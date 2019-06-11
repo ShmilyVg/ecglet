@@ -29,8 +29,8 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#bfbfbf",
-    "selectedColor": "#104097",
+    "color": "#7D7D7D",
+    "selectedColor": "#368EEE",
     "backgroundColor": "#fff",
     "list": [
       {
@@ -40,14 +40,8 @@
         "selectedIconPath": "images/home_select.png"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "历史",
-        "iconPath": "images/history.png",
-        "selectedIconPath": "images/history_select.png"
-      },
-      {
         "pagePath": "pages/profile/profile",
-        "text": "我",
+        "text": "我的",
         "iconPath": "images/profile.png",
         "selectedIconPath": "images/profile_select.png"
       }

@@ -50,25 +50,17 @@
 .toast {
   position: absolute;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 0 1 auto;
-  align-items: center;
-  justify-content: flex-end;
-}
-.toast .toast-img {
-  // width: 300px;
-  // height: 188px;
-  width: 80%;
-  height: 40%;
-  // margin-top: 30px;
-  margin-bottom: 10px;
-  // padding: 30px;
+  left: 0;
+  bottom: 0;
 }
 .toast .tip {
   color: white; // #7a7ac4;
-  font-size: 22px;
-  width: 90%;
-  margin-bottom: 60px;
+  font-size: 26rpx;
+  margin-bottom: 107rpx;
+}
+
+.remind-image-size{
+  width:18rpx;
+  height:18rpx;
+  margin-right: 10rpx;
 }

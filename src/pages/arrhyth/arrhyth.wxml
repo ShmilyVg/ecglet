@@ -17,10 +17,15 @@
   <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
 
   <cover-view class="toast" hidden="{{showLoading}}">
-    <cover-image class="toast-img"  src="../../images/borsam_touch.png" binderror="binderror" bindload="bindload" />
-    <cover-view class="tip">
-      <cover-view class="first">将双手放在金属片上。测试过程中</cover-view>
-      <cover-view class="second">勿交谈、移动，保持静息状态。</cover-view>
+    <cover-view class="flex-column align-items-center tip">
+      <cover-view class="flex-row align-items-center">
+        <cover-image src="../../images/collect_lvdeng.png" class="remind-image-size"></cover-image>
+        <cover-view >绿灯亮起：表示当前处于采集状态</cover-view>
+      </cover-view>
+      <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
+        <cover-image src="../../images/collect_landeng.png" class="remind-image-size"></cover-image>
+        <cover-view >蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
+      </cover-view>
     </cover-view>
   </cover-view>
 </view>
