@@ -24,8 +24,8 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor":  "#67a445",
-    "navigationBarTitleText": "四维心电",
+    "navigationBarBackgroundColor":  "#2E7DE9",
+    "navigationBarTitleText": "HiPee心电仪",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
