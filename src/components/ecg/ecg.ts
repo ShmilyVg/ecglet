@@ -107,7 +107,7 @@ export default class extends MyComponent {
       width: rw,
       height: rh
     })
-    let ctx = wxp.createCanvasContext("ecg_bg", that)
+    let ctx = wxp.createCanvasContext("√", that)
 
     ctx.fillStyle = "rgba(255, 255, 255, 1)"
     ctx.fillRect(0, 0, rw, rh)
@@ -283,7 +283,7 @@ export default class extends MyComponent {
     ctx.draw(true)
   }
 
-  preparePannelDark(w: number, h: number) {
+  preparePannelDark(w: number, h: number, bgColor: string) {
     console.log(`Canvas size(${w}, ${h})`)
     let that = this
 
@@ -298,7 +298,7 @@ export default class extends MyComponent {
     })
     let ctx = wxp.createCanvasContext("ecg_bg", that)
 
-    // ctx.fillStyle = "rgb(255,255,255)"
+    ctx.fillStyle = bgColor || 'transparent';
     ctx.fillRect(0, 0, rw, rh)
 
     const d = that.data.pxmm
