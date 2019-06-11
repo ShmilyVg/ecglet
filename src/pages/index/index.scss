@@ -1,0 +1,89 @@
+@import "../../assets/scss/global.scss";
+
+.headView {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  background: $blueColor; // #0d69b1; // linear-gradient(to bottom right, #67a445, #0d69b1);
+  position: relative;
+}
+.headView .avatarContainer {
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  position: inherit;
+  box-sizing: inherit;
+}
+.avatarContainer .avatar {
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  border: 6px solid $blueColor; // #0d69b1;
+  position: absolute;
+  box-sizing: inherit;
+}
+.headView .account {
+  margin-left: 5px;
+  font-size: 14px;
+  position: inherit;
+  box-sizing: inherit;
+  color: #fff; //#353535;
+}
+.headView .authorize {
+  margin-right: 10px;
+}
+.features {
+  flex-basis: 70%;
+  width: 100%;
+  // flex-grow: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  // background-color: gray;
+  padding-top: 50px;
+}
+.features .r-button {
+  flex-basis: 30%;
+  width: 50%;
+  // background-color: #3cbbff;
+  display: flex;
+  // flex-direction: column;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  // color: white;
+  border-radius: 10px;
+  margin: 30px 20px 30px 40px;
+}
+.r-button .background {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.r-button .title {
+  font-size: 16px;
+  color: black;
+  margin-top: 10px;
+}
+.r-button .one {
+  background-color: #3d91d1;
+}
+.r-button .two {
+  background-color: #cf5a55;
+}
+.r-button .three {
+  background-color: #7eaf42;
+}
+.r-button .background .icon {
+  font-size: 40px;
+  // height: 40px;
+  color: white;
+}

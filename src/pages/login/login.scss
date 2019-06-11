@@ -1,0 +1,150 @@
+/*
+  此文件是由模板文件 ".dtpl/component/$rawModuleName.$style.dtpl" 生成的，你可以自行修改模板
+
+  注意：文件为空，编译时不会生成新文件
+*/
+
+@import "../../assets/scss/global.scss";
+
+$inputContainerHeight: 45px;
+$inputContainerFontSize: 15px;
+$submitButtonHeight: 45px;
+$tipFontSize: 15px;
+
+.container .head {
+  margin: 10px 10px;
+  position: relative;
+}
+
+.tip {
+  color: #888888;
+  font-size: $tipFontSize;
+  // text-align: left;
+}
+
+.container .swiper-tab {
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  background-color: #f7f7f7;
+}
+
+.swiper-tab .swiper-tab-list {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid $blueColor;
+  border-bottom: 1px solid $blueColor;
+}
+
+.on {
+  color: #fff;
+  background-color: $blueColor;
+}
+
+.swiper-tab-list .swiper-tab-list-title {
+  font-size: 20px;
+}
+
+.container .swiper-box {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.swiper-box .swiper-box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  // font-size: 13px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100%;
+}
+
+.swiper-box-container .swiper-box-head {
+  position: relative;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+
+.text-input {
+  background-color: #eeeeee;
+  // height: 22px;
+}
+
+.swiper-box-input-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #efeff4;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 5px;
+  font-size: $inputContainerFontSize;
+  height: $inputContainerHeight;
+}
+
+.swiper-box-input-container .swiper-box-input {
+  flex: 1 0 auto;
+  margin-left: 6px;
+  font-size: inherit;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.swiper-box-input-container .swiper-box-mobile {
+  margin-top: 30px;
+}
+
+.swiper-box-container .swiper-box-pin {
+  margin-top: 30px;
+}
+
+.swiper-box-pin .swiper-box-pin-send {
+  flex: 0 0 120px;
+  height: inherit;
+  font-size: inherit;
+  // color: white;
+  // background-color: $blueColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.swiper-box-container .swiper-box-password {
+  margin-top: 30px;
+  // flex-basis: 22px;
+  // position: relative;
+}
+
+.swiper-box-password .swiper-box-password-icon {
+  font-size: 25px;
+  // position: relative;
+  // z-index: 1;
+  align-self: center;
+  margin-right: 6px;
+}
+
+.swiper-box-container .swiper-box-register {
+  margin-top: 60px;
+  // flex-basis: 22px;
+  width: 100%;
+  flex: 0 0 $submitButtonHeight;
+  // align-self: stretch;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

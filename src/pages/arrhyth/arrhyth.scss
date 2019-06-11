@@ -1,0 +1,74 @@
+/*
+  此文件是由模板文件 ".dtpl/component/$rawModuleName.$style.dtpl" 生成的，你可以自行修改模板
+
+  注意：文件为空，编译时不会生成新文件
+*/
+
+/*圆环进度条文字*/
+.container{
+  background-color: #000; // #0d69b1;
+}
+.circle_info {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.circle_dot {
+  width:16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: #fb9126;
+}
+.circle_txt {
+  padding-left: 10rpx;
+  color: #fff;
+  font-size: 36rpx;
+  letter-spacing: 2rpx;
+}
+// .circle_pannel {
+//   flex: 0 0 200px;
+  // width: 100%;
+  // background-color: #104097;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-flow: row nowrap;
+  // display: inline-block;
+  // position: relative;
+//   background-color: #0d69b1;
+// }
+.ecg_pannel {
+  flex: 1 1 300px;
+  width: 100%;
+  align-self: stretch;
+}
+.toast {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+.toast .toast-img {
+  // width: 300px;
+  // height: 188px;
+  width: 80%;
+  height: 40%;
+  // margin-top: 30px;
+  margin-bottom: 10px;
+  // padding: 30px;
+}
+.toast .tip {
+  color: white; // #7a7ac4;
+  font-size: 22px;
+  width: 90%;
+  margin-bottom: 60px;
+}

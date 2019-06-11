@@ -1,0 +1,18 @@
+
+
+@import "./assets/icons/fa_icons.wxss";
+@import "../node_modules/weui-wxss/dist/style/weui.wxss";
+// @import "./assets/scss/global.scss";
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  // padding: 50px 0;
+  box-sizing: border-box;
+  // background-color: red;
+  position: absolute;
+}

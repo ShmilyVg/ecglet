@@ -1,0 +1,30 @@
+<!--
+  此文件是由模板文件 ".dtpl/page/$rawModuleName.wxml.dtpl" 生成的，你可以自行修改模板
+
+  注意：
+  1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
+-->
+
+<view class="container">
+  <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
+    <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
+    <view class="circle_info" bindtap="changeTime">
+      <view class="circle_dot"></view>
+      <text class='circle_txt'>{{txt}}</text>
+    </view>
+  </circle>
+
+  <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
+
+  <cover-view class="toast" hidden="{{showLoading}}">
+    <cover-image class="toast-img"  src="../../images/borsam_touch.png" binderror="binderror" bindload="bindload" />
+    <cover-view class="tip">
+      <cover-view class="first">将双手放在金属片上。测试过程中</cover-view>
+      <cover-view class="second">勿交谈、移动，保持静息状态。</cover-view>
+    </cover-view>
+  </cover-view>
+</view>
+
+
+<!-- <i-toast id="toast" /> -->
+

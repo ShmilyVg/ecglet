@@ -1,0 +1,56 @@
+{
+  "$schema": "https://raw.githubusercontent.com/qiu8310/minapp/master/schema/app.json",
+  "pages": [
+    /*
+      注意：
+        1. INJECT_START 到 INJECT_END 之间的文件是自动注入的，请不要随意修改
+        2. 注入规则写在 .dtpl 文件夹中的 dtpl.js 文件中
+        3. 需要安装 vscode 插件 dot-template-vscode 来达到注入功能
+        4. 触发条件是：每次在 src/pages 目录下新建一个空文件夹时
+    */
+
+    /*# INJECT_START {"key": "page"} #*/
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/login/login",
+    "pages/arrhyth/arrhyth",
+    "pages/profile/profile",
+    "pages/report/report",
+    "pages/userdata/userdata",
+    "pages/disease/disease",
+    "pages/disease-arrhyth/disease-arrhyth",
+    "pages/manual/manual",
+    /*# INJECT_END #*/
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor":  "#67a445",
+    "navigationBarTitleText": "四维心电",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#104097",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "采集",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_select.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "历史",
+        "iconPath": "images/history.png",
+        "selectedIconPath": "images/history_select.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile_select.png"
+      }
+    ]
+  }
+}
