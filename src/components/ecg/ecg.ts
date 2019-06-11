@@ -298,7 +298,7 @@ export default class extends MyComponent {
     })
     let ctx = wxp.createCanvasContext("ecg_bg", that)
 
-    ctx.fillStyle = "rgb(0,0,0)"
+    ctx.fillStyle = "rgb(255,255,255)"
     ctx.fillRect(0, 0, rw, rh)
 
     const d = that.data.pxmm
