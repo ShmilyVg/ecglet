@@ -10,10 +10,10 @@
     */
 
     /*# INJECT_START {"key": "page"} #*/
+    "pages/arrhyth/arrhyth",
     "pages/index/index",
     "pages/logs/logs",
     "pages/login/login",
-    "pages/arrhyth/arrhyth",
     "pages/profile/profile",
     "pages/report/report",
     "pages/userdata/userdata",

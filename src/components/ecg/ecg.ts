@@ -29,7 +29,8 @@ interface ECGData {
   animationId: any,
   sampleData?: Uint16Array,
   continueAnimation: boolean,
-  terminated: boolean
+  terminated: boolean,
+  showColumnAndRowLine: boolean;
 }
 
 @comify()
@@ -75,7 +76,8 @@ export default class extends MyComponent {
     animationId: undefined,
     sampleData: undefined,
     continueAnimation: false,
-    terminated: false
+    terminated: false,
+    showColumnAndRowLine: false
   }
 
   /**
@@ -231,7 +233,7 @@ export default class extends MyComponent {
     }
     const ctx = that.data.ctx
 
-    ctx.strokeStyle = "#76f112"
+    ctx.strokeStyle = "#3993EE"
     ctx.setLineJoin("round")
     ctx.lineWidth = 1.5
 
@@ -300,39 +302,42 @@ export default class extends MyComponent {
     ctx.fillRect(0, 0, rw, rh)
 
     const d = that.data.pxmm
-    // 绘制竖行网格
-    for (var i = 0; i < rw / d; i++) {
-      if (i % 5 == 0) {
-        ctx.strokeStyle = "#1b4200"
-        ctx.lineWidth = 0.8
-      } else {
-        ctx.strokeStyle = "#092100"
-        ctx.lineWidth = 0.4
+    // // 绘制竖行网格
+    if (that.data.showColumnAndRowLine) {
+      for (var i = 0; i < rw / d; i++) {
+        if (i % 5 == 0) {
+          ctx.strokeStyle = "#1b4200"
+          ctx.lineWidth = 0.8
+        } else {
+          ctx.strokeStyle = "#092100"
+          ctx.lineWidth = 0.4
+        }
+        let x = i * d + offsetX;
+        ctx.beginPath();
+        ctx.moveTo(x, offsetY);
+        ctx.lineTo(x, offsetY + rh);
+        ctx.stroke();
+        ctx.closePath();
       }
-      let x = i * d + offsetX
-      ctx.beginPath()
-      ctx.moveTo(x, offsetY)
-      ctx.lineTo(x, offsetY + rh)
-      ctx.stroke()
-      ctx.closePath()
+
+      // 绘制横行网格
+      for (var j = 0; j < rh / d; j++) {
+        if (j % 5 == 0) {
+          ctx.strokeStyle = "#1b4200"
+          ctx.lineWidth = 0.8
+        } else {
+          ctx.strokeStyle = "#092100"
+          ctx.lineWidth = 0.4
+        }
+        let y = j * d + offsetY
+        ctx.beginPath()
+        ctx.moveTo(offsetX, y)
+        ctx.lineTo(rw + offsetX, y)
+        ctx.stroke()
+        ctx.closePath()
+      }
     }
 
-    // 绘制横行网格
-    for (var j = 0; j < rh / d; j++) {
-      if (j % 5 == 0) {
-        ctx.strokeStyle = "#1b4200"
-        ctx.lineWidth = 0.8
-      } else {
-        ctx.strokeStyle = "#092100"
-        ctx.lineWidth = 0.4
-      }
-      let y = j * d + offsetY
-      ctx.beginPath()
-      ctx.moveTo(offsetX, y)
-      ctx.lineTo(rw + offsetX, y)
-      ctx.stroke()
-      ctx.closePath()
-    }
 
     that.data.baseY = rh / (2 * d) * d + offsetY
 
