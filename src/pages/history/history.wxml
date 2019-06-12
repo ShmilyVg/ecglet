@@ -11,6 +11,7 @@
 </view>-->
 <view>
   <view class="bg"></view>
+  <view class="bg-pic"><cover-image src="../../images/mine/jingcejilu_beijing.png" alt=""/></view>
   <view class="notebox">
     <view class="note">
       <view class="note-main">
@@ -47,7 +48,7 @@
         </view>
       </view>
       <view class="note-main">
-        <view class="note-num">59<span>PBM</span></view>
+        <view class="note-num">559<span>PBM</span></view>
         <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
       </view>
     </view>
