@@ -361,7 +361,7 @@ export default class extends MyPage {
         circle.drawCircle('circle_draw1', 100, 16, that.data.count / this.data.maxCount)
         console.log('count: ' + that.data.count, that.data.maxCount);
         if (that.data.count < 2 * that.data.maxCount) {
-          that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}秒` })
+          that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
         } else {
           that.data.count = 0
           that.setDataSmart({ txt: '完成' })
