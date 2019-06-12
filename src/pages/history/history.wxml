@@ -1,0 +1,56 @@
+<!--
+  此文件是由模板文件 ".dtpl/page/$rawModuleName.wxml.dtpl" 生成的，你可以自行修改模板
+
+  注意：
+  1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
+-->
+
+<!--<view class="none-history">
+  <view class="none-history-pic"><cover-image src="../../images/history.png" alt=""/></view>
+  <view class="none-history-hint">暂无检测记录</view>
+</view>-->
+<view>
+  <view class="bg"></view>
+  <view class="bg-pic"><cover-image src="../../images/mine/jingcejilu_beijing.png" alt=""/></view>
+  <view class="notebox">
+    <view class="note">
+      <view class="note-main">
+        <view class="note-circle"><span></span></view>
+        <view class="note-hint">
+          <view class="note-hint-time">11:40</view>
+          <view class="note-hint-date">2019.6.12</view>
+        </view>
+      </view>
+      <view class="note-main">
+        <view class="note-num">59<span>PBM</span></view>
+        <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
+      </view>
+    </view>
+    <view class="note">
+      <view class="note-main">
+        <view class="note-circle"><span></span></view>
+        <view class="note-hint">
+          <view class="note-hint-time">11:40</view>
+          <view class="note-hint-date">2019.6.12</view>
+        </view>
+      </view>
+      <view class="note-main">
+        <view class="note-num">59<span>PBM</span></view>
+        <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
+      </view>
+    </view>
+    <view class="note">
+      <view class="note-main">
+        <view class="note-circle"><span></span></view>
+        <view class="note-hint">
+          <view class="note-hint-time">11:40</view>
+          <view class="note-hint-date">2019.6.12</view>
+        </view>
+      </view>
+      <view class="note-main">
+        <view class="note-num">559<span>PBM</span></view>
+        <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
+      </view>
+    </view>
+  </view>
+</view>

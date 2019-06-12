@@ -1,0 +1,52 @@
+/*
+  此文件是由模板文件 ".dtpl/component/$rawModuleName.$style.dtpl" 生成的，你可以自行修改模板
+
+  注意：文件为空，编译时不会生成新文件
+*/
+
+@import "../../assets/scss/global.scss";
+
+$inputContainerHeight: 45px;
+$inputContainerFontSize: 15px;
+$submitButtonHeight: 45px;
+$tipFontSize: 15px;
+
+.main{
+  width: 590rpx;
+  margin: 90rpx auto 68rpx;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.main-header{
+  width: 100%;
+  display: flex;
+  margin: 50rpx 0 68rpx 30rpx;
+}
+.main-header-pic{
+  width: 120rpx;
+  height: 120rpx;
+}
+.main-header-name{
+  font-size: 32rpx;
+  margin: 20rpx 0 0 28rpx;
+}
+.code{
+  width: 490rpx;
+  margin: 0 auto;
+}
+.main-footer{
+  margin: 40rpx 0 60rpx;
+}
+.main-footer-p{
+  color: #999999;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 34rpx;
+}
+.savebtn{
+  width: 605rpx;
+  height: 100rpx;
+  color: rgba(255,255,255,0.9);
+  background: rgba(57, 147, 238, 1);
+  border-radius: 50rpx;
+  margin: 0 auto;
+}
