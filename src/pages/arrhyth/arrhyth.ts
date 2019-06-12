@@ -4,6 +4,7 @@ import { pagify, MyPage, wxp, fsp } from 'base/'
 import "../../extensions/ArrayBuffer.ext"
 
 interface ArrhythData {
+  windowHeight:number,
   logs: string[],
   deviceList: string[],
   lastDeviceId: string,
@@ -20,17 +21,22 @@ interface ArrhythData {
   btCheckTimer?: NodeJS.Timer
   showToast: boolean,
   toastMsg?: string,
-  showLoading: boolean
+  showLoading: boolean,
+  canvasWidth:number,
+  canvasHeight: number;
 }
 @pagify()
 export default class extends MyPage {
   data: ArrhythData = {
+    canvasHeight: 0,
+    canvasWidth: 0,
+    windowHeight:0,
     logs: [],
     deviceList: [],
     lastDeviceId: '',
     connectingDeviceId: '',
     progressCircle: undefined,
-    txt: '等待设备连接...',
+    txt: '30',
     count: 0,
     maxCount: 15,
     countTimer: undefined,
@@ -74,7 +80,7 @@ export default class extends MyPage {
         if (!that.data.completed) {
           // 停止计时，复位
           that.reset()
-
+          that.preparePannelDark('');
           // await wxp.showLoading({
           //   title: "等待设备接通...",
           //   mask: true
@@ -93,11 +99,16 @@ export default class extends MyPage {
 
         // 计时开始
         if (!that.data.countTimer) {
-          that.startCount()
+          that.preparePannelDark('white');
+          setTimeout(() => {
+            that.startCount();
+          });
         }
       }
     } catch (err) {
+      that.preparePannelDark('');
       console.log("onDeviceConnected error -- %o", err)
+
     }
   }
 
@@ -105,6 +116,7 @@ export default class extends MyPage {
     // console.log(await wxp.getUserInfo())
     console.log('onLoad')
     let that = this;
+    that.setDataSmart({windowHeight: wxp.getSystemInfoSync().windowHeight});
 
     try {
       // 设置设备发现监听回调
@@ -288,16 +300,26 @@ export default class extends MyPage {
 
     that.data.progressCircle = that.selectComponent('#circle1')
     let circle: any = that.data.progressCircle
-    circle.drawCircleBg('circle_bg1', 100, 16)
+    circle.drawCircleBg('circle_bg1', 100)
+    // setTimeout(()=>{
+      query.select('#ecg').boundingClientRect((rect: any) => {
+        that.data.ecgPannel = that.selectComponent('#ecg')
+        console.log("ECG box rect: %o}", rect)
+        // let ecg: any = that.data.ecgPannel
+        // ecg.preparePannel(rect.width, rect.height)
+        that.data.canvasWidth = rect.width;
+        that.data.canvasHeight = rect.height;
+        this.preparePannelDark('');
+        // ecg.preparePannelDark(rect.width, rect.height);
+      }).exec()
+    // },2000)
 
-    query.select('#ecg').boundingClientRect((rect: any) => {
-      that.data.ecgPannel = that.selectComponent('#ecg')
-      console.log("ECG box rect: %o}", rect)
-      let ecg: any = that.data.ecgPannel
-      // ecg.preparePannel(rect.width, rect.height)
-      ecg.preparePannelDark(rect.width, rect.height)
-    }).exec()
 
+  }
+
+  preparePannelDark(bgColor:string) {
+    const ecg: any = this.data.ecgPannel || this.selectComponent('#ecg');
+    ecg.preparePannelDark(this.data.canvasWidth, this.data.canvasHeight, bgColor || '');
   }
   async onUnload() {
     console.log('onUnload...')
@@ -336,13 +358,13 @@ export default class extends MyPage {
       that.data.count++
       if (that.data.count <= 2 * that.data.maxCount) {
         let circle: any = that.data.progressCircle
-        circle.drawCircle('circle_draw1', 100, 16, that.data.count / this.data.maxCount)
-        // console.log('count: ' + that.data.count)
+        circle.drawCircle('circle_draw1', 100, that.data.count);
+        console.log('count: ' + that.data.count, that.data.maxCount);
         if (that.data.count < 2 * that.data.maxCount) {
-          that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}秒` })
+          that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
         } else {
           that.data.count = 0
-          that.setDataSmart({ txt: '完成' })
+          that.setDataSmart({ txt: '0' })
           if (that.data.countTimer) {
             clearInterval(that.data.countTimer)
             that.data.countTimer = undefined
@@ -401,8 +423,9 @@ export default class extends MyPage {
 
     if (that.data.progressCircle) {
       let circle: any = that.data.progressCircle
-      circle.drawCircle('circle_draw1', 100, 16, 0)
-      that.setDataSmart({txt: "等待设备接通..."})
+      circle.drawCircle('circle_draw1', 100, -1);
+      that.preparePannelDark('');
+      that.setDataSmart({txt: "30"})
     }
 
     if (that.data.ecgPannel) {

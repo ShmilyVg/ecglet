@@ -5,61 +5,75 @@
   1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
 -->
 
-<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
-  <view class="weui-cells__title">用户资料</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">姓名</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入用户姓名" value="{{name}}" bind:input="onNameChange"/>
-      </view>
+<view class="flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
+    <view style="background-color: #4A9DF0">
+        <view class="top-view-blue-white"></view>
     </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">出生日期</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker mode="date" value="{{birthDate}}" start="1900-01-01" end="{{birthEndDate}}" bindchange="onBirthChange">
-          <view class="weui-input">{{birthDate}}</view>
-        </picker>
-      </view>
+    <view class="avatar-view flex-row">
+        <view class="avatar"></view>
     </view>
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">性别</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="onSexChange" value="{{sexIndex}}" range="{{sexies}}">
-          <view class="weui-select weui-select_in-select-after">{{sexies[sexIndex]}}</view>
-        </picker>
-      </view>
+    <view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">昵称</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" bind:input="onNameChange"/>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入手机号" value="{{number}}" bind:input="onNumberChange"/>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_select cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">性别</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="onSexChange" value="{{sexIndex}}" range="{{sexies}}">
+                    <view class="cell-content">{{sexies[sexIndex]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">出生日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{birthDate}}" start="1900-01-01" end="{{birthEndDate}}"
+                        bindchange="onBirthChange">
+                    <view class="weui-input cell-content">{{birthDate}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">身高（cm)</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入身高" value="{{height}}" bind:input="onHeightChange"/>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">体重（kg）</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入体重" value="{{weight}}" bind:input="onWeightChange"/>
+            </view>
+        </view>
     </view>
-  </view>
-  <view class="weui-cells__title">医生联络信息（可选择是否填写）</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">姓名</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入联系医生的姓名" value="{{doctor}}" bind:input="onDoctor"/>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">医院</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入联系医生所在医院" value="{{hospital}}" bind:input="onHospital"/>
-      </view>
-    </view>
-  </view>
 
-  <view class="weui-btn-area">
-    <button class="weui-btn" disable="{{submitDisabled}}" style="opacity: {{submitOpacity}}; color: white; background-color: #0d69b1" type="primary" bindtap="onSubmit">提交</button>
-  </view>
-  <!-- <view class="weui-cells__tips">底部说明文字底部说明文字</view> -->
+    <view class="finish" bindtap="onSubmit">完成</view>
 </view>
 

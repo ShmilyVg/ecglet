@@ -1,33 +1,52 @@
 // 此文件是由模板文件 ".dtpl/page/$rawModuleName.ts.dtpl" 生成的，你可以自行修改模板
 
-import { pagify, MyPage, wxp } from 'base/'
-import { Admin } from './../../utils/admin'
+import {pagify, MyPage, wxp} from 'base/'
+import {Admin} from './../../utils/admin'
 
 @pagify()
 export default class extends MyPage {
-  data = {
-    userData: {},
-    phone: '4009210610'
-  }
+    data = {
+        userData: {},
+        phone: '4009210610'
+    }
 
-  async onLoad(options: any) {
-    // console.log(await wxp.getUserInfo())
-  }
+    async onLoad(options: any) {
+        // console.log(await wxp.getUserInfo())
+    }
 
-  async onShow() {
-    let that = this
-    let userData = Admin.default().userData
+    async onShow() {
+        let that = this
+        let userData = Admin.default().userData
 
-    that.setDataSmart({
-      userData: userData
-    })
-  }
+        that.setDataSmart({
+            userData: userData
+        })
+    }
 
-  async call() {
-    let that = this
+    async call() {
+        let that = this
 
-    await wxp.makePhoneCall({
-      phoneNumber: that.data.phone
-    })
-  }
+        await wxp.makePhoneCall({
+            phoneNumber: that.data.phone
+        })
+    }
+
+    async toEditInfo() {
+        wx.navigateTo({
+                url: '../userdata/userdata'
+            }
+        )
+    }
+
+    async clickCell1() {
+        console.log('ceshidwe1');
+    }
+
+    async clickCell2() {
+        console.log('ceshidwe2');
+    }
+
+    async clickCell3() {
+        console.log('ceshidwe3');
+    }
 }

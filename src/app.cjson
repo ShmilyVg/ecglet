@@ -13,9 +13,9 @@
     "pages/history/history",
     "pages/feedback/feedback",
     "pages/index/index",
+    "pages/arrhyth/arrhyth",
     "pages/logs/logs",
     "pages/login/login",
-    "pages/arrhyth/arrhyth",
     "pages/profile/profile",
     "pages/report/report",
     "pages/userdata/userdata",
@@ -26,13 +26,13 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor":  "#67a445",
-    "navigationBarTitleText": "四维心电",
+    "navigationBarBackgroundColor":  "#3a93ef",
+    "navigationBarTitleText": "HiPee心电仪",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#bfbfbf",
-    "selectedColor": "#104097",
+    "color": "#7D7D7D",
+    "selectedColor": "#368EEE",
     "backgroundColor": "#fff",
     "list": [
       {
@@ -43,7 +43,7 @@
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我",
+        "text": "我的",
         "iconPath": "images/profile.png",
         "selectedIconPath": "images/profile_select.png"
       }

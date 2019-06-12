@@ -16,3 +16,25 @@
   // background-color: red;
   position: absolute;
 }
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.align-items-center{
+  align-items: center;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.fill-width{
+  width: 100%;
+}

@@ -5,7 +5,13 @@
 */
 .ecg_box, .ecg_draw{
   position: relative;
+  border-radius: 80rpx;
+  height: 100%;
+  //background-color: transparent;
 }
 .ecg_bg{
   position: absolute;
+  border-radius: 80rpx;
+  height: 100%;
+  //background-color: white;
 }

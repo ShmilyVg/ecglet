@@ -3,3 +3,93 @@
 
   注意：文件为空，编译时不会生成新文件
 */
+
+.top-image{
+  height: 256rpx;
+  width: 100%;
+  background-color: #4A9DF0;
+}
+
+.top-cell {
+  width:687rpx;
+  height:232rpx;
+  background:rgba(255,255,255,1);
+  border-radius:40rpx;
+  align-items: center;
+  margin-top: -151rpx;
+}
+
+.avatar-view {
+  width:143rpx;
+  height:142rpx;
+  background:rgba(208,232,255,0.52);
+  border-radius:50%;
+  align-items: center;
+  margin-left: 43rpx;
+}
+
+.avatar{
+  width:115rpx;
+  height:114rpx;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 14rpx;
+}
+
+.name{
+  margin-left: 33rpx;
+}
+
+.edit-info{
+  width:195rpx;
+  height:60rpx;
+  background:rgba(57,147,238,1);
+  border-radius:30rpx;
+  font-size:24rpx;
+  color: #ffffff;
+  line-height: 60rpx;
+  text-align: center;
+  margin-left: 44rpx;
+}
+
+.cell {
+  height: 126rpx;
+  width: 100%;
+  align-items: center;
+}
+
+.icon{
+  width: 57rpx;
+  height: 57rpx;
+  margin-left: 38rpx;
+}
+
+.title {
+  font-size:28rpx;
+  color:rgba(102,102,102,1);
+  margin-left: 17rpx;
+}
+
+.arr {
+  width: 14rpx;
+  height: 25rpx;
+  position: absolute;
+  right: 80rpx;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table{
+  width:687rpx;
+  background:rgba(255,255,255,1);
+  border-radius:40rpx;
+  margin-top: 30rpx;
+}
+
+page {
+  background-color: #f2f2f2;
+}

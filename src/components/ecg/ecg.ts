@@ -29,7 +29,8 @@ interface ECGData {
   animationId: any,
   sampleData?: Uint16Array,
   continueAnimation: boolean,
-  terminated: boolean
+  terminated: boolean,
+  showColumnAndRowLine: boolean;
 }
 
 @comify()
@@ -75,7 +76,8 @@ export default class extends MyComponent {
     animationId: undefined,
     sampleData: undefined,
     continueAnimation: false,
-    terminated: false
+    terminated: false,
+    showColumnAndRowLine: false
   }
 
   /**
@@ -105,7 +107,7 @@ export default class extends MyComponent {
       width: rw,
       height: rh
     })
-    let ctx = wxp.createCanvasContext("ecg_bg", that)
+    let ctx = wxp.createCanvasContext("√", that)
 
     ctx.fillStyle = "rgba(255, 255, 255, 1)"
     ctx.fillRect(0, 0, rw, rh)
@@ -231,7 +233,7 @@ export default class extends MyComponent {
     }
     const ctx = that.data.ctx
 
-    ctx.strokeStyle = "#76f112"
+    ctx.strokeStyle = "#3993EE"
     ctx.setLineJoin("round")
     ctx.lineWidth = 1.5
 
@@ -281,12 +283,13 @@ export default class extends MyComponent {
     ctx.draw(true)
   }
 
-  preparePannelDark(w: number, h: number) {
+  preparePannelDark(w: number, h: number, bgColor: string) {
     console.log(`Canvas size(${w}, ${h})`)
     let that = this
-
     const rw = w * that.data.rpx
     const rh = h * that.data.rpx
+    const r = rw / 10;
+
     const offsetX = 0
     const offsetY = 0
 
@@ -296,43 +299,55 @@ export default class extends MyComponent {
     })
     let ctx = wxp.createCanvasContext("ecg_bg", that)
 
-    ctx.fillStyle = "rgb(0,0,0)"
-    ctx.fillRect(0, 0, rw, rh)
-
+    ctx.fillStyle = bgColor || 'transparent';
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.lineTo(rw - r, 0);
+    ctx.arcTo(rw, 0, rw, r, r);
+    ctx.lineTo(rw, rh);
+    ctx.lineTo(0, rh);
+    ctx.lineTo(0, rh-r);
+    ctx.arcTo(0, 0, r, 0, r);
+    ctx.closePath();
+    ctx.fill();
+    ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
     const d = that.data.pxmm
-    // 绘制竖行网格
-    for (var i = 0; i < rw / d; i++) {
-      if (i % 5 == 0) {
-        ctx.strokeStyle = "#1b4200"
-        ctx.lineWidth = 0.8
-      } else {
-        ctx.strokeStyle = "#092100"
-        ctx.lineWidth = 0.4
+    // // 绘制竖行网格
+    if (that.data.showColumnAndRowLine) {
+      for (var i = 0; i < rw / d; i++) {
+        if (i % 5 == 0) {
+          ctx.strokeStyle = "#1b4200"
+          ctx.lineWidth = 0.8
+        } else {
+          ctx.strokeStyle = "#092100"
+          ctx.lineWidth = 0.4
+        }
+        let x = i * d + offsetX;
+        ctx.beginPath();
+        ctx.moveTo(x, offsetY);
+        ctx.lineTo(x, offsetY + rh);
+        ctx.stroke();
+        ctx.closePath();
       }
-      let x = i * d + offsetX
-      ctx.beginPath()
-      ctx.moveTo(x, offsetY)
-      ctx.lineTo(x, offsetY + rh)
-      ctx.stroke()
-      ctx.closePath()
+
+      // 绘制横行网格
+      for (var j = 0; j < rh / d; j++) {
+        if (j % 5 == 0) {
+          ctx.strokeStyle = "#1b4200"
+          ctx.lineWidth = 0.8
+        } else {
+          ctx.strokeStyle = "#092100"
+          ctx.lineWidth = 0.4
+        }
+        let y = j * d + offsetY
+        ctx.beginPath()
+        ctx.moveTo(offsetX, y)
+        ctx.lineTo(rw + offsetX, y)
+        ctx.stroke()
+        ctx.closePath()
+      }
     }
 
-    // 绘制横行网格
-    for (var j = 0; j < rh / d; j++) {
-      if (j % 5 == 0) {
-        ctx.strokeStyle = "#1b4200"
-        ctx.lineWidth = 0.8
-      } else {
-        ctx.strokeStyle = "#092100"
-        ctx.lineWidth = 0.4
-      }
-      let y = j * d + offsetY
-      ctx.beginPath()
-      ctx.moveTo(offsetX, y)
-      ctx.lineTo(rw + offsetX, y)
-      ctx.stroke()
-      ctx.closePath()
-    }
 
     that.data.baseY = rh / (2 * d) * d + offsetY
 
@@ -341,7 +356,7 @@ export default class extends MyComponent {
     that.data.ctx = wxp.createCanvasContext('ecg_draw', that)
     ctx = that.data.ctx
 
-    ctx.fillStyle = "rgba(0,0,0,0)"
+    ctx.fillStyle = "transparent"
     ctx.fillRect(0, 0, rw, rh)
     ctx.draw()
 

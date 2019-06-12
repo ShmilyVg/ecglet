@@ -6,7 +6,9 @@
 
 /*圆环进度条文字*/
 .container{
-  background-color: #000; // #0d69b1;
+  background-color: #3a93ef; // #0d69b1;
+  //background-color: black;
+  position: relative;
 }
 .circle_info {
   position: absolute;
@@ -15,20 +17,24 @@
   top: 50%;
   transform: translate(-50%,-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 .circle_dot {
-  width:16rpx;
-  height: 16rpx;
-  border-radius: 50%;
-  background-color: #fb9126;
+  font-size:30rpx;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+  opacity:0.67;
+  line-height: 30rpx;
 }
 .circle_txt {
-  padding-left: 10rpx;
-  color: #fff;
-  font-size: 36rpx;
-  letter-spacing: 2rpx;
+  font-size:120rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height: 87rpx;
+  margin-top: 10rpx;
+  margin-bottom: 15rpx;
 }
 // .circle_pannel {
 //   flex: 0 0 200px;
@@ -42,33 +48,45 @@
   // position: relative;
 //   background-color: #0d69b1;
 // }
+.circle_pannel{
+  flex-grow: 1;
+  height: 100%;
+}
 .ecg_pannel {
-  flex: 1 1 300px;
+  flex-grow: 1;
   width: 100%;
+  height: 100%;
   align-self: stretch;
 }
 .toast {
   position: absolute;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 0 1 auto;
-  align-items: center;
-  justify-content: flex-end;
-}
-.toast .toast-img {
-  // width: 300px;
-  // height: 188px;
-  width: 80%;
-  height: 40%;
-  // margin-top: 30px;
-  margin-bottom: 10px;
-  // padding: 30px;
+  left: 0;
+  bottom: 0;
 }
 .toast .tip {
   color: white; // #7a7ac4;
-  font-size: 22px;
-  width: 90%;
-  margin-bottom: 60px;
+  font-size: 26rpx;
+  margin-bottom: 107rpx;
+}
+
+.remind-image-size{
+  width:18rpx;
+  height:18rpx;
+  margin-right: 10rpx;
+}
+.remind-text-big{
+  font-size:50rpx;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  margin-bottom: 25rpx;
+}
+.remind-text-small{
+  font-size:26rpx;
+  font-weight:500;
+  color:rgba(153,204,255,1);
+}
+.remind-large-size{
+  width: 235rpx;
+  height: 146rpx;
 }

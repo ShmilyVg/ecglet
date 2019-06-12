@@ -27,50 +27,58 @@ export default class extends MyComponent {
     step: 1,
     num: 100,
     rpx: 1,
+    ctx: {}
   }
 
   options = {
     multipleSlot: true
   }
 
-  drawCircleBg(id: string, radius: number, width: number) {
-    let that = this
-    const r = radius * that.data.rpx
-    const w = width * that.data.rpx
-    that.setDataSmart({
-      size: 2 * r
-    })
-    const ctx = wxp.createCanvasContext(id, that)
-    ctx.setLineWidth(w / 2)
-    // ctx.setStrokeStyle('#20183b')
-    ctx.setStrokeStyle('#bbb')
-    ctx.setLineCap('round')
-    ctx.beginPath()
-    ctx.arc(r, r, r - w, 0, 2 * Math.PI, false)
-    ctx.stroke()
-    ctx.draw()
+  drawCircleBg(id: string, radius: number) {
+    //源代码 start------------
+    // let that = this
+    // const r = radius * that.data.rpx
+    // const w = width * that.data.rpx
+    // that.setDataSmart({
+    //   size: 2 * r
+    // })
+    // const ctx = wxp.createCanvasContext(id, that)
+    // ctx.setLineWidth(w / 2)
+    // // ctx.setStrokeStyle('#20183b')
+    // ctx.setStrokeStyle('#bbb')
+    // ctx.setLineCap('round')
+    // ctx.beginPath()
+    // ctx.arc(r, r, r - w, 0, 2 * Math.PI, false)
+    // ctx.stroke()
+    // ctx.draw()
+    //源代码 end------------
+
+    this.drawCircle(id, radius,-1);
   }
 
-  drawCircle(id: string, radius: number, width: number, step: number) {
+  drawCircle(id: string, radius: number, step: number) {
     let that = this
     const r = radius * that.data.rpx
-    const w = width * that.data.rpx
-    const ctx = wxp.createCanvasContext(id, that)
-    // const gradient = ctx.createLinearGradient(2 * r, r, r, 0)
-    // gradient.addColorStop(0, '#2661DD')
-    // gradient.addColorStop(0.5, '#40ED94')
-    // gradient.addColorStop(1.0, '#5956CC')
-    // gradient.addColorStop(0, '#67a445')
-    // gradient.addColorStop(0.9, '#0d69b1')
-    // gradient.addColorStop(1.0, '#67a445')
-    ctx.setLineWidth(width / 2 + 1)
-    // ctx.setStrokeStyle(gradient);
-    ctx.setStrokeStyle("#0d69b1")
-    ctx.setLineCap('round')
-    ctx.beginPath()
-    ctx.arc(r, r, r - w, -Math.PI / 2, step * Math.PI - Math.PI / 2, false)
-    ctx.stroke()
-    ctx.draw()
+    that.setDataSmart({
+      size: 2 * r
+    });
+    const ctx = wxp.createCanvasContext(id, that), x1 = r, smallRadius = r / 12, y1 = smallRadius,
+        wholeDegree = 2 * Math.PI, a = 2 * Math.PI / 15, circleRadius = r - smallRadius, maxPointNum = 15,
+        currentStep = Math.ceil(step / 2);
+    console.log(currentStep);
+
+    let x = x1, y = y1;
+    for (let i = 1; i <= maxPointNum; i++) {
+      ctx.beginPath();
+      ctx.setFillStyle(currentStep >= i ? 'white' : '#257AD1');
+      ctx.arc(x, y, smallRadius, 0, wholeDegree, false);
+      ctx.fill();
+      const degree = a * i;
+      x = x1 + circleRadius * Math.sin(degree);
+      y = y1 + circleRadius - circleRadius * Math.cos(degree);
+    }
+    ctx.draw();
+
   }
 
   _runEvent() {
