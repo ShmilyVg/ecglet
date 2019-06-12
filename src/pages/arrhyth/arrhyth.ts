@@ -100,7 +100,9 @@ export default class extends MyPage {
         // 计时开始
         if (!that.data.countTimer) {
           that.preparePannelDark('white');
-          that.startCount()
+          setTimeout(() => {
+            that.startCount();
+          });
         }
       }
     } catch (err) {
@@ -307,7 +309,7 @@ export default class extends MyPage {
         // ecg.preparePannel(rect.width, rect.height)
         that.data.canvasWidth = rect.width;
         that.data.canvasHeight = rect.height;
-        this.preparePannelDark('');
+        this.preparePannelDark('white');
         // ecg.preparePannelDark(rect.width, rect.height);
       }).exec()
     // },2000)
@@ -357,7 +359,7 @@ export default class extends MyPage {
       if (that.data.count <= 2 * that.data.maxCount) {
         let circle: any = that.data.progressCircle
         circle.drawCircle('circle_draw1', 100, 16, that.data.count / this.data.maxCount)
-        // console.log('count: ' + that.data.count)
+        console.log('count: ' + that.data.count, that.data.maxCount);
         if (that.data.count < 2 * that.data.maxCount) {
           that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}秒` })
         } else {
