@@ -6,21 +6,30 @@
 -->
 
 
-<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
-  <view class="weui-cells__title">资料</view>
-  <view class="weui-cells weui-cells_after-title">
-    <block>
-      <navigator url="../userdata/userdata" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">用户信息</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">{{userData.first_name}}</view>
-      </navigator>
-    </block>
-  </view>
-  <view class="weui-cells__title">其他</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="call">
-      <view class="weui-cell__bd">联系我们</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access">{{phone}}</view>
+<view class="page flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
+    <view class="top-cell flex-row">
+        <view class="avatar"></view>
+        <view class="name">这里是名字</view>
+        <view class="edit-info">编辑资料</view>
     </view>
-  </view>
+    <view class="table">
+        <view class="flex-row cell" bindtap="clickCell1">
+            <image class="icon" src="../../images/mine/jingcejilu.png"></image>
+            <view class="title">检测记录</view>
+            <image src="../../images/mine/arr.png" class="arr"></image>
+        </view>
+        <view class="flex-row cell" bindtap="clickCell2">
+            <image class="icon" src="../../images/mine/xinzhangjibingjieshou.png"></image>
+            <view class="title">心脏疾病介绍</view>
+            <image src="../../images/mine/arr.png" class="arr"></image>
+        </view>
+    </view>
+    <view class="table">
+        <view class="flex-row cell" bindtap="clickCell3">
+            <image class="icon" src="../../images/mine/fangkui.png"></image>
+            <view class="title">反馈</view>
+            <image src="../../images/mine/arr.png" class="arr"></image>
+        </view>
+    </view>
 </view>
