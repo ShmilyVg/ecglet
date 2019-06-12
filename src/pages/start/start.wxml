@@ -1,0 +1,25 @@
+<!--
+  此文件是由模板文件 ".dtpl/page/$rawModuleName.wxml.dtpl" 生成的，你可以自行修改模板
+
+  注意：
+  1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
+-->
+
+<!--<view class="none-history">
+  <view class="none-history-pic"><cover-image src="../../images/history.png" alt=""/></view>
+  <view class="none-history-hint">暂无检测记录</view>
+</view>-->
+<view>
+    <view class="header">
+        <view class="header-p1">欢迎使用HiPee心电仪</view>
+        <view class="header-p2">梦想陪我等天亮</view>
+    </view>
+    <view class="main">
+        <view class="main-pic"><cover-image src="../../images/start/user.png" alt=""/></view>
+        <view class="main-heart">
+            <view class="main-heart-bg"><cover-image src="../../images/start/startbtnbg.png" alt=""/></view>
+            <view class="main-heart-btn">开始</view>
+        </view>
+        <view class="main-hint">点击按钮进入测试</view>
+    </view>
+</view>
