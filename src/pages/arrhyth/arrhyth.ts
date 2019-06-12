@@ -300,7 +300,7 @@ export default class extends MyPage {
 
     that.data.progressCircle = that.selectComponent('#circle1')
     let circle: any = that.data.progressCircle
-    circle.drawCircleBg('circle_bg1', 100, 16)
+    circle.drawCircleBg('circle_bg1', 100)
     // setTimeout(()=>{
       query.select('#ecg').boundingClientRect((rect: any) => {
         that.data.ecgPannel = that.selectComponent('#ecg')
@@ -358,7 +358,7 @@ export default class extends MyPage {
       that.data.count++
       if (that.data.count <= 2 * that.data.maxCount) {
         let circle: any = that.data.progressCircle
-        circle.drawCircle('circle_draw1', 100, 16, that.data.count / this.data.maxCount)
+        circle.drawCircle('circle_draw1', 100, that.data.count);
         console.log('count: ' + that.data.count, that.data.maxCount);
         if (that.data.count < 2 * that.data.maxCount) {
           that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
@@ -423,7 +423,7 @@ export default class extends MyPage {
 
     if (that.data.progressCircle) {
       let circle: any = that.data.progressCircle
-      circle.drawCircle('circle_draw1', 100, 16, 0)
+      circle.drawCircle('circle_draw1', 100, 1);
       that.setDataSmart({txt: "30"})
     }
 
