@@ -364,7 +364,7 @@ export default class extends MyPage {
           that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
         } else {
           that.data.count = 0
-          that.setDataSmart({ txt: '完成' })
+          that.setDataSmart({ txt: '0' })
           if (that.data.countTimer) {
             clearInterval(that.data.countTimer)
             that.data.countTimer = undefined
