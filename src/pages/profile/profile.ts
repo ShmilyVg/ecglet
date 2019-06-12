@@ -23,6 +23,12 @@ export default class extends MyPage {
         })
     }
 
+    getPhoneNumber(e: any) {
+        if (e.detail.errMsg == 'getPhoneNumber:ok') {
+            
+        }
+    }
+
     async call() {
         let that = this
 
