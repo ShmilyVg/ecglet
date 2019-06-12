@@ -11,6 +11,8 @@
 
     /*# INJECT_START {"key": "page"} #*/
     "pages/start/start",
+    "pages/profile/profile",
+    "pages/history/history",
     "pages/feedback/feedback",
     "pages/index/index",
     "pages/history/history",
