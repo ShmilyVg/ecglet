@@ -31,6 +31,13 @@ export default class extends MyPage {
         })
     }
 
+    async toEditInfo() {
+        wx.navigateTo({
+                url: '../userdata/userdata'
+            }
+        )
+    }
+
     async clickCell1() {
         console.log('ceshidwe1');
     }

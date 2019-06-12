@@ -9,9 +9,11 @@
 <view class="page flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
     <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
     <view class="top-cell flex-row">
-        <view class="avatar"></view>
+        <view class="avatar-view flex-row">
+            <view class="avatar"></view>
+        </view>
         <view class="name">这里是名字</view>
-        <view class="edit-info">编辑资料</view>
+        <view class="edit-info" bindtap="toEditInfo">编辑资料</view>
     </view>
     <view class="table">
         <view class="flex-row cell" bindtap="clickCell1">
