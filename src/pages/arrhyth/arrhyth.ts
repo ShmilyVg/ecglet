@@ -424,6 +424,7 @@ export default class extends MyPage {
     if (that.data.progressCircle) {
       let circle: any = that.data.progressCircle
       circle.drawCircle('circle_draw1', 100, -1);
+      that.preparePannelDark('');
       that.setDataSmart({txt: "30"})
     }
 
