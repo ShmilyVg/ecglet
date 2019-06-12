@@ -8,10 +8,14 @@
 <view class="container" style="height:{{windowHeight}}px;">
   <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
     <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
-    <view class="circle_info" bindtap="changeTime">
-      <text class='circle_txt'>{{txt}}</text>
-      <view class="circle_dot">SECOND</view>
+    <view class="circle_info">
+      <block wx:if="{{showLoading}}">
+        <text class='circle_txt'>{{txt}}</text>
+        <view class="circle_dot">SECOND</view>
+      </block>
+      <image wx:else src="./../../images/arrhyth/collect_jingshubian.png" class="remind-large-size"></image>
     </view>
+
   </circle>
 
   <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
@@ -22,11 +26,11 @@
       <cover-view class="remind-text-small">将双手放在金属片上测试</cover-view>
       <cover-view class="remind-text-small" style="margin-bottom: 330rpx;">过程中勿交谈、移动、保持静息状态</cover-view>
       <cover-view class="flex-row align-items-center">
-        <cover-image src="./../../images/collect_lvdeng.png" class="remind-image-size"></cover-image>
+        <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
         <cover-view >绿灯亮起：表示当前处于采集状态</cover-view>
       </cover-view>
       <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
-        <cover-image src="./../../images/collect_landeng.png" class="remind-image-size"></cover-image>
+        <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
         <cover-view >蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
       </cover-view>
     </cover-view>
