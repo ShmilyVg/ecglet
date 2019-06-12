@@ -25,7 +25,7 @@ export default class extends MyPage {
 
     getPhoneNumber(e: any) {
         if (e.detail.errMsg == 'getPhoneNumber:ok') {
-            
+
         }
     }
 
@@ -45,8 +45,9 @@ export default class extends MyPage {
     }
 
     async clickCell1() {
-        console.log('ceshidwe1');
+        wx.navigateTo({url: '../history/history'})
     }
+
 
     async clickCell2() {
         console.log('ceshidwe2');
