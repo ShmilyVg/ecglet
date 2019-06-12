@@ -9,8 +9,8 @@
   <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
     <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
     <view class="circle_info" bindtap="changeTime">
-      <view class="circle_dot"></view>
       <text class='circle_txt'>{{txt}}</text>
+      <view class="circle_dot">SECOND</view>
     </view>
   </circle>
 

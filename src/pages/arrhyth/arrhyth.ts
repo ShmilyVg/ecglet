@@ -36,7 +36,7 @@ export default class extends MyPage {
     lastDeviceId: '',
     connectingDeviceId: '',
     progressCircle: undefined,
-    txt: '等待设备连接...',
+    txt: '30',
     count: 0,
     maxCount: 15,
     countTimer: undefined,
@@ -424,7 +424,7 @@ export default class extends MyPage {
     if (that.data.progressCircle) {
       let circle: any = that.data.progressCircle
       circle.drawCircle('circle_draw1', 100, 16, 0)
-      that.setDataSmart({txt: "等待设备接通..."})
+      that.setDataSmart({txt: "30"})
     }
 
     if (that.data.ecgPannel) {

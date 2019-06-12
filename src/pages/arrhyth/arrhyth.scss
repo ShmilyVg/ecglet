@@ -17,20 +17,24 @@
   top: 50%;
   transform: translate(-50%,-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .circle_dot {
-  width:16rpx;
-  height: 16rpx;
-  border-radius: 50%;
-  background-color: #fb9126;
+  font-size:30rpx;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+  opacity:0.67;
+  line-height: 30rpx;
 }
 .circle_txt {
-  padding-left: 10rpx;
-  color: #fff;
-  font-size: 36rpx;
-  letter-spacing: 2rpx;
+  font-size:120rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height: 87rpx;
+  margin-top: 10rpx;
+  margin-bottom: 5rpx;
 }
 // .circle_pannel {
 //   flex: 0 0 200px;
