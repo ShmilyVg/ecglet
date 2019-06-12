@@ -10,6 +10,8 @@
     */
 
     /*# INJECT_START {"key": "page"} #*/
+    "pages/history/history",
+    "pages/feedback/feedback",
     "pages/index/index",
     "pages/logs/logs",
     "pages/login/login",
@@ -38,12 +40,6 @@
         "text": "采集",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home_select.png"
-      },
-      {
-        "pagePath": "pages/logs/logs",
-        "text": "历史",
-        "iconPath": "images/history.png",
-        "selectedIconPath": "images/history_select.png"
       },
       {
         "pagePath": "pages/profile/profile",
