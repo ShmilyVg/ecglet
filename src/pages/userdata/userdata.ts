@@ -11,7 +11,7 @@ export default class extends MyPage {
         sexies: ['女', '男', '未知'],
         sexIndex: 1,
         birthEndDate: new Date().format('yyyy-MM-dd'),
-        birthDate: '',
+        birthDate: '请选择出生日期',
         submitOpacity: 0.4,
         submitDisabled: true,
         name: '',
