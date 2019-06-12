@@ -309,7 +309,7 @@ export default class extends MyPage {
         // ecg.preparePannel(rect.width, rect.height)
         that.data.canvasWidth = rect.width;
         that.data.canvasHeight = rect.height;
-        this.preparePannelDark('white');
+        this.preparePannelDark('');
         // ecg.preparePannelDark(rect.width, rect.height);
       }).exec()
     // },2000)
