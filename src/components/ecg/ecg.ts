@@ -286,9 +286,10 @@ export default class extends MyComponent {
   preparePannelDark(w: number, h: number, bgColor: string) {
     console.log(`Canvas size(${w}, ${h})`)
     let that = this
-
     const rw = w * that.data.rpx
     const rh = h * that.data.rpx
+    const r = rw / 10;
+
     const offsetX = 0
     const offsetY = 0
 
@@ -299,7 +300,16 @@ export default class extends MyComponent {
     let ctx = wxp.createCanvasContext("ecg_bg", that)
 
     ctx.fillStyle = bgColor || 'transparent';
-    ctx.fillRect(0, 0, rw, rh)
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.lineTo(rw - r, 0);
+    ctx.arcTo(rw, 0, rw, r, r);
+    ctx.lineTo(rw, rh);
+    ctx.lineTo(0, rh);
+    ctx.lineTo(0, rh-r);
+    ctx.arcTo(0, 0, r, 0, r);
+    ctx.closePath();
+    ctx.fill();
 
     const d = that.data.pxmm
     // // 绘制竖行网格
@@ -346,7 +356,7 @@ export default class extends MyComponent {
     that.data.ctx = wxp.createCanvasContext('ecg_draw', that)
     ctx = that.data.ctx
 
-    ctx.fillStyle = "rgba(0,0,0,0)"
+    ctx.fillStyle = "transparent"
     ctx.fillRect(0, 0, rw, rh)
     ctx.draw()
 

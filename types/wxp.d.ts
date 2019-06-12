@@ -10488,7 +10488,7 @@ export namespace wxp {
      *     canvasContext.arcTo(x1, y1, x2, y2, radius)
      *     ```
      */
-    arcTo(): void
+    arcTo(x1:number,y1:number,x2:number,y2:number,radius:number): void
     /**
      * > 基础库 1.9.90 开始支持，低版本需做[兼容处理](https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html)。
      *
