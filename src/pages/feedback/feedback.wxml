@@ -17,6 +17,6 @@
       <view class="main-footer-p">或搜索客服微信号：hipee_kf</view>
     </view>
   </view>
-  <button class="savebtn">保 存</button>
+  <button class="savebtn" bind:tap="savePic">保 存</button>
 </view>
 
