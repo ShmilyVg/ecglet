@@ -23,7 +23,20 @@ export default class extends MyPage {
     loginDisabled: true,
     loginBtnOpacity: 0.4,
     toastMessage: '',
-    toast: false
+    toast: false,
+      list: [{
+        time: '11.30',
+          date: '2019.1.11',
+          num: '66',
+      },{
+          time: '11.30',
+          date: '2019.1.11',
+          num: '55',
+      },{
+          time: '11.30',
+          date: '2019.1.11',
+          num: '44',
+      }]
   }
 
   async onLoad(options: any) {

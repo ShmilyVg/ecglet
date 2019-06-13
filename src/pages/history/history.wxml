@@ -11,45 +11,19 @@
 </view>-->
 <view>
   <view class="bg"></view>
-  <view class="bg-pic"><cover-image src="../../images/mine/jingcejilu_beijing.png" alt=""/></view>
+  <image class="bg-pic" src="../../images/mine/jingcejilu_beijing.png" alt=""/>
   <view class="notebox">
-    <view class="note">
+    <view class="note" wx:for="{{list}}">
       <view class="note-main">
         <view class="note-circle"><span></span></view>
         <view class="note-hint">
-          <view class="note-hint-time">11:40</view>
-          <view class="note-hint-date">2019.6.12</view>
+          <view class="note-hint-time">{{item.time}}</view>
+          <view class="note-hint-date">{{item.date}}</view>
         </view>
       </view>
       <view class="note-main">
-        <view class="note-num">59<span>PBM</span></view>
-        <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
-      </view>
-    </view>
-    <view class="note">
-      <view class="note-main">
-        <view class="note-circle"><span></span></view>
-        <view class="note-hint">
-          <view class="note-hint-time">11:40</view>
-          <view class="note-hint-date">2019.6.12</view>
-        </view>
-      </view>
-      <view class="note-main">
-        <view class="note-num">59<span>PBM</span></view>
-        <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
-      </view>
-    </view>
-    <view class="note">
-      <view class="note-main">
-        <view class="note-circle"><span></span></view>
-        <view class="note-hint">
-          <view class="note-hint-time">11:40</view>
-          <view class="note-hint-date">2019.6.12</view>
-        </view>
-      </view>
-      <view class="note-main">
-        <view class="note-num">559<span>PBM</span></view>
-        <view class="note-more"><cover-image src="../../images/more.png" alt=""/></view>
+        <view class="note-num">{{item.num}}<span>PBM</span></view>
+        <image class="note-more" src="../../images/more.png" alt=""/>
       </view>
     </view>
   </view>
