@@ -26,7 +26,8 @@ export class MyApp extends BaseApp {
     userdata: Url
     disease: Url
     diseaseArrhyth: Url
-    manual: Url
+    manual: Url,
+    result:Url,
     /*# INJECT_END #*/
   }
 }

@@ -106,14 +106,18 @@ page {
 .cell-state {
   font-size:26rpx;
   font-weight:400;
-  color:rgba(239,58,89,1);
   line-height:37rpx;
 }
+.cell-blue{
+  color:#3A93EF;
+}
 
+.cell-red{
+  color:rgba(239,58,89,1);
+}
 .cell-num {
   font-size:70rpx;
   font-weight:500;
-  color:rgba(58,147,239,1);
   line-height:84rpx;
 }
 

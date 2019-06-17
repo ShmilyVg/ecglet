@@ -6,6 +6,7 @@ export default class BaseNetworkImp {
 
     static setToken({token}) {
         _token = token;
+        wx.setStorageSync('cookie', token);
     }
 
     static request({url, data, requestWithoutLogin = false, showResendDialog}) {

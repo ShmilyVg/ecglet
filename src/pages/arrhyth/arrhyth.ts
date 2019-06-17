@@ -505,39 +505,41 @@ export default class extends MyPage {
       // } else if (readRes.data instanceof ArrayBuffer) {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
-      Protocol.uploadFile({filePath}).then((path: string) => {
-
+      Protocol.uploadGatherFile({filePath}).then((data: any) => {
+        that.app.$url.result.redirect({gatheResult: data.result});
+      }).catch(res=>{
+        console.error('上传解析过程中报错',res);
       });
-      res = await APIs.default().uploadRequest({
-        url: "bs/upload_file",
-        filePath: filePath,
-        name: "file",
-        formData: {
-          test_time: Math.floor(Date.now() / 1000),
-          type: 1,
-          condition: ""
-        }
-      })
-      console.log("upload file(%s) -- %o", filePath, res)
-
-      let jsonObj = JSON.parse(res)
-      if (!jsonObj) {
-        console.log("json object null...")
-        return
-      }
-      if (jsonObj.resultcode == 0) {
-        let data = jsonObj.data
-        let rawData = data.rawData
-        if (typeof rawData === "string") {
-          rawData = JSON.parse(rawData)
-        }
-        console.log("upload response...%o", data)
-        if (data.pdf_url) {
+      // res = await APIs.default().uploadRequest({
+      //   url: "bs/upload_file",
+      //   filePath: filePath,
+      //   name: "file",
+      //   formData: {
+      //     test_time: Math.floor(Date.now() / 1000),
+      //     type: 1,
+      //     condition: ""
+      //   }
+      // })
+      // console.log("upload file(%s) -- %o", filePath, res)
+      //
+      // let jsonObj = JSON.parse(res)
+      // if (!jsonObj) {
+      //   console.log("json object null...")
+      //   return
+      // }
+      // if (jsonObj.resultcode == 0) {
+      //   let data = jsonObj.data
+      //   let rawData = data.rawData
+      //   if (typeof rawData === "string") {
+      //     rawData = JSON.parse(rawData)
+      //   }
+      //   console.log("upload response...%o", data)
+      //   if (data.pdf_url) {
           that.app.$url.report.go({ reportUrl: data.pdf_url })
-        }
-      } else {
-        throw new Error("返回错误结果...")
-      }
+      //   }
+      // } else {
+      //   throw new Error("返回错误结果...")
+      // }
 
     } catch (error) {
       console.log("uploadData: %o", error)
