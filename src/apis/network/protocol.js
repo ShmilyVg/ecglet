@@ -47,6 +47,9 @@ export default class Protocol {
         return Network.request({url: 'gather/list',data: {page, page_size}})
     }
 
+    static accountUpdate({nickname, sex, phone, birthday, height, weight}) {
+        return Network.request({url: 'account/update', data: arguments[0]});
+    }
 }
 
 
