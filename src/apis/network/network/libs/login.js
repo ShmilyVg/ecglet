@@ -29,10 +29,7 @@ export default class Login {
                 reject(res);
             }) : resolve()
         )
-
     }
-
-
 }
 
 function wxReLogin(resolve, reject) {
