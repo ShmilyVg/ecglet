@@ -1,5 +1,4 @@
 import Network from "./network";
-import {UploadUrl} from "../../utils/config";
 import WXDialog from "../../base/heheda-common-view/dialog";
 import BaseNetworkImp from "./network/libs/base/base-network-imp";
 import {PostUrl, UploadUrl} from "../../utils/config";

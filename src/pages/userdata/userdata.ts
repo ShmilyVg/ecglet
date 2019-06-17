@@ -8,6 +8,8 @@ import Protocol from "../../apis/network/protocol";
 import Toast from "../../base/heheda-common-view/toast";
 // import {Admin} from './../../utils/admin';
 // var request_1 = require("../../apis/request");
+// @ts-ignore
+import UserInfo from '../../apis/network/userInfo.js';
 
 @pagify()
 export default class extends MyPage {
@@ -26,28 +28,19 @@ export default class extends MyPage {
     }
 
     async onLoad(options: any) {
-
-        // await request_1.APIs.default().getRequest({
-        //     url: 'account/info',
-        //     data: {}
-        // })
-
-
-        // console.log(await wxp.getUserInfo())
-
-        // let that = this
-        //
-        // let userData = Admin.default().userData
-        // if (!!userData) {
-        //     that.setDataSmart({
-        //         name: userData.first_name,
-        //         birthDate: !!userData.birthday ? new Date(userData.birthday * 1000).format('yyyy-MM-dd') : '',
-        //         sexIndex: !!userData.sex ? userData.sex - 1 : 1,
-        //         doctor: userData.doctor,
-        //         hospital: userData.hospital
-        //     })
-        // }
-
+        let that = this
+        UserInfo.get().then((res: any) => {
+            console.log('res:', res);
+            that.setDataSmart({
+                name: res.userInfo.nickName,
+                number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
+                sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
+                birthDate: res.userInfo.birthday || '请选择出生日期',
+                height: res.userInfo.height,
+                weight: res.userInfo.weight,
+                portraitUrl: res.userInfo.portraitUrl
+            })
+        })
     }
 
     onNameChange(e: any) {
@@ -118,7 +111,7 @@ export default class extends MyPage {
             //     data: data
             // })
             console.log('保存信息：', data);
-            Protocol.accountUpdate(data).then(()=>{
+            Protocol.accountUpdate(data).then(() => {
                 Toast.success('修改成功');
             });
 
