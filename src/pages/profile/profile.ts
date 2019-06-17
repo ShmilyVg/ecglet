@@ -48,7 +48,6 @@ export default class extends MyPage {
         wx.navigateTo({url: '../history/history'})
     }
 
-
     async clickCell2() {
         console.log('ceshidwe2');
     }
