@@ -5,7 +5,7 @@ export default class UserInfo {
         return new Promise((resolve, reject) => {
             const globalData = getApp().globalData;
             let localUserInfoInMemory = globalData.userInfo;
-            if (!!localUserInfoInMemory && !!localUserInfoInMemory.id) {
+            if (!!localUserInfoInMemory && !!localUserInfoInMemory.memberId) {
                 resolve({userInfo: localUserInfoInMemory});
                 return;
             }

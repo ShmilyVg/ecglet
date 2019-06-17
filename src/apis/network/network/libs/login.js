@@ -11,7 +11,7 @@ export default class Login {
         );
     }
 
-    static doRegister({userInfo, encryptedData, iv}) {
+    static doRegister({encryptedData, iv}) {
         return new Promise((resolve, reject) =>
             _needRegister ? wxLogin().then(res => {
                 const {code} = res;

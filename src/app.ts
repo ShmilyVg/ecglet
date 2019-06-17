@@ -7,11 +7,12 @@ import {appify, MyApp, wxp} from 'base/'
 import 'utils/config';
 // @ts-ignore
 import Login from "./apis/network/login";
+// @ts-ignore
+import UserInfo from "./apis/network/userInfo.js";
 // import {APIs} from 'apis/request'
 
 @appify({pages: require('./app.cjson?pages'), tabBarList: require('./app.cjson?tabBar.list')})
 export default class extends MyApp {
-  loginCallBack = function () { console.log('你好')};
   needRegisterCallBack = function () {};
     globalData = {userInfo: {}};
   async onLaunch() {
@@ -21,29 +22,31 @@ export default class extends MyApp {
     console.log('qqq')
 
     Login.doLogin().then((data:any) => {
-      this.loginCallBack && this.loginCallBack();
+      return UserInfo.get();
+    }).then(()=>{
+      wxp.setStorageSync('isRegister',true);
     }).catch((res:any) => {
       if (res && res.data && res.data.code === 2) {
         this.needRegisterCallBack && this.needRegisterCallBack();
       }
     });
-    try {
-      let res = await wxp.setKeepScreenOn({
-        keepScreenOn: true
-      })
-      console.log(`wxp.setKeepScreenOn(true) -- ${res.errMsg}`)
-
-      await wxp.checkSession()
-      console.log("已登录，可以获取用户头像和昵称...")
-    } catch (error) {
-      console.log(`wxp.checkSession-- ${error.message}`)
-      try {
-        let res = await wxp.login()
-        console.log(`wxp.login-- (${res.code}): ${res.errMsg}`)
-      } catch (error) {
-        console.log(`wxp.login -- ${error.message}`)
-      }
-    }
+    // try {
+    //   let res = await wxp.setKeepScreenOn({
+    //     keepScreenOn: true
+    //   })
+    //   console.log(`wxp.setKeepScreenOn(true) -- ${res.errMsg}`)
+    //
+    //   await wxp.checkSession()
+    //   console.log("已登录，可以获取用户头像和昵称...")
+    // } catch (error) {
+    //   console.log(`wxp.checkSession-- ${error.message}`)
+    //   try {
+    //     let res = await wxp.login()
+    //     console.log(`wxp.login-- (${res.code}): ${res.errMsg}`)
+    //   } catch (error) {
+    //     console.log(`wxp.login -- ${error.message}`)
+    //   }
+    // }
 
 
     // 检查是否授权获取用户信息

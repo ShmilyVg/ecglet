@@ -33,11 +33,10 @@ export default class extends MyPage {
         if (!!userInfo) {
             if (!!wxp.getStorageSync('isRegister')) {
                 HiNavigator.navigateToArrhyth();
-                UserInfo.get();
             }else {
                 Toast.showLoading();
                 Login.doRegister({
-                    userInfo, encryptedData, iv
+                    encryptedData, iv
                 }).then(() => UserInfo.get())
                     .then((res: any) => {
                         console.log(res);
@@ -53,7 +52,7 @@ export default class extends MyPage {
                 });
             }
 
-        }else{
+        }else {
             WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
         }
         /*wx.getSetting({
