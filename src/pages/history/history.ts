@@ -43,7 +43,7 @@ export default class extends MyPage {
 
     toPdfUrl(e:any){
         console.log(e)
-        let pdfUrl = e.target.dataset.url
+        let pdfUrl = e.currentTarget.dataset.url
         this.app.$url.report.go({reportUrl: pdfUrl});
     }
 
