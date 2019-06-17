@@ -13,7 +13,7 @@
         </view>
     </view>
     <view class="main">
-        <view class="main-pic"><open-data type="userAvatarUrl"></open-data></view>
+        <open-data class="main-pic" type="userAvatarUrl"></open-data>
         <view class="main-heart">
             <image class="main-heart-bg" src="../../images/start/startbtnbg.png" alt=""/>
             <view class="main-heart-btn" bindtap="start">开始</view>

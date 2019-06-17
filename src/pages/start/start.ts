@@ -1,5 +1,4 @@
 import {pagify, MyPage, wxp} from 'base/'
-import {Admin} from './../../utils/admin'
 
 
 @pagify()
