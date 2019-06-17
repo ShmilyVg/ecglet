@@ -1,6 +1,8 @@
 <view class="flex-column">
     <image src="../../images/result/bg.png" style="height: 270rpx;width: 100%"></image>
-    <view class="avatar-border"></view>
+    <view class="avatar-border flex-column">
+        <view class="avatar"></view>
+    </view>
     <view class="title">心电智能分析报告</view>
     <view class="content">这是显示时间</view>
     <image src="../../images/result/logo.png" class="logo"></image>

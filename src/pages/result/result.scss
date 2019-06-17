@@ -24,6 +24,14 @@ page {
   margin-top: -170rpx;
 }
 
+.avatar{
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background-color: #0BB20C;
+  margin-top: 18rpx;
+}
+
 .title {
   font-size:38rpx;
   font-weight:500;
@@ -50,7 +58,7 @@ page {
 .logo {
   width: 110rpx;
   height: 110rpx;
-  margin-top: 17rpx;
+  margin-top: 25rpx;
   z-index: 1;
 }
 
