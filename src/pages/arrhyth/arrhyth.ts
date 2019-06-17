@@ -1,6 +1,5 @@
-import { APIs } from './../../apis/request';
 // 此文件是由模板文件 ".dtpl/page/$rawModuleName.ts.dtpl" 生成的，你可以自行修改模板
-import { pagify, MyPage, wxp, fsp } from 'base/'
+import {fsp, MyPage, pagify, wxp} from 'base/'
 // @ts-ignore
 import Protocol from './../../apis/network/protocol.js';
 import "../../extensions/ArrayBuffer.ext"
@@ -507,7 +506,7 @@ export default class extends MyPage {
       // }
       Protocol.uploadGatherFile({filePath}).then((data: any) => {
         that.app.$url.result.redirect({gatheResult: data.result});
-      }).catch(res=>{
+      }).catch((res:any)=>{
         console.error('上传解析过程中报错',res);
       });
       // res = await APIs.default().uploadRequest({
@@ -535,7 +534,7 @@ export default class extends MyPage {
       //   }
       //   console.log("upload response...%o", data)
       //   if (data.pdf_url) {
-          that.app.$url.report.go({ reportUrl: data.pdf_url })
+      //     that.app.$url.report.go({ reportUrl: data.pdf_url })
       //   }
       // } else {
       //   throw new Error("返回错误结果...")
