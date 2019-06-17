@@ -37,7 +37,7 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/start/start",
         "text": "采集",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home_select.png"
