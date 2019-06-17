@@ -505,8 +505,10 @@ export default class extends MyPage {
       // } else if (readRes.data instanceof ArrayBuffer) {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
-      Protocol.uploadGatheFile({filePath}).then((data: any) => {
+      Protocol.uploadGatherFile({filePath}).then((data: any) => {
         that.app.$url.result.redirect({gatheResult: data.result});
+      }).catch(res=>{
+        console.error('上传解析过程中报错',res);
       });
       // res = await APIs.default().uploadRequest({
       //   url: "bs/upload_file",

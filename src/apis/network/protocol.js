@@ -3,11 +3,11 @@ import {PostUrl, UploadUrl} from "../../utils/config";
 
 export default class Protocol {
 
-    static uploadGatheFile({filePath}) {
+    static uploadGatherFile({filePath}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
-                    url: PostUrl + 'gathe/upload',
+                    url: PostUrl + 'gather/upload',
                     filePath: filePath,
                     name: filePath,
                     // header: {"Content-Type": "multipart/form-data"},
@@ -16,11 +16,12 @@ export default class Protocol {
                         // 'session_token': wx.getStorageSync('session_token')
                     },
                     success: function (res) {
+                        console.log('上传成功的文件',res);
                         let data = JSON.parse(res.data);
                         resolve(data);
                     },
                     fail: function (e) {
-                        console.log(e);
+                        console.log('上传失败', e);
                         reject();
                     }
                 });
