@@ -109,11 +109,10 @@ export default class extends MyPage {
     }
 
     async clickCell2() {
-        console.log('ceshidwe2');
+        this.app.$url.diseaseArrhyth.go();
     }
 
     async clickCell3() {
-        console.log('ceshidwe3');
         wx.navigateTo({url: '../feedback/feedback'})
     }
 }
