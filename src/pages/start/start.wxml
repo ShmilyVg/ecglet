@@ -14,7 +14,7 @@
     </view>
     <view class="main">
         <open-data class="main-pic" type="userAvatarUrl"></open-data>
-        <button class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">
+        <button class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" hover-class="none">
             <image class="main-heart-bg" src="../../images/start/startbtnbg.png" alt=""/>
             <view class="main-heart-btn">开始</view>
         </button>

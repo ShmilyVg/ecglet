@@ -7,6 +7,8 @@ import UserInfo from '../../apis/network/userInfo.js';
 import HiNavigator from '../../components/navigator/hi-navigator.js'
 // @ts-ignore
 import Toast from '../../base/heheda-common-view/toast.js';
+// @ts-ignore
+import WXDialog from '../../base/heheda-common-view/dialog.js';
 
 @pagify()
 export default class extends MyPage {
@@ -27,7 +29,7 @@ export default class extends MyPage {
                 iv
             }
         } = e;
-        console.log(userInfo);
+        console.log(e);
         if (!!userInfo) {
             if (!!wxp.getStorageSync('isRegister')) {
                 HiNavigator.navigateToArrhyth();
@@ -51,6 +53,8 @@ export default class extends MyPage {
                 });
             }
 
+        }else{
+            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
         }
         /*wx.getSetting({
             success (res){
