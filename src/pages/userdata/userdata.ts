@@ -3,12 +3,12 @@
 import {pagify, MyPage, wxp} from 'base/'
 import '../../extensions/Date.extensions'
 // import {Admin} from './../../utils/admin';
-// import {APIs} from './../../apis/request';
+// var request_1 = require("../../apis/request");
 
 @pagify()
 export default class extends MyPage {
     data = {
-        sexies: ['女', '男', '未知'],
+        sexies: ['女', '男'],
         sexIndex: 1,
         birthEndDate: new Date().format('yyyy-MM-dd'),
         birthDate: '请选择出生日期',
@@ -17,10 +17,18 @@ export default class extends MyPage {
         name: '',
         height: '',
         weight: '',
-        number: ''
+        number: '',
+        portraitUrl: ''
     }
 
     async onLoad(options: any) {
+
+        // await request_1.APIs.default().getRequest({
+        //     url: 'account/info',
+        //     data: {}
+        // })
+
+
         // console.log(await wxp.getUserInfo())
 
         // let that = this
@@ -90,14 +98,14 @@ export default class extends MyPage {
         let that = this
         // const apis = APIs.default()
 
-        let birthTime = Date.parse(that.data.birthDate) / 1000
+        let birthTime = Date.parse(that.data.birthDate)
         console.log(`birth time: ${birthTime}`)
         try {
             let data = {
-                name: that.data.name,
-                number: that.data.number,
-                sex: <number>that.data.sexIndex + 1,
-                birthday: that.data.birthDate,
+                nickName: that.data.name,
+                phone: that.data.number,
+                sex: that.data.sexIndex,
+                birthday: birthTime,
                 height: that.data.height,
                 weight: that.data.weight
             }
