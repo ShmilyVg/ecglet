@@ -14,10 +14,11 @@
     </view>
     <view class="main">
         <view class="main-pic"><open-data type="userAvatarUrl"></open-data></view>
-        <view class="main-heart">
+        <button wx:if="{{isRegister}}" class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" hover-style="">
             <image class="main-heart-bg" src="../../images/start/startbtnbg.png" alt=""/>
-            <view class="main-heart-btn" bindtap="start">开始</view>
-        </view>
+            <view class="main-heart-btn">开始</view>
+        </button>
+
         <view class="main-hint">点击按钮进入测试</view>
     </view>
 </view>

@@ -4,8 +4,8 @@ const Release = false;
 
 const SoftwareVersion = `${Release?'':'Ecglet_Stage'} 1.6.5`;
 
-const PostUrl = `https://backend.${Release?'':'stage.'}hipee.cn/hipee-web-hiecg/`;
-const UploadUrl = 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do';
+const PostUrl = `http://backend.${Release?'':'stage.'}hipee.cn/hipee-web-hiecg/`;
+const UploadUrl = 'http://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do';
 NetworkConfig.setConfig({postUrl: PostUrl});
 
 export {

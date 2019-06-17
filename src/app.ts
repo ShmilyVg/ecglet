@@ -4,13 +4,28 @@ Author Mora <qiuzhongleiabc@126.com> (https://github.com/qiu8310)
 *******************************************************************/
 
 import {appify, MyApp, wxp} from 'base/'
+import 'utils/config';
+// @ts-ignore
+import Login from "./apis/network/login";
 // import {APIs} from 'apis/request'
 
 @appify({pages: require('./app.cjson?pages'), tabBarList: require('./app.cjson?tabBar.list')})
 export default class extends MyApp {
+  loginCallBack = function () { console.log('你好')};
+  needRegisterCallBack = function () {};
   async onLaunch() {
     // 检查是否小程序登录用户
     // 如果有登录记录，检查登录时效
+
+    console.log('qqq')
+
+    Login.doLogin().then((data:any) => {
+      this.loginCallBack && this.loginCallBack();
+    }).catch((res:any) => {
+      if (res && res.data && res.data.code === 2) {
+        this.needRegisterCallBack && this.needRegisterCallBack();
+      }
+    });
     try {
       let res = await wxp.setKeepScreenOn({
         keepScreenOn: true

@@ -1,6 +1,6 @@
 import BaseNetworkImp from "./base/base-network-imp";
+import WXDialog from "../../../../base/heheda-common-view/dialog";
 
-import {WXDialog} from "heheda-common-view";
 
 let _needRegister = false;
 export default class Login {

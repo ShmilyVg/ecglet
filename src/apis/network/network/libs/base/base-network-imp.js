@@ -1,5 +1,5 @@
 import {NetworkConfig} from "../config";
-import WXDialog from "../../../../../components/heheda-common-view/dialog";
+import WXDialog from "../../../../../base/heheda-common-view/dialog";
 
 let _token = '', _queue = {}, divideTimestamp = 0;
 export default class BaseNetworkImp {

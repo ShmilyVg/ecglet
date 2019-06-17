@@ -1,14 +1,47 @@
-import {pagify, MyPage, wxp} from 'base/'
-import {Admin} from './../../utils/admin'
-
+import {MyPage, pagify} from 'base/'
+// @ts-ignore
+import Login from '../../apis/network/login.js';
+// @ts-ignore
+import UserInfo from '../../apis/network/userInfo.js';
+// @ts-ignore
+import HiNavigator from '../../components/navigator/hi-navigator.js'
+// @ts-ignore
+import Toast from '../../base/heheda-common-view/toast.js';
 
 @pagify()
 export default class extends MyPage {
-  data = {
+    data = {
+        isRegister: true
+    }
 
-  }
+    onLoad(param: any): any {
 
-    async start() {
+    }
+
+    async onGotUserInfo(e: any) {
+
+        const {
+            detail: {
+                userInfo,
+                encryptedData,
+                iv
+            }
+        } = e;
+        if (!!userInfo) {
+            Toast.showLoading();
+            Login.doRegister({
+                userInfo, encryptedData, iv
+            }).then(() => UserInfo.get())
+                .then((res: any) => {
+                        !this.setData({userInfo: res.userInfo});
+                    }
+                ).catch(() => {
+                setTimeout(Toast.warn, 0, '获取信息失败');
+            }).finally(() => {
+                    Toast.hiddenLoading();
+                    HiNavigator.navigateToArrhyth();
+                });
+        }
         /*wx.getSetting({
             success (res){
                 if (res.authSetting['scope.userInfo']) {
@@ -21,10 +54,6 @@ export default class extends MyPage {
                 }
             }
         })*/
-        console.log('qqq')
-        wx.navigateTo({
-            url: '../arrhyth/arrhyth'
-        })
     }
 
 
