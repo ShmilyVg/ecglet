@@ -1,13 +1,13 @@
 import Network from "./network";
-import {UploadUrl} from "../../utils/config";
+import {PostUrl, UploadUrl} from "../../utils/config";
 
 export default class Protocol {
 
-    static uploadFile({filePath}) {
+    static uploadGatheFile({filePath}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
-                    url: UploadUrl,
+                    url: PostUrl + 'gathe/upload',
                     filePath: filePath,
                     name: filePath,
                     // header: {"Content-Type": "multipart/form-data"},
@@ -16,9 +16,8 @@ export default class Protocol {
                         // 'session_token': wx.getStorageSync('session_token')
                     },
                     success: function (res) {
-                        let data = res.data;
-                        let path = JSON.parse(data).result.path;
-                        resolve(path);
+                        let data = JSON.parse(res.data);
+                        resolve(data);
                     },
                     fail: function (e) {
                         console.log(e);
