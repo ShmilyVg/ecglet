@@ -43,4 +43,17 @@ export default class extends MyPage {
         let pdfUrl = e.target.dataset.url
         this.app.$url.report.go({reportUrl: pdfUrl});
     }
+
+    onPullDownRefresh() {
+        this.setData({
+            page: 1,
+            logs: []
+        });
+        this.getList({page: 1});
+    },
+
+    onReachBottom() {
+        console.log('getMedicalRecordList', this.data.page + 1);
+        this.getList({page: ++this.data.page});
+    },
 }
