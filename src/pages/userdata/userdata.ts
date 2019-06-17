@@ -2,6 +2,10 @@
 
 import {pagify, MyPage, wxp} from 'base/'
 import '../../extensions/Date.extensions'
+// @ts-ignore
+import Protocol from "../../apis/network/protocol";
+// @ts-ignore
+import Toast from "../../base/heheda-common-view/toast";
 // import {Admin} from './../../utils/admin';
 // var request_1 = require("../../apis/request");
 
@@ -113,8 +117,11 @@ export default class extends MyPage {
             //     url: 'bs/modify',
             //     data: data
             // })
-
             console.log('保存信息：', data);
+            Protocol.accountUpdate(data).then(()=>{
+                Toast.success('修改成功');
+            });
+
 
             // Admin.default().userData = {
             //     first_name: data.first_name,

@@ -114,5 +114,6 @@ export default class extends MyPage {
 
     async clickCell3() {
         console.log('ceshidwe3');
+        wx.navigateTo({url: '../feedback/feedback'})
     }
 }

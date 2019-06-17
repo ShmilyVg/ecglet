@@ -2,28 +2,29 @@ import Network from "./network";
 import {UploadUrl} from "../../utils/config";
 import WXDialog from "../../base/heheda-common-view/dialog";
 import BaseNetworkImp from "./network/libs/base/base-network-imp";
+import {PostUrl, UploadUrl} from "../../utils/config";
 
 export default class Protocol {
 
-    static uploadFile({filePath}) {
+    static uploadGatherFile({filePath}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
-                    url: UploadUrl,
+                    url: PostUrl + 'gather/upload',
                     filePath: filePath,
                     name: filePath,
-                    // header: {"Content-Type": "multipart/form-data"},
+                    header: {"Cookie": `JSESSIONID=${wx.getStorageSync('cookie')}`},
                     formData: {
                         //和服务器约定的token, 一般也可以放在header中
                         // 'session_token': wx.getStorageSync('session_token')
                     },
                     success: function (res) {
-                        let data = res.data;
-                        let path = JSON.parse(data).result.path;
-                        resolve(path);
+                        console.log('上传成功的文件',res);
+                        let data = JSON.parse(res.data);
+                        resolve(data);
                     },
                     fail: function (e) {
-                        console.log(e);
+                        console.log('上传失败', e);
                         reject();
                     }
                 });
@@ -37,7 +38,6 @@ export default class Protocol {
         return Network.request({url: 'account/info'});
     }
 
-
     static postDeviceUnbind() {
         return Network.request({url: 'device/unbind'})
     }
@@ -50,6 +50,9 @@ export default class Protocol {
         return Network.request({url: 'gather/list', data: {page, page_size}})
     }
 
+    static accountUpdate({nickname, sex, phone, birthday, height, weight}) {
+        return Network.request({url: 'account/update', data: arguments[0]});
+    }
 
     static getPhoneNum({encryptedData, iv}) {
         return new Promise((resolve, reject) =>

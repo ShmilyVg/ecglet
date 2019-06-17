@@ -2,21 +2,12 @@
  MIT License http://www.opensource.org/licenses/mit-license.php
  Author Mora <qiuzhongleiabc@126.com> (https://github.com/qiu8310)
  *******************************************************************/
-// @ts-ignore
+
 import {pagify, MyPage, wxp} from 'base/'
-// @ts-ignore
 import Toast from '../../base/heheda-common-view/toast.js';
-// @ts-ignore
 import * as tools from "../../utils/tools";
-// @ts-ignore
 import Protocol from '../../apis/network/protocol.js'
 
-/*type Log = {
-    id: number,
-    localfile: string,
-    rawdata: any,
-    createdTime: string
-}*/
 @pagify()
 export default class extends MyPage {
     data = {
@@ -24,26 +15,22 @@ export default class extends MyPage {
         page: 1,
     }
 
-    onLoad() {
+    onLoad(){
         this.getList({page: 1});
         console.log(this.data.logs)
     }
 
-    /*onShow() {
-        this.getList({page: 1});
-        console.log(this.data.logs)
-    }*/
-
-    getList({page = 1, recorded = false}) {
+    getList({page = 1, recorded = false}){
         Toast.showLoading();
-        Protocol.getHistoryList({page}).then((data: any) => {
+        Protocol.getHistoryList({ page }).then((data) =>{
             let list = data.result.dataList
-            for (let i = 0; i < list.length; i++) {
-                const {date, time} = tools.createDateAndTime(list[i].time);
-                console.log({date, time})
-            }
+            list.forEach(item=>{
+                const {date, time} = tools.createDateAndTime(parseInt(item.time));
+                item.date = date;
+                item.time = time;
+            })
             this.setData({
-                logs: list
+                logs : list
             })
         }).finally(() => {
             Toast.hiddenLoading();
@@ -51,9 +38,22 @@ export default class extends MyPage {
         });
     }
 
-    toPdfUrl(e: any) {
+    toPdfUrl(e){
         console.log(e)
         let pdfUrl = e.target.dataset.url
         this.app.$url.report.go({reportUrl: pdfUrl});
     }
+
+    onPullDownRefresh() {
+        this.setData({
+            page: 1,
+            logs: []
+        });
+        this.getList({page: 1});
+    },
+
+    onReachBottom() {
+        console.log('getMedicalRecordList', this.data.page + 1);
+        this.getList({page: ++this.data.page});
+    },
 }

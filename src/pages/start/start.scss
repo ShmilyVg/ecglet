@@ -78,11 +78,13 @@ page{
   overflow: hidden;
 }
 .main-heart{
-  width: auto;
+  width: 388rpx;
+  height: 388rpx;
   position: absolute;
   top: 172rpx;
   left: 50%;
   margin-left: -194rpx;
+  padding: 0;
 }
 .main-heart-bg{
   width: 388rpx;
@@ -92,7 +94,7 @@ page{
   color: #fff;
   font-size: 36rpx;
   position: absolute;
-  top: 170rpx;
+  top: 150rpx;
   left: 157rpx;
   z-index: 2;
 }
