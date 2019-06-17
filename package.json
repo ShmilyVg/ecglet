@@ -7,7 +7,7 @@
     "lint": "tslint src/**/*.ts",
     "clear": "minapp clear dist",
     "dev": "minapp dev",
-    "build": "minapp build --publicPath '/'"
+    "build": "minapp build --publicPath /"
   },
   "author": "Derek<peng.su@jdremedical.com>",
   "license": "MIT",

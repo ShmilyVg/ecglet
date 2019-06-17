@@ -35,13 +35,16 @@ export default class Protocol {
         return Network.request({url: 'account/info'});
     }
 
-
     static postDeviceUnbind() {
         return Network.request({url: 'device/unbind'})
     }
 
     static getDeviceBindInfo() {
         return Network.request({url: 'device/bind/info'})
+    }
+
+    static getHistoryList({page, page_size = 15}) {
+        return Network.request({url: 'gather/list',data: {page, page_size}})
     }
 
 }
