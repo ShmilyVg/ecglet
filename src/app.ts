@@ -13,6 +13,7 @@ import Login from "./apis/network/login";
 export default class extends MyApp {
   loginCallBack = function () { console.log('你好')};
   needRegisterCallBack = function () {};
+    globalData = {userInfo: {}};
   async onLaunch() {
     // 检查是否小程序登录用户
     // 如果有登录记录，检查登录时效

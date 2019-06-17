@@ -1,4 +1,4 @@
-import {MyPage, pagify} from 'base/'
+import {MyPage, pagify, wxp} from 'base/'
 // @ts-ignore
 import Login from '../../apis/network/login.js';
 // @ts-ignore
@@ -27,20 +27,30 @@ export default class extends MyPage {
                 iv
             }
         } = e;
+        console.log(userInfo);
         if (!!userInfo) {
-            Toast.showLoading();
-            Login.doRegister({
-                userInfo, encryptedData, iv
-            }).then(() => UserInfo.get())
-                .then((res: any) => {
-                        !this.setData({userInfo: res.userInfo});
-                    }
-                ).catch(() => {
-                setTimeout(Toast.warn, 0, '获取信息失败');
-            }).finally(() => {
+            if (!!wxp.getStorageSync('isRegister')) {
+                HiNavigator.navigateToArrhyth();
+                UserInfo.get();
+            }else {
+                Toast.showLoading();
+                Login.doRegister({
+                    userInfo, encryptedData, iv
+                }).then(() => UserInfo.get())
+                    .then((res: any) => {
+                        console.log(res);
+                        wxp.setStorageSync('isRegister', this.data.isRegister = true);
+                            !this.setData({userInfo: res.userInfo});
+                        }
+                    ).catch((res:any) => {
+                    console.log(res);
+                    setTimeout(Toast.warn, 0, '获取信息失败');
+                }).finally(() => {
                     Toast.hiddenLoading();
                     HiNavigator.navigateToArrhyth();
                 });
+            }
+
         }
         /*wx.getSetting({
             success (res){

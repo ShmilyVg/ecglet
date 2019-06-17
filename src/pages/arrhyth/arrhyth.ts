@@ -1,6 +1,8 @@
 import { APIs } from './../../apis/request';
 // 此文件是由模板文件 ".dtpl/page/$rawModuleName.ts.dtpl" 生成的，你可以自行修改模板
 import { pagify, MyPage, wxp, fsp } from 'base/'
+// @ts-ignore
+import Protocol from './../../apis/network/protocol.js';
 import "../../extensions/ArrayBuffer.ext"
 
 interface ArrhythData {
@@ -503,7 +505,9 @@ export default class extends MyPage {
       // } else if (readRes.data instanceof ArrayBuffer) {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
+      Protocol.uploadFile({filePath}).then((path: string) => {
 
+      });
       res = await APIs.default().uploadRequest({
         url: "bs/upload_file",
         filePath: filePath,
