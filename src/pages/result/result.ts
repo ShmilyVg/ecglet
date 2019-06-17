@@ -5,7 +5,7 @@ export default class extends MyPage {
     data = {
         result: {
             "time": "1560757586488",
-            "pdfUrl": "http://localhost:8091/hipee-web-hiecg/pdf/fc2415a80c9c46b491b4af2bc1f76b4a.jpg",
+            "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
             "info": [
                 {
                     "code": "HR",
@@ -28,7 +28,7 @@ export default class extends MyPage {
             ],
             "hr": 60
         }
-    }
+    };
 
     lookDetail() {
         const pdfUrl = this.data.result.pdfUrl;
@@ -37,7 +37,17 @@ export default class extends MyPage {
         }
     }
 
+    getTime(timestamp:number) {
+        const date = new Date(timestamp);
+        console.log(timestamp,date);
+        return `${date.getFullYear()}/${('0' + (date.getMonth() + 1)).slice(-2)}/${('0' + (date.getDate())).slice(-2)} ${date.getHours()}:${date.getMinutes()}`;
+
+    }
     async onLoad(options: any) {
+        const result = options.gatheResult;
+        // const result = this.data.result;
+        result.time = this.getTime(parseInt(result.time));
+        this.setData({result});
         // const {info} = this.data.result;
 
     }

@@ -506,7 +506,6 @@ export default class extends MyPage {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
       Protocol.uploadGatheFile({filePath}).then((data: any) => {
-        const {time, pdfUrl, info} = data.result;
         that.app.$url.result.redirect({gatheResult: data.result});
       });
       // res = await APIs.default().uploadRequest({
