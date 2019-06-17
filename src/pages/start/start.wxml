@@ -16,7 +16,7 @@
         <view class="main-pic"><open-data type="userAvatarUrl"></open-data></view>
         <view class="main-heart">
             <image class="main-heart-bg" src="../../images/start/startbtnbg.png" alt=""/>
-            <view class="main-heart-btn" bind:tap="start">开始</view>
+            <view class="main-heart-btn" bindtap="start">开始</view>
         </view>
         <view class="main-hint">点击按钮进入测试</view>
     </view>

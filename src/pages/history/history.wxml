@@ -5,15 +5,12 @@
   1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
 -->
 
-<!--<view class="none-history">
-  <view class="none-history-pic"><cover-image src="../../images/history.png" alt=""/></view>
-  <view class="none-history-hint">暂无检测记录</view>
-</view>-->
-<view>
+
+<view wx:if="{{logs.length}}">
   <view class="bg"></view>
   <image class="bg-pic" src="../../images/mine/jingcejilu_beijing.png" alt=""/>
   <view class="notebox">
-    <view class="note" wx:for="{{list}}">
+    <view class="note" wx:for="{{logs}}">
       <view class="note-main">
         <view class="note-circle"><span></span></view>
         <view class="note-hint">
@@ -27,4 +24,8 @@
       </view>
     </view>
   </view>
+</view>
+<view class="none-history" wx:else>
+  <view class="none-history-pic"><cover-image src="../../images/history.png" alt=""/></view>
+  <view class="none-history-hint">暂无检测记录</view>
 </view>
