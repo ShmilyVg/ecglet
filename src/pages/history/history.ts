@@ -3,9 +3,12 @@
  Author Mora <qiuzhongleiabc@126.com> (https://github.com/qiu8310)
  *******************************************************************/
 
-import {pagify, MyPage, wxp} from 'base/'
+import {MyPage, pagify} from 'base/'
+// @ts-ignore
 import Toast from '../../base/heheda-common-view/toast.js';
+// @ts-ignore
 import * as tools from "../../utils/tools";
+// @ts-ignore
 import Protocol from '../../apis/network/protocol.js'
 
 @pagify()
@@ -22,9 +25,9 @@ export default class extends MyPage {
 
     getList({page = 1, recorded = false}){
         Toast.showLoading();
-        Protocol.getHistoryList({ page }).then((data) =>{
+        Protocol.getHistoryList({ page }).then((data:any) =>{
             let list = data.result.dataList
-            list.forEach(item=>{
+            list.forEach((item:any)=>{
                 const {date, time} = tools.createDateAndTime(parseInt(item.time));
                 item.date = date;
                 item.time = time;
@@ -38,7 +41,7 @@ export default class extends MyPage {
         });
     }
 
-    toPdfUrl(e){
+    toPdfUrl(e:any){
         console.log(e)
         let pdfUrl = e.target.dataset.url
         this.app.$url.report.go({reportUrl: pdfUrl});
@@ -50,10 +53,10 @@ export default class extends MyPage {
             logs: []
         });
         this.getList({page: 1});
-    },
+    }
 
     onReachBottom() {
         console.log('getMedicalRecordList', this.data.page + 1);
         this.getList({page: ++this.data.page});
-    },
+    }
 }
