@@ -10,7 +10,7 @@ export default class Protocol {
                     url: PostUrl + 'gather/upload',
                     filePath: filePath,
                     name: filePath,
-                    // header: {"Content-Type": "multipart/form-data"},
+                    header: {"Cookie": `JSESSIONID=${wx.getStorageSync('cookie')}`},
                     formData: {
                         //和服务器约定的token, 一般也可以放在header中
                         // 'session_token': wx.getStorageSync('session_token')
