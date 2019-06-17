@@ -1,0 +1,29 @@
+<view class="flex-column">
+    <image src="../../images/result/bg.png" style="height: 270rpx;width: 100%"></image>
+    <view class="avatar-border"></view>
+    <view class="title">心电智能分析报告</view>
+    <view class="content">这是显示时间</view>
+    <image src="../../images/result/logo.png" class="logo"></image>
+
+    <view class="table">
+        <block wx:for="{{4}}">
+            <view class="cell flex-row">
+                <view class="flex-row">
+                    <view class="point-comm point-red"></view>
+                    <view class="flex-column" style="align-items: flex-start">
+                        <view class="cell-title">心率</view>
+                        <view class="cell-state">正常</view>
+                    </view>
+                </view>
+                <view class="flex-column" style="align-items: flex-end">
+                    <view class="cell-num">106</view>
+                    <view class="cell-eng">bmp</view>
+                </view>
+            </view>
+            <view class="line"></view>
+        </block>
+        <view class="cell-bottom-view">查看详细报告</view>
+    </view>
+    <image src="../../images/result/logo-ch.png" style="width: 114rpx;height: 67rpx;margin-top: 50rpx"></image>
+    <view class="bottom-text"><text>上海交通大学医学附属仁济医院远程\n心电诊断中心</text></view>
+</view>
