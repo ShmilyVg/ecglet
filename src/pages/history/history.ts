@@ -1,208 +1,185 @@
+/******************************************************************
+ MIT License http://www.opensource.org/licenses/mit-license.php
+ Author Mora <qiuzhongleiabc@126.com> (https://github.com/qiu8310)
+ *******************************************************************/
+
 import {pagify, MyPage, wxp} from 'base/'
-// import { wxp } from '../../../types/wxp'
 import { APIs } from 'apis/request';
-import { Md5 } from 'ts-md5/dist/md5';
-import { Admin } from './../../utils/admin';
+import Protocol from 'modules/network/protocol'
 
-
+type Log = {
+    id: number,
+    localfile: string,
+    rawdata: any,
+    createdTime: string
+}
 @pagify()
 export default class extends MyPage {
-  data = {
-    mobile: '',
-    password: '',
-    pin: '',
-    currentSelect: 0,
-    disabled: true,
-    time: '获取验证码',
-    currentTime: 120,
-    passHidden: true,
-    showPassIcon: '../../assets/icons',
-    sendBtnOpacity: 0.4,
-    regBtnOpacity: 0.4,
-    regDisabled: true,
-    loginDisabled: true,
-    loginBtnOpacity: 0.4,
-    toastMessage: '',
-    toast: false,
-      list: [{
-        time: '11.30',
-          date: '2019.1.11',
-          num: '66',
-      },{
-          time: '11.30',
-          date: '2019.1.11',
-          num: '55',
-      },{
-          time: '11.30',
-          date: '2019.1.11',
-          num: '44',
-      }]
-  }
-
-  async onLoad(options: any) {
-    // console.log(await wxp.getUserInfo())
-    console.log("登录页面")
-  }
-
-  switchTab(e: any) {
-    console.log("点击切换事件：%o", e)
-
-    let that = this
-    if (that.data.currentSelect === e.currentTarget.dataset.current) {
-      return false
-    } else {
-      that.setDataSmart({currentSelect: e.currentTarget.dataset.current})
-      return true
+    data = {
+        logs: [],
+        page: 1,
+        loadmorehidden: true,
+        refreshhidden: true,
+        refresh: false
     }
-  }
 
-  swipeChange(e: any) {
-    console.log(`滑动切换事件：%o`, e)
-    this.setDataSmart({currentSelect: e.detail.current})
-  }
-
-  bindMobileInput(e: any) {
-    this.setDataSmart({mobile: e.detail.value})
-    let phoneValid = this.isMobileValid()
-    this.setDataSmart({disabled: !phoneValid})
-    this.setDataSmart({sendBtnOpacity: phoneValid ? 1 : 0.4})
-
-    this.checkResultButton()
-  }
-
-  private isMobileValid(): boolean {
-    const mobileRegexp = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
-    let valid = mobileRegexp.test(this.data.mobile)
-    console.log(`手机检查结果: ${valid}`)
-    return valid
-  }
-
-  private isPinValid(): boolean {
-    const pinRegExp = /^\d{6}$/
-    let valid = pinRegExp.test(this.data.pin)
-    console.log(`验证码检查结果: ${valid}`)
-    return valid
-  }
-
-  private isPasswordValid(): boolean {
-    const passRegExp = /^[a-zA-Z0-9]{6,20}$/
-    let valid = passRegExp.test(this.data.password)
-    console.log(`密码检查结果: ${valid}`)
-    return valid
-  }
-
-  private checkRegisterDisabled() {
-    let valid = this.isMobileValid() && this.isPinValid() /*&& this.isPasswordValid()*/
-    console.log(`注册使能：${valid}`)
-    this.setDataSmart({regDisabled: !valid})
-    this.setDataSmart({regBtnOpacity: valid ? 1.0 : 0.4})
-  }
-
-  private checkLoginDisabled() {
-    let valid = this.isMobileValid() && this.isPasswordValid()
-    console.log(`登录使能：${valid}`)
-    this.setDataSmart({loginDisabled: !valid})
-    this.setDataSmart({loginBtnOpacity: valid ? 1.0 : 0.4})
-  }
-
-  private checkResultButton() {
-    if (this.data.currentSelect == 0) {
-      this.checkRegisterDisabled()
-    } else {
-      this.checkLoginDisabled()
+    onLoad(){
+        this.getList({page: 1});
     }
-  }
 
-  bindPinInput(e: any) {
-    this.setDataSmart({pin: e.detail.value})
-
-    this.checkResultButton()
-  }
-
-  async sendCode() {
-    let that = this;
-    that.setDataSmart({disabled: true})
-    this.setDataSmart({sendBtnOpacity: 0.4})
-    let currentTime = that.data.currentTime;
-    that.setDataSmart({time: currentTime + '秒'})
-
-    let interval = setInterval(function () {
-      that.setDataSmart({time: (--currentTime) + '秒'})
-      if (currentTime <= 0) {
-        clearInterval(interval)
-        that.setDataSmart({
-          time: '重新获取',
-          disabled: false,
-          sendBtnOpacity: 1.0,
-          currentTime: 120
+    async getList({page = 1, recorded = false}){
+        Protocol.getHistoryList({ page }).then(data =>{
+            console.log(data)
         })
-      }
-    }, 1000)
-
-    let res = await APIs.default().getPinCode(this.data.mobile)
-    console.log(`Get PIN code: %o`, res)
-  }
-
-  bindPassInput(e: any) {
-    let that = this;
-    that.setDataSmart({password: e.detail.value})
-
-    this.checkResultButton()
-  }
-
-  changePassIcon() {
-    console.log("show or hidden password tapped......")
-    let that = this;
-    that.setDataSmart({passHidden: !that.data.passHidden})
-  }
-
-  async register() {
-    console.log("注册")
-    let {code} = await wxp.login()
-    let res = await APIs.default().postRequest({
-      url: "register",
-      data: {
-        mobile: this.data.mobile,
-        verificationcode: this.data.pin,
-        // password: Md5.hashStr(this.data.password),
-        code: code
-      }
-    })
-    console.log('注册返回结果： %o', res)
-    if (res) {
-      Admin.default().credit = res
-      APIs.default().updateCredit()
-
-      // 注册成功，跳转主页
-      // this.app.$back()
-      this.app.$url.userdata.go()
     }
-  }
 
-  async login() {
-    console.log("登录")
-    let res = await APIs.default().postRequest({
-      url: "/login",
-      data: {
-        mobile: this.data.mobile,
-        password: Md5.hashStr(this.data.password),
-      }
-    })
-    console.log('登录返回结果： %o', res)
-    if (res) {
-      const admin = Admin.default()
-      admin.credit = res
-
-      APIs.default().updateCredit()
-
-      let userData = admin.userData
-      if (!userData || !userData.first_name || !userData.birthday || !userData.sex) {
-        this.app.$url.userdata.go()
-      } else {
-        // 登录成功，跳转主页
+    backToHome() {
         this.app.$back()
-      }
     }
-  }
 
+    async onLoad() {
+        let location = this.getLocation()
+        console.log(`当前页面 ${location.pathname}, 页面参数 ${JSON.stringify(location.query)}`)
+
+        let logs: Log[] = wx.getStorageSync('logs') || []
+        this.setDataSmart({
+            logs: logs
+        })
+
+        await this.onPullDownRefresh()
+    }
+
+    async onPullDownRefresh() {
+        console.log("onPullDownRefresh...")
+
+        let that = this
+
+        if (!that.data.refresh) {
+            that.data.refresh = true
+
+            that.setDataSmart({
+                refreshhidden: false
+            })
+
+            try {
+                let res = await wxp.startPullDownRefresh()
+                console.log(`wxp.startPullDownRefresh result: ${res.errMsg}`)
+
+                let dataList = await that.loadData(0, 40)
+                if (!dataList || !dataList.length) {
+                    console.log("服务端没有返回数据......")
+                }
+
+                setTimeout(async () => {
+                    if (!!dataList && !!dataList.length) {
+                        wxp.removeStorageSync('logs')
+
+                        // 只保存当前最新的20条记录，用作在初始无网络加载时本地备忘记录
+                        let storeList = dataList.slice(0, 20)
+                        wxp.setStorageSync('logs', storeList)
+                    }
+
+                    that.data.refresh = false
+
+                    wxp.stopPullDownRefresh()
+
+                    that.setDataSmart({
+                        refreshhidden: true,
+                        logs: !dataList ? that.data.logs : dataList
+                    })
+                }, 2000)
+            } catch (err) {
+                console.log("onPullDownRefresh error: %o", err)
+            }
+        } else {
+            console.log('正在刷新...')
+        }
+    }
+
+    async onReachBottom() {
+        console.log("onReachBottom...")
+
+        let that = this
+
+        if (!that.data.refresh) {
+            that.data.refresh = true
+
+            that.setDataSmart({
+                loadmorehidden: false
+            })
+
+            try {
+                let list = that.data.logs
+
+                let last: any = list[list.length - 1]
+                let dataList = await that.loadData(last.id, 40)
+                if (!dataList || !dataList.length) {
+                    console.log("没有获取到更多记录......")
+                }
+
+                setTimeout(async () => {
+                    that.data.refresh = false
+
+                    that.setDataSmart({
+                        loadmorehidden: true,
+                        logs: !!dataList ? list.concat(dataList) : list
+                    })
+                }, 2000)
+            } catch (err) {
+                console.log("onReachBottom error: %o", err)
+            }
+        } else {
+            console.log('正在刷新...')
+        }
+    }
+
+    private async loadData(start: number, size: number) {
+        let that = this
+        let st = start
+        let sz = size
+        let apis = APIs.default()
+
+        try {
+            let res = await apis.postRequest({
+                url: 'bs/get_records',
+                data: {
+                    start: st,
+                    pageSize: 20,
+                }
+            }, false)
+            let list = JSON.parse(JSON.stringify(res)).list
+            if (!list.length) {
+                throw new Error("返回数据为空...")
+            }
+            list = list.map((v: any) => {
+                if (!!v.createtime) {
+                    let createdAt = parseInt(v.createtime) * 1000
+                    console.log(`createtime: ${createdAt}`)
+                    v.createtime = new Date(createdAt).format('yyyy-MM-dd HH:mm')
+                    console.log(`createtime: ${v.createtime}`)
+                }
+                return v
+            })
+            console.log("list: %o", list)
+            console.log(`before size: ${sz}; list length: ${list.length}`)
+            sz -= list.length
+            st = list[list.length - 1].id
+            console.log(`next size: ${sz}, next start: ${st}`)
+            if (list.length == 20 && sz > 0) {
+                console.log("next loadData...")
+                let moreList = await that.loadData(st, sz)
+                if (!!moreList) {
+                    list = list.concat(moreList)
+                }
+            }
+            return list
+        } catch (err) {
+            console.log("loadData error: %o", err)
+        }
+        return
+    }
+
+    onDetail(e: any) {
+        console.log("e: %o", e)
+    }
 }

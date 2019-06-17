@@ -1,4 +1,5 @@
-import {pagify, MyPage} from 'base/'
+import {pagify, MyPage, wxp} from 'base/'
+import {Admin} from './../../utils/admin'
 
 
 @pagify()
@@ -8,7 +9,7 @@ export default class extends MyPage {
   }
 
     async start() {
-        wx.getSetting({
+        /*wx.getSetting({
             success (res){
                 if (res.authSetting['scope.userInfo']) {
                     // 已经授权，可以直接调用 getUserInfo 获取头像昵称
@@ -19,6 +20,10 @@ export default class extends MyPage {
                     })
                 }
             }
+        })*/
+        console.log('qqq')
+        wx.navigateTo({
+            url: '../arrhyth/arrhyth'
         })
     }
 
