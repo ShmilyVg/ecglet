@@ -30,8 +30,8 @@ export default class extends MyPage {
             if(list.length){
                 list.forEach((item:any)=>{
                     const {date, time} = createDateAndTime(parseInt(item.time));
-                    item.date = date;
-                    item.time = time;
+                    item.dateStr = date;
+                    item.timeStr = time;
                 })
                 if (!recorded) {
                     list = this.data.logs.concat(list);

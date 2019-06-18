@@ -14,8 +14,8 @@
       <view class="note-main">
         <view class="note-circle"><span></span></view>
         <view class="note-hint">
-          <view class="note-hint-time">{{item.time}}</view>
-          <view class="note-hint-date">{{item.date}}</view>
+          <view class="note-hint-time">{{item.timeStr}}</view>
+          <view class="note-hint-date">{{item.dateStr}}</view>
         </view>
       </view>
       <view class="note-main">
