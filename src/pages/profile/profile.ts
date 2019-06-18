@@ -29,10 +29,17 @@ export default class extends MyPage {
 
         if (this.isRegister) {
             console.log('注册过了');
-            that.setDataSmart({
-                haveNum: true,
-                haveAuthorize: true
-            });
+            if (wx.getStorageSync('phoneNumber')) {
+                that.setDataSmart({
+                    haveNum: false,
+                    haveAuthorize: true
+                });
+            } else {
+                that.setDataSmart({
+                    haveNum: true,
+                    haveAuthorize: true
+                });
+            }
             UserInfo.get().then((res: any) => {
                 console.log('res:', res);
                 that.setDataSmart({
@@ -53,12 +60,13 @@ export default class extends MyPage {
     }
 
     onShow() {
-        UserInfo.get().then((res:any)=>{
+        UserInfo.get().then((res: any) => {
             this.setData({
                 userInfo: res.userInfo
             })
         })
     }
+
     getPhoneNumber(e: any) {
         let that = this
         const {detail: {encryptedData, iv, errMsg}} = e;
