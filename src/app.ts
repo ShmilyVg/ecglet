@@ -14,7 +14,7 @@ import UserInfo from "./apis/network/userInfo.js";
 @appify({pages: require('./app.cjson?pages'), tabBarList: require('./app.cjson?tabBar.list')})
 export default class extends MyApp {
   needRegisterCallBack = function () {};
-    globalData = {userInfo: {}};
+    globalData = {userInfo: {}, tempGatherResult: {}};
   async onLaunch() {
     // 检查是否小程序登录用户
     // 如果有登录记录，检查登录时效

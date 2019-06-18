@@ -9,6 +9,10 @@ export default class extends MyPage {
     ios: true
   }
 
+  onloadSuccess() {
+    console.log('加载完成');
+    wx.setNavigationBarTitle({title: '检测报告'});
+  }
   async onLoad(options: any) {
     // console.log(await wxp.getUserInfo())
     console.log("options: %o", options)
