@@ -13,6 +13,16 @@ export default class Protocol {
         });
 
     }
+
+    static checkHaveNetwork() {
+        return this.getNetworkType().then(res=>{
+            if (res.networkType === 'none' || res.networkType === 'unknown') {
+                return Promise.reject();
+            }else{
+                return Promise.resolve();
+            }
+        })
+    }
     static uploadGatherFile({filePath}) {
         return new Promise((resolve, reject) => {
             if (filePath) {

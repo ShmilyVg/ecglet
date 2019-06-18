@@ -3,6 +3,8 @@ import {fsp, MyPage, pagify, wxp} from 'base/'
 // @ts-ignore
 import Protocol from './../../apis/network/protocol.js';
 import "../../extensions/ArrayBuffer.ext"
+// @ts-ignore
+import WXDialog from "../../base/heheda-common-view/dialog";
 
 interface ArrhythData {
   windowHeight:number,
@@ -504,13 +506,21 @@ export default class extends MyPage {
       // } else if (readRes.data instanceof ArrayBuffer) {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
-      Protocol.uploadGatherFile({filePath}).then((data: any) => {
-        // @ts-ignore
-        getApp().globalData.tempGatherResult = data.result;
-        that.app.$url.result.redirect({});
-      }).catch((res:any)=>{
-        console.error('上传解析过程中报错',res);
+
+      Protocol.checkHaveNetwork().then(() => {
+        Protocol.uploadGatherFile({filePath}).then((data: any) => {
+          // @ts-ignore
+          getApp().globalData.tempGatherResult = data.result;
+          that.app.$url.result.redirect({});
+        }).catch((res: any) => {
+          console.error('上传解析过程中报错', res);
+        });
+      }).catch((res: any) => {
+        console.error('',res);
+        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+        this.reset();
       });
+
       // res = await APIs.default().uploadRequest({
       //   url: "bs/upload_file",
       //   filePath: filePath,
