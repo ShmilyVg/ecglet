@@ -27,14 +27,21 @@ export default class extends MyPage {
         Toast.showLoading();
         Protocol.getHistoryList({ page }).then((data:any) =>{
             let list = data.result.dataList
-            list.forEach((item:any)=>{
-                const {date, time} = tools.createDateAndTime(parseInt(item.time));
-                item.date = date;
-                item.time = time;
-            })
-            this.setData({
-                logs : list
-            })
+            if(list.length){
+                list.forEach((item:any)=>{
+                    const {date, time} = tools.createDateAndTime(parseInt(item.time));
+                    item.date = date;
+                    item.time = time;
+                })
+                if (!recorded) {
+                    list = this.data.logs.concat(list);
+                } else {
+                    this.data.page = 1;
+                }
+                this.setData({
+                    logs : list
+                })
+            }
         }).finally(() => {
             Toast.hiddenLoading();
             wx.stopPullDownRefresh();
@@ -56,7 +63,7 @@ export default class extends MyPage {
     }
 
     onReachBottom() {
-        console.log('getMedicalRecordList', this.data.page + 1);
+        console.log('getList', this.data.page + 1);
         this.getList({page: ++this.data.page});
     }
 }
