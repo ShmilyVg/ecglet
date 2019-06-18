@@ -48,7 +48,6 @@ page {
 
 .table{
   background-color: white;
-  width: 690rpx;
   padding-top: 50rpx;
   margin-top: -50rpx;
   border-radius: 30rpx;
@@ -67,12 +66,14 @@ page {
   padding-left: 50rpx;
   padding-right: 60rpx;
   align-items: center;
+  margin-bottom: 1rpx;
+  margin-top: 1rpx;
 }
 
 .line{
   width:690rpx;
-  height:1rpx;
-  background-color: #E8E8E8;
+  border: 1rpx solid #E8E8E8;
+  margin: 2rpx 0;
 }
 
 .point-comm{

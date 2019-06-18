@@ -6,7 +6,8 @@ export default class extends MyPage {
     data = {
         result: {
             // "time": "1560757586488",
-            "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
+            // "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
+            "pdfUrl": "",
             // "info": [
             //     {
             //         "code": "HR",
