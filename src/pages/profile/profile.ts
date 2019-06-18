@@ -84,9 +84,9 @@ export default class extends MyPage {
         }).then(() => UserInfo.get())
             .then((res: any) => {
                     wxp.setStorageSync('isRegister', true);
-                    // !this.setData({userInfo: res.userInfo});
                     this.setDataSmart({
-                        haveAuthorize: true
+                        haveAuthorize: true,
+                        userInfo: res.userInfo
                     })
                 }
             ).catch((res: any) => {
