@@ -8,5 +8,5 @@
 
 {
   "$schema": "https://raw.githubusercontent.com/qiu8310/minapp/master/schema/page.json",
-  "navigationBarTitleText": "检查结果"
+  "navigationBarTitleText": "检测报告"
 }

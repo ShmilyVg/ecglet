@@ -9,13 +9,19 @@
 <block wx:if="{{haveNum}}">
     <view class="page flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
         <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
-        <view class="top-cell flex-row">
-            <view class="avatar-view flex-row">
-                <image src="{{userInfo.portraitUrl}}" class="avatar"></image>
+        <view class="top-cell flex-row box-sizing-border-box" style="justify-content: space-between;padding: 0 56rpx 0 43rpx;">
+            <view class="flex-row align-items-center">
+                <view class="avatar-view flex-row">
+                    <image src="{{userInfo.portraitUrl}}" class="avatar"></image>
+                </view>
+                <view class="name">{{userInfo.nickName}}</view>
             </view>
-            <view class="name">{{userInfo.nickName}}</view>
-            <view wx:if="{{haveAuthorize}}" class="edit-info" bindtap="toEditInfo">编辑资料</view>
-            <button wx:else class="edit-info" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
+
+            <view>
+                <view wx:if="{{haveAuthorize}}" class="edit-info" bindtap="toEditInfo">编辑资料</view>
+                <button wx:else class="edit-info" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
+            </view>
+
         </view>
         <view class="table">
             <view class="flex-row cell" bindtap="clickCell1">

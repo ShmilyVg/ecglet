@@ -49,6 +49,13 @@ export default class extends MyPage {
         }
     }
 
+    onShow() {
+        UserInfo.get().then((res:any)=>{
+            this.setData({
+                userInfo: res.userInfo
+            })
+        })
+    }
     getPhoneNumber(e: any) {
         let that = this
         const {detail: {encryptedData, iv, errMsg}} = e;
@@ -72,7 +79,7 @@ export default class extends MyPage {
                 // HiNavigator.navigateToArrhyth();
             });
         } else {
-            Toast.showLoading('手机号授权失败~')
+            Toast.warn('手机号授权失败');
         }
     }
 
@@ -84,9 +91,9 @@ export default class extends MyPage {
         }).then(() => UserInfo.get())
             .then((res: any) => {
                     wxp.setStorageSync('isRegister', true);
-                    // !this.setData({userInfo: res.userInfo});
                     this.setDataSmart({
-                        haveAuthorize: true
+                        haveAuthorize: true,
+                        userInfo: res.userInfo
                     })
                 }
             ).catch((res: any) => {

@@ -63,7 +63,7 @@ export default class extends MyPage {
 
         // console.log('new date: %o', e.detail.value)
         that.setDataSmart({
-            birthDate: e.detail.value
+            birthDate: e.detail.value || ''
         })
     }
 
@@ -95,7 +95,7 @@ export default class extends MyPage {
         let that = this
         // const apis = APIs.default()
 
-        let birthTime = Date.parse(that.data.birthDate)
+        let birthTime = that.data.birthDate || '';
         console.log(`birth time: ${birthTime}`)
         try {
             let data = {
@@ -112,7 +112,14 @@ export default class extends MyPage {
             // })
             console.log('保存信息：', data);
             Protocol.accountUpdate(data).then(() => {
+                return UserInfo.get();
+            }).then((res: any) => {
                 Toast.success('修改成功');
+               return UserInfo.set({...res.userInfo, ...data});
+            }).then(()=>{
+                wx.navigateBack({delta: 1});
+            }).catch(()=>{
+                Toast.success('修改失败');
             });
 
 
