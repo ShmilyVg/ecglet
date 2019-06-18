@@ -5,6 +5,8 @@ import Protocol from './../../apis/network/protocol.js';
 import "../../extensions/ArrayBuffer.ext"
 // @ts-ignore
 import WXDialog from "../../base/heheda-common-view/dialog";
+// @ts-ignore
+import Toast from "../../base/heheda-common-view/toast";
 
 interface ArrhythData {
   windowHeight:number,
@@ -455,7 +457,7 @@ export default class extends MyPage {
   private async uploadData() {
     console.log("uploadData...")
     let that = this
-
+    Toast.showLoading('请稍后...');
     try {
       let dirPath = (wx as any).env.USER_DATA_PATH + "/cache/bs-upload"
       let fileName = "rawdata"
@@ -513,13 +515,21 @@ export default class extends MyPage {
           getApp().globalData.tempGatherResult = data.result;
           that.app.$url.result.redirect({});
         }).catch((res: any) => {
-          WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+          WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+              wx.navigateBack({delta: 1});
+            }});
           console.error('上传解析过程中报错', res);
+        }).finally(()=>{
+          Toast.hiddenLoading();
         });
       }).catch((res: any) => {
-        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+            wx.navigateBack({delta: 1});
+          }});
         this.reset();
         console.error('',res);
+      }).finally(()=>{
+        Toast.hiddenLoading();
       });
 
       // res = await APIs.default().uploadRequest({

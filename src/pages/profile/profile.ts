@@ -11,6 +11,8 @@ import HiNavigator from '../../components/navigator/hi-navigator.js'
 import Toast from '../../base/heheda-common-view/toast.js';
 // @ts-ignore
 import Protocol from '../../apis/network/protocol.js'
+// @ts-ignore
+import WXDialog from "../../base/heheda-common-view/dialog";
 
 
 @pagify()
@@ -82,29 +84,33 @@ export default class extends MyPage {
                 // HiNavigator.navigateToArrhyth();
             });
         } else {
-            Toast.warn('手机号授权失败');
+            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
         }
     }
 
     onGotUserInfo(e: any) {
-        const {detail: {encryptedData, iv}} = e;
-        Toast.showLoading();
-        Login.doRegister({
-            encryptedData, iv
-        }).then(() => UserInfo.get())
-            .then((res: any) => {
-                    wxp.setStorageSync('isRegister', true);
-                    this.setDataSmart({
-                        haveAuthorize: true,
-                        userInfo: res.userInfo
-                    })
-                }
-            ).catch((res: any) => {
-            console.log(res);
-            setTimeout(Toast.warn, 0, '获取信息失败');
-        }).finally(() => {
-            Toast.hiddenLoading();
-        });
+        const {detail: {encryptedData, iv,userInfo}} = e;
+        if (!!userInfo) {
+            Toast.showLoading();
+            Login.doRegister({
+                encryptedData, iv
+            }).then(() => UserInfo.get())
+                .then((res: any) => {
+                        wxp.setStorageSync('isRegister', true);
+                        this.setDataSmart({
+                            haveAuthorize: true,
+                            userInfo: res.userInfo
+                        })
+                    }
+                ).catch((res: any) => {
+                console.log(res);
+                setTimeout(Toast.warn, 0, '获取信息失败');
+            }).finally(() => {
+                Toast.hiddenLoading();
+            });
+        }else{
+            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
+        }
     }
 
     async toEditInfo() {
