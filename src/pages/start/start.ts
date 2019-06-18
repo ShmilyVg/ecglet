@@ -13,11 +13,19 @@ import WXDialog from '../../base/heheda-common-view/dialog.js';
 @pagify()
 export default class extends MyPage {
     data = {
-        isRegister: true
+        isRegister: true,
+        nameShow: '梦想陪我等天亮',
+        userPic: ''
     }
 
     onLoad(param: any): any {
-
+        UserInfo.get().then((res:any)=>{
+            // @ts-ignore
+            this.setData({
+                nameShow: res.userInfo.nickName,
+                userPic: res.userInfo.portraitUrl
+            })
+        })
     }
 
     async onGotUserInfo(e: any) {
@@ -41,7 +49,9 @@ export default class extends MyPage {
                     .then((res: any) => {
                         console.log(res);
                         wxp.setStorageSync('isRegister', this.data.isRegister = true);
-                            !this.setData({userInfo: res.userInfo});
+                            !this.setData({
+                                userInfo: res.userInfo,
+                            });
                         }
                     ).catch((res:any) => {
                     console.log(res);

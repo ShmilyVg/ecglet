@@ -1,19 +1,15 @@
-<!--
-  此文件是由模板文件 ".dtpl/page/$rawModuleName.wxml.dtpl" 生成的，你可以自行修改模板
 
-  注意：
-  1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
--->
 <view>
     <view class="header">
         <view class="heart-bg"><image src="../../images/start/bg.png" alt=""/></view>
         <view class="heart-box">
             <view class="header-p1">欢迎使用HiPee心电仪</view>
-            <view class="header-p2"><open-data type="userNickName"></open-data></view>
+            <view class="header-p2">{{nameShow}}</view>
         </view>
     </view>
     <view class="main">
-        <open-data class="main-pic" type="userAvatarUrl"></open-data>
+        <image wx:if="{{userPic}}" class="main-pic" src="{{userPic}}"></image>
+        <image wx:else class="main-pic" src="../../images/start/user.png"></image>
         <button class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" hover-class="none">
             <image class="main-heart-bg" src="../../images/start/startbtnbg.png" alt=""/>
             <view class="main-heart-btn">开始</view>
