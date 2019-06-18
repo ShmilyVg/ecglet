@@ -52,6 +52,13 @@ export default class extends MyPage {
         }
     }
 
+    onShow() {
+        UserInfo.get().then((res:any)=>{
+            this.setData({
+                userInfo: res.userInfo
+            })
+        })
+    }
     getPhoneNumber(e: any) {
         let that = this
         const {detail: {encryptedData, iv, errMsg}} = e;

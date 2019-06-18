@@ -22,7 +22,9 @@ export default class UserInfo {
     static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex}) {
         const globalData = getApp().globalData;
         globalData.userInfo = {...arguments[0]};
-        wx.setStorage({key: 'userInfo', data: globalData.userInfo});
+        return new Promise((resolve, reject) => {
+            wx.setStorage({key: 'userInfo', data: globalData.userInfo,success:resolve, fail: reject});
+        })
     }
 
     static _postGetUserInfo({resolve, reject}) {

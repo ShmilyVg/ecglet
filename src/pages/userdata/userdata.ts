@@ -112,7 +112,14 @@ export default class extends MyPage {
             // })
             console.log('保存信息：', data);
             Protocol.accountUpdate(data).then(() => {
+                return UserInfo.get();
+            }).then((res: any) => {
                 Toast.success('修改成功');
+               return UserInfo.set({...res.userInfo, ...data});
+            }).then(()=>{
+                wx.navigateBack({delta: 1});
+            }).catch(()=>{
+                Toast.success('修改失败');
             });
 
 

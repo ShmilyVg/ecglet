@@ -15,11 +15,19 @@ import Protocol from "../../apis/network/protocol";
 @pagify()
 export default class extends MyPage {
     data = {
-        isRegister: true
+        isRegister: true,
+        nameShow: '梦想陪我等天亮',
+        userPic: ''
     }
 
     onLoad(param: any): any {
-
+        UserInfo.get().then((res:any)=>{
+            // @ts-ignore
+            this.setData({
+                nameShow: res.userInfo.nickName,
+                userPic: res.userInfo.portraitUrl
+            })
+        })
     }
 
     async onGotUserInfo(e: any) {
