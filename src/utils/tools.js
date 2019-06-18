@@ -29,7 +29,7 @@ export function dealAuthUserInfo(e) {
                     iv
                 }
             } = e;
-            console.log(e);
+            console.log('dealAuthUserInfo 用户信息',e);
             if (!!userInfo) {
                 if (!!wx.getStorageSync('isRegister')) {
                     UserInfo.get().then(res=>{
@@ -45,7 +45,7 @@ export function dealAuthUserInfo(e) {
                     }).then(() => UserInfo.get())
                         .then((res) => {
                                 console.log('获取到用户信息', res);
-                                wx.setStorageSync('isRegister', this.data.isRegister = true);
+                                wx.setStorageSync('isRegister', true);
                                 resolve(res);
                             }
                         ).catch((res) => {

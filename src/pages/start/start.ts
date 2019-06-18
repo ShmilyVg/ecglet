@@ -13,7 +13,6 @@ import {dealAuthUserInfo} from "../../utils/tools";
 @pagify()
 export default class extends MyPage {
     data = {
-        isRegister: true,
         nameShow: '',
         userPic: ''
     }
