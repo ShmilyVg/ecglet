@@ -513,12 +513,13 @@ export default class extends MyPage {
           getApp().globalData.tempGatherResult = data.result;
           that.app.$url.result.redirect({});
         }).catch((res: any) => {
+          WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
           console.error('上传解析过程中报错', res);
         });
       }).catch((res: any) => {
-        console.error('',res);
         WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
         this.reset();
+        console.error('',res);
       });
 
       // res = await APIs.default().uploadRequest({
