@@ -6,7 +6,7 @@ export default class extends MyPage {
     data = {
         result: {
             // "time": "1560757586488",
-            // "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
+            "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
             // "info": [
             //     {
             //         "code": "HR",
@@ -48,8 +48,9 @@ export default class extends MyPage {
         UserInfo.get().then((res: any) => {
             this.setData({userInfo: res.userInfo});
         });
-        console.log('接收到的结果',options);
-        const result = options.gatheResult;
+        const result = getApp().globalData.tempGatherResult;
+
+        console.log('接收到的结果', result);
         // const result = this.data.result;
         result.time = this.getTime(parseInt(result.time));
         this.setData({result});

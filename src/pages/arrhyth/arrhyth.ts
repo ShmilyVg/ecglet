@@ -505,7 +505,8 @@ export default class extends MyPage {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
       Protocol.uploadGatherFile({filePath}).then((data: any) => {
-        that.app.$url.result.redirect({gatheResult: data.result});
+        getApp().globalData.tempGatherResult = data.result;
+        that.app.$url.result.redirect({});
       }).catch((res:any)=>{
         console.error('上传解析过程中报错',res);
       });
