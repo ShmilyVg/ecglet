@@ -44,6 +44,7 @@ export default class extends MyPage {
 
     }
     async onLoad(options: any) {
+        console.log('接收到的结果',options);
         const result = options.gatheResult;
         // const result = this.data.result;
         result.time = this.getTime(parseInt(result.time));
