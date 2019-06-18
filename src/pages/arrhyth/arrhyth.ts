@@ -14,12 +14,12 @@ interface ArrhythData {
   txt: string,
   count: number,
   maxCount: number,
-  countTimer?: NodeJS.Timer,
+  countTimer?: any,
   ecgPannel?: Component,
   waveData?: ArrayBuffer,
   connected: boolean,
   completed: boolean,
-  btCheckTimer?: NodeJS.Timer
+  btCheckTimer?: any
   showToast: boolean,
   toastMsg?: string,
   showLoading: boolean,
@@ -505,6 +505,7 @@ export default class extends MyPage {
       //   console.log(`ArrayBuffer data: ${that.ab2hex(readRes.data)}`)
       // }
       Protocol.uploadGatherFile({filePath}).then((data: any) => {
+        // @ts-ignore
         getApp().globalData.tempGatherResult = data.result;
         that.app.$url.result.redirect({});
       }).catch((res:any)=>{

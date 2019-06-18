@@ -48,6 +48,7 @@ export default class extends MyPage {
         UserInfo.get().then((res: any) => {
             this.setData({userInfo: res.userInfo});
         });
+        // @ts-ignore
         const result = getApp().globalData.tempGatherResult;
 
         console.log('接收到的结果', result);
