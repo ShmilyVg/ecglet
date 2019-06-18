@@ -23,7 +23,7 @@ export default class extends MyPage {
     }
 
     async onGotUserInfo(e: any) {
-        Protocol.getNetworkType().then(res => {
+        Protocol.getNetworkType().then((res: any) => {
             if (res.networkType === 'none' || res.networkType === 'unknown') {
                 WXDialog.showDialog({content: '请检查网络'});
                 return;
@@ -49,7 +49,7 @@ export default class extends MyPage {
                                 wxp.setStorageSync('isRegister', this.data.isRegister = true);
                                 !this.setData({userInfo: res.userInfo});
                             }
-                        ).catch((res:any) => {
+                        ).catch((res: any) => {
                         console.log(res);
                         setTimeout(Toast.warn, 0, '获取信息失败');
                     }).finally(() => {

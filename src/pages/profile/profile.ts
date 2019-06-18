@@ -19,12 +19,15 @@ export default class extends MyPage {
         phone: '4009210610',
         haveNum: false,
         haveAuthorize: false
-    }
+    };
+    isRegister = false;
 
     async onLoad(options: any) {
         // console.log(await wxp.getUserInfo())
         let that = this;
-        if (!!wxp.getStorageSync('isRegister')) {
+        this.isRegister = !!wxp.getStorageSync('isRegister');
+
+        if (this.isRegister) {
             console.log('注册过了');
             that.setDataSmart({
                 haveNum: true,
@@ -98,10 +101,14 @@ export default class extends MyPage {
     }
 
     async toEditInfo() {
-        wx.navigateTo({
-                url: '../userdata/userdata'
-            }
-        )
+        if (this.isRegister) {
+            wx.navigateTo({
+                    url: '../userdata/userdata'
+                }
+            );
+        } else {
+            Toast.warn('请您授权');
+        }
     }
 
     async clickCell1() {
@@ -115,4 +122,4 @@ export default class extends MyPage {
     async clickCell3() {
         wx.navigateTo({url: '../feedback/feedback'})
     }
-}
+};

@@ -41,8 +41,11 @@ export default class extends MyPage {
     getTime(timestamp:number) {
         const date = new Date(timestamp);
         console.log(timestamp,date);
-        return `${date.getFullYear()}/${('0' + (date.getMonth() + 1)).slice(-2)}/${('0' + (date.getDate())).slice(-2)} ${date.getHours()}:${date.getMinutes()}`;
-
+        return `${date.getFullYear()}/${this.getTimeWithZero(date.getMonth() + 1)}/${this.getTimeWithZero(date.getDate())} ${this.getTimeWithZero(date.getHours())}:${this.getTimeWithZero(date.getMinutes())}`;
+    }
+x
+    getTimeWithZero(num: number) {
+        return ('0' + num).slice(-2);
     }
     async onLoad(options: any) {
         UserInfo.get().then((res: any) => {
