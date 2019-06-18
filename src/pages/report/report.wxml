@@ -12,7 +12,7 @@
     <image class="report" src="{{reportUrl}}" style="width:{{touch.scaleWidth}}px;height:{{touch.scaleHeight}}px" bindload="imageLoad" />
   </view> -->
   <!-- <web-view wx:if="{{ios}}" src="{{reportUrl}}" bindmessage=""></web-view> -->
-  <web-view src="{{reportUrl}}" bindmessage=""></web-view>
+  <web-view src="{{reportUrl}}" bindload="onloadSuccess"></web-view>
 </view>
 
 
