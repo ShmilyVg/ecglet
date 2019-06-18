@@ -6,8 +6,5 @@
 -->
 
 <view class="container">
-  <web-view src="{{url}}" bindmessage=""></web-view>
+  <web-view src="https://backend.stage.hipee.cn/hipee-web-hiecg/DiseaseIntroduced.html" bindmessage=""></web-view>
 </view>
-
-
-

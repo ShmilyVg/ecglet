@@ -31,10 +31,19 @@ export default class extends MyPage {
 
         if (this.isRegister) {
             console.log('注册过了');
-            that.setDataSmart({
-                haveNum: true,
-                haveAuthorize: true
-            });
+            let phoneNum = wx.getStorageSync('phoneNumber');
+            console.log('手机号：', phoneNum);
+            if (phoneNum === "") {
+                that.setDataSmart({
+                    haveNum: false,
+                    haveAuthorize: true
+                });
+            } else {
+                that.setDataSmart({
+                    haveNum: true,
+                    haveAuthorize: true
+                });
+            }
             UserInfo.get().then((res: any) => {
                 console.log('res:', res);
                 that.setDataSmart({
@@ -55,12 +64,13 @@ export default class extends MyPage {
     }
 
     onShow() {
-        UserInfo.get().then((res:any)=>{
+        UserInfo.get().then((res: any) => {
             this.setData({
                 userInfo: res.userInfo
             })
         })
     }
+
     getPhoneNumber(e: any) {
         let that = this
         const {detail: {encryptedData, iv, errMsg}} = e;
@@ -89,7 +99,7 @@ export default class extends MyPage {
     }
 
     onGotUserInfo(e: any) {
-        const {detail: {encryptedData, iv,userInfo}} = e;
+        const {detail: {encryptedData, iv, userInfo}} = e;
         if (!!userInfo) {
             Toast.showLoading();
             Login.doRegister({
@@ -108,7 +118,7 @@ export default class extends MyPage {
             }).finally(() => {
                 Toast.hiddenLoading();
             });
-        }else{
+        } else {
             WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
         }
     }

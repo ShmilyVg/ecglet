@@ -115,10 +115,10 @@ export default class extends MyPage {
                 return UserInfo.get();
             }).then((res: any) => {
                 Toast.success('修改成功');
-               return UserInfo.set({...res.userInfo, ...data});
-            }).then(()=>{
+                return UserInfo.set({...res.userInfo, ...data});
+            }).then(() => {
                 wx.navigateBack({delta: 1});
-            }).catch(()=>{
+            }).catch(() => {
                 Toast.success('修改失败');
             });
 
