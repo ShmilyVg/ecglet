@@ -63,7 +63,7 @@ export default class extends MyPage {
 
         // console.log('new date: %o', e.detail.value)
         that.setDataSmart({
-            birthDate: e.detail.value
+            birthDate: e.detail.value || ''
         })
     }
 
@@ -95,7 +95,7 @@ export default class extends MyPage {
         let that = this
         // const apis = APIs.default()
 
-        let birthTime = Date.parse(that.data.birthDate)
+        let birthTime = Date.parse(that.data.birthDate) || '';
         console.log(`birth time: ${birthTime}`)
         try {
             let data = {
