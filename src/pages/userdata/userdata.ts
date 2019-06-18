@@ -6,8 +6,6 @@ import '../../extensions/Date.extensions'
 import Protocol from "../../apis/network/protocol";
 // @ts-ignore
 import Toast from "../../base/heheda-common-view/toast";
-// import {Admin} from './../../utils/admin';
-// var request_1 = require("../../apis/request");
 // @ts-ignore
 import UserInfo from '../../apis/network/userInfo.js';
 
@@ -61,7 +59,6 @@ export default class extends MyPage {
     onBirthChange(e: any) {
         let that = this
 
-        // console.log('new date: %o', e.detail.value)
         that.setDataSmart({
             birthDate: e.detail.value || ''
         })
@@ -93,6 +90,12 @@ export default class extends MyPage {
 
     async onSubmit() {
         let that = this
+
+
+        if (that.data.number.length != 11) {
+            Toast.warn('手机号格式错误')
+            return;
+        }
         // const apis = APIs.default()
 
         let birthTime = that.data.birthDate || '';
@@ -107,44 +110,26 @@ export default class extends MyPage {
                 weight: that.data.weight,
                 portraitUrl: that.data.portraitUrl
             }
-            // await apis.postRequest({
-            //     url: 'bs/modify',
-            //     data: data
-            // })
             console.log('保存信息：', data);
-            Protocol.accountUpdate(data).then(() => {
+            Protocol.accountUpdate(data).then((res) => {
                 return UserInfo.get();
             }).then((res: any) => {
                 Toast.success('修改成功');
                 return UserInfo.set({...res.userInfo, ...data});
             }).then(() => {
                 wx.navigateBack({delta: 1});
-            }).catch(() => {
-                Toast.success('修改失败');
+            }).catch((res: any) => {
+                if (res.data.code == 2000) {
+                    console.log('手机号重复');
+                    wxp.showToast({
+                        title: '同一手机\n不能绑定两个账号',
+                        icon: 'none',
+                        duration: 2000
+                    })
+                } else {
+                    Toast.success('修改失败');
+                }
             });
-
-
-            // Admin.default().userData = {
-            //     first_name: data.first_name,
-            //     sex: data.sex,
-            //     birthday: data.birthday,
-            //     language_id: data.language_id,
-            //     doctor: data.doctor,
-            //     hospital: data.hospital
-            // }
-            //
-            // await wxp.showToast({
-            //     title: '修改成功',
-            //     icon: 'success',
-            //     duration: 2000
-            // })
-            //
-            // // 回到首页
-            // let pages = getCurrentPages();
-            // if (pages.length > 1) {
-            //     that.app.$back(pages.length - 1)
-            // }
-
         } catch (err) {
             console.log("onSubmit error: %o", err)
             await wxp.showToast({
