@@ -43,7 +43,7 @@ export default class extends MyPage {
         console.log(timestamp,date);
         return `${date.getFullYear()}/${this.getTimeWithZero(date.getMonth() + 1)}/${this.getTimeWithZero(date.getDate())} ${this.getTimeWithZero(date.getHours())}:${this.getTimeWithZero(date.getMinutes())}`;
     }
-x
+
     getTimeWithZero(num: number) {
         return ('0' + num).slice(-2);
     }
