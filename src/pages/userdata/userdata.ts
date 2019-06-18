@@ -95,7 +95,7 @@ export default class extends MyPage {
         let that = this
         // const apis = APIs.default()
 
-        let birthTime = Date.parse(that.data.birthDate) || '';
+        let birthTime = that.data.birthDate || '';
         console.log(`birth time: ${birthTime}`)
         try {
             let data = {
