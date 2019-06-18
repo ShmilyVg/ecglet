@@ -72,7 +72,7 @@ export default class extends MyPage {
                 // HiNavigator.navigateToArrhyth();
             });
         } else {
-            Toast.showLoading('手机号授权失败~')
+            Toast.warn('手机号授权失败');
         }
     }
 
