@@ -104,7 +104,8 @@ export default class extends MyPage {
                 sex: that.data.sexIndex,
                 birthday: birthTime,
                 height: that.data.height,
-                weight: that.data.weight
+                weight: that.data.weight,
+                portraitUrl: that.data.portraitUrl
             }
             // await apis.postRequest({
             //     url: 'bs/modify',
@@ -152,5 +153,34 @@ export default class extends MyPage {
                 duration: 2000
             })
         }
+    }
+
+
+    chooseImage() {
+        let that = this
+        console.log('chooseImage');
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            success: function (res) {
+                Toast.showLoading();
+                let path = res.tempFilePaths[0];
+                wxp.uploadFile({
+                    url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
+                    filePath: path,
+                    name: path
+                }).then((res: any) => {
+                    console.log(res);
+                    Toast.hiddenLoading();
+                    let data = res.data;
+                    let image = JSON.parse(data).result.img_url;
+                    console.log('图片：', image);
+                    that.setDataSmart({
+                        portraitUrl: image
+                    })
+                })
+            }
+        })
     }
 }

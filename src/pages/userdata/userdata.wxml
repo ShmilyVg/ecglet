@@ -10,7 +10,7 @@
     <view style="background-color: #4A9DF0">
         <view class="top-view-blue-white"></view>
     </view>
-    <view class="avatar-view flex-row">
+    <view class="avatar-view flex-row" bindtap="chooseImage">
         <image src="{{portraitUrl}}" class="avatar"></image>
     </view>
     <view>
