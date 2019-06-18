@@ -7,7 +7,7 @@
 .top-image{
   height: 256rpx;
   width: 100%;
-  background-color: #4A9DF0;
+  background-color: #3a93ef;
 }
 
 .top-cell {
@@ -68,13 +68,11 @@
   margin-left: 17rpx;
 }
 
-.arr {
+.arr-02{
   width: 14rpx;
   height: 25rpx;
-  position: absolute;
-  right: 80rpx;
+  margin-right: 60rpx;
 }
-
 .flex-column{
   display: flex;
   flex-direction: column;

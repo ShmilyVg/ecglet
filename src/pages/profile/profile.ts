@@ -13,6 +13,8 @@ import Toast from '../../base/heheda-common-view/toast.js';
 import Protocol from '../../apis/network/protocol.js'
 // @ts-ignore
 import WXDialog from "../../base/heheda-common-view/dialog";
+// @ts-ignore
+import {dealAuthUserInfo} from "../../utils/tools";
 
 
 @pagify()
@@ -27,9 +29,14 @@ export default class extends MyPage {
     async onLoad(options: any) {
         // console.log(await wxp.getUserInfo())
         let that = this;
-        this.isRegister = !!wxp.getStorageSync('isRegister');
+        // if (!!wxp.getStorageSync('isRegister')) {
+        //     UserInfo.get().then((res: any) => {
+        //
+        //
+        //     });
+        // }
 
-        if (this.isRegister) {
+        if (!!wxp.getStorageSync('isRegister')) {
             console.log('注册过了');
             let phoneNum = wx.getStorageSync('phoneNumber');
             console.log('手机号：', phoneNum);
@@ -99,32 +106,18 @@ export default class extends MyPage {
     }
 
     onGotUserInfo(e: any) {
-        const {detail: {encryptedData, iv, userInfo}} = e;
-        if (!!userInfo) {
-            Toast.showLoading();
-            Login.doRegister({
-                encryptedData, iv
-            }).then(() => UserInfo.get())
-                .then((res: any) => {
-                        wxp.setStorageSync('isRegister', true);
-                        this.setDataSmart({
-                            haveAuthorize: true,
-                            userInfo: res.userInfo
-                        })
-                    }
-                ).catch((res: any) => {
-                console.log(res);
-                setTimeout(Toast.warn, 0, '获取信息失败');
-            }).finally(() => {
-                Toast.hiddenLoading();
-            });
-        } else {
-            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
-        }
+        dealAuthUserInfo(e).then((res: any) => {
+            this.setDataSmart({
+                haveAuthorize: true,
+                userInfo: res.userInfo
+            })
+        }).catch((res: any) => {
+            console.log(res);
+        });
     }
 
     async toEditInfo() {
-        if (this.isRegister) {
+        if (!!wxp.getStorageSync('isRegister')) {
             wx.navigateTo({
                     url: '../userdata/userdata'
                 }
@@ -134,8 +127,16 @@ export default class extends MyPage {
         }
     }
 
-    async clickCell1() {
-        wx.navigateTo({url: '../history/history'})
+    async onGotUserInfoAndToHistory(e: any) {
+        dealAuthUserInfo(e).then((res: any) => {
+            this.setDataSmart({
+                haveAuthorize: true,
+                userInfo: res.userInfo
+            });
+            wx.navigateTo({url: '../history/history'})
+        }).catch((res: any) => {
+            console.log(res);
+        });
     }
 
     async clickCell2() {

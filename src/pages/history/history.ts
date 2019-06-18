@@ -50,8 +50,10 @@ export default class extends MyPage {
 
     toPdfUrl(e:any){
         console.log(e)
-        let pdfUrl = e.currentTarget.dataset.url
-        this.app.$url.report.go({reportUrl: pdfUrl});
+        // @ts-ignore
+        getApp().globalData.tempGatherResult = e.currentTarget.dataset.item;
+        this.app.$url.result.go({});
+
     }
 
     onPullDownRefresh() {

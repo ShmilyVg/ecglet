@@ -10,7 +10,7 @@
   <view class="bg"></view>
   <image class="bg-pic" src="../../images/mine/jingcejilu_beijing.png" alt=""/>
   <view class="notebox">
-    <view class="note" wx:for="{{logs}}" bindtap="toPdfUrl" data-url="{{item.pdfUrl}}">
+    <view class="note" wx:for="{{logs}}" bindtap="toPdfUrl" data-item="{{item}}">
       <view class="note-main">
         <view class="note-circle"><span></span></view>
         <view class="note-hint">
