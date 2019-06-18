@@ -9,7 +9,8 @@ import WXDialog from "../../base/heheda-common-view/dialog";
 import Toast from "../../base/heheda-common-view/toast";
 
 interface ArrhythData {
-  windowHeight:number,
+  bleStatus: string,
+  windowHeight: number,
   logs: string[],
   deviceList: string[],
   lastDeviceId: string,
@@ -27,12 +28,13 @@ interface ArrhythData {
   showToast: boolean,
   toastMsg?: string,
   showLoading: boolean,
-  canvasWidth:number,
+  canvasWidth: number,
   canvasHeight: number;
 }
 @pagify()
 export default class extends MyPage {
   data: ArrhythData = {
+    bleStatus:'',
     canvasHeight: 0,
     canvasWidth: 0,
     windowHeight:0,
@@ -209,7 +211,7 @@ export default class extends MyPage {
         try {
           if (res.available) {
             // 关闭蓝牙检测未打开提示
-
+            this.setData({bleStatus: ''});
             if (!res.discovering && !that.data.completed) {
               await that.startBluetooth()
             }
@@ -218,7 +220,7 @@ export default class extends MyPage {
             let that = this
 
             that.reset()
-
+            this.setData({bleStatus: 'not_init'});
             let res = await wxp.showModal({
               title: "提醒",
               content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！",
@@ -249,6 +251,7 @@ export default class extends MyPage {
         if (err.errCode == 10001) {
           console.log(`wxp.openBluetoothAdapter error: ${err.errMsg}`)
           // that.showToast('蓝牙没有打开，请在快捷面板或设置中打开蓝牙！')
+          this.setData({bleStatus: 'not_init'});
           let res = await wxp.showModal({
             title: "提醒",
             content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！",
@@ -564,6 +567,10 @@ export default class extends MyPage {
       // }
 
     } catch (error) {
+      Toast.hiddenLoading();
+      WXDialog.showDialog({content: '您的检测数据不完整，请重新测试',confirmEvent:()=>{
+          wx.navigateBack({delta: 1});
+        }});
       console.log("uploadData: %o", error)
     }
   }

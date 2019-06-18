@@ -22,9 +22,9 @@
 
   <cover-view class="toast" hidden="{{showLoading}}">
     <cover-view class="flex-column align-items-center tip">
-      <cover-view class="remind-text-big">等待设备连接</cover-view>
-      <cover-view class="remind-text-small">将双手放在金属片上测试</cover-view>
-      <cover-view class="remind-text-small" style="margin-bottom: 330rpx;">过程中勿交谈、移动、保持静息状态</cover-view>
+      <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'等待设备连接'}}</cover-view>
+      <cover-view class="remind-text-small">{{bleStatus==='not_init'?' ':'将双手放在金属片上测试'}}</cover-view>
+      <cover-view class="remind-text-small" style="margin-bottom: 330rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
       <cover-view class="flex-row align-items-center">
         <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
         <cover-view >绿灯亮起：表示当前处于采集状态</cover-view>
