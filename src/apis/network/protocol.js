@@ -4,7 +4,15 @@ import BaseNetworkImp from "./network/libs/base/base-network-imp";
 import {PostUrl, UploadUrl} from "../../utils/config";
 
 export default class Protocol {
+    static getNetworkType() {
+        return new Promise((resolve, reject) => {
+            wx.getNetworkType({
+                success:resolve,
+                fail: reject
+            });
+        });
 
+    }
     static uploadGatherFile({filePath}) {
         return new Promise((resolve, reject) => {
             if (filePath) {

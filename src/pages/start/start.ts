@@ -9,6 +9,8 @@ import HiNavigator from '../../components/navigator/hi-navigator.js'
 import Toast from '../../base/heheda-common-view/toast.js';
 // @ts-ignore
 import WXDialog from '../../base/heheda-common-view/dialog.js';
+// @ts-ignore
+import Protocol from "../../apis/network/protocol";
 
 @pagify()
 export default class extends MyPage {
@@ -21,40 +23,46 @@ export default class extends MyPage {
     }
 
     async onGotUserInfo(e: any) {
-
-        const {
-            detail: {
-                userInfo,
-                encryptedData,
-                iv
+        Protocol.getNetworkType().then(res => {
+            if (res.networkType === 'none' || res.networkType === 'unknown') {
+                WXDialog.showDialog({content: '请检查网络'});
+                return;
             }
-        } = e;
-        console.log(e);
-        if (!!userInfo) {
-            if (!!wxp.getStorageSync('isRegister')) {
-                HiNavigator.navigateToArrhyth();
-            } else {
-                Toast.showLoading();
-                Login.doRegister({
-                    encryptedData, iv
-                }).then(() => UserInfo.get())
-                    .then((res: any) => {
-                        console.log(res);
-                        wxp.setStorageSync('isRegister', this.data.isRegister = true);
-                            !this.setData({userInfo: res.userInfo});
-                        }
-                    ).catch((res:any) => {
-                    console.log(res);
-                    setTimeout(Toast.warn, 0, '获取信息失败');
-                }).finally(() => {
-                    Toast.hiddenLoading();
+            const {
+                detail: {
+                    userInfo,
+                    encryptedData,
+                    iv
+                }
+            } = e;
+            console.log(e);
+            if (!!userInfo) {
+                if (!!wxp.getStorageSync('isRegister')) {
                     HiNavigator.navigateToArrhyth();
-                });
-            }
+                } else {
+                    Toast.showLoading();
+                    Login.doRegister({
+                        encryptedData, iv
+                    }).then(() => UserInfo.get())
+                        .then((res: any) => {
+                                console.log(res);
+                                wxp.setStorageSync('isRegister', this.data.isRegister = true);
+                                !this.setData({userInfo: res.userInfo});
+                            }
+                        ).catch((res:any) => {
+                        console.log(res);
+                        setTimeout(Toast.warn, 0, '获取信息失败');
+                    }).finally(() => {
+                        Toast.hiddenLoading();
+                        HiNavigator.navigateToArrhyth();
+                    });
+                }
 
-        } else {
-            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
-        }
+            } else {
+                WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
+            }
+        });
+
         /*wx.getSetting({
             success (res){
                 if (res.authSetting['scope.userInfo']) {
