@@ -1,4 +1,10 @@
-function createDateAndTime(timeStamp) {
+import WXDialog from "../base/heheda-common-view/dialog";
+import Toast from "../base/heheda-common-view/toast";
+import Login from "../apis/network/login";
+import {UserInfo} from "../apis/network/network/index";
+import Protocol from "../apis/network/protocol";
+
+export function createDateAndTime(timeStamp) {
     let date = new Date(timeStamp);
     let month = date.getMonth() + 1;
     let day = date.getDate();
@@ -9,26 +15,51 @@ function createDateAndTime(timeStamp) {
     return {date: dateT, time: time, day: day, month: month};
 }
 
-function deleteLineBreak(str){
-    return str.replace(/[\r\n]/g,"");
-}
+export function dealAuthUserInfo(e) {
+    return new Promise((resolve, reject) => {
+        Protocol.getNetworkType().then((res) => {
+            if (res.networkType === 'none' || res.networkType === 'unknown') {
+                WXDialog.showDialog({content: '请检查网络'});
+                return;
+            }
+            const {
+                detail: {
+                    userInfo,
+                    encryptedData,
+                    iv
+                }
+            } = e;
+            console.log(e);
+            if (!!userInfo) {
+                if (!!wx.getStorageSync('isRegister')) {
+                    UserInfo.get().then(res=>{
+                        resolve(res);
+                    }).catch(res=>{
+                        console.error('注册情况下获取用户信息失败',res);
+                        reject(res);
+                    })
+                } else {
+                    Toast.showLoading();
+                    Login.doRegister({
+                        encryptedData, iv
+                    }).then(() => UserInfo.get())
+                        .then((res) => {
+                                console.log('获取到用户信息', res);
+                                wx.setStorageSync('isRegister', this.data.isRegister = true);
+                                resolve(res);
+                            }
+                        ).catch((res) => {
+                        console.log(res);
+                        reject(res);
+                    }).finally(() => {
+                        Toast.hiddenLoading();
+                    });
+                }
 
-function getRulerTime(){
-    return {
-        1: ['08:00'],
-        2: ['08:00', '21:00'],
-        3: ["08:00", "13:00", "21:00"],
-        4: ["08:00", "13:00", "18:00", "21:00"],
-        5: ["08:00", "12:00", "15:00", "18:00", "21:00"],
-        6: ["08:00", "11:00", "14:00", "17:00", "19:00", "21:00"],
-        7: ["08:00", "10:30", "13:00", "15:30", "17:00", "19:30", "21:00"],
-        8: ["08:00", "10:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"],
-        9: ["08:00", "09:30", "11:00", "12:30", "14:00", "15:30", "17:00", "18:30", "21:00"],
-    }
-}
-
-module.exports = {
-    createDateAndTime,
-    deleteLineBreak,
-    getRulerTime
+            } else {
+                WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
+                reject();
+            }
+        });
+    });
 }

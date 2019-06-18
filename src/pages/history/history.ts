@@ -7,7 +7,7 @@ import {MyPage, pagify} from 'base/'
 // @ts-ignore
 import Toast from '../../base/heheda-common-view/toast.js';
 // @ts-ignore
-import * as tools from "../../utils/tools";
+import {createDateAndTime} from "../../utils/tools";
 // @ts-ignore
 import Protocol from '../../apis/network/protocol.js'
 
@@ -29,7 +29,7 @@ export default class extends MyPage {
             let list = data.result.dataList
             if(list.length){
                 list.forEach((item:any)=>{
-                    const {date, time} = tools.createDateAndTime(parseInt(item.time));
+                    const {date, time} = createDateAndTime(parseInt(item.time));
                     item.date = date;
                     item.time = time;
                 })
