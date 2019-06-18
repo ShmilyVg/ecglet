@@ -24,22 +24,31 @@
 
         </view>
         <view class="table">
-            <view class="flex-row cell" bindtap="clickCell1">
-                <image class="icon" src="../../images/mine/jingcejilu.png"></image>
-                <view class="title">检测记录</view>
-                <image src="../../images/mine/arr.png" class="arr"></image>
-            </view>
-            <view class="flex-row cell" bindtap="clickCell2">
-                <image class="icon" src="../../images/mine/xinzhangjibingjieshou.png"></image>
-                <view class="title">心脏疾病介绍</view>
-                <image src="../../images/mine/arr.png" class="arr"></image>
+            <button class="flex-row cell space-between" open-type="getUserInfo" bindgetuserinfo="onGotUserInfoAndToHistory" hover-class="none">
+                <view class="flex-row align-items-center">
+                    <image class="icon" src="../../images/mine/jingcejilu.png"></image>
+                    <view class="title">检测记录</view>
+                </view>
+
+                <image src="../../images/mine/arr.png" class="arr-02"></image>
+            </button>
+            <view class="flex-row cell space-between" bindtap="clickCell2">
+                <view class="flex-row align-items-center">
+                    <image class="icon" src="../../images/mine/xinzhangjibingjieshou.png"></image>
+                    <view class="title">心脏疾病介绍</view>
+                </view>
+
+                <image src="../../images/mine/arr.png" class="arr-02"></image>
             </view>
         </view>
         <view class="table">
-            <view class="flex-row cell" bindtap="clickCell3">
-                <image class="icon" src="../../images/mine/fangkui.png"></image>
-                <view class="title">反馈</view>
-                <image src="../../images/mine/arr.png" class="arr"></image>
+            <view class="flex-row cell space-between" bindtap="clickCell3">
+                <view class="flex-row align-items-center">
+                    <image class="icon" src="../../images/mine/fangkui.png"></image>
+                    <view class="title">反馈</view>
+                </view>
+
+                <image src="../../images/mine/arr.png" class="arr-02"></image>
             </view>
         </view>
     </view>
