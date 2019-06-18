@@ -7,7 +7,7 @@
 
 <view class="flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
     <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
-    <view style="background-color: #4A9DF0">
+    <view style="background-color: #3a93ef">
         <view class="top-view-blue-white"></view>
     </view>
     <view class="avatar-view flex-row" bindtap="chooseImage">
