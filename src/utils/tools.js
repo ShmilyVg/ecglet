@@ -19,7 +19,7 @@ export function dealAuthUserInfo(e) {
     return new Promise((resolve, reject) => {
         Protocol.getNetworkType().then((res) => {
             if (res.networkType === 'none' || res.networkType === 'unknown') {
-                WXDialog.showDialog({content: '请检查网络'});
+                WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
                 return;
             }
             const {
