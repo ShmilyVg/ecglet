@@ -16,11 +16,21 @@ import Protocol from "../../apis/network/protocol";
 export default class extends MyPage {
     data = {
         isRegister: true,
-        nameShow: '梦想陪我等天亮',
+        nameShow: '',
         userPic: ''
     }
 
     onLoad(param: any): any {
+        UserInfo.get().then((res:any)=>{
+            // @ts-ignore
+            this.setData({
+                nameShow: res.userInfo.nickName,
+                userPic: res.userInfo.portraitUrl
+            })
+        })
+    }
+
+    onShow(){
         UserInfo.get().then((res:any)=>{
             // @ts-ignore
             this.setData({

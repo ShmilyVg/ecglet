@@ -16,6 +16,7 @@ export default class Protocol {
 
     static checkHaveNetwork() {
         return this.getNetworkType().then(res=>{
+            console.log('当前网络状态',res);
             if (res.networkType === 'none' || res.networkType === 'unknown') {
                 return Promise.reject();
             }else{

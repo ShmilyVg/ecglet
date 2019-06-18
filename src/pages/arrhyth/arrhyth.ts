@@ -5,9 +5,12 @@ import Protocol from './../../apis/network/protocol.js';
 import "../../extensions/ArrayBuffer.ext"
 // @ts-ignore
 import WXDialog from "../../base/heheda-common-view/dialog";
+// @ts-ignore
+import Toast from "../../base/heheda-common-view/toast";
 
 interface ArrhythData {
-  windowHeight:number,
+  bleStatus: string,
+  windowHeight: number,
   logs: string[],
   deviceList: string[],
   lastDeviceId: string,
@@ -25,12 +28,13 @@ interface ArrhythData {
   showToast: boolean,
   toastMsg?: string,
   showLoading: boolean,
-  canvasWidth:number,
+  canvasWidth: number,
   canvasHeight: number;
 }
 @pagify()
 export default class extends MyPage {
   data: ArrhythData = {
+    bleStatus:'',
     canvasHeight: 0,
     canvasWidth: 0,
     windowHeight:0,
@@ -207,7 +211,7 @@ export default class extends MyPage {
         try {
           if (res.available) {
             // 关闭蓝牙检测未打开提示
-
+            this.setData({bleStatus: ''});
             if (!res.discovering && !that.data.completed) {
               await that.startBluetooth()
             }
@@ -216,7 +220,7 @@ export default class extends MyPage {
             let that = this
 
             that.reset()
-
+            this.setData({bleStatus: 'not_init'});
             let res = await wxp.showModal({
               title: "提醒",
               content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！",
@@ -247,6 +251,7 @@ export default class extends MyPage {
         if (err.errCode == 10001) {
           console.log(`wxp.openBluetoothAdapter error: ${err.errMsg}`)
           // that.showToast('蓝牙没有打开，请在快捷面板或设置中打开蓝牙！')
+          this.setData({bleStatus: 'not_init'});
           let res = await wxp.showModal({
             title: "提醒",
             content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！",
@@ -455,7 +460,7 @@ export default class extends MyPage {
   private async uploadData() {
     console.log("uploadData...")
     let that = this
-
+    Toast.showLoading('请稍后...');
     try {
       let dirPath = (wx as any).env.USER_DATA_PATH + "/cache/bs-upload"
       let fileName = "rawdata"
@@ -513,12 +518,21 @@ export default class extends MyPage {
           getApp().globalData.tempGatherResult = data.result;
           that.app.$url.result.redirect({});
         }).catch((res: any) => {
+          WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+              wx.navigateBack({delta: 1});
+            }});
           console.error('上传解析过程中报错', res);
+        }).finally(()=>{
+          Toast.hiddenLoading();
         });
       }).catch((res: any) => {
-        console.error('',res);
-        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+            wx.navigateBack({delta: 1});
+          }});
         this.reset();
+        console.error('',res);
+      }).finally(()=>{
+        Toast.hiddenLoading();
       });
 
       // res = await APIs.default().uploadRequest({
@@ -553,6 +567,10 @@ export default class extends MyPage {
       // }
 
     } catch (error) {
+      Toast.hiddenLoading();
+      WXDialog.showDialog({content: '您的检测数据不完整，请重新测试',confirmEvent:()=>{
+          wx.navigateBack({delta: 1});
+        }});
       console.log("uploadData: %o", error)
     }
   }
