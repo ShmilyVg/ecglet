@@ -68,14 +68,15 @@ page{
   z-index: 5;
 }
 .main-pic{
-  width: 196rpx;
-  height: 196rpx;
+  width: 158rpx;
+  height: 158rpx;
   position: absolute;
   top: -98rpx;
   left: 50%;
   margin-left: -98rpx;
   border-radius: 98rpx;
   overflow: hidden;
+  border: 20rpx solid #D0E8FF;
 }
 .main-heart{
   width: 388rpx;
@@ -88,11 +89,17 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../../images/start/startbtnbg.png") no-repeat;
-  background-size: 100%;
   color: #fff;
   font-size: 36rpx;
   line-height:18px;
+}
+.startbtnbg{
+  width: 388rpx;
+  height: 388rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 .main-hint{
   width: 100%;
