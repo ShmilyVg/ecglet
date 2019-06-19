@@ -20,7 +20,17 @@ export default class extends MyApp {
     // 如果有登录记录，检查登录时效
 
     console.log('qqq')
-
+    wx.onNetworkStatusChange((res)=> {
+      console.log('网络状态变更', res);
+      // if (!res.isConnected) {
+      const currentPages = getCurrentPages();
+      if (currentPages && currentPages.length) {
+        const pageListener = currentPages[currentPages.length - 1].onNetworkStatusChanged;
+        console.log('页面监听函数', pageListener);
+        pageListener && pageListener(res);
+      }
+      // }
+    });
     Login.doLogin().then((data:any) => {
       return UserInfo.get();
     }).then(()=>{
