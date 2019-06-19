@@ -387,9 +387,7 @@ export default class extends MyPage {
     that.data.countTimer = setInterval(async () => {
       that.data.count++
       if (that.data.count <= 2 * that.data.maxCount) {
-        let circle: any = that.data.progressCircle
-        circle.drawCircle('circle_draw1', 100, that.data.count);
-        console.log('count: ' + that.data.count, that.data.maxCount);
+        // console.log('count: ' + that.data.count, that.data.maxCount);
         if (that.data.count < 2 * that.data.maxCount) {
           that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
         } else {
@@ -407,6 +405,9 @@ export default class extends MyPage {
           await that.uploadData()
 
         }
+        let circle: any = that.data.progressCircle
+        circle.drawCircle('circle_draw1', 100, that.data.count);
+
       }
     }, 1000)
   }
