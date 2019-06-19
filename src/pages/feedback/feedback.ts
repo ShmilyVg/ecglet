@@ -8,7 +8,7 @@ export default class extends MyPage {
   }
   async savePic() {
       wx.downloadFile({
-          url: 'http://backend.hipee.cn/assets/home/images/mine_fankui_hipeeerweima2x.png',
+          url: 'https://backend.stage.hipee.cn/hipee-web-hiecg/img/mine_fankui_hipeeerweima.png',
           success (res) {
               console.log(res)
               if (res.statusCode === 200) {
