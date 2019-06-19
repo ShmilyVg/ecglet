@@ -91,12 +91,15 @@ export default class extends MyPage {
     async onSubmit() {
         let that = this
 
-
-        if (that.data.number.length != 11) {
-            Toast.warn('手机号格式错误')
+        if (that.data.name.length == 0) {
+            Toast.showText('请填写完整信息');
             return;
         }
-        // const apis = APIs.default()
+
+        if (that.data.number.length != 11) {
+            Toast.showText('手机号格式错误');
+            return;
+        }
 
         let birthTime = that.data.birthDate || '';
         console.log(`birth time: ${birthTime}`)
@@ -111,7 +114,7 @@ export default class extends MyPage {
                 portraitUrl: that.data.portraitUrl
             }
             console.log('保存信息：', data);
-            Protocol.accountUpdate(data).then((res) => {
+            Protocol.accountUpdate(data).then((res: any) => {
                 return UserInfo.get();
             }).then((res: any) => {
                 Toast.success('修改成功');
