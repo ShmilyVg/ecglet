@@ -7,7 +7,7 @@
 
 <view class="flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
     <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
-    <view style="background-color: #4A9DF0">
+    <view style="background-color: #3a93ef">
         <view class="top-view-blue-white"></view>
     </view>
     <view class="avatar-view flex-row" bindtap="chooseImage">
@@ -19,7 +19,7 @@
                 <view class="weui-label cell-title">昵称</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" bind:input="onNameChange"/>
+                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="8" bind:input="onNameChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -28,7 +28,7 @@
                 <view class="weui-label cell-title">手机号</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" bind:input="onNumberChange"/>
+                <input class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bind:input="onNumberChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -60,7 +60,7 @@
                 <view class="weui-label cell-title">身高（cm)</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入身高" type="number" value="{{height}}" bind:input="onHeightChange"/>
+                <input class="weui-input cell-content" placeholder="请输入身高" type="number" value="{{height}}" type="number" maxlength="3" bind:input="onHeightChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -69,7 +69,7 @@
                 <view class="weui-label cell-title">体重（kg）</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入体重" type="number" value="{{weight}}" bind:input="onWeightChange"/>
+                <input class="weui-input cell-content" placeholder="请输入体重" type="number" value="{{weight}}" type="number" maxlength="4" bind:input="onWeightChange"/>
             </view>
         </view>
     </view>
