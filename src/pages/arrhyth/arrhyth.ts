@@ -143,6 +143,8 @@ export default class extends MyPage {
   async onLoad(options: any) {
     // console.log(await wxp.getUserInfo())
     console.log('onLoad')
+    this.isNetworkNotConnected = false;
+
     let that = this;
     that.setDataSmart({windowHeight: wxp.getSystemInfoSync().windowHeight});
 
@@ -352,7 +354,6 @@ export default class extends MyPage {
   }
   async onUnload() {
     console.log('onUnload...')
-    this.isNetworkNotConnected = false;
     let that = this
     try {
       // await wxp.hideLoading()
