@@ -50,7 +50,7 @@
             <view class="weui-cell__bd">
                 <picker mode="date" value="{{birthDate}}" start="1900-01-01" end="{{birthEndDate}}"
                         bindchange="onBirthChange">
-                    <view class="weui-input cell-content">{{birthDate}}</view>
+                    <view class="weui-input cell-content" style="color:{{birthDate=='请选择出生日期'?'gray':'black'}}">{{birthDate}}</view>
                 </picker>
             </view>
         </view>
