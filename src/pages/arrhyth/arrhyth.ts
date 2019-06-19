@@ -86,7 +86,9 @@ export default class extends MyPage {
 
         if (!that.data.completed) {
           // 停止计时，复位
-          await wxp.showToast({title: '信号质量差，请重新测试', icon: 'none'});
+          if (!this.isNetworkNotConnected) {
+            await wxp.showToast({title: '信号质量差，请重新测试', icon: 'none'});
+          }
           that.reset()
           that.preparePannelDark('');
           // await wxp.showLoading({
@@ -120,11 +122,11 @@ export default class extends MyPage {
     }
   }
 
-  isNetworkStatusChanged = false;
+  isNetworkNotConnected = false;
   onNetworkStatusChanged(res: any) {
     if (!res.isConnected) {
-      if (!this.isNetworkStatusChanged) {
-        this.isNetworkStatusChanged = true;
+      if (!this.isNetworkNotConnected) {
+        this.isNetworkNotConnected = true;
         WXDialog.showDialog({
           content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
             wx.navigateBack({delta: 1});
@@ -350,7 +352,7 @@ export default class extends MyPage {
   }
   async onUnload() {
     console.log('onUnload...')
-    this.isNetworkStatusChanged = false;
+    this.isNetworkNotConnected = false;
     let that = this
     try {
       // await wxp.hideLoading()
