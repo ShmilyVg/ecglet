@@ -4,13 +4,6 @@
   注意：文件为空，编译时不会生成新文件
 */
 
-.top-view-blue-white{
-  height: 125rpx;
-  width: 100%;
-  background-color: white;
-  border-radius:80rpx 80rpx 0 0;
-}
-
 .cell-hpe{
   height: 25rpx;
   padding: 50rpx 40rpx;
@@ -26,7 +19,7 @@
 }
 
 .top-image{
-  height: 156rpx;
+  height: 281rpx;
   width: 100%;
   background-color: #3a93ef;
 }
@@ -40,6 +33,7 @@
   margin-top: -222rpx;
   margin-bottom: 30rpx;
   align-self: center;
+  z-index: 100;
 }
 
 .avatar{
