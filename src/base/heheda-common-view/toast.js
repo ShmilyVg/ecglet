@@ -1,3 +1,4 @@
+
 export default class Toast {
 
     static success(title, duration) {
@@ -34,5 +35,13 @@ export default class Toast {
 
     static hiddenToast() {
         wx.hideToast();
+    }
+
+    static showText(title) {
+        wx.showToast({
+            title: title,
+            icon: 'none',
+            duration: 2000
+        })
     }
 }
