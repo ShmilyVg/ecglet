@@ -387,14 +387,24 @@ export default class extends MyPage {
     that.data.countTimer = setInterval(async () => {
       that.data.count++
       if (that.data.count <= 2 * that.data.maxCount) {
-        let circle: any = that.data.progressCircle
-        circle.drawCircle('circle_draw1', 100, that.data.count);
-        console.log('count: ' + that.data.count, that.data.maxCount);
+        // console.log('count: ' + that.data.count, that.data.maxCount);
         if (that.data.count < 2 * that.data.maxCount) {
-          that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
+          that.setData({
+            txt: `${2 * that.data.maxCount - that.data.count}`
+          }, () => {
+            let circle: any = that.data.progressCircle;
+            circle.drawCircle('circle_draw1', 100, that.data.count);
+          });
+          // that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
         } else {
           that.data.count = 0
-          that.setDataSmart({ txt: '0' })
+          that.setData({
+            txt: '0'
+          }, () => {
+            let circle: any = that.data.progressCircle;
+            circle.drawCircle('circle_draw1', 100, that.data.count);
+          });
+          // that.setDataSmart({ txt: '0' })
           if (that.data.countTimer) {
             clearInterval(that.data.countTimer)
             that.data.countTimer = undefined
@@ -407,6 +417,8 @@ export default class extends MyPage {
           await that.uploadData()
 
         }
+
+
       }
     }, 1000)
   }
