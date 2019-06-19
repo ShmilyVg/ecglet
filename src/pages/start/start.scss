@@ -85,18 +85,14 @@ page{
   left: 50%;
   margin-left: -194rpx;
   padding: 0;
-}
-.main-heart-bg{
-  width: 388rpx;
-  height: 388rpx;
-}
-.main-heart-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../../images/start/startbtnbg.png") no-repeat;
+  background-size: 100%;
   color: #fff;
   font-size: 36rpx;
-  position: absolute;
-  top: 150rpx;
-  left: 157rpx;
-  z-index: 2;
+  line-height:18px;
 }
 .main-hint{
   width: 100%;
