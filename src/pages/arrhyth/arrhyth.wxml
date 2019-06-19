@@ -9,11 +9,7 @@
   <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
     <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
     <view class="circle_info">
-      <block wx:if="{{showLoading}}">
-        <text class='circle_txt'>{{txt}}</text>
-        <view class="circle_dot">SECOND</view>
-      </block>
-      <image wx:else src="./../../images/arrhyth/collect_jingshubian.png" class="remind-large-size"></image>
+      <image wx:if="{{!showLoading}}" src="./../../images/arrhyth/collect_jingshubian.png" class="remind-large-size"></image>
     </view>
 
   </circle>

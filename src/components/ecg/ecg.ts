@@ -250,6 +250,8 @@ export default class extends MyComponent {
 
     ctx.beginPath()
     ctx.moveTo(opx, opy)
+    // console.log('传入的数据',buffer);
+    const len = buffer.length;
     buffer.forEach((gain, index) => {
       px += speed
       py += ((gain - ogn) * yunit)
@@ -272,7 +274,7 @@ export default class extends MyComponent {
         ctx.moveTo(opx, opy)
       }
 
-      if (index == (buffer.length - 1)) {
+      if (index == (len - 1)) {
         that.data.lastPoint.index += index
         that.data.lastPoint.adGain = ogn
         that.data.lastPoint.x = px

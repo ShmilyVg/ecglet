@@ -366,7 +366,7 @@ export default class extends MyPage {
       console.log('释放蓝牙资源错误<' + error.title + '>: ' + error.message)
     }
   }
-
+  currentTimestamp = 0;
   private async onFirstChannelChange(data: ArrayBuffer) {
     // console.log('onFirstChannelChange')
     let that = this
@@ -377,7 +377,11 @@ export default class extends MyPage {
     // console.log('data: ' + that.ab2hex(that.data.waveData))
     let ecg: any = that.data.ecgPannel
     // ecg.drawWave(data)
-    ecg.drawWaveDark(data)
+    const now = Date.now();
+    if (now - this.currentTimestamp >= 33) {
+      this.currentTimestamp = now;
+      ecg.drawWaveDark(data);
+    }
     // ecg.drawWaveAnimation(data, that.data.completed)
   }
 
@@ -388,22 +392,10 @@ export default class extends MyPage {
       that.data.count++
       if (that.data.count <= 2 * that.data.maxCount) {
         // console.log('count: ' + that.data.count, that.data.maxCount);
-        if (that.data.count < 2 * that.data.maxCount) {
-          that.setData({
-            txt: `${2 * that.data.maxCount - that.data.count}`
-          }, () => {
-            let circle: any = that.data.progressCircle;
-            circle.drawCircle('circle_draw1', 100, that.data.count);
-          });
-          // that.setDataSmart({ txt: `${2 * that.data.maxCount - that.data.count}` })
-        } else {
+        let circle: any = that.data.progressCircle;
+        circle.drawCircle('circle_draw1', 100, that.data.count);
+        if (that.data.count >= 2 * that.data.maxCount) {
           that.data.count = 0
-          that.setData({
-            txt: '0'
-          }, () => {
-            let circle: any = that.data.progressCircle;
-            circle.drawCircle('circle_draw1', 100, that.data.count);
-          });
           // that.setDataSmart({ txt: '0' })
           if (that.data.countTimer) {
             clearInterval(that.data.countTimer)
@@ -415,7 +407,6 @@ export default class extends MyPage {
 
           console.log('prepare to upload data...')
           await that.uploadData()
-
         }
 
 

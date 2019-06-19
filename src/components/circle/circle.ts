@@ -59,9 +59,11 @@ export default class extends MyComponent {
   drawCircle(id: string, radius: number, step: number) {
     let that = this
     const r = radius * that.data.rpx
-    that.setDataSmart({
-      size: 2 * r
-    });
+    if (!that.data.size) {
+      that.setDataSmart({
+        size: 2 * r
+      });
+    }
     const ctx = wxp.createCanvasContext(id, that), x1 = r, smallRadius = r / 12, y1 = smallRadius,
         wholeDegree = 2 * Math.PI, a = 2 * Math.PI / 15, circleRadius = r - smallRadius, maxPointNum = 15,
         currentStep = Math.ceil(step / 2);
@@ -76,6 +78,14 @@ export default class extends MyComponent {
       const degree = a * i;
       x = x1 + circleRadius * Math.sin(degree);
       y = y1 + circleRadius - circleRadius * Math.cos(degree);
+    }
+    if (step !== -1) {
+      ctx.setFontSize(65);
+      const maxWidthText1 = 60, maxWidthText2 = 75, centerX1 = r - maxWidthText1 / 2, centerX2 = r - maxWidthText2 / 3;
+      ctx.setFillStyle('white');
+      ctx.fillText(('00' + (maxPointNum * 2 - step)).slice(-2), centerX1, r + 12, maxWidthText1);
+      ctx.setFontSize(12);
+      ctx.fillText('SECOND', centerX2, r + 30, maxWidthText2);
     }
     ctx.draw();
 
