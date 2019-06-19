@@ -19,7 +19,7 @@
         </view>
       </view>
       <view class="note-main">
-        <view class="note-num">{{item.hr}}<span>PBM</span></view>
+        <view class="note-num">{{item.hr}}<span>BPM</span></view>
         <image class="note-more" src="../../images/more.png" alt=""/>
       </view>
     </view>
