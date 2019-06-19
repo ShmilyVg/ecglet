@@ -8,5 +8,6 @@
 
 {
   "$schema": "https://raw.githubusercontent.com/qiu8310/minapp/master/schema/page.json",
-  "navigationBarTitleText": "反馈"
+  "navigationBarTitleText": "反馈",
+    "backgroundColor": "#f2f2f2"
 }

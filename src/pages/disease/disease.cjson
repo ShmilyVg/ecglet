@@ -11,5 +11,6 @@
   "usingComponents": {
     "i-cell": "../../../node_modules/iview-weapp/dist/cell/index",
     "i-panel": "../../../node_modules/iview-weapp/dist/panel/index",
-  }
+  },
+    "backgroundColor": "#f2f2f2"
 }
