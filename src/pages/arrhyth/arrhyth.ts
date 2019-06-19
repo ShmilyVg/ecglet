@@ -21,7 +21,6 @@ interface ArrhythData {
   maxCount: number,
   countTimer?: any,
   ecgPannel?: Component,
-  waveData?: ArrayBuffer,
   connected: boolean,
   completed: boolean,
   btCheckTimer?: any
@@ -48,7 +47,6 @@ export default class extends MyPage {
     maxCount: 15,
     countTimer: undefined,
     ecgPannel: undefined,
-    waveData: undefined,
     connected: false,
     completed: false,
     btCheckTimer: undefined,
@@ -65,6 +63,7 @@ export default class extends MyPage {
   //   )
   //   return hexArr.join('');
   // }
+  waveData: undefined;
 
   private async onDeviceConnect(connected: boolean, devId: string) {
     let that = this
@@ -105,7 +104,7 @@ export default class extends MyPage {
         that.hideLoading()
 
         // 每次重新连接，采集数据缓存清空一次
-        that.data.waveData = undefined
+        that.waveData = undefined
 
         // 计时开始
         if (!that.data.countTimer) {
@@ -372,8 +371,9 @@ export default class extends MyPage {
     // console.log('onFirstChannelChange')
     let that = this
 
-    let buffer = that.data.waveData ? that.data.waveData : new ArrayBuffer(0)
-    that.data.waveData = buffer.concat(data)
+    let buffer = that.waveData ? that.waveData : new ArrayBuffer(0)
+    // @ts-ignore
+    that.waveData = buffer.concat(data)
     // console.log('data: ' + that.ab2hex(that.data.waveData))
     let ecg: any = that.data.ecgPannel
     // ecg.drawWave(data)
@@ -521,15 +521,16 @@ export default class extends MyPage {
         console.log("fsp.removeSavedFile error -- %o", err)
       })
       console.log("fsp.removeSavedFile result -- %o", res)
-      if (!that.data.waveData) {
+      if (!that.waveData) {
         throw new Error("上传数据为空...")
       }
 
       console.log("开始创建上传数据临时文件...")
+      // @ts-ignore
       res = await fsp.writeFile({
         filePath: filePath,
         // encoding: "binary",
-        data: that.data.waveData
+        data: that.waveData
       })
       console.log("fsp.writeFile result -- %o", res)
 
