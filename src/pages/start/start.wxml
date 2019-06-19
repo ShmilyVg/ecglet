@@ -9,11 +9,12 @@
     </view>
     <view class="main">
         <image wx:if="{{userPic}}" class="main-pic" src="{{userPic}}"></image>
-        <image wx:else class="main-pic" src="../../images/start/user.png"></image>
+        <image wx:else class="main-pic" src="../../images/user.png"></image>
         <button class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" hover-class="none">
-            <image class="main-heart-bg" src="../../images/start/startbtnbg.png" alt=""/>
-            <view class="main-heart-btn">开始</view>
+            开始
+            <image class="startbtnbg" src="../../images/start/startbtnbg.png"></image>
         </button>
+
 
         <view class="main-hint">点击按钮进入测试</view>
     </view>

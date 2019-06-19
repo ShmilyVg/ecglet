@@ -51,6 +51,7 @@ page {
   padding-top: 50rpx;
   margin-top: -50rpx;
   border-radius: 30rpx;
+  width:91.6%;
 }
 
 .logo {
@@ -71,7 +72,7 @@ page {
 }
 
 .line{
-  width:690rpx;
+  width:100%;
   border: 1rpx solid #E8E8E8;
   margin: 2rpx 0;
 }
@@ -108,6 +109,7 @@ page {
   font-weight:400;
   line-height:37rpx;
 }
+
 .cell-blue{
   color:#3A93EF;
 }
@@ -115,6 +117,7 @@ page {
 .cell-red{
   color:rgba(239,58,89,1);
 }
+
 .cell-num {
   font-size:70rpx;
   font-weight:500;
@@ -126,6 +129,7 @@ page {
   font-weight:400;
   color:rgba(158,158,158,1);
   line-height:33rpx;
+  margin-top: -10rpx;
 }
 
 .cell-bottom-view{

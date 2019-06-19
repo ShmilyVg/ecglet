@@ -8,10 +8,10 @@
 <view class="container">
   <view class="main">
     <view class="main-header">
-      <image src="../../images/hipee.png" class="main-header-pic" alt=""/>
+      <image src="../../images/feedback/hipee.png" class="main-header-pic" alt=""/>
       <view class="main-header-name">hipee健康管家</view>
     </view>
-    <image class="code" src="../../images/code.png" alt=""/>
+    <image class="code" src="../../images/feedback/code.png" alt=""/>
     <view class="main-footer">
       <view class="main-footer-p">保存客服微信二维码到相册</view>
       <view class="main-footer-p">或搜索客服微信号：hipee_kf</view>

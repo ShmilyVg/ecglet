@@ -10,6 +10,7 @@ $inputContainerHeight: 45px;
 $inputContainerFontSize: 15px;
 $submitButtonHeight: 45px;
 $tipFontSize: 15px;
+
 page{
   background: #f2f2f2;
 }
@@ -32,7 +33,7 @@ page{
   width: 100%;
   height: 178rpx;
   background: #3a93ef;
-  position: fixed;
+  position: absolute;
   z-index: -2;
 }
 .bg-pic{
@@ -45,7 +46,7 @@ page{
   padding-top: 100rpx;
 }
 .note{
-  width: 685rpx;
+  width:91.6%;
   height: 125rpx;
   background: #fff;
   border-radius: 40rpx;

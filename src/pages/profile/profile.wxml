@@ -7,12 +7,13 @@
 
 
 <block wx:if="{{haveNum}}">
-    <view class="page flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
-        <image class="top-image" src="../../images/mine/jingcejilu_beijing.png"></image>
+    <view class="page flex-column">
+        <view class="top-image"></view>
         <view class="top-cell flex-row box-sizing-border-box" style="justify-content: space-between;padding: 0 56rpx 0 43rpx;">
             <view class="flex-row align-items-center">
                 <view class="avatar-view flex-row">
-                    <image src="{{userInfo.portraitUrl}}" class="avatar"></image>
+                    <image wx:if="{{userInfo.portraitUrl}}" src="{{userInfo.portraitUrl}}" class="avatar"></image>
+                    <image wx:else src="../../images/user.png" class="avatar"></image>
                 </view>
                 <view class="name">{{userInfo.nickName}}</view>
             </view>
