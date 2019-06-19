@@ -557,9 +557,8 @@ export default class extends MyPage {
           }
         });
         this.reset();
-        console.error('', res);
-      }).finally(() => {
         Toast.hiddenLoading();
+        console.error('', res);
       });
 
       // res = await APIs.default().uploadRequest({
