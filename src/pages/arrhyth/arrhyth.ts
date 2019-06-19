@@ -120,20 +120,27 @@ export default class extends MyPage {
     }
   }
 
+  isNetworkStatusChanged = false;
+  onNetworkStatusChanged(res: any) {
+    if (!res.isConnected) {
+      if (!this.isNetworkStatusChanged) {
+        this.isNetworkStatusChanged = true;
+        WXDialog.showDialog({
+          content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
+            wx.navigateBack({delta: 1});
+          }
+        });
+        this.reset();
+        this.preparePannelDark('');
+        this.showLoading();
+      }
+
+    }
+  }
+
   async onLoad(options: any) {
     // console.log(await wxp.getUserInfo())
     console.log('onLoad')
-    wx.onNetworkStatusChange((res)=> {
-      console.log('网络状态变更', res);
-      if (!res.isConnected) {
-        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
-            wx.navigateBack({delta: 1});
-          }});
-        that.reset();
-        that.preparePannelDark('');
-        that.showLoading();
-      }
-    });
     let that = this;
     that.setDataSmart({windowHeight: wxp.getSystemInfoSync().windowHeight});
 
@@ -343,7 +350,7 @@ export default class extends MyPage {
   }
   async onUnload() {
     console.log('onUnload...')
-
+    this.isNetworkStatusChanged = false;
     let that = this
     try {
       // await wxp.hideLoading()
