@@ -58,8 +58,9 @@ export default class extends MyPage {
                 })
             })
         } else {
-            console.log('还没注册');
-            if (wx.getStorageSync('phoneNumber')) {
+            const phoneNumber =wx.getStorageSync('phoneNumber');
+            console.log('还没注册', phoneNumber);
+            if (phoneNumber) {
                 console.log('有手机号');
                 that.setDataSmart({
                     haveNum: true,
