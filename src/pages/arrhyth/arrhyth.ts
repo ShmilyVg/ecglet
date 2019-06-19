@@ -86,6 +86,7 @@ export default class extends MyPage {
 
         if (!that.data.completed) {
           // 停止计时，复位
+          await wxp.showToast({title: '信号质量差，请重新测试', icon: 'none'});
           that.reset()
           that.preparePannelDark('');
           // await wxp.showLoading({
@@ -122,6 +123,17 @@ export default class extends MyPage {
   async onLoad(options: any) {
     // console.log(await wxp.getUserInfo())
     console.log('onLoad')
+    wx.onNetworkStatusChange((res)=> {
+      console.log('网络状态变更', res);
+      if (!res.isConnected) {
+        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+            wx.navigateBack({delta: 1});
+          }});
+        that.reset();
+        that.preparePannelDark('');
+        that.showLoading();
+      }
+    });
     let that = this;
     that.setDataSmart({windowHeight: wxp.getSystemInfoSync().windowHeight});
 
@@ -460,8 +472,9 @@ export default class extends MyPage {
   private async uploadData() {
     console.log("uploadData...")
     let that = this
-    Toast.showLoading('请稍后...');
+
     try {
+      await wxp.showToast({title: '处理中，请稍后', icon: 'none', duration: 10000});
       let dirPath = (wx as any).env.USER_DATA_PATH + "/cache/bs-upload"
       let fileName = "rawdata"
       let filePath = `${dirPath}/${fileName}`
@@ -518,20 +531,24 @@ export default class extends MyPage {
           getApp().globalData.tempGatherResult = data.result;
           that.app.$url.result.redirect({});
         }).catch((res: any) => {
-          WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+          WXDialog.showDialog({
+            content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
               wx.navigateBack({delta: 1});
-            }});
+            }
+          });
           console.error('上传解析过程中报错', res);
-        }).finally(()=>{
+        }).finally(() => {
           Toast.hiddenLoading();
         });
       }).catch((res: any) => {
-        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试',confirmEvent:()=>{
+        WXDialog.showDialog({
+          content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
             wx.navigateBack({delta: 1});
-          }});
+          }
+        });
         this.reset();
-        console.error('',res);
-      }).finally(()=>{
+        console.error('', res);
+      }).finally(() => {
         Toast.hiddenLoading();
       });
 
