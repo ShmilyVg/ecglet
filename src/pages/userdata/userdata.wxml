@@ -16,7 +16,7 @@
                 <view class="weui-label cell-title">姓名</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="8" bind:input="onNameChange"/>
+                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="13" bind:input="onNameChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
