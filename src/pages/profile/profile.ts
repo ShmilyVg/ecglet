@@ -69,6 +69,9 @@ export default class extends MyPage {
                     haveNum: true,
                 });
             } else {
+                that.setDataSmart({
+                    haveNum: false,
+                });
                 console.log('没手机号');
             }
         }
