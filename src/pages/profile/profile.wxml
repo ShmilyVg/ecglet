@@ -15,8 +15,8 @@
                 <image wx:else src="../../images/user.png" class="avatar"></image>
             </view>
 
-            <view>
-                <view wx:if="{{haveAuthorize}}"style="display: flex;flex-direction: column;margin-left: 50rpx">
+            <view style="margin-left: 50rpx">
+                <view wx:if="{{haveAuthorize}}"style="display: flex;flex-direction: column">
                     <view class="name">{{userInfo.nickName}}</view>
                     <view class="edit-info" bindtap="toEditInfo">编辑资料</view>
                 </view>
