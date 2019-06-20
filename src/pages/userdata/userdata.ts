@@ -7,6 +7,8 @@ import Protocol from "../../apis/network/protocol";
 // @ts-ignore
 import Toast from "../../base/heheda-common-view/toast";
 // @ts-ignore
+import WXDialog from "../../base/heheda-common-view/dialog";
+// @ts-ignore
 import UserInfo from '../../apis/network/userInfo.js';
 
 @pagify()
@@ -100,47 +102,41 @@ export default class extends MyPage {
             Toast.showText('手机号格式错误');
             return;
         }
-
-        let birthTime = that.data.birthDate || '';
-        console.log(`birth time: ${birthTime}`)
-        try {
-            let data = {
-                nickName: that.data.name,
-                phone: that.data.number,
-                sex: that.data.sexIndex,
-                birthday: birthTime,
-                height: that.data.height,
-                weight: that.data.weight,
-                portraitUrl: that.data.portraitUrl
-            }
-            console.log('保存信息：', data);
-            Protocol.accountUpdate(data).then((res: any) => {
-                return UserInfo.get();
-            }).then((res: any) => {
-                Toast.success('修改成功');
-                return UserInfo.set({...res.userInfo, ...data});
-            }).then(() => {
-                wx.navigateBack({delta: 1});
-            }).catch((res: any) => {
-                if (res.data.code == 2000) {
-                    console.log('手机号重复');
-                    wxp.showToast({
-                        title: '同一手机\n不能绑定两个账号',
-                        icon: 'none',
-                        duration: 2000
-                    })
-                } else {
-                    Toast.success('修改失败');
+        WXDialog.showDialog({title: '提示', content: '是否确定修改', showCancel: true,confirmEvent:()=>{
+                let birthTime = that.data.birthDate || '';
+                console.log(`birth time: ${birthTime}`)
+                try {
+                    let data = {
+                        nickName: that.data.name,
+                        phone: that.data.number,
+                        sex: that.data.sexIndex,
+                        birthday: birthTime,
+                        height: that.data.height,
+                        weight: that.data.weight,
+                        portraitUrl: that.data.portraitUrl
+                    }
+                    console.log('保存信息：', data);
+                    Protocol.accountUpdate(data).then((res: any) => {
+                        return UserInfo.get();
+                    }).then((res: any) => {
+                        Toast.success('修改成功');
+                        return UserInfo.set({...res.userInfo, ...data});
+                    }).then(() => {
+                        wx.navigateBack({delta: 1});
+                    }).catch((res: any) => {
+                        if (res.data.code == 2000) {
+                            console.log('手机号重复');
+                            Toast.showText('同一手机\n不能绑定两个账号')
+                        } else {
+                            Toast.success('修改失败');
+                        }
+                    });
+                } catch (err) {
+                    console.log("onSubmit error: %o", err)
+                    Toast.showText('提交失败')
                 }
-            });
-        } catch (err) {
-            console.log("onSubmit error: %o", err)
-            await wxp.showToast({
-                title: '提交失败',
-                icon: 'none',
-                duration: 2000
-            })
-        }
+            }});
+
     }
 
 
