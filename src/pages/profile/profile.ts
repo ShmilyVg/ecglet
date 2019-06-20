@@ -34,6 +34,10 @@ export default class extends MyPage {
         //
         //     });
         // }
+        // @ts-ignore
+        getApp().onLoginSuccess = () => {
+            this.setData({haveAuthorize: true});
+        };
         if (!!wxp.getStorageSync('isRegister')) {
             console.log('注册过了');
             let phoneNum = wx.getStorageSync('phoneNumber');

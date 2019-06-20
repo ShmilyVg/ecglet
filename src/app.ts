@@ -33,12 +33,14 @@ export default class extends MyApp {
       }
       // }
     });
-    Login.doLogin().then((data:any) => {
+    Login.doLogin().then((data: any) => {
       return UserInfo.get();
-    }).then(()=>{
-      wxp.setStorageSync('isRegister',true);
+    }).then((res: any) => {
+      console.log('app getUserInfo',res);
+      wxp.setStorageSync('phoneNumber', res.userInfo.phone || '');
+      wxp.setStorageSync('isRegister', true);
       this.onLoginSuccess && this.onLoginSuccess();
-    }).catch((res:any) => {
+    }).catch((res: any) => {
       if (res && res.data && res.data.code === 2) {
         this.needRegisterCallBack && this.needRegisterCallBack();
       }
