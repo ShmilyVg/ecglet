@@ -96,7 +96,7 @@ export default class extends MyPage {
                 }
             ).catch((res: any) => {
                 console.log(res);
-                setTimeout(Toast.warn, 0, '获取信息失败');
+                setTimeout(Toast.showText, 0, '获取信息失败');
             }).finally(() => {
                 Toast.hiddenLoading();
                 // HiNavigator.navigateToArrhyth();
