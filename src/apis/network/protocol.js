@@ -84,7 +84,7 @@ export default class Protocol {
             }).then(data => {
                 resolve(data.result.phoneNumber);
             }).catch(res => {
-                console.log('register failed:', res);
+                console.log('getPhoneNum failed:', res);
                 reject(res);
             })
         )
