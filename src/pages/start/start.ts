@@ -10,13 +10,14 @@ import HiNavigator from '../../components/navigator/hi-navigator.js'
 // @ts-ignore
 import {dealAuthUserInfo} from "../../utils/tools";
 // @ts-ignore
-import Toast from "../../base/heheda-common-view/toast";
+import WXDialog from "../../base/heheda-common-view/dialog";
 
 @pagify()
 export default class extends MyPage {
     data = {
         nameShow: '',
-        userPic: ''
+        userPic: '',
+        isConnected: true
     }
 
     onLoad(param: any): any {
@@ -39,66 +40,21 @@ export default class extends MyPage {
         })
     }
 
+    onNetworkStatusChanged(res:any) {
+        this.setData({isConnected: res.isConnected});
+    }
+    onNoNetworkConnected() {
+        console.log('onNoNetworkConnected', this.data.isConnected);
+        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+    }
     async onGotUserInfo(e: any) {
+        console.log('onGotUserInfo isConnected=', this.data.isConnected);
         dealAuthUserInfo(e).then((res: any) => {
             this.setData({userInfo: res.userInfo});
             HiNavigator.navigateToArrhyth();
         }).catch((res: any) => {
-            Toast.showText('授权用户信息失败，请重试');
             console.log(res);
         });
-        // Protocol.getNetworkType().then((res: any) => {
-        //     if (res.networkType === 'none' || res.networkType === 'unknown') {
-        //         WXDialog.showDialog({content: '请检查网络'});
-        //         return;
-        //     }
-        //     const {
-        //         detail: {
-        //             userInfo,
-        //             encryptedData,
-        //             iv
-        //         }
-        //     } = e;
-        //     console.log(e);
-        //     if (!!userInfo) {
-        //         if (!!wxp.getStorageSync('isRegister')) {
-        //             HiNavigator.navigateToArrhyth();
-        //         } else {
-        //             Toast.showLoading();
-        //             Login.doRegister({
-        //                 encryptedData, iv
-        //             }).then(() => UserInfo.get())
-        //                 .then((res: any) => {
-        //                         console.log(res);
-        //                         wxp.setStorageSync('isRegister', this.data.isRegister = true);
-        //                         !this.setData({userInfo: res.userInfo});
-        //                     }
-        //                 ).catch((res: any) => {
-        //                 console.log(res);
-        //                 setTimeout(Toast.warn, 0, '获取信息失败');
-        //             }).finally(() => {
-        //                 Toast.hiddenLoading();
-        //                 HiNavigator.navigateToArrhyth();
-        //             });
-        //         }
-        //
-        //     } else {
-        //         WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
-        //     }
-        // });
-
-        /*wx.getSetting({
-            success (res){
-                if (res.authSetting['scope.userInfo']) {
-                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-                    wx.getUserInfo({
-                        success: function(res) {
-                            console.log(res.userInfo)
-                        }
-                    })
-                }
-            }
-        })*/
     }
 
 
