@@ -53,12 +53,13 @@ export default class extends MyPage {
                     haveAuthorize: true
                 });
             }
-            UserInfo.get().then((res: any) => {
-                console.log('res:', res);
-                that.setDataSmart({
-                    userInfo: res.userInfo
-                })
-            })
+            // UserInfo.get().then((res: any) => {
+            //     console.log('res:', res);
+            //     that.setDataSmart({
+            //         userInfo: res.userInfo,
+            //         haveAuthorize: true
+            //     })
+            // })
         } else {
             const phoneNumber =wx.getStorageSync('phoneNumber');
             console.log('还没注册', phoneNumber);
@@ -89,7 +90,8 @@ export default class extends MyPage {
         this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res: any) => {
             this.setData({
-                userInfo: res.userInfo
+                userInfo: res.userInfo,
+                haveAuthorize: true
             })
         })
     }
@@ -107,7 +109,7 @@ export default class extends MyPage {
             }).then((res: any) => {
                     that.setDataSmart({
                         haveNum: true
-                    })
+                    });
                 }
             ).catch((res: any) => {
                 console.log(res);
