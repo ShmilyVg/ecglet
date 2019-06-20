@@ -114,7 +114,7 @@ export default class extends MyPage {
             })
         }).catch((res: any) => {
             console.log(res);
-            Toast.showText('授权用户信息失败，请重试');
+            // Toast.showText('授权用户信息失败，请重试');
         });
     }
 
