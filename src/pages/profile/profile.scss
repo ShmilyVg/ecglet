@@ -29,20 +29,21 @@
 }
 
 .name{
-  margin-left: 33rpx;
-  white-space:nowrap;
+  white-space: nowrap;
+  color: #666666;
+  font-size: 36rpx;
 }
 
-.edit-info{
-  width:195rpx;
-  height:60rpx;
-  background:rgba(57,147,238,1);
-  border-radius:30rpx;
-  font-size:24rpx;
+.edit-info {
+  width: 175rpx;
+  height: 60rpx;
+  background: rgba(57,147,238,1);
+  border-radius: 30rpx;
+  font-size: 24rpx;
   color: #ffffff;
   line-height: 60rpx;
   text-align: center;
-  margin-left: 44rpx;
+  margin-top: 10rpx;
 }
 
 .cell {
