@@ -38,10 +38,12 @@ export default class Toast {
     }
 
     static showText(title) {
-        wx.showToast({
-            title: title,
-            icon: 'none',
-            duration: 2000
-        })
+        setTimeout(() => {
+            wx.showToast({
+                title: title,
+                icon: 'none',
+                duration: 2000
+            })
+        });
     }
 }

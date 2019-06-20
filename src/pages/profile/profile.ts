@@ -1,12 +1,10 @@
 // 此文件是由模板文件 ".dtpl/page/$rawModuleName.ts.dtpl" 生成的，你可以自行修改模板
 
-import {pagify, MyPage, wxp} from 'base/';
+import {MyPage, pagify, wxp} from 'base/';
 // @ts-ignore
-import Login from '../../apis/network/login.js';
 // @ts-ignore
 import UserInfo from '../../apis/network/userInfo.js';
 // @ts-ignore
-import HiNavigator from '../../components/navigator/hi-navigator.js'
 // @ts-ignore
 import Toast from '../../base/heheda-common-view/toast.js';
 // @ts-ignore
