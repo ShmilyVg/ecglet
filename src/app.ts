@@ -38,8 +38,10 @@ export default class extends MyApp {
       return UserInfo.get();
     }).then((res: any) => {
       console.log('app getUserInfo',res);
-      wxp.setStorageSync('phoneNumber', res.userInfo.phone || '');
       wxp.setStorageSync('isRegister', true);
+      if (!wxp.getStorageSync('phoneNumber')) {
+        wxp.setStorageSync('phoneNumber', res.userInfo.phone || '');
+      }
       this.onLoginSuccess && this.onLoginSuccess();
     }).catch((res: any) => {
       if (res && res.data && res.data.code === 2) {

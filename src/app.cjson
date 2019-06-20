@@ -50,5 +50,9 @@
         "selectedIconPath": "images/profile_select.png"
       }
     ]
-  }
+  },
+  "networkTimeout": {
+       "request": 5000,
+       "downloadFile": 30000
+     }
 }
