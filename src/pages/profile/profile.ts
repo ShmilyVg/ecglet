@@ -34,7 +34,6 @@ export default class extends MyPage {
         //
         //     });
         // }
-
         if (!!wxp.getStorageSync('isRegister')) {
             console.log('注册过了');
             let phoneNum = wx.getStorageSync('phoneNumber');
