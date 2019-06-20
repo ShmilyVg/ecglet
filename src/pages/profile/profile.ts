@@ -19,7 +19,7 @@ import {dealAuthUserInfo} from "../../utils/tools";
 export default class extends MyPage {
     data = {
         phone: '4009210610',
-        haveNum: false,
+        haveNum: true,
         haveAuthorize: false,
         isConnected: true
     };
