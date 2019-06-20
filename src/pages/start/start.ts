@@ -9,6 +9,7 @@ import HiNavigator from '../../components/navigator/hi-navigator.js'
 // @ts-ignore
 // @ts-ignore
 import {dealAuthUserInfo} from "../../utils/tools";
+// @ts-ignore
 import Toast from "../../base/heheda-common-view/toast";
 
 @pagify()
