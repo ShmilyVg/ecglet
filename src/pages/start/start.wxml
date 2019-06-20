@@ -7,15 +7,13 @@
             <view class="header-p2">{{nameShow}}</view>
         </view>
     </view>
-    <view class="main">
+    <view class="flex-column align-items-center justify-center main">
         <image wx:if="{{userPic}}" class="main-pic" src="{{userPic}}"></image>
         <image wx:else class="main-pic" src="../../images/user.png"></image>
         <button class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" hover-class="none">
             开始
             <image class="startbtnbg" src="../../images/start/startbtnbg.png"></image>
         </button>
-
-
         <view class="main-hint">点击按钮进入测试</view>
     </view>
 </view>
