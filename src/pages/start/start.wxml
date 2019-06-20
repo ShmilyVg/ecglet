@@ -10,11 +10,15 @@
     <view class="flex-column align-items-center justify-center main">
         <image wx:if="{{userPic}}" class="main-pic" src="{{userPic}}"></image>
         <image wx:else class="main-pic" src="../../images/user.png"></image>
-        <button wx:if="{{!isConnected}}" class="main-heart" hover-class="none" bindtap="onNoNetworkConnected">
+        <button wx:if="{{haveAuthorize}}" class="main-heart" bindtap="toTestPage" hover-class="none">
             开始
             <image class="startbtnbg" src="../../images/start/startbtnbg.png"></image>
         </button>
-        <button wx:else class="main-heart" open-type="getUserInfo" bindgetuserinfo="{{isConnected?'onGotUserInfo':''}}" hover-class="none" bindtap="{{isConnected?'':'onStartTest'}}">
+        <button wx:elif="{{isConnected}}" class="main-heart" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" hover-class="none">
+            开始
+            <image class="startbtnbg" src="../../images/start/startbtnbg.png"></image>
+        </button>
+        <button wx:else class="main-heart" hover-class="none" bindtap="onNoNetworkConnected">
             开始
             <image class="startbtnbg" src="../../images/start/startbtnbg.png"></image>
         </button>

@@ -14,7 +14,9 @@ import UserInfo from "./apis/network/userInfo.js";
 @appify({pages: require('./app.cjson?pages'), tabBarList: require('./app.cjson?tabBar.list')})
 export default class extends MyApp {
   needRegisterCallBack = function () {};
-    globalData = {userInfo: {}, tempGatherResult: {}};
+    globalData = {userInfo: {}, tempGatherResult: {}, isConnected: true};
+  onLoginSuccess: any;
+
   async onLaunch() {
     // 检查是否小程序登录用户
     // 如果有登录记录，检查登录时效
@@ -22,7 +24,7 @@ export default class extends MyApp {
     console.log('qqq')
     wx.onNetworkStatusChange((res)=> {
       console.log('网络状态变更', res);
-      // if (!res.isConnected) {
+      this.globalData.isConnected = res.isConnected;
       const currentPages = getCurrentPages();
       if (currentPages && currentPages.length) {
         const pageListener = currentPages[currentPages.length - 1].onNetworkStatusChanged;
@@ -35,6 +37,7 @@ export default class extends MyApp {
       return UserInfo.get();
     }).then(()=>{
       wxp.setStorageSync('isRegister',true);
+      this.onLoginSuccess && this.onLoginSuccess();
     }).catch((res:any) => {
       if (res && res.data && res.data.code === 2) {
         this.needRegisterCallBack && this.needRegisterCallBack();

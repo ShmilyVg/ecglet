@@ -21,16 +21,15 @@ export default class extends MyPage {
     }
 
     onLoad(param: any): any {
-        UserInfo.get().then((res:any)=>{
-            // @ts-ignore
-            this.setData({
-                nameShow: res.userInfo.nickName,
-                userPic: res.userInfo.portraitUrl
-            })
-        })
+        // @ts-ignore
+        getApp().onLoginSuccess = ()=>{
+            this.setData({haveAuthorize: true});
+        }
     }
 
     onShow(){
+        // @ts-ignore
+        this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res:any)=>{
             // @ts-ignore
             this.setData({
@@ -40,6 +39,9 @@ export default class extends MyPage {
         })
     }
 
+    toTestPage() {
+        HiNavigator.navigateToArrhyth();
+    }
     onNetworkStatusChanged(res:any) {
         this.setData({isConnected: res.isConnected});
     }

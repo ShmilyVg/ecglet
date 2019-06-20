@@ -20,7 +20,8 @@ export default class extends MyPage {
     data = {
         phone: '4009210610',
         haveNum: false,
-        haveAuthorize: false
+        haveAuthorize: false,
+        isConnected: true
     };
     isRegister = false;
 
@@ -68,8 +69,16 @@ export default class extends MyPage {
             }
         }
     }
-
+    onNetworkStatusChanged(res:any) {
+        this.setData({isConnected: res.isConnected});
+    }
+    onNoNetworkConnected() {
+        console.log('onNoNetworkConnected', this.data.isConnected);
+        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+    }
     onShow() {
+        // @ts-ignore
+        this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res: any) => {
             this.setData({
                 userInfo: res.userInfo

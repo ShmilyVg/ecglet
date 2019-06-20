@@ -18,7 +18,8 @@
 
             <view>
                 <view wx:if="{{haveAuthorize}}" class="edit-info" bindtap="toEditInfo">编辑资料</view>
-                <button wx:else class="edit-info" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
+                <button wx:elif="{{isConnected}}" class="edit-info" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
+                <button wx:else class="edit-info" bindtap="onNoNetworkConnected">授权</button>
             </view>
 
         </view>
@@ -57,5 +58,6 @@
     <image style="width: 422rpx;height: 370rpx;margin-top: 184rpx" src="../../images/mine/shouquangdenglu.png"></image>
     <view style="font-size: 50rpx;color: #333333;">微信授权</view>
     <text style="text-align: center;font-size: 26rpx;color: #999999">HiPee心电仪需要获取您的手机号登录注册\n登录后可以使用更多专业服务</text>
-    <button class="btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权</button>
+    <button wx:if="{{isConnected}}" class="btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权</button>
+    <button wx:else class="btn" bindtap="onNoNetworkConnected">授权</button>
 </view>
