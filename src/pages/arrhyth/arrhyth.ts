@@ -285,6 +285,23 @@ export default class extends MyPage {
           }
         }
       })
+      let that = this
+      try {
+        // await wxp.showLoading({
+        //   title: "等待设备接通...",
+        //   mask: true
+        // })
+        that.showLoading()
+
+        that.reset()
+
+        that.data.completed = false
+
+        await that.startBluetooth()
+      } catch (error) {
+        this.isStartBLEDevices = false;
+        console.log('蓝牙错误<' + error.title + '>：' + error.message)
+      }
 
     } catch (error) {
       console.log('蓝牙错误: %o', error)
@@ -293,8 +310,10 @@ export default class extends MyPage {
 
   async onShow() {
     console.log('onShow...')
-
-    let that = this
+    if (this.isStartBLEDevices) {
+      return;
+    }
+    let that = this;
     try {
       // await wxp.showLoading({
       //   title: "等待设备接通...",
@@ -321,6 +340,7 @@ export default class extends MyPage {
 
     that.reset()
     that.data.completed = true
+    this.isStartBLEDevices = false;
   }
 
   async onReady() {
@@ -357,7 +377,7 @@ export default class extends MyPage {
     try {
       // await wxp.hideLoading()
       that.hideLoading()
-
+      that.isStartBLEDevices = false;
       that.reset()
 
       let res = await wxp.closeBluetoothAdapter()
@@ -469,14 +489,17 @@ export default class extends MyPage {
     // that.data.completed = false
   }
 
+  isStartBLEDevices = true;
   private async startBluetooth() {
     try {
+      this.isStartBLEDevices = true;
       let discoverRes = await wxp.startBluetoothDevicesDiscovery({
         services: ['FFB1'],
         allowDuplicatesKey: true
       })
       console.log(`wxp.startBluetoothDevicesDiscovery result: ${discoverRes.errMsg}`)
     } catch (error) {
+      this.isStartBLEDevices = false
       console.log("startBluetooth error: %o", error)
     }
 
