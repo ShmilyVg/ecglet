@@ -17,7 +17,7 @@
 
             <view>
                 <view wx:if="{{haveAuthorize}}"style="display: flex;flex-direction: column;margin-left: 50rpx">
-                    <view class="name">一二三四五六七八</view>
+                    <view class="name">{{userInfo.nickName}}</view>
                     <view class="edit-info" bindtap="toEditInfo">编辑资料</view>
                 </view>
                 <button wx:else class="edit-info" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
