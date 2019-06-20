@@ -9,7 +9,7 @@
     "newFeature": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.4.2",
+  "libVersion": "2.7.1",
   "appid": "wx78cead23b1ef8b6b",
   "projectname": "ecglet",
   "isGameTourist": false,
