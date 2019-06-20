@@ -5,12 +5,11 @@ import UserInfo from '../../apis/network/userInfo.js';
 // @ts-ignore
 import HiNavigator from '../../components/navigator/hi-navigator.js'
 // @ts-ignore
-// @ts-ignore
-// @ts-ignore
-// @ts-ignore
 import {dealAuthUserInfo} from "../../utils/tools";
 // @ts-ignore
 import WXDialog from "../../base/heheda-common-view/dialog";
+// @ts-ignore
+import Protocol from "../../apis/network/protocol";
 
 @pagify()
 export default class extends MyPage {
@@ -28,6 +27,11 @@ export default class extends MyPage {
     }
 
     onShow(){
+        Protocol.checkHaveNetwork().then(() => {
+            this.setData({isConnected: true});
+        }).catch(() => {
+            this.setData({isConnected: false});
+        });
         // @ts-ignore
         this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res:any)=>{

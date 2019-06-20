@@ -80,6 +80,11 @@ export default class extends MyPage {
         WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
     }
     onShow() {
+        Protocol.checkHaveNetwork().then(() => {
+            this.setData({isConnected: true});
+        }).catch(() => {
+            this.setData({isConnected: false});
+        });
         // @ts-ignore
         this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res: any) => {

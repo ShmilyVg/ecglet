@@ -33,6 +33,7 @@ export default class extends MyApp {
       }
       // }
     });
+
     Login.doLogin().then((data: any) => {
       return UserInfo.get();
     }).then((res: any) => {
