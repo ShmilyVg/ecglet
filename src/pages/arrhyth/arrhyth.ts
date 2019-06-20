@@ -510,7 +510,7 @@ export default class extends MyPage {
     let that = this
 
     try {
-      await wxp.showToast({title: '处理中，请稍后', icon: 'none', duration: 10000});
+      await wxp.showToast({title: '处理中，请稍后', icon: 'none', duration: 35000});
       let dirPath = (wx as any).env.USER_DATA_PATH + "/cache/bs-upload"
       let fileName = "rawdata"
       let filePath = `${dirPath}/${fileName}`
