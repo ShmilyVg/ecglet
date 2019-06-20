@@ -44,7 +44,11 @@ export default class extends MyPage {
     }
 
     toTestPage() {
-        HiNavigator.navigateToArrhyth();
+        Protocol.checkHaveNetwork().then(()=>{
+            HiNavigator.navigateToArrhyth();
+        }).catch(()=>{
+            WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
+        })
     }
     onNetworkStatusChanged(res:any) {
         this.setData({isConnected: res.isConnected});
