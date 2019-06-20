@@ -9,6 +9,7 @@ import HiNavigator from '../../components/navigator/hi-navigator.js'
 // @ts-ignore
 // @ts-ignore
 import {dealAuthUserInfo} from "../../utils/tools";
+import Toast from "../../base/heheda-common-view/toast";
 
 @pagify()
 export default class extends MyPage {
@@ -42,6 +43,7 @@ export default class extends MyPage {
             this.setData({userInfo: res.userInfo});
             HiNavigator.navigateToArrhyth();
         }).catch((res: any) => {
+            Toast.showText('授权用户信息失败，请重试');
             console.log(res);
         });
         // Protocol.getNetworkType().then((res: any) => {

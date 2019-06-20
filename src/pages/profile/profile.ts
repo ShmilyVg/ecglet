@@ -96,7 +96,7 @@ export default class extends MyPage {
                 }
             ).catch((res: any) => {
                 console.log(res);
-                setTimeout(Toast.showText, 0, '获取信息失败');
+                Toast.showText('授权手机号失败，请重试');
             }).finally(() => {
                 Toast.hiddenLoading();
                 // HiNavigator.navigateToArrhyth();
@@ -114,6 +114,7 @@ export default class extends MyPage {
             })
         }).catch((res: any) => {
             console.log(res);
+            Toast.showText('授权用户信息失败，请重试');
         });
     }
 
