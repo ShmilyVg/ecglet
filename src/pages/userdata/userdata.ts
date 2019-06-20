@@ -102,7 +102,7 @@ export default class extends MyPage {
             Toast.showText('手机号格式错误');
             return;
         }
-        WXDialog.showDialog({title: '提示', content: '是否确定修改', showCancel: true,confirmEvent:()=>{
+        WXDialog.showDialog({title: '提示', content: '确认修改您的信息吗？', showCancel: true,confirmEvent:()=>{
                 let birthTime = that.data.birthDate || '';
                 console.log(`birth time: ${birthTime}`)
                 try {
