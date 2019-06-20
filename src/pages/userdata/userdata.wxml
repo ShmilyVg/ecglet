@@ -5,7 +5,7 @@
   1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
 -->
 
-<view class="flex-column" xmlns:wx="http://www.w3.org/1999/xhtml">
+<view class="flex-column" style="margin-bottom: 50rpx;">
     <view class="top-image"></view>
     <view class="avatar-view flex-row" bindtap="chooseImage">
         <image src="{{portraitUrl}}" class="avatar"></image>
