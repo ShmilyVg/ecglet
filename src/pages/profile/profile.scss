@@ -32,6 +32,10 @@
   white-space: nowrap;
   color: #666666;
   font-size: 36rpx;
+  width: 345rpx;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  overflow: hidden;
 }
 
 .edit-info {
