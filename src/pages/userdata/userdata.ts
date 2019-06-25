@@ -128,7 +128,7 @@ export default class extends MyPage {
                             console.log('手机号重复');
                             Toast.showText('同一手机\n不能绑定两个账号')
                         } else {
-                            Toast.success('修改失败');
+                            Toast.showText('修改失败');
                         }
                     });
                 } catch (err) {
