@@ -23,7 +23,7 @@
       <cover-view class="remind-text-small" style="margin-bottom: 330rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
       <cover-view class="flex-row align-items-center">
         <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
-        <cover-view >绿灯亮起：表示当前处于采集状态</cover-view>
+        <cover-view >绿灯亮起/蓝灯闪烁：表示当前处于采集状态</cover-view>
       </cover-view>
       <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
         <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
