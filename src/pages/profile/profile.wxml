@@ -8,23 +8,26 @@
 
 <block wx:if="{{haveNum}}">
     <view class="page flex-column">
-        <view class="top-image"></view>
-        <view class="top-cell flex-row box-sizing-border-box" style="padding: 0 56rpx 0 43rpx;">
-            <view class="flex-row align-items-center">
-                <image wx:if="{{userInfo.portraitUrl}}" src="{{userInfo.portraitUrl}}" class="avatar"></image>
-                <image wx:else src="../../images/user.png" class="avatar"></image>
-            </view>
-
-            <view style="margin-left: 50rpx">
-                <view wx:if="{{haveAuthorize}}"style="display: flex;flex-direction: column">
-                    <view class="name">{{userInfo.nickName}}</view>
-                    <view class="edit-info" bindtap="toEditInfo">编辑资料</view>
+        <view class="top-image">
+            <view class="flex-row" style="width: 100%;justify-content: space-between">
+                <view class="flex-row align-items-center" style="margin-top: 48rpx;margin-left: 40rpx">
+                    <image wx:if="{{userInfo.portraitUrl}}" src="{{userInfo.portraitUrl}}" class="avatar"></image>
+                    <image wx:else src="../../images/user.png" class="avatar"></image>
                 </view>
-                <button wx:elif="{{isConnected}}" class="edit-info" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
-                <button wx:else class="edit-info" bindtap="onNoNetworkConnected">授权</button>
+                <view class="box-sizing-border-box shouquan">
+                    <view wx:if="{{haveAuthorize}}" style="display: flex;flex-direction: column">
+                        <view class="edit-info" bindtap="toEditInfo">编辑资料</view>
+                    </view>
+                    <button wx:elif="{{isConnected}}" class="edit-info" open-type="getUserInfo"
+                            bindgetuserinfo="onGotUserInfo">授权
+                    </button>
+                    <button wx:else class="edit-info" bindtap="onNoNetworkConnected">授权</button>
+                </view>
             </view>
-
+            <view class="name">{{userInfo.nickName}}</view>
         </view>
+
+        <view style="margin-top: -100rpx"></view>
         <view class="table">
             <button wx:if="{{isConnected}}"  class="flex-row cell space-between" open-type="getUserInfo" bindgetuserinfo="onGotUserInfoAndToHistory" hover-class="none">
                 <view class="flex-row align-items-center">
