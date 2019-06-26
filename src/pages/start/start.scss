@@ -22,89 +22,50 @@ button::after{
 page{
   background: #fff;
 }
-.header{
-  width: 100%;
-  height: 892rpx;
-  background: #3993EE;
-  position: absolute;
-  left: 0;
-  top: 0;
+.user-head{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
 }
-.heart-bg{
-  width: 100%;
-  height: 892rpx;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 0;
-}
-.heart-bg image{
-  width: 100%;
-}
-.heart-box{
-  width: 100%;
-  height: 892rpx;
-  position: absolute;
-  left: 0;
-  top: 70rpx;
-  z-index: 1;
-}
-.header-p1{
-  color: #fff;
-  font-size: 48rpx;
-  text-align: center;
-}
-.header-p2{
-  color: #fff;
-  font-size: 36rpx;
-  text-align: center;
-}
-.main{
-  width: 100%;
-  height: 700rpx;
-  background: #fff;
-  border-radius: 80rpx 80rpx 0 0rpx;
-  position: relative;
-  top: 334rpx;
-  left: 0;
-  z-index: 5;
-}
-.main-pic{
-  width: 158rpx;
-  height: 158rpx;
-  position: absolute;
-  top: -98rpx;
-  left: 50%;
-  margin-left: -98rpx;
-  border-radius: 98rpx;
+
+.user-name{
+  width:288rpx;
+  font-size:32rpx;
+  font-weight:400;
+  color:rgba(91,91,91,1);
+  white-space: nowrap;
   overflow: hidden;
-  border: 20rpx solid #D0E8FF;
+  margin-left: 30rpx;
+  text-overflow: ellipsis;
 }
-.main-heart{
-  width: 388rpx;
-  height: 388rpx;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 36rpx;
-  line-height:18px;
+
+.title{
+  font-size:50rpx;
+  font-weight:400;
+  color:rgba(0,0,0,1);
 }
-.startbtnbg{
-  width: 388rpx;
-  height: 388rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
+
+.description{
+  font-size:30rpx;
+  font-weight:400;
+  color:rgba(159,159,159,1);
+  margin-bottom: 50rpx;
 }
-.main-hint{
-  width: 100%;
-  color: #A7A7A7;
-  font-size: 30rpx;
-  position: absolute;
-  left: 0;
-  top: 592rpx;
-  text-align: center;
+
+.item-title{
+  font-size:34rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+}
+
+.start-btn{
+  background:rgba(58,147,239,1);
+  box-shadow:-10rpx 10rpx 13rpx 0px rgba(58,147,239,0.3);
+  border-radius:40rpx 0px 40rpx 40rpx;
+}
+
+.start-btn-02{
+  background:rgba(58,147,239,1);
+  box-shadow:-10rpx 10rpx 13rpx 0px rgba(58,147,239,0.3);
+  border-radius:40rpx 0px 40rpx 40rpx;
 }

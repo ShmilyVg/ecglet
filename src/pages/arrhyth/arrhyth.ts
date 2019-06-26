@@ -29,20 +29,22 @@ interface ArrhythData {
   showLoading: boolean,
   canvasWidth: number,
   canvasHeight: number;
+  testType: number;
 }
 @pagify()
 export default class extends MyPage {
   data: ArrhythData = {
-    bleStatus:'',
+    bleStatus: '',
     canvasHeight: 0,
     canvasWidth: 0,
-    windowHeight:0,
+    windowHeight: 0,
     logs: [],
     deviceList: [],
     lastDeviceId: '',
     connectingDeviceId: '',
     progressCircle: undefined,
-    txt: '30',
+    txt: '',
+    testType: 0,
     count: 0,
     maxCount: 15,
     countTimer: undefined,
@@ -53,7 +55,7 @@ export default class extends MyPage {
     showToast: false,
     toastMsg: undefined,
     showLoading: true
-  }
+  };
   // ArrayBuffer转16进度字符串示例
   // private ab2hex(buffer: ArrayBuffer) {
   // var hexArr = Array.prototype.map.call(
@@ -139,13 +141,25 @@ export default class extends MyPage {
     }
   }
 
+    getOriginTxt() {
+        return this.data.testType === 3 ? '180' : '30';
+    }
+
   async onLoad(options: any) {
     // console.log(await wxp.getUserInfo())
-    console.log('onLoad')
+    console.log('onLoad', options);
     this.isNetworkNotConnected = false;
 
     let that = this;
-    that.setDataSmart({windowHeight: wxp.getSystemInfoSync().windowHeight});
+      that.setDataSmart({
+              testType: parseInt(options.type) || 0,
+              windowHeight: wxp.getSystemInfoSync().windowHeight
+          }
+      );
+      that.setDataSmart({
+              txt: this.getOriginTxt(),
+          }
+      );
 
     try {
       // 设置设备发现监听回调
@@ -478,7 +492,7 @@ export default class extends MyPage {
       let circle: any = that.data.progressCircle
       circle.drawCircle('circle_draw1', 100, -1);
       that.preparePannelDark('');
-      that.setDataSmart({txt: "30"})
+        that.setDataSmart({txt: this.getOriginTxt()});
     }
 
     if (that.data.ecgPannel) {

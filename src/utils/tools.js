@@ -10,7 +10,7 @@ export function createDateAndTime(timeStamp) {
     let day = date.getDate();
     let hour = date.getHours();
     let minute = date.getMinutes();
-    let dateT = date.getFullYear() + '年' + (month < 10 ? ('0' + month) : month) + '月' + (day < 10 ? ('0' + day) : day) + '日';
+    let dateT = date.getFullYear() + '/' + (month < 10 ? ('0' + month) : month) + '/' + (day < 10 ? ('0' + day) : day) + '';
     let time = (hour < 10 ? ('0' + hour) : hour) + ':' + (minute < 10 ? ('0' + minute) : minute);
     return {date: dateT, time: time, day: day, month: month};
 }
