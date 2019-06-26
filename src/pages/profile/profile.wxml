@@ -31,7 +31,7 @@
         <view class="table">
             <button wx:if="{{isConnected}}"  class="flex-row cell space-between" open-type="getUserInfo" bindgetuserinfo="onGotUserInfoAndToHistory" hover-class="none">
                 <view class="flex-row align-items-center">
-                    <image class="icon" src="../../images/mine/jingcejilu.png"></image>
+                    <image class="icon" src="../../images/mine/icon1.png"></image>
                     <view class="title">成员管理</view>
                 </view>
 
@@ -39,7 +39,7 @@
             </button>
             <button wx:else class="flex-row cell space-between" bindtap="onNoNetworkConnected" hover-class="none">
                 <view class="flex-row align-items-center">
-                    <image class="icon" src="../../images/mine/jingcejilu.png"></image>
+                    <image class="icon" src="../../images/mine/icon1.png"></image>
                     <view class="title">成员管理</view>
                 </view>
 
@@ -47,7 +47,7 @@
             </button>
             <view class="flex-row cell space-between" bindtap="clickCell2">
                 <view class="flex-row align-items-center">
-                    <image class="icon" src="../../images/mine/xinzhangjibingjieshou.png"></image>
+                    <image class="icon" src="../../images/mine/icon2.png"></image>
                     <view class="title">心脏疾病介绍</view>
                 </view>
 
@@ -57,7 +57,7 @@
         <view class="table">
             <view class="flex-row cell space-between" bindtap="clickCell3">
                 <view class="flex-row align-items-center">
-                    <image class="icon" src="../../images/mine/fangkui.png"></image>
+                    <image class="icon" src="../../images/mine/icon3.png"></image>
                     <view class="title">反馈</view>
                 </view>
 

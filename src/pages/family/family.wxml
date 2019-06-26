@@ -14,8 +14,8 @@
         <view class="avatar" data-member-index="{{index}}"></view>
         <view class="name" data-member-index="{{index}}">这里是名字{{index}}</view>
     </view>
-    <view class="choose" data-member-index="{{index}}"
-          style="background-color: {{memberIndex==index?'black':'white'}}"></view>
+    <view wx:if="{{memberIndex==index}}" class="choose" style="background-color: green" data-member-index="{{index}}"></view>
+    <view wx:else class="choose" data-member-index="{{index}}"></view>
 </view>
 <view class="add-memeber-view">
     <view class="add-member" bindtap="addMember">＋添加成员</view>
