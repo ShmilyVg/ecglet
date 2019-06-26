@@ -59,13 +59,40 @@ page{
 }
 
 .start-btn{
+  width: 300rpx;
   background:rgba(58,147,239,1);
   box-shadow:-10rpx 10rpx 13rpx 0px rgba(58,147,239,0.3);
   border-radius:40rpx 0px 40rpx 40rpx;
+  padding: 45rpx 56rpx 45rpx 40rpx;
+  margin: 0;
 }
 
 .start-btn-02{
+  width: 300rpx;
   background:rgba(58,147,239,1);
   box-shadow:-10rpx 10rpx 13rpx 0px rgba(58,147,239,0.3);
   border-radius:40rpx 0px 40rpx 40rpx;
+  padding: 45rpx 56rpx 45rpx 40rpx;
+  margin: 0;
+}
+.start-icon{
+  width: 58rpx;
+  height: 50rpx;
+}
+.start-arrow-icon{
+  width: 44rpx;
+  height: 35rpx;
+}
+
+.icon-margin-top{
+  margin-top: 117rpx;
+}
+
+.line-little{
+  width:70rpx;
+  height:6rpx;
+  background:rgba(231,231,231,1);
+  border-radius:3rpx;
+  margin-top: 12rpx;
+  margin-bottom: 20rpx;
 }

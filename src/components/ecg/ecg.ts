@@ -266,6 +266,7 @@ export default class extends MyComponent {
       ogn = gain
 
       if (px > that.data.width) {
+        console.log('已经越界', buffer);
         ctx.closePath()
         ctx.clearRect(0, 0, that.data.width + 20, that.data.height)
         px = opx = -speed
