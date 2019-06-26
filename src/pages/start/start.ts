@@ -64,7 +64,7 @@ export default class extends MyPage {
         WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
     }
     async onGotUserInfoNormalTest(e: any) {
-        console.log('onGotUserInfo isConnected=', this.data.isConnected);
+        console.log('onGotUserInfoNormalTest isConnected=', this.data.isConnected);
         dealAuthUserInfo(e).then((res: any) => {
             this.setData({userInfo: res.userInfo});
             HiNavigator.navigateToArrhyth();
@@ -73,7 +73,7 @@ export default class extends MyPage {
         });
     }
     async onGotUserInfo02Test(e: any) {
-        console.log('onGotUserInfo isConnected=', this.data.isConnected);
+        console.log('onGotUserInfo02Test isConnected=', this.data.isConnected);
         dealAuthUserInfo(e).then((res: any) => {
             this.setData({userInfo: res.userInfo});
             HiNavigator.navigateToArrhyth({type: 3});

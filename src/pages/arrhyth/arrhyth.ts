@@ -151,13 +151,14 @@ export default class extends MyPage {
     this.isNetworkNotConnected = false;
 
     let that = this;
-      that.setDataSmart({
-              testType: parseInt(options.type) || 0,
-              windowHeight: wxp.getSystemInfoSync().windowHeight
-          }
-      );
-      that.setDataSmart({
-              txt: this.getOriginTxt(),
+    that.data.testType = parseInt(options.type) || 0;
+    that.data.maxCount = parseInt(this.getOriginTxt()) / 2;
+    console.log('onLoad', that.data.testType, this.getOriginTxt(),this.data.maxCount);
+    that.setDataSmart({
+              testType: that.data.testType,
+              windowHeight: wxp.getSystemInfoSync().windowHeight,
+        txt: this.getOriginTxt(),
+
           }
       );
 
@@ -426,8 +427,8 @@ export default class extends MyPage {
       that.data.count++
       if (that.data.count <= 2 * that.data.maxCount) {
         // console.log('count: ' + that.data.count, that.data.maxCount);
-        let circle: any = that.data.progressCircle;
-        circle.drawCircle('circle_draw1', 100, that.data.count);
+        // let circle: any = that.data.progressCircle;
+        // circle.drawCircle('circle_draw1', 100, that.data.count);
         if (that.data.count >= 2 * that.data.maxCount) {
           that.data.count = 0
           // that.setDataSmart({ txt: '0' })
