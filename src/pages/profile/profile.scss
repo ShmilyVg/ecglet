@@ -5,7 +5,7 @@
 */
 
 .top-image{
-  height: 256rpx;
+  height: 383rpx;
   width: 100%;
   background-color: #3a93ef;
 }
@@ -13,7 +13,6 @@
 .top-cell {
   width:91.6%;
   height:232rpx;
-  background:rgba(255,255,255,1);
   border-radius:40rpx;
   align-items: center;
   margin-top: -151rpx;
@@ -30,19 +29,21 @@
 
 .name{
   white-space: nowrap;
-  color: #666666;
+  color: white;
   font-size: 36rpx;
   width: 345rpx;
   text-overflow: ellipsis;
   white-space:nowrap;
   overflow: hidden;
+  margin-top: 25rpx;
+  margin-left: 40rpx;
 }
 
 .edit-info {
   width: 175rpx;
   height: 60rpx;
-  background: rgba(57,147,238,1);
   border-radius: 30rpx;
+  border:2rpx solid;
   font-size: 24rpx;
   color: #ffffff;
   line-height: 60rpx;
@@ -97,6 +98,11 @@
   color: white;
   position: absolute;
   bottom: 65rpx;
+}
+
+.shouquan{
+  margin-right: 40rpx;
+  margin-top: 77rpx;
 }
 
 page {
