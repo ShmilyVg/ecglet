@@ -20,6 +20,7 @@ export default class extends MyPage {
     }
 
     onFilterSelected(e: any) {
+        console.log(e);
         const {currentTarget: {dataset: {selectedType}}} = e;
         this.setData({selectedType: selectedType === this.data.selectedType ? '' : selectedType});
         // switch (selectedType) {
