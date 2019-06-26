@@ -25,14 +25,16 @@
       <view wx:elif="{{selectedType==='time'}}" class="flex-column fill-width" style="background-color: white;">
         <view class="history-selected-time-title" style="margin-top: 20rpx;">开始时间</view>
         <picker mode="date" class="flex-row fill-width align-items-center box-sizing-border-box date-picker" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
-          <view class="fill-width picker-content-text" style="width: 100%;">
+          <view class="flex-row align-items-center fill-width picker-content-text">
+            <image src="../../images/history/date.png" class="date-icon"></image>
             {{date||'请选择'}}
           </view>
         </picker>
 
         <view class="history-selected-time-title" style="margin-top: 20rpx;">结束时间</view>
         <picker mode="date" class="flex-row fill-width align-items-center box-sizing-border-box date-picker" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
-          <view class="fill-width picker-content-text" style="width: 100%;">
+          <view class="flex-row align-items-center fill-width picker-content-text">
+            <image src="../../images/history/date.png" class="date-icon"></image>
             {{date||'请选择'}}
           </view>
         </picker>
@@ -45,13 +47,14 @@
 
   <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindtap="toPdfUrl" data-item="{{item}}">
     <view class="flex-row align-items-center">
-      <view class="green-circle"></view>
+      <image wx:if="{{item.isAbnormal}}" src="../../images/history/red.png" class="green-circle"></image>
+      <image wx:else src="../../images/history/green.png" class="green-circle"></image>
       <view class="flex-column" style="margin-left: 18rpx;">
         <view class="flex-row align-items-center">
           <view class="item-title">{{item.type||'常规心电检测'}}</view>
-          <view class="item-status-abnormal">异常</view>
+          <view wx:if="{{item.isAbnormal}}" class="item-status-abnormal">异常</view>
         </view>
-        <view class="item-name-and-time">{{item.name||'喔喔哒'}}·{{item.dateStr}}·{{item.timeStr}}</view>
+        <view class="item-name-and-time">{{item.name||'未知姓名'}}·{{item.dateStr}}·{{item.timeStr}}</view>
       </view>
     </view>
     <view class="flex-column" style="align-items: flex-end">

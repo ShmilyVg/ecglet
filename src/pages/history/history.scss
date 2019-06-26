@@ -27,10 +27,8 @@ page{
 }
 
 .green-circle{
-  width:26rpx;
-  height:26rpx;
-  background:rgba(0,198,188,1);
-  border: 16rpx solid rgba(0,198,188,0.4);
+  width:42rpx;
+  height:42rpx;
   border-radius: 50%;
 }
 
@@ -131,4 +129,10 @@ page{
   font-family:PingFang-SC-Regular;
   font-weight:400;
   color:rgba(91,91,91,1);
+}
+
+.date-icon{
+  width: 27rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
 }
