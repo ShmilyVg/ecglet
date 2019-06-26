@@ -34,7 +34,8 @@
     </view>
 
     <view class="title" style="margin-top: 100rpx;">欢迎使用</view>
-    <view class="title" style="margin-bottom: 38rpx;">HiPee智能心电仪</view>
+    <view class="title">HiPee智能心电仪</view>
+    <view class="line-little"></view>
     <view class="description">选择以下项目·开启您的检测之旅</view>
 
     <view class="flex-row align-items-center space-between">
