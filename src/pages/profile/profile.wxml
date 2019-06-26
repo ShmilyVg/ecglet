@@ -32,7 +32,7 @@
             <button wx:if="{{isConnected}}"  class="flex-row cell space-between" open-type="getUserInfo" bindgetuserinfo="onGotUserInfoAndToHistory" hover-class="none">
                 <view class="flex-row align-items-center">
                     <image class="icon" src="../../images/mine/jingcejilu.png"></image>
-                    <view class="title">检测记录</view>
+                    <view class="title">成员管理</view>
                 </view>
 
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
@@ -40,7 +40,7 @@
             <button wx:else class="flex-row cell space-between" bindtap="onNoNetworkConnected" hover-class="none">
                 <view class="flex-row align-items-center">
                     <image class="icon" src="../../images/mine/jingcejilu.png"></image>
-                    <view class="title">检测记录</view>
+                    <view class="title">成员管理</view>
                 </view>
 
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
