@@ -14,8 +14,7 @@ import Protocol from "../../apis/network/protocol";
 @pagify()
 export default class extends MyPage {
     data = {
-        nameShow: '',
-        userPic: '',
+        userInfo: {},
         isConnected: true
     }
 
@@ -35,17 +34,17 @@ export default class extends MyPage {
         // @ts-ignore
         this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res:any)=>{
+            // res.userInfo.portraitUrl = '';
             // @ts-ignore
             this.setData({
-                nameShow: res.userInfo.nickName,
-                userPic: res.userInfo.portraitUrl
+                userInfo: res.userInfo,
             })
         })
     }
 
     toTestPage() {
         Protocol.checkHaveNetwork().then(()=>{
-            HiNavigator.navigateToArrhyth();
+            HiNavigator.navigateToArrhyth({type: 3});
         }).catch(()=>{
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
         })

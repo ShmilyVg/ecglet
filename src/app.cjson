@@ -44,6 +44,12 @@
         "selectedIconPath": "images/home_select.png"
       },
       {
+              "pagePath": "pages/history/history",
+              "text": "检测记录",
+              "iconPath": "images/home.png",
+              "selectedIconPath": "images/home_select.png"
+            },
+      {
         "pagePath": "pages/profile/profile",
         "text": "我的",
         "iconPath": "images/profile.png",

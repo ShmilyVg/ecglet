@@ -16,8 +16,23 @@ export default class extends MyPage {
     data = {
         logs: [],
         page: 1,
+        selectedType: ''
     }
 
+    onFilterSelected(e: any) {
+        const {currentTarget: {dataset: {selectedType}}} = e;
+        this.setData({selectedType: selectedType === this.data.selectedType ? '' : selectedType});
+        // switch (selectedType) {
+        //
+        //     case 'time':
+        //
+        //         break;
+        //     case 'type':
+        //     default:
+        //
+        //         break;
+        // }
+    }
     onLoad(){
         this.getList({page: 1});
         console.log(this.data.logs)
