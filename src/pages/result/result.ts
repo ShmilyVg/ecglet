@@ -4,31 +4,32 @@ import UserInfo from '../../apis/network/userInfo';
 @pagify()
 export default class extends MyPage {
     data = {
+        isGreen: true,
         result: {
-            // "time": "1560757586488",
-            // "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
-            "pdfUrl": "",
-            // "info": [
-            //     {
-            //         "code": "HR",
-            //         "name": "心率",
-            //         "time": 60,
-            //         "status": 0
-            //     },
-            //     {
-            //         "code": "QRS",
-            //         "name": "QRS宽度",
-            //         "time": 79,
-            //         "status": 1
-            //     },
-            //     {
-            //         "code": "QTC",
-            //         "name": "QTC",
-            //         "time": 330,
-            //         "status": 1
-            //     }
-            // ],
-            // "hr": 60
+            "time": "1560757586488",
+            "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",
+            // "pdfUrl": "",
+            "info": [
+                {
+                    "code": "HR",
+                    "name": "心率",
+                    "time": 60,
+                    "status": 0
+                },
+                {
+                    "code": "QRS",
+                    "name": "QRS宽度",
+                    "time": 79,
+                    "status": 1
+                },
+                {
+                    "code": "QTC",
+                    "name": "QTC",
+                    "time": 330,
+                    "status": 1
+                }
+            ],
+            "hr": 60
         }
     };
 
@@ -53,13 +54,18 @@ export default class extends MyPage {
             this.setData({userInfo: res.userInfo});
         });
         // @ts-ignore
-        const result = getApp().globalData.tempGatherResult;
-
-        console.log('接收到的结果', result);
-        // const result = this.data.result;
-        result.time = this.getTime(parseInt(result.time));
-        this.setData({result});
-        // const {info} = this.data.result;
+        wx.setNavigationBarColor({backgroundColor: this.data.isGreen ? '#00C6BC' : '#3A93EF',frontColor:'#ffffff',animation: {
+                duration: 400,
+                timingFunc: 'easeIn'
+            }});
+        // @ts-ignore
+        // const result = getApp().globalData.tempGatherResult;
+        //
+        // console.log('接收到的结果', result);
+        // // const result = this.data.result;
+        // result.time = this.getTime(parseInt(result.time));
+        // this.setData({result});
+        // // const {info} = this.data.result;
 
     }
 }
