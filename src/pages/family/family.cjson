@@ -8,6 +8,8 @@
 
 {
   "$schema": "https://raw.githubusercontent.com/qiu8310/minapp/master/schema/page.json",
-  "navigationBarTitleText": "检测记录",
+  "navigationBarTitleText": "用户信息",
     "backgroundColor": "#f2f2f2",
+    "navigationBarBackgroundColor":"white",
+    "navigationBarTextStyle":"black"
 }

@@ -24,6 +24,7 @@
     "pages/disease/disease",
     "pages/disease-arrhyth/disease-arrhyth",
     "pages/manual/manual",
+    "pages/family/family"
     /*# INJECT_END #*/
   ],
   "window": {
