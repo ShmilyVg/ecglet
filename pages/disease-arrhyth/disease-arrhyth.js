@@ -1,6 +1,7 @@
+
 Page({
     data: {},
 
-    async onLoad() {
+    onLoad() {
     }
 })
