@@ -136,7 +136,7 @@ Page({
     },
 
     clickCell2() {
-        this.app.$url.diseaseArrhyth.go();
+        wx.navigateTo({url:'../disease-arrhyth/disease-arrhyth'})
     },
 
     clickCell3() {
