@@ -1,9 +1,10 @@
 // import UserInfo from '../../../ecglet的副本/src/apis/network/userInfo.js';
-// import Toast from '../../../ecglet的副本/src/base/heheda-common-view/toast.js';
 // import Protocol from '../../../ecglet的副本/src/apis/network/protocol.js'
-// import WXDialog from "../../../ecglet的副本/src/base/heheda-common-view/dialog";
 // import {dealAuthUserInfo} from "../../../ecglet的副本/src/utils/tools";
 
+
+import Toast from "../../utils/toast";
+import WXDialog from "../../utils/dialog";
 
 Page({
     data: {
@@ -15,7 +16,6 @@ Page({
 
     isRegister: false,
     onLoad(options) {
-        let that = this;
         getApp().onLoginSuccess = () => {
             this.setData({haveAuthorize: true});
         };
@@ -24,12 +24,12 @@ Page({
             let phoneNum = wx.getStorageSync('phoneNumber');
             console.log('手机号：', phoneNum);
             if (phoneNum === "") {
-                that.setData({
+                this.setData({
                     haveNum: false,
                     haveAuthorize: true
                 });
             } else {
-                that.setData({
+                this.setData({
                     haveNum: true,
                     haveAuthorize: true
                 });
@@ -39,11 +39,11 @@ Page({
             console.log('还没注册', phoneNumber);
             if (phoneNumber) {
                 console.log('有手机号');
-                that.setData({
+                this.setData({
                     haveNum: true,
                 });
             } else {
-                that.setData({
+                this.setData({
                     haveNum: false,
                 });
                 console.log('没手机号');
@@ -52,7 +52,9 @@ Page({
     },
 
     onNetworkStatusChanged(res) {
-        this.setData({isConnected: res.isConnected});
+        this.setData({
+            isConnected: res.isConnected
+        });
     },
 
     onNoNetworkConnected() {
@@ -77,17 +79,15 @@ Page({
     },
 
     getPhoneNumber(e) {
-        let that = this
         const {detail: {encryptedData, iv, errMsg}} = e;
-        if (errMsg == 'getPhoneNumber:ok') {
+        if (errMsg === 'getPhoneNumber:ok') {
             Toast.showLoading();
             Protocol.getPhoneNum({
                 encryptedData, iv
             }).then((phoneNumber) => {
                 wx.setStorageSync('phoneNumber', phoneNumber);
-
             }).then((res) => {
-                    that.setDataSmart({
+                    this.setData({
                         haveNum: true
                     });
                 }
@@ -96,7 +96,6 @@ Page({
                 Toast.showText('授权手机号失败，请重试');
             }).finally(() => {
                 Toast.hiddenLoading();
-                // HiNavigator.navigateToArrhyth();
             });
         } else {
             WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
@@ -116,14 +115,14 @@ Page({
     },
 
     toEditInfo() {
-        if (!!wx.getStorageSync('isRegister')) {
+        // if (!!wx.getStorageSync('isRegister')) {
             wx.navigateTo({
                     url: '../userdata/userdata'
                 }
             );
-        } else {
-            Toast.warn('请您授权');
-        }
+        // } else {
+        //     Toast.warn('请您授权');
+        // }
     },
 
     onGotUserInfoAndToHistory(e) {
@@ -132,7 +131,7 @@ Page({
                 haveAuthorize: true,
                 userInfo: res.userInfo
             });
-            wx.navigateTo({url: '../history/history'})
+            wx.navigateTo({url: '../history/history'});
         }).catch((res) => {
             console.log(res);
         });

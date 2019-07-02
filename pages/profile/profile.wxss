@@ -100,14 +100,6 @@
   margin-top: 77rpx;
 }
 
-.space-between {
-  justify-content: space-between;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
 page {
   background-color: #f2f2f2;
 }

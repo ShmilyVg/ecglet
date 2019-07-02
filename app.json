@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/profile/profile",
-    "pages/userdata/userdata"
+    "pages/userdata/userdata",
+    "pages/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,7 +23,7 @@
         "selectedIconPath": "images/home_select.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/history/history",
         "text": "检测记录",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home_select.png"
