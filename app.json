@@ -1,13 +1,43 @@
 {
   "pages": [
-    "pages/start/start",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/profile/profile",
+    "pages/userdata/userdata",
+    "pages/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#3a93ef",
+    "navigationBarTitleText": "HiPee心电仪",
+    "navigationBarTextStyle": "white"
   },
-  "sitemapLocation": "sitemap.json"
+  "tabBar": {
+    "color": "#7D7D7D",
+    "selectedColor": "#368EEE",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "采集",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_select.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "检测记录",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_select.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile_select.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 5000,
+    "downloadFile": 30000
+  }
 }

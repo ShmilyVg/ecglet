@@ -1,0 +1,105 @@
+
+.top-image {
+  height: 383rpx;
+  width: 100%;
+  background-color: #3a93ef;
+}
+
+.top-cell {
+  width:91.6%;
+  height:232rpx;
+  border-radius:40rpx;
+  align-items: center;
+  margin-top: -151rpx;
+}
+
+.avatar {
+  width:114rpx;
+  height:114rpx;
+  border-radius: 50%;
+  border-width: 14rpx;
+  border-color: rgba(208,232,255,0.52);
+  border-style: solid;
+}
+
+.name {
+  white-space: nowrap;
+  color: white;
+  font-size: 36rpx;
+  width: 345rpx;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  overflow: hidden;
+  margin-top: 25rpx;
+  margin-left: 40rpx;
+}
+
+.edit-info {
+  width: 175rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+  border:2rpx solid;
+  font-size: 24rpx;
+  color: #ffffff;
+  line-height: 60rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.cell {
+  height: 126rpx;
+  width: 100%;
+  align-items: center;
+}
+
+.icon{
+  width: 58rpx;
+  height: 58rpx;
+  margin-left: 38rpx;
+}
+
+.title {
+  font-size:28rpx;
+  color:rgba(102,102,102,1);
+  margin-left: 17rpx;
+}
+
+.arr-02 {
+  width: 14rpx;
+  height: 25rpx;
+  margin-right: 60rpx;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  width:91.6%;
+  background:rgba(255,255,255,1);
+  border-radius:40rpx;
+  margin-top: 30rpx;
+}
+
+.btn {
+  width:605rpx;
+  height:100rpx;
+  background:rgba(57,147,238,1);
+  border-radius:50rpx;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: white;
+  position: absolute;
+  bottom: 65rpx;
+}
+
+.shouquan {
+  margin-right: 40rpx;
+  margin-top: 77rpx;
+}
+
+page {
+  background-color: #f2f2f2;
+}
