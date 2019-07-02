@@ -1,0 +1,12 @@
+.title {
+  font-size: 18px;
+  margin: 10px 0 0 10px;
+}
+.from {
+  font-size: 12px;
+  margin: 0px 10px;
+  color: gray;
+}
+.img {
+  margin: 30px 0 0 0;
+}
