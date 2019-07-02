@@ -1,39 +1,43 @@
 //app.js
+import 'utils/config';
+import Login from "./apis/network/network/libs/login";
+import UserInfo from "./apis/network/network/libs/userInfo";
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    console.log('qqq')
+    wx.onNetworkStatusChange((res)=> {
+      console.log('网络状态变更', res);
+      this.globalData.isConnected = res.isConnected;
+      const currentPages = getCurrentPages();
+      if (currentPages && currentPages.length) {
+        const pageListener = currentPages[currentPages.length - 1].onNetworkStatusChanged;
+        console.log('页面监听函数', pageListener);
+        pageListener && pageListener(res);
       }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+      // }
+    });
 
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
+    Login.doLogin().then((data) => {
+      return UserInfo.get();
+    }).then((res) => {
+      console.log('app getUserInfo',res);
+      wx.setStorageSync('isRegister', true);
+      if (!wx.getStorageSync('phoneNumber')) {
+        wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
       }
-    })
+      this.onLoginSuccess && this.onLoginSuccess();
+    }).catch((res) => {
+      if (res && res.data && res.data.code === 2) {
+        this.needRegisterCallBack && this.needRegisterCallBack();
+      }
+    });
   },
   globalData: {
-    userInfo: null
-  }
-})
+    userInfo: {}, tempGatherResult: {}, isConnected: true
+  },
+  needRegisterCallBack: null,
+  onLoginSuccess: null,
+
+});
