@@ -1,0 +1,79 @@
+.cell-hpe{
+  height: 25rpx;
+  padding: 50rpx 40rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cell-line-hpe {
+  width: 100%;
+  height: 2rpx;
+  background-color: #E6E6E6;
+}
+
+.top-image{
+  height: 281rpx;
+  width: 100%;
+  background-color: #3a93ef;
+}
+
+.avatar-view {
+  width:200rpx;
+  height:200rpx;
+  background:rgba(208,232,255,0.52);
+  border-radius:50%;
+  align-items: center;
+  margin-top: -222rpx;
+  margin-bottom: 30rpx;
+  align-self: center;
+  z-index: 100;
+}
+
+.avatar{
+  width:158rpx;
+  height:158rpx;
+  border-radius: 50%;
+  margin-left: 21rpx;
+}
+
+.finish {
+  width:605rpx;
+  height:100rpx;
+  background:rgba(57,147,238,1);
+  border-radius:50rpx;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: white;
+  margin-top: 30rpx;
+  align-self: center;
+}
+
+.cell-title{
+  font-size:30rpx;
+  color:rgba(51,51,51,1);
+}
+
+.cell-content {
+  font-size:30rpx;
+  margin-left: -40rpx;
+}
+
+.weui-label {
+  width: 210rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.weui-input {
+  height: 2.58823529em;
+  min-height: 2.58823529em;
+  line-height: 2.58823529em;
+}
+
+
+
+page {
+  background-color: white;
+}
