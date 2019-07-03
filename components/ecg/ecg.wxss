@@ -7,11 +7,11 @@
   position: relative;
   border-radius: 80rpx;
   height: 100%;
-  //background-color: transparent;
+  /*//background-color: transparent;*/
 }
 .ecg_bg{
   position: absolute;
   border-radius: 80rpx;
   height: 100%;
-  //background-color: white;
+  /*//background-color: white;*/
 }

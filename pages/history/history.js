@@ -1,5 +1,6 @@
 import Toast from '../../utils/toast';
 import {createDateAndTime} from "../../utils/tools";
+import HiNavigator from "../../components/navigator/hi-navigator";
 // import Protocol from '../../../ecglet的副本/src/apis/network/protocol.js'
 
 Page({
@@ -55,10 +56,8 @@ Page({
     },
 
     toPdfUrl(e) {
-        // @ts-ignore
         getApp().globalData.tempGatherResult = e.currentTarget.dataset.item;
-        this.app.$url.result.go({});
-
+        HiNavigator.navigateToResult();
     },
 
     onPullDownRefresh() {

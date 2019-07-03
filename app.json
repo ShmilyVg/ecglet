@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/start/start",
+    "pages/arrhyth/arrhyth",
     "pages/index/index",
     "pages/profile/profile",
     "pages/userdata/userdata",

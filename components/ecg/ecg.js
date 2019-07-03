@@ -132,6 +132,7 @@ Component({
     },
 
     drawWaveDark(data) {
+      console.log('疯狂绘制', data);
       let that = this
 
       if (!that.data.ctx) {

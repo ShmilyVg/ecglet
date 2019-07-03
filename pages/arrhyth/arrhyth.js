@@ -14,6 +14,14 @@ import {
     startBluetoothDevicesDiscovery,
     stopBluetoothDevicesDiscovery
 } from "../../apis/ble/manager";
+import HiNavigator from "../../components/navigator/hi-navigator";
+
+ArrayBuffer.prototype.concat = function (b2) {
+    let tmp = new Uint8Array(this.byteLength + b2.byteLength);
+    tmp.set(new Uint8Array(this), 0);
+    tmp.set(new Uint8Array(b2), this.byteLength);
+    return tmp.buffer;
+};
 
 Page({
     data: {
@@ -37,7 +45,7 @@ Page({
         btCheckTimer: undefined,
         showToast: false,
         toastMsg: undefined,
-        showLoading: true
+        showLoading: false
     },
 
     waveData: undefined,
@@ -199,7 +207,8 @@ Page({
                 })
 
                 // 优先连接原设备
-                let selectDeviceId = matches.length === 0 ? res.devices[0].deviceId : matches[0].deviceId
+                let selectDeviceId = matches.length === 0 ? res.devices[0].deviceId : matches[0].deviceId,
+                    matchServices = [];
 
                 // 先判断设备是否已经被接通
                 createBLEConnection({deviceId: selectDeviceId}).then(ret => {
@@ -216,7 +225,7 @@ Page({
                         console.log('service: ' + v.uuid + ' isPrimary: ' + v.isPrimary)
                     })
 
-                    let matchServices = services.services.filter(v => {
+                    matchServices = services.services.filter(v => {
                         return v.uuid.includes('0000FFB1')
                     })
                     if (matchServices.length > 0) {
@@ -298,6 +307,11 @@ Page({
                 }
             })
 
+            that.showLoading()
+
+            that.reset()
+
+            that.data.completed = false
             // 初始化蓝牙
             openBluetoothAdapter().then(() => {
                 let that = this
@@ -306,12 +320,6 @@ Page({
                     //   title: "等待设备接通...",
                     //   mask: true
                     // })
-                    that.showLoading()
-
-                    that.reset()
-
-                    that.data.completed = false
-
                     that.startBluetooth()
                 } catch (error) {
                     this.isStartBLEDevices = false;
@@ -348,19 +356,21 @@ Page({
             that.reset()
             closeBluetoothAdapter().then(res => {
                 console.log('关闭蓝牙适配: %o', res)
-            })
+            }).catch(error => {
+                console.log('释放蓝牙资源错误<' + error.title + '>: ' + error.message)
+            });
         } catch (error) {
             console.log('释放蓝牙资源错误<' + error.title + '>: ' + error.message)
         }
     },
     currentTimestamp: 0,
     onFirstChannelChange(data) {
-        // console.log('onFirstChannelChange')
         let that = this
-
         let buffer = that.waveData ? that.waveData : new ArrayBuffer(0)
-        // @ts-ignore
-        that.waveData = buffer.concat(data)
+
+        console.log('onFirstChannelChange waveData', that.waveData, 'buffer',buffer);
+        that.waveData = buffer.concat(data);
+        console.log('onFirstChannelChange waveData23', that.waveData);
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
         // ecg.drawWave(data)
@@ -378,9 +388,9 @@ Page({
         that.data.countTimer = setInterval(() => {
             that.data.count++
             if (that.data.count <= 2 * that.data.maxCount) {
-                // console.log('count: ' + that.data.count, that.data.maxCount);
-                // let circle: any = that.data.progressCircle;
-                // circle.drawCircle('circle_draw1', 100, that.data.count);
+                console.log('count: ' + that.data.count, that.data.maxCount);
+                let circle = that.data.progressCircle;
+                circle.drawCircle('circle_draw1', 100, that.data.count);
                 if (that.data.count >= 2 * that.data.maxCount) {
                     that.data.count = 0
                     // that.setData({ txt: '0' })
@@ -530,7 +540,7 @@ Page({
                         Protocol.uploadGatherFile({filePath}).then((data) => {
                             // @ts-ignore
                             getApp().globalData.tempGatherResult = data.result;
-                            that.app.$url.result.redirect({});
+                            HiNavigator.redirectToResult();
                         }).catch((res) => {
                             WXDialog.showDialog({
                                 content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
