@@ -66,7 +66,6 @@ Page({
         }).catch(() => {
             this.setData({isConnected: false});
         });
-        // @ts-ignore
         this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res) => {
             this.setData({

@@ -55,7 +55,6 @@ Page({
     },
 
     toPdfUrl(e) {
-        // @ts-ignore
         getApp().globalData.tempGatherResult = e.currentTarget.dataset.item;
         this.app.$url.result.go({});
 
