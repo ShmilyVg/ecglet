@@ -52,7 +52,6 @@ Page({
         UserInfo.get().then((res) => {
             this.setData({userInfo: res.userInfo});
         });
-        // @ts-ignore
         wx.setNavigationBarColor({
             backgroundColor: this.data.isGreen ? '#00C6BC' : '#3A93EF', frontColor: '#ffffff', animation: {
                 duration: 400,

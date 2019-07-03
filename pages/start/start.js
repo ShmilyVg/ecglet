@@ -11,7 +11,6 @@ Page({
     },
 
     onLoad(param) {
-        // @ts-ignore
         getApp().onLoginSuccess = ()=>{
             this.setData({haveAuthorize: true});
         }
