@@ -67,6 +67,7 @@ Component({
       let ctx = wx.createCanvasContext("ecg_bg", that)
 
       ctx.fillStyle = bgColor || 'transparent';
+      console.log(ctx);
       ctx.beginPath();
       ctx.moveTo(r, 0);
       ctx.lineTo(rw - r, 0);
@@ -211,17 +212,12 @@ Component({
       this.triggerEvent('runEvent', {}, {})
     },
   },
-
-
-  onCreated() {
-    let that = this
-    that.data.rpx = 1; // wx.getSystemInfoSync().windowWidth / 375
+  lifetimes:{
+    created() {
+      let that = this
+      that.data.rpx = 1; // wx.getSystemInfoSync().windowWidth / 375
+    },
   },
-
-  onReady() {
-    // this.data.ctx = wx.createCanvasContext('ecg_bg', this)
-  },
-
 
 });
 

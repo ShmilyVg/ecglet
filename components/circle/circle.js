@@ -90,17 +90,12 @@ Component({
     },
   },
 
-
-  /**
-   * 组件属性值有更新时会调用此函数，不需要在 properties 中设置 observer 函数
-   */
-  onPropUpdate(prop, newValue, oldValue) {
-
+  lifetimes:{
+    created() {
+      let that = this
+      that.data.rpx = wx.getSystemInfoSync().windowWidth / 375
+    },
   },
 
-  onCreated() {
-    let that = this
-    that.data.rpx = wx.getSystemInfoSync().windowWidth / 375
-  },
 
 });
