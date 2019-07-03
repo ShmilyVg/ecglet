@@ -1,0 +1,9 @@
+
+{
+  "usingComponents": {
+    "circle": "../../components/circle/circle",
+    "ecg": "../../components/ecg/ecg"
+  },
+  "navigationBarTitleText": "采集",
+   "backgroundColor": "#f2f2f2"
+}

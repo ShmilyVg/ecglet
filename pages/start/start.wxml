@@ -39,7 +39,7 @@
     <view class="description">选择以下项目·开启您的检测之旅</view>
 
     <view class="flex-row align-items-center space-between">
-        <button wx:if="{{haveAuthorize}}" class="flex-column box-sizing-border-box start-btn" bindtap="toTestPage" hover-class="none">
+        <button wx:if="{{haveAuthorize}}" class="flex-column box-sizing-border-box start-btn" bindtap="toNormalTestPage" hover-class="none">
             <view class="item-title">常规心电检测</view>
             <view class="flex-row align-items-center space-between icon-margin-top">
                 <image class="start-icon" src="../../images/start/normal.png"></image>

@@ -1,4 +1,4 @@
-import CommonNavigator from "./../../base/heheda-navigator";
+import CommonNavigator from "./../../base/heheda-navigator/navigator";
 
 export default class HiNavigator extends CommonNavigator {
 

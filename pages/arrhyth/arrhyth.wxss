@@ -6,8 +6,8 @@
 
 /*圆环进度条文字*/
 .container{
-  background-color: #3a93ef; // #0d69b1;
-  //background-color: black;
+  background-color: #3a93ef;
+  /*//background-color: black;*/
   position: relative;
 }
 .circle_info {
@@ -36,18 +36,18 @@
   margin-top: 10rpx;
   margin-bottom: 15rpx;
 }
-// .circle_pannel {
-//   flex: 0 0 200px;
-  // width: 100%;
-  // background-color: #104097;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // flex-flow: row nowrap;
-  // display: inline-block;
-  // position: relative;
-//   background-color: #0d69b1;
-// }
+ /*.circle_pannel {*/
+ /*  flex: 0 0 200px;*/
+ /*  width: 100%;*/
+ /*  background-color: #104097;*/
+ /*  display: flex;*/
+ /* justify-content: center;*/
+ /*  align-items: center;*/
+ /*  flex-flow: row nowrap;*/
+ /*  display: inline-block;*/
+ /*  position: relative;*/
+ /*  background-color: #0d69b1;*/
+ /*}*/
 .circle_pannel{
   flex-grow: 1;
   height: 100%;
@@ -65,7 +65,7 @@
   bottom: 0;
 }
 .toast .tip {
-  color: white; // #7a7ac4;
+  color: white;
   font-size: 26rpx;
   margin-bottom: 107rpx;
 }

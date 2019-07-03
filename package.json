@@ -1,0 +1,8 @@
+{
+  "name": "ecglet",
+  "version": "1.0.0",
+  "devDependencies": {
+    "wechat-mini-programs-apis": "^1.6.2"
+  },
+  "dependencies": {}
+}

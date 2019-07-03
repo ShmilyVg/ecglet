@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/start/start",
     "pages/index/index",
     "pages/profile/profile",
     "pages/userdata/userdata",
@@ -17,7 +18,7 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/start/start",
         "text": "采集",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home_select.png"
@@ -39,5 +40,6 @@
   "networkTimeout": {
     "request": 5000,
     "downloadFile": 30000
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
