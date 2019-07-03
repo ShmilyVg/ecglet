@@ -2,13 +2,13 @@
   "pages": [
     "pages/start/start",
     "pages/arrhyth/arrhyth",
-    "pages/index/index",
     "pages/profile/profile",
     "pages/userdata/userdata",
     "pages/history/history",
     "pages/disease-arrhyth/disease-arrhyth",
     "pages/feedback/feedback",
-    "pages/result/result"
+    "pages/result/result",
+    "pages/report/report"
   ],
   "window": {
     "backgroundTextStyle": "light",
