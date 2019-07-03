@@ -6,8 +6,8 @@ export default class HiNavigator extends CommonNavigator {
         this.navigateTo({url: '/pages/arrhyth/arrhyth?type=' + type});
     }
 
-    static navigateToReport() {
-        this.navigateTo({url: '/pages/report/report'});
+    static navigateToReport({reportUrl}) {
+        this.navigateTo({url: '/pages/report/report?reportUrl=' + reportUrl});
     }
     static navigateToResult() {
         this.navigateTo({url: '/pages/result/result'});

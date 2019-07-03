@@ -538,7 +538,6 @@ Page({
 
                     Protocol.checkHaveNetwork().then(() => {
                         Protocol.uploadGatherFile({filePath}).then((data) => {
-                            // @ts-ignore
                             getApp().globalData.tempGatherResult = data.result;
                             HiNavigator.redirectToResult();
                         }).catch((res) => {

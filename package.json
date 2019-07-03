@@ -4,5 +4,10 @@
   "devDependencies": {
     "wechat-mini-programs-apis": "^1.6.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "heheda-adapter": "^1.0.0",
+    "heheda-common-view": "^1.0.0",
+    "heheda-navigator": "^1.0.0",
+    "heheda-update": "^1.0.0"
+  }
 }

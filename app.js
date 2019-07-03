@@ -1,4 +1,6 @@
 //app.js
+// import "heheda-update";
+// import "heheda-adapter";
 import 'utils/config';
 import Login from "./apis/network/network/libs/login";
 import UserInfo from "./apis/network/network/libs/userInfo";
