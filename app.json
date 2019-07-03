@@ -4,7 +4,9 @@
     "pages/index/index",
     "pages/profile/profile",
     "pages/userdata/userdata",
-    "pages/history/history"
+    "pages/history/history",
+    "pages/disease-arrhyth/disease-arrhyth",
+    "pages/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",

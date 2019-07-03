@@ -1,8 +1,8 @@
-// import Protocol from "../../../ecglet的副本/src/apis/network/protocol";
 import Toast from "../../utils/toast";
 import WXDialog from "../../utils/dialog";
 import * as tools from "../../utils/tools";
-// import UserInfo from '../../../ecglet的副本/src/apis/network/userInfo.js';
+import UserInfo from "../../apis/network/network/libs/userInfo";
+import Protocol from "../../apis/network/protocol";
 
 Page({
     data: {
@@ -24,63 +24,52 @@ Page({
         this.setData({
             birthEndDate: birthEndDate
         });
-        // UserInfo.get().then((res) => {
-        //     console.log('res:', res);
-        //     this.setData({
-        //         name: res.userInfo.nickName,
-        //         number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
-        //         sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
-        //         birthDate: res.userInfo.birthday || '请选择出生日期',
-        //         height: res.userInfo.height,
-        //         weight: res.userInfo.weight,
-        //         portraitUrl: res.userInfo.portraitUrl
-        //     })
-        // })
+        UserInfo.get().then((res) => {
+            console.log('res:', res);
+            this.setData({
+                name: res.userInfo.nickName,
+                number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
+                sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
+                birthDate: res.userInfo.birthday || '请选择出生日期',
+                height: res.userInfo.height,
+                weight: res.userInfo.weight,
+                portraitUrl: res.userInfo.portraitUrl
+            })
+        })
     },
 
     onNameChange(e) {
-        let that = this
-
-        that.setData({
+        this.setData({
             name: e.detail.value
         })
     },
 
     onNumberChange(e) {
-        let that = this;
-        that.setData({
+        this.setData({
             number: e.detail.value
         })
     },
 
     onBirthChange(e) {
-        let that = this
-
-        that.setData({
+        this.setData({
             birthDate: e.detail.value || ''
         })
     },
 
     onSexChange(e) {
-        let that = this
-
-        that.setData({
+        this.setData({
             sexIndex: parseInt(e.detail.value)
         })
     },
 
     onHeightChange(e) {
-        let that = this
-
-        that.setData({
+        this.setData({
             height: e.detail.value
         })
     },
 
     onWeightChange(e) {
-        let that = this
-
-        that.setData({
+        this.setData({
             weight: e.detail.value
         })
     },
@@ -91,23 +80,23 @@ Page({
             return;
         }
 
-        if (yhis.data.number.length != 11) {
+        if (this.data.number.length != 11) {
             Toast.showText('手机号格式错误');
             return;
         }
         WXDialog.showDialog({
             title: '提示', content: '确认修改您的信息吗？', showCancel: true, confirmEvent: () => {
-                let birthTime = that.data.birthDate || '';
+                let birthTime = this.data.birthDate || '';
                 console.log(`birth time: ${birthTime}`);
                 try {
                     let data = {
-                        nickName: that.data.name,
-                        phone: that.data.number,
-                        sex: that.data.sexIndex,
+                        nickName: this.data.name,
+                        phone: this.data.number,
+                        sex: this.data.sexIndex,
                         birthday: birthTime,
-                        height: that.data.height,
-                        weight: that.data.weight,
-                        portraitUrl: that.data.portraitUrl
+                        height: this.data.height,
+                        weight: this.data.weight,
+                        portraitUrl: this.data.portraitUrl
                     }
                     console.log('保存信息：', data);
                     Protocol.accountUpdate(data).then((res) => {
@@ -133,7 +122,6 @@ Page({
         });
     },
 
-
     chooseImage() {
         console.log('chooseImage');
         wx.chooseImage({
@@ -143,7 +131,7 @@ Page({
             success: (res) => {
                 Toast.showLoading();
                 let path = res.tempFilePaths[0];
-                wxp.uploadFile({
+                wx.uploadFile({
                     url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
                     filePath: path,
                     name: path

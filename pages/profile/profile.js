@@ -1,10 +1,8 @@
-// import UserInfo from '../../../ecglet的副本/src/apis/network/userInfo.js';
-// import Protocol from '../../../ecglet的副本/src/apis/network/protocol.js'
-// import {dealAuthUserInfo} from "../../../ecglet的副本/src/utils/tools";
-
-
 import Toast from "../../utils/toast";
 import WXDialog from "../../utils/dialog";
+import UserInfo from "../../apis/network/network/libs/userInfo";
+import Protocol from "../../apis/network/protocol";
+import {dealAuthUserInfo} from "../../utils/tools";
 
 Page({
     data: {
@@ -63,19 +61,19 @@ Page({
     },
 
     onShow() {
-        // Protocol.checkHaveNetwork().then(() => {
-        //     this.setData({isConnected: true});
-        // }).catch(() => {
-        //     this.setData({isConnected: false});
-        // });
-        // // @ts-ignore
-        // this.setData({isConnected: getApp().globalData.isConnected});
-        // UserInfo.get().then((res) => {
-        //     this.setData({
-        //         userInfo: res.userInfo,
-        //         haveAuthorize: true
-        //     })
-        // })
+        Protocol.checkHaveNetwork().then(() => {
+            this.setData({isConnected: true});
+        }).catch(() => {
+            this.setData({isConnected: false});
+        });
+        // @ts-ignore
+        this.setData({isConnected: getApp().globalData.isConnected});
+        UserInfo.get().then((res) => {
+            this.setData({
+                userInfo: res.userInfo,
+                haveAuthorize: true
+            })
+        })
     },
 
     getPhoneNumber(e) {
@@ -115,14 +113,14 @@ Page({
     },
 
     toEditInfo() {
-        // if (!!wx.getStorageSync('isRegister')) {
+        if (!!wx.getStorageSync('isRegister')) {
             wx.navigateTo({
                     url: '../userdata/userdata'
                 }
             );
-        // } else {
-        //     Toast.warn('请您授权');
-        // }
+        } else {
+            Toast.warn('请您授权');
+        }
     },
 
     onGotUserInfoAndToHistory(e) {
@@ -138,7 +136,7 @@ Page({
     },
 
     clickCell2() {
-        this.app.$url.diseaseArrhyth.go();
+        wx.navigateTo({url:'../disease-arrhyth/disease-arrhyth'})
     },
 
     clickCell3() {
