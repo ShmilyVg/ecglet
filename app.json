@@ -6,7 +6,8 @@
     "pages/userdata/userdata",
     "pages/history/history",
     "pages/disease-arrhyth/disease-arrhyth",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/result/result"
   ],
   "window": {
     "backgroundTextStyle": "light",
