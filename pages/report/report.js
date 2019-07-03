@@ -19,7 +19,7 @@ Page({
 
         if (options.reportUrl) {
             let reportUrl = decodeURIComponent(options.reportUrl);
-            this.setDataSmart({
+            this.setData({
                 reportUrl: reportUrl
             })
         }
