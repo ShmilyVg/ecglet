@@ -9,11 +9,24 @@ export default class HiNavigator extends CommonNavigator {
     static navigateToReport({reportUrl}) {
         this.navigateTo({url: '/pages/report/report?reportUrl=' + reportUrl});
     }
+
     static navigateToResult() {
         this.navigateTo({url: '/pages/result/result'});
     }
+
     static redirectToResult() {
-        this.redirectTo({url: '/pages/result/result'});
+        const pages = getCurrentPages();
+        console.log('页面', pages);
+        if (pages && pages.length) {
+            const isHomePage = pages[pages.length].route === 'pages/start/start';
+            if (isHomePage) {
+                this.navigateToResult();
+            } else {
+                this.redirectTo({url: '/pages/result/result'});
+            }
+        } else {
+            this.navigateToResult();
+        }
     }
 
 }
