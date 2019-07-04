@@ -18,7 +18,7 @@ export default class HiNavigator extends CommonNavigator {
         const pages = getCurrentPages();
         console.log('页面', pages);
         if (pages && pages.length) {
-            const isHomePage = pages[pages.length].route === 'pages/start/start';
+            const isHomePage = pages[pages.length-1].route === 'pages/start/start';
             if (isHomePage) {
                 this.navigateToResult();
             } else {
