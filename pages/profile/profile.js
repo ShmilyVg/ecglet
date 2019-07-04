@@ -104,7 +104,12 @@ Page({
             this.setData({
                 haveAuthorize: true,
                 userInfo: res.userInfo
-            })
+            });
+            let phone = wx.getStorageSync('phoneNumber');
+            let userInfo = {...res.userInfo,phone};
+            Protocol.accountUpdate(userInfo).then(res=>{
+                console.log(res);
+            });
         }).catch((res) => {
             console.log(res);
             // Toast.showText('授权用户信息失败，请重试');
