@@ -3,7 +3,7 @@ import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
     data: {
-        isGreen: true,
+        isGreen: false,
         result: {
             // "time": "1560757586488",
             // "pdfUrl": "http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/264e949d6bfe4a6594233a3ef7512366.jpg",

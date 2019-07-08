@@ -373,7 +373,6 @@ Page({
 
         console.log('onFirstChannelChange waveData', that.waveData, 'buffer',buffer);
         that.waveData = buffer.concat(data);
-        console.log('onFirstChannelChange waveData23', that.waveData);
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
         // ecg.drawWave(data)

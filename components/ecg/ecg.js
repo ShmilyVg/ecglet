@@ -40,7 +40,7 @@ Component({
     sampleData: undefined,
     continueAnimation: false,
     terminated: false,
-    showColumnAndRowLine: false
+    showColumnAndRowLine: true
   },
 
   /**
@@ -81,13 +81,13 @@ Component({
       ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
       const d = that.data.pxmm
       // // 绘制竖行网格
-      if (that.data.showColumnAndRowLine) {
+      if (!!bgColor&&that.data.showColumnAndRowLine) {
         for (var i = 0; i < rw / d; i++) {
           if (i % 5 == 0) {
-            ctx.strokeStyle = "#1b4200"
+            ctx.strokeStyle = "#eeeeee"
             ctx.lineWidth = 0.8
           } else {
-            ctx.strokeStyle = "#092100"
+            ctx.strokeStyle = "#eeeeee"
             ctx.lineWidth = 0.4
           }
           let x = i * d + offsetX;
@@ -101,10 +101,10 @@ Component({
         // 绘制横行网格
         for (var j = 0; j < rh / d; j++) {
           if (j % 5 == 0) {
-            ctx.strokeStyle = "#1b4200"
+            ctx.strokeStyle = "#eeeeee"
             ctx.lineWidth = 0.8
           } else {
-            ctx.strokeStyle = "#092100"
+            ctx.strokeStyle = "#eeeeee"
             ctx.lineWidth = 0.4
           }
           let y = j * d + offsetY
@@ -132,7 +132,6 @@ Component({
     },
 
     drawWaveDark(data) {
-      console.log('疯狂绘制', data);
       let that = this
 
       if (!that.data.ctx) {
