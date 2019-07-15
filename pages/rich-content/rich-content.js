@@ -44,7 +44,8 @@ Page({
                 value: false, text: '刚进行过剧烈活动'
             }
         ],
-        count: 0
+        count: 0,
+        text: ''
     },
 
     onLoad(options) {
@@ -52,7 +53,10 @@ Page({
     },
 
     textContent(e) {
-        const {detail: {cursor, value}} = e;
+        let {detail: {cursor, value}} = e;
+        if (cursor > 100) {
+            value = value.slice(0, 99);
+        }
         this.setData({
             count: cursor,
             text: value
