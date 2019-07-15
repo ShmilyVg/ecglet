@@ -1,0 +1,22 @@
+<!--pages/member-list/member-list.wxml-->
+<view class="big-view">
+    <view class="title-0">这是谁的检测记录</view>
+    <view class="title-1">点击您要选择的对象</view>
+    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{16}}">
+        <view class="flex-row">
+            <view class="avatar"></view>
+            <view class="flex-column" style="margin-left: 25rpx">
+                <view class="name">name</view>
+                <view class="flex-row" style="align-items: center;margin-top: 10rpx">
+                    <image class="sex" src="../../images/rich/w.png"></image>
+                    <view class="age">32岁</view>
+                </view>
+            </view>
+        </view>
+        <view style="height: 36rpx;width: 36rpx;background-color: red"></view>
+    </view>
+</view>
+
+<view class="flex-column" style="align-items: center;width: 100%">
+    <view class="button-radius btn">+ 添加成员</view>
+</view>

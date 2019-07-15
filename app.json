@@ -10,7 +10,8 @@
     "pages/result/result",
     "pages/report/report",
     "pages/welcome/welcome",
-    "pages/rich-content/rich-content"
+    "pages/rich-content/rich-content",
+    "pages/member-list/member-list"
   ],
   "window": {
     "backgroundTextStyle": "light",
