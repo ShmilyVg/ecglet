@@ -7,8 +7,8 @@
             <view class="flex-column" style="margin-left: 16rpx">
                 <view class="name">name</view>
                 <view class="flex-row" style="align-items: center">
-                    <view class="sex"></view>
-                    <view class="age">25sui</view>
+                    <image class="sex" src="../../images/rich/m.png"></image>
+                    <view class="age">25岁</view>
                 </view>
             </view>
         </view>

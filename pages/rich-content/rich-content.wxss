@@ -14,7 +14,7 @@
     width:100rpx;
     height:100rpx;
     border-radius:50%;
-    background-color: red;
+    border:10rpx solid #F6F7F7
 }
 
 .name{
@@ -26,7 +26,6 @@
 .sex{
     width: 28rpx;
     height: 28rpx;
-    background-color: red;
 }
 
 .age {
