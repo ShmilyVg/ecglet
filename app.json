@@ -10,7 +10,6 @@
     "pages/result/result",
     "pages/report/report",
     "pages/welcome/welcome",
-    "pages/report/report",
     "pages/rich-content/rich-content"
   ],
   "window": {
