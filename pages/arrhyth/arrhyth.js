@@ -168,6 +168,7 @@ Page({
 
     onLoad(options) {
         // console.log(await wx.getUserInfo())
+        wx.setKeepScreenOn({keepScreenOn: true});
         console.log('onLoad', options);
         this.isNetworkNotConnected = false;
 
@@ -353,7 +354,9 @@ Page({
             // await wx.hideLoading()
             that.hideLoading()
             that.isStartBLEDevices = false;
-            that.reset()
+            that.reset();
+            wx.setKeepScreenOn({keepScreenOn: false});
+
             closeBluetoothAdapter().then(res => {
                 console.log('关闭蓝牙适配: %o', res)
             }).catch(error => {
