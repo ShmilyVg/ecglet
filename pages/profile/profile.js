@@ -106,8 +106,8 @@ Page({
                 userInfo: res.userInfo
             });
             let phone = wx.getStorageSync('phoneNumber');
-            let userInfo = {...res.userInfo,phone};
-            Protocol.accountUpdate(userInfo).then(res=>{
+            let userInfo = {...res.userInfo, phone};
+            Protocol.accountUpdate(userInfo).then(res => {
                 console.log(res);
             });
         }).catch((res) => {
@@ -140,7 +140,7 @@ Page({
     },
 
     clickCell2() {
-        wx.navigateTo({url:'../disease-arrhyth/disease-arrhyth'})
+        wx.navigateTo({url: '../disease-arrhyth/disease-arrhyth'})
     },
 
     clickCell3() {
