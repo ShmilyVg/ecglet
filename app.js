@@ -4,6 +4,7 @@ import "heheda-adapter";
 import 'utils/config';
 import Login from "./apis/network/network/libs/login";
 import UserInfo from "./apis/network/network/libs/userInfo";
+import HiNavigator from "./components/navigator/hi-navigator";
 
 App({
   onLaunch: function () {
@@ -31,15 +32,15 @@ App({
       }
       this.onLoginSuccess && this.onLoginSuccess();
     }).catch((res) => {
+      console.log('app.js login fail',res);
       if (res && res.data && res.data.code === 2) {
-        this.needRegisterCallBack && this.needRegisterCallBack();
+        HiNavigator.relaunchToWelcome();
       }
     });
   },
   globalData: {
     userInfo: {}, tempGatherResult: {}, isConnected: true
   },
-  needRegisterCallBack: null,
   onLoginSuccess: null,
 
 });

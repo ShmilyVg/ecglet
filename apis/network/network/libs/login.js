@@ -60,9 +60,10 @@ function setToken({data: {result: {jsessionid}}}) {
 }
 
 const loginFailObj = {
-    2: () => {
+    2: ({reject}) => {
         console.log('未注册，请先注册');
         _needRegister = true;
+        reject({data:{code: 2}});
     },
     4000: ({resolve, reject}) => {
         WXDialog.showDialog({
