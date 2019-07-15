@@ -8,7 +8,8 @@
     "pages/disease-arrhyth/disease-arrhyth",
     "pages/feedback/feedback",
     "pages/result/result",
-    "pages/report/report"
+    "pages/report/report",
+    "pages/rich-content/rich-content"
   ],
   "window": {
     "backgroundTextStyle": "light",

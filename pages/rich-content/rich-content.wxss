@@ -1,0 +1,115 @@
+/* pages/rich-content/rich-content.wxss */
+.title{
+    font-size:40rpx;
+    font-weight:500;
+    color:rgba(91,91,91,1);
+    line-height:28rpx;
+    margin-top: 52rpx;
+    width: 710rpx;
+    text-align: left;
+    padding-left: 40rpx;
+}
+
+.avatar {
+    width:100rpx;
+    height:100rpx;
+    border-radius:50%;
+    background-color: red;
+}
+
+.name{
+    font-size:32rpx;
+    font-weight:500;
+    color:rgba(91,91,91,1);
+}
+
+.sex{
+    width: 28rpx;
+    height: 28rpx;
+    background-color: red;
+}
+
+.age {
+    font-size:24rpx;
+    font-weight:500;
+    color:rgba(156,156,156,1);
+    margin-left: 20rpx;
+}
+
+.qiehuantaren{
+    font-size:24rpx;
+    font-weight:500;
+    color:rgba(170,170,170,1);
+}
+
+.arr {
+    background-color: red;
+    height: 24rpx;
+    width: 14rpx;
+    margin-left: 20rpx;
+}
+
+.line{
+    width:750rpx;
+    height:2rpx;
+    background:rgba(246,247,247,1);
+    margin-top: 50rpx;
+}
+
+.tag-view {
+    padding: 0 32rpx;
+    width: 686rpx;
+    flex-wrap: wrap;
+    margin-top: 34rpx;
+}
+
+.tag{
+    padding: 16rpx 30rpx;
+    font-size: 28rpx;
+    color: #60778B;
+    background-color: #F6F7F7;
+    border-radius: 30rpx;
+    margin: 10rpx 8rpx;
+}
+
+.tag-chose{
+    background-color: #3A93EF;
+    color: white;
+}
+
+.text{
+    margin-top: 42rpx;
+    width:610rpx;
+    height:190rpx;
+    background:rgba(246,247,247,1);
+    border:1rpx solid rgba(232,232,232,1);
+    border-radius:30rpx;
+    padding: 50rpx 30rpx;
+    color: #5B5B5B;
+    font-size: 28rpx;
+    line-height:50rpx;
+}
+
+.text-placeholder{
+    color: #BBBBBB;
+}
+
+.count{
+    position: absolute;
+    right: 30rpx;
+    bottom: 40rpx;
+    color: #AAAAAA;
+}
+
+.btn{
+    width:750rpx;
+    height:110rpx;
+    background:rgba(57,147,238,1);
+    font-size:38rpx;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    text-align: center;
+    line-height:110rpx;
+    position: fixed;
+    bottom: 0;
+}

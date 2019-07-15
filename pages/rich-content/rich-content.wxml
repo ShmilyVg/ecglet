@@ -1,0 +1,43 @@
+<!--pages/rich-content/rich-content.wxml-->
+<view class="flex-column" style="align-items: center">
+    <view class="title">基本信息</view>
+    <view class="flex-row" style="width: 660rpx;align-items: center;justify-content: space-between;margin-top: 42rpx">
+        <view class="flex-row" style="align-items: center">
+            <view class="avatar"></view>
+            <view class="flex-column" style="margin-left: 16rpx">
+                <view class="name">name</view>
+                <view class="flex-row" style="align-items: center">
+                    <view class="sex"></view>
+                    <view class="age">25sui</view>
+                </view>
+            </view>
+        </view>
+        <view class="flex-row" style="align-items: center">
+            <view class="qiehuantaren">切换他人</view>
+            <view class="arr"></view>
+        </view>
+    </view>
+    <view class="line"></view>
+    <view class="title">常见症状
+        <mark style="font-size: 24rpx">（可多选)</mark>
+    </view>
+    <view class="tag-view flex-row">
+        <view wx:for="{{ill}}" class="tag {{item.value?'tag-chose':''}}" bindtap="clickIll" data-index="{{index}}">
+            {{item.text}}
+        </view>
+    </view>
+    <view class="line"></view>
+    <view class="title">详细活动记录</view>
+    <view class="tag-view flex-row">
+        <view wx:for="{{detailed}}" class="tag {{item.value?'tag-chose':''}}" bindtap="clickDetailed"
+              data-index="{{index}}">{{item.text}}
+        </view>
+    </view>
+
+    <textarea class="text" placeholder="如果还有其他症状、活动需要说明，请在此处补充。如是否饮酒、吸烟、是否剧烈运动，以及是否服用了控制心率的药物等。"
+              placeholder-class="text-placeholder" bindinput="textContent">
+        <view class="count">{{count}}/100</view>
+    </textarea>
+</view>
+
+<view class="btn">确定</view>
