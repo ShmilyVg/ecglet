@@ -8,12 +8,13 @@
     "pages/disease-arrhyth/disease-arrhyth",
     "pages/feedback/feedback",
     "pages/result/result",
-    "pages/report/report"
+    "pages/report/report",
+    "pages/welcome/welcome"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#3a93ef",
-    "navigationBarTitleText": "HiPee心电仪",
+    "navigationBarTitleText": "HiPee心电管家",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

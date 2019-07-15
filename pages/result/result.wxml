@@ -1,7 +1,7 @@
 <view class="flex-column {{isGreen?'page-green':'page-blue'}}">
     <image wx:if="{{isGreen}}" src="../../images/result/bg_green.png" style="height: 273rpx;width: 100%"></image>
     <image wx:else src="../../images/result/bg_blue.png" style="height: 273rpx;width: 100%"></image>
-    <view class="share">分享给亲友</view>
+<!--    <view class="share">分享给亲友</view>-->
     <view class="avatar-border flex-column {{isGreen?'avatar-border-green':'avatar-border-blue'}}">
         <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
     </view>

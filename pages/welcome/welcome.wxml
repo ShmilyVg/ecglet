@@ -1,0 +1,16 @@
+<view class="fill-width flex-column">
+    <swiper indicator-dots="{{true}}" bindchange="onWelcomeItemChanged"
+            autoplay="{{true}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(54,148,239,1)" indicator-color="rgba(215,234,252,1)">
+        <block wx:for="{{items}}" wx:key="path">
+            <swiper-item class="flex-column align-items-center" style="margin-top: 92rpx;">
+                <view class="welcome-title">{{item.title}}</view>
+                <view class="welcome-content">{{item.content}}</view>
+                <image src="../../images/welcome/{{item.path}}.png" class="welcome-image"/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="fill-width flex-column align-items-center" style="position: absolute;left: 0;bottom: 40rpx;">
+        <button class="button-radius">授权登录</button>
+        <view class="welcome-bottom-text">{{currentIndex===items.length-1?'*报告出自“上海交通大学医院附属仁济医院远程诊断中心':''}}</view>
+    </view>
+</view>

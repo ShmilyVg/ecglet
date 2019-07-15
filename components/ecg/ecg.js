@@ -67,7 +67,6 @@ Component({
       let ctx = wx.createCanvasContext("ecg_bg", that)
 
       ctx.fillStyle = bgColor || 'transparent';
-      console.log(ctx);
       ctx.beginPath();
       ctx.moveTo(r, 0);
       ctx.lineTo(rw - r, 0);
@@ -81,6 +80,7 @@ Component({
       ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
       const d = that.data.pxmm
       // // 绘制竖行网格
+      // if (that.data.showColumnAndRowLine) {
       if (!!bgColor&&that.data.showColumnAndRowLine) {
         for (var i = 0; i < rw / d; i++) {
           if (i % 5 == 0) {
@@ -116,7 +116,22 @@ Component({
         }
       }
 
+      ctx.fillStyle = '#3a93ef';
+      ctx.beginPath();
+      ctx.moveTo(0, r);
+      ctx.lineTo(0, 0);
+      ctx.lineTo(r, 0);
+      ctx.arcTo(0, 0, 0, r, r);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();
 
+      ctx.moveTo(rw - r, 0);
+      ctx.lineTo(rw, 0);
+      ctx.lineTo(rw, r);
+      ctx.arcTo(rw, 0, rw - r, 0, r);
+      ctx.closePath();
+      ctx.fill();
       that.data.baseY = rh / (2 * d) * d + offsetY
 
       ctx.draw()
