@@ -1,0 +1,78 @@
+<view class="flex-column">
+    <view class="fill-width flex-row align-items-center space-between box-sizing-border-box new-user-edit-top-layout">
+        <view class="flex-column">
+            <view class="new-user-edit-remind">首先，</view>
+            <view class="new-user-edit-remind">为了测出准确合理的检测结果</view>
+            <view class="new-user-edit-remind">请您完善基本信息</view>
+        </view>
+        <image src="{{portraitUrl}}" class="avatar" bindtap="chooseImage"></image>
+
+    </view>
+    <view style="padding-top: 120rpx;background-color: white;padding-bottom: 50rpx;border-top-left-radius: 80rpx;border-top-right-radius: 80rpx;">
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">姓名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="13" bind:input="onNameChange"/>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <button wx:if="{{isPhoneNotAuth}}" class="weui-input cell-content" style="color: gray;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请输入手机号</button>
+                <input wx:else class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bindinput="onNumberChange"/>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_select cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">性别</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="onSexChange" value="{{sexIndex}}" range="{{sexies}}">
+                    <view class="cell-content">{{sexies[sexIndex]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">出生日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{birthDate}}" start="1900-01-01" end="{{birthEndDate}}"
+                        bindchange="onBirthChange">
+                    <view class="weui-input cell-content" style="color:{{birthDate=='请选择出生日期'?'gray':'black'}}">{{birthDate}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">身高（cm)</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入身高" type="number" value="{{height}}" type="number" maxlength="3" bind:input="onHeightChange"/>
+            </view>
+        </view>
+        <view class="cell-line-hpe"></view>
+        <view class="weui-cell_input cell-hpe">
+            <view class="weui-cell__hd">
+                <view class="weui-label cell-title">体重（kg）</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input cell-content" placeholder="请输入体重" type="number" value="{{weight}}" type="number" maxlength="4" bind:input="onWeightChange"/>
+            </view>
+        </view>
+        <view class="fill-width flex-row justify-center" style="margin-top: 30rpx;">
+            <view class="finish" bindtap="onSubmit">完成</view>
+        </view>
+
+    </view>
+
+</view>
+

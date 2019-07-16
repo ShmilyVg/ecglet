@@ -20,6 +20,9 @@ Page({
     },
 
     onLoad(options) {
+        const isNewUser = parseInt(options.isNewUser || 0);//如果是新用户初次使用
+
+
         let birthEndDate = tools.createDateAndTime(new Date());
         this.setData({
             birthEndDate: birthEndDate
