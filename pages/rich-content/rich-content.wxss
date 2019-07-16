@@ -42,7 +42,6 @@
 }
 
 .arr {
-    background-color: red;
     height: 24rpx;
     width: 14rpx;
     margin-left: 20rpx;

@@ -13,7 +13,7 @@
                 </view>
             </view>
         </view>
-        <view style="height: 36rpx;width: 36rpx;background-color: red"></view>
+        <image src="../../images/members/bj.png" style="height: 36rpx;width: 36rpx"></image>
     </view>
 </view>
 

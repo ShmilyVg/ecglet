@@ -74,9 +74,7 @@ Page({
     clickDetailed(e) {
         const {target: {dataset: {index}}} = e;
         let detailed = this.data.detailed;
-        detailed.map((value, index1) => {
-            value.value = value.value ? false : index1 === index
-        });
+        detailed[index].value = !detailed[index].value;
         this.setData({
             detailed: detailed
         })

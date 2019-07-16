@@ -14,7 +14,7 @@
         </view>
         <view class="flex-row" style="align-items: center">
             <view class="qiehuantaren">切换他人</view>
-            <view class="arr"></view>
+            <image src="../../images/rich/arr.png" class="arr"></image>
         </view>
     </view>
     <view class="line"></view>
