@@ -39,7 +39,7 @@
             </button>
             <view class="flex-row cell space-between" bindtap="clickCell2">
                 <view class="flex-row align-items-center">
-                    <image class="icon" src="../../images/mine/icon2.png"></image>
+                    <image class="icon" src="../../images/mine/share.png"></image>
                     <view class="title">亲友共享记录</view>
                 </view>
 
@@ -55,7 +55,7 @@
             </view>
             <view class="flex-row cell space-between" bindtap="clickCell2">
                 <view class="flex-row align-items-center">
-                    <image class="icon" src="../../images/mine/icon2.png"></image>
+                    <image class="icon" src="../../images/mine/xd.png"></image>
                     <view class="title">读懂心电图</view>
                 </view>
 

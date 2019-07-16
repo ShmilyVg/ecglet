@@ -50,6 +50,7 @@ Page({
 
     waveData: undefined,
 
+
     reset() {
         let that = this
 
