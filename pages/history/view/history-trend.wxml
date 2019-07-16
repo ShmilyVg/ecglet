@@ -1,3 +1,4 @@
+<import src="view/trend-index"></import>
 <template name="history-trend">
     <view class="flex-row" style="background-color: white;padding-top: 50rpx;justify-content: space-around" bindtap="clickTrendTop">
         <view class="flex-column">
@@ -11,9 +12,11 @@
             <view wx:if="{{!trendRightChoseIsLeft}}" class="line" style="width:117rpx"></view>
         </view>
     </view>
-    <view>
+
+    <view class="flex-column" style="background-color: white;align-items: center;margin-top: 12rpx">
         <canvas canvas-id="lineCanvas" class="canvas" disable-scroll="true"
                 bindtouchstart="touchHandler"
                 bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
     </view>
+    <template is="trend-index" data="{{list}}"></template>
 </template>

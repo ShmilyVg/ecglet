@@ -20,6 +20,7 @@
     width: 720rpx;
     height: 440rpx;
     margin-top: 50rpx;
+    background-color: white;
 }
 
 .canvas-bottom-text{

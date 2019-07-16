@@ -16,4 +16,4 @@
 
 <template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
 
-<template is="history-trend" wx:else data="{{trendRightChoseIsLeft}}"></template>
+<template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list}}"></template>

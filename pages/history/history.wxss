@@ -1,5 +1,6 @@
 @import "view/history-list.wxss";
 @import "view/history-trend.wxss";
+@import "view/view/trend-index.wxss";
 
 page {
     background: #f2f2f2;
