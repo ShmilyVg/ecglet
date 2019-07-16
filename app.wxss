@@ -35,13 +35,19 @@
 .fill-width{
   width: 100%;
 }
-
+.fill-height{
+  height: 100%;
+}
 .box-sizing-border-box{
   box-sizing: border-box;
 }
 
 .space-between{
   justify-content: space-between;
+}
+
+.absolute{
+  position: absolute;
 }
 
 button{

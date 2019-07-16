@@ -15,6 +15,7 @@ import {
     stopBluetoothDevicesDiscovery
 } from "../../apis/ble/manager";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import {ArrhythStateManager} from "./state";
 
 ArrayBuffer.prototype.concat = function (b2) {
     let tmp = new Uint8Array(this.byteLength + b2.byteLength);
@@ -25,6 +26,7 @@ ArrayBuffer.prototype.concat = function (b2) {
 
 Page({
     data: {
+        items: [{title: '- 手握式 -', path: 'sws'}, {title: '- 贴胸式 -', path: 'txs'}],
         bleStatus: '',
         canvasHeight: 0,
         canvasWidth: 0,
@@ -45,7 +47,7 @@ Page({
         btCheckTimer: undefined,
         showToast: false,
         toastMsg: undefined,
-        showLoading: false
+        showLoading: false,
     },
 
     waveData: undefined,
@@ -114,6 +116,7 @@ Page({
                     }
                     that.reset()
                     that.preparePannelDark('');
+                    this.arrhythStateManager.connectedFailed();
                     // await wx.showLoading({
                     //   title: "等待设备接通...",
                     //   mask: true
@@ -132,10 +135,7 @@ Page({
 
                 // 计时开始
                 if (!that.data.countTimer) {
-                    that.preparePannelDark('white');
-                    setTimeout(() => {
-                        that.startCount();
-                    });
+                    this.arrhythStateManager.prepare();
                 }
             }
         } catch (err) {
@@ -168,6 +168,8 @@ Page({
     },
 
     onLoad(options) {
+        this.arrhythStateManager = new ArrhythStateManager(this);
+        this.arrhythStateManager.guider();
         // console.log(await wx.getUserInfo())
         wx.setKeepScreenOn({keepScreenOn: true});
         console.log('onLoad', options);
@@ -346,6 +348,7 @@ Page({
         } catch (error) {
             console.log('蓝牙错误: %o', error)
         }
+
     },
 
     onUnload() {
@@ -452,27 +455,23 @@ Page({
     },
 
     onReady() {
-        let that = this
-
-        let query = that.createSelectorQuery()
-
-        that.data.progressCircle = that.selectComponent('#circle1')
-        let circle = that.data.progressCircle
-        circle.drawCircleBg('circle_bg1', 100)
-        // setTimeout(()=>{
-        query.select('#ecg').boundingClientRect((rect) => {
-            that.data.ecgPannel = that.selectComponent('#ecg')
-            console.log("ECG box rect: %o}", rect)
-            // let ecg: any = that.data.ecgPannel
-            // ecg.preparePannel(rect.width, rect.height)
-            that.data.canvasWidth = rect.width;
-            that.data.canvasHeight = rect.height;
-            this.preparePannelDark('');
-            // ecg.preparePannelDark(rect.width, rect.height);
-        }).exec()
-        // },2000)
-
-
+        //TODO 将来删掉
+        // let that = this;
+        // setTimeout(() => {
+        //     that.hideLoading()
+        //
+        //     // 每次重新连接，采集数据缓存清空一次
+        //     that.waveData = undefined
+        //
+        //     // 计时开始
+        //     if (!that.data.countTimer) {
+        //         that.preparePannelDark('white');
+        //         this.arrhythStateManager.prepare();
+        //         // setTimeout(() => {
+        //         //     that.startCount();
+        //         // });
+        //     }
+        // }, 1000);
     },
 
     preparePannelDark(bgColor) {
