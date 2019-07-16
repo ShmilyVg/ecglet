@@ -70,15 +70,11 @@ swiper{
   align-self: stretch;
 }
 .toast {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
+  margin-top: 41rpx;
 }
 .toast .tip {
   color: white;
   font-size: 26rpx;
-  margin-bottom: 109rpx;
 }
 
 .remind-image-size{
@@ -100,4 +96,37 @@ swiper{
 .arrhyth-connected-confirm-size{
   width: 149rpx;
   height: 149rpx;
+}
+
+.connect-failed-button{
+  width:338rpx;
+  padding: 36rpx;
+  background:rgba(255,255,255,0.08);
+  border:2rpx solid rgba(255,255,255,1);
+  border-radius:50rpx;
+  font-size:30rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  margin-top: 47rpx;
+  margin-bottom: 32rpx;
+}
+
+.reconnected-image{
+  width: 29rpx;
+  height: 29rpx;
+  margin-right: 8rpx;
+}
+
+.cant-connected{
+  font-size:26rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(132,193,255,1);
+}
+
+.remind-text-bottom{
+  font-size:26rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1)
 }

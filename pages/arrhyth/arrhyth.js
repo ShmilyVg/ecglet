@@ -373,10 +373,11 @@ Page({
     currentTimestamp: 0,
     onFirstChannelChange(data) {
         let that = this
-        let buffer = that.waveData ? that.waveData : new ArrayBuffer(0)
-
-        console.log('onFirstChannelChange waveData', that.waveData, 'buffer',buffer);
-        that.waveData = buffer.concat(data);
+        if (!this.arrhythStateManager.isFilterData()) {
+            let buffer = that.waveData ? that.waveData : new ArrayBuffer(0);
+            console.log('onFirstChannelChange waveData', that.waveData, 'buffer',buffer);
+            that.waveData = buffer.concat(data);
+        }
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
         // ecg.drawWave(data)

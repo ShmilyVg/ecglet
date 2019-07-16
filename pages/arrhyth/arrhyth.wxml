@@ -32,20 +32,39 @@
           </swiper-item>
         </block>
       </swiper>
-      <cover-view class="toast" hidden="{{showLoading}}">
+      <cover-view class="fill-width toast" hidden="{{showLoading}}">
         <cover-view class="flex-column align-items-center tip">
-          <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</cover-view>
-          <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'尝试设备连接'}}</cover-view>
-          <cover-view class="remind-text-small" style="margin-top: 49rpx;">{{bleStatus==='not_init'?' ':'将双手放在金属片上测试'}}</cover-view>
-          <cover-view class="remind-text-small" style="margin-bottom: 217rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
-          <cover-view class="flex-row align-items-center">
-            <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
-            <cover-view >绿灯亮起/蓝灯闪烁：表示当前处于采集状态</cover-view>
+          <block wx:if="{{isConnectedFailed}}">
+            <cover-view class="remind-text-big">连接失败</cover-view>
+            <cover-view class="flex-row align-items-center justify-center connect-failed-button" bindtap="onClickConnectedFail">
+              <cover-image class="reconnected-image" src="../../images/arrhyth/cl.png"></cover-image>
+              <cover-view>连接失败</cover-view>
+            </cover-view>
+            <cover-view class="cant-connected">连接不上?</cover-view>
+
+          </block>
+
+          <block wx:else>
+            <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</cover-view>
+            <cover-view class="remind-text-big">{{bleStatus==='not_init'?'':'尝试设备连接'}}</cover-view>
+            <cover-view class="fill-width flex-row align-items-center justify-center" style="margin-top: 49rpx;">
+              <cover-image src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></cover-image>
+              <cover-view class="remind-text-small" style="margin-left: 8rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
+            </cover-view>
+          </block>
+
+          <cover-view class="fill-width flex-column align-items-center" style="margin-top: 220rpx;">
+            <cover-view class="flex-row align-items-center">
+              <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
+              <cover-view class="remind-text-bottom">绿灯亮起/蓝灯闪烁：表示当前处于采集状态</cover-view>
+            </cover-view>
+            <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
+              <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
+              <cover-view class="remind-text-bottom">蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
+            </cover-view>
           </cover-view>
-          <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
-            <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
-            <cover-view >蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
-          </cover-view>
+
+
         </cover-view>
       </cover-view>
     </view>

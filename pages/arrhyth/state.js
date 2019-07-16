@@ -2,21 +2,44 @@ export class ArrhythStateManager {
 
     constructor(page) {
         this._page = page;
+        this._page.onClickConnectedFail = () => {
+            this.guider();
+        };
+        this.connectedStateIndex = -1;
+        // this.prepareStateIndex = -1;
+    }
+
+    isFilterData() {
+        return this._page.data.isFilterArrhythData;
     }
 
     guider() {
         this._page.setData({
-            isGuider: true
+            isGuider: true,
+            isConnectedFailed: false,
+            isFilterArrhythData:true
+        }, () => {
+            this.connectedStateIndex = setTimeout(() => {
+                this.connectedFailed();
+            }, 60000);
         })
     }
 
     prepare() {
         this._page.setData({
-            isGuider: false
+            isGuider: false,
+            isConnectedFailed: false,
+            isFilterArrhythData: true
         }, () => {
-            showCanvasView(this._page);
-        })
+            showCanvasView(this._page, () => {
+                this._page.setData({
+                    isFilterArrhythData: false
+                })
+            });
+        });
     }
+
+
 
     test() {
 
@@ -27,14 +50,17 @@ export class ArrhythStateManager {
     }
 
     connectedFailed() {
+        clearTimeout(this.connectedStateIndex);
         this._page.setData({
-            isGuider: true
+            isGuider: true,
+            isConnectedFailed: true,
+            isFilterArrhythData:false
         })
     }
 
 }
 
-function showCanvasView(page) {
+function showCanvasView(page, startCountFun) {
     let that = page;
 
     let query = that.createSelectorQuery()
@@ -52,8 +78,9 @@ function showCanvasView(page) {
         that.data.canvasHeight = rect.height;
         that.preparePannelDark('white');
         setTimeout(() => {
+            startCountFun && startCountFun();
             that.startCount();
-        });
+        }, 5000);
         // ecg.preparePannelDark(rect.width, rect.height);
     }).exec()
 }
