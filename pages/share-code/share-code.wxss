@@ -1,0 +1,47 @@
+/* pages/share-code/share-code.wxss */
+.card-view{
+    background-color: white;
+    width: 570rpx;
+    height: 807rpx;
+    margin-top: 120rpx;
+}
+
+.canvas-view{
+    width:244px;
+    height:244px;
+
+}
+.canvas-border{
+    background:rgba(255,255,255,1);
+    border:2rpx solid rgba(240,242,243,1);
+    border-radius:8rpx;
+    padding: 8px;
+    margin-top: 156rpx;
+}
+.middle-line {
+    width: 100rpx;
+    height: 1rpx;
+    background-color: #BFBFBF;
+}
+
+.middle-text {
+    font-size:36rpx;
+    font-weight:500;
+    color:rgba(91,91,91,1);
+    margin-top: 34rpx;
+    margin-bottom: 32rpx;
+}
+
+.bottom-text{
+    text-align: center;
+    color: #A1A1A1;
+    font-size: 28rpx;
+}
+
+.circular-point{
+    width: 44rpx;
+    height: 44rpx;
+    background-color: #67D5B8;
+    top: 500rpx;
+    border-radius: 50%;
+}

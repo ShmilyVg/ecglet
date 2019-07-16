@@ -12,7 +12,8 @@
     "pages/report/report",
     "pages/welcome/welcome",
     "pages/rich-content/rich-content",
-    "pages/member-list/member-list"
+    "pages/member-list/member-list",
+    "pages/share-code/share-code"
   ],
   "window": {
     "backgroundTextStyle": "light",

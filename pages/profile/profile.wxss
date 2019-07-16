@@ -18,7 +18,7 @@
   height:114rpx;
   border-radius: 50%;
   border-width: 14rpx;
-  border-color: rgba(208,232,255,0.52);
+  border-color: rgba(238,243,247,0.1);
   border-style: solid;
 }
 
@@ -61,7 +61,7 @@
 .title {
   font-size:28rpx;
   color:rgba(102,102,102,1);
-  margin-left: 17rpx;
+  margin-left: 31rpx;
 }
 
 .arr-02 {
@@ -69,6 +69,7 @@
   height: 25rpx;
   margin-right: 60rpx;
 }
+
 .flex-column {
   display: flex;
   flex-direction: column;
