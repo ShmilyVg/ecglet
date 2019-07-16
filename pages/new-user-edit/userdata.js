@@ -66,11 +66,13 @@ Page({
                 Toast.hiddenLoading();
             });
         } else {
+            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
             wx.setStorageSync('isNewUserPhoneAuth', true);
             this.setData({
                 number: wx.getStorageSync('phoneNumber'),
                 isPhoneNotAuth: this.isPhoneNotAuth()
             });
+
         }
     },
     onNameChange(e) {
@@ -123,7 +125,7 @@ Page({
             return;
         }
         if (!this.data.birthDate.trim()) {
-            Toast.showText('请填写出生日期');
+            Toast.showText('请选择出生日期');
             return;
         }
         let birthTime = this.data.birthDate || '';
