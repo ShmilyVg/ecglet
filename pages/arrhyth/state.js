@@ -21,7 +21,7 @@ export class ArrhythStateManager {
         }, () => {
             this.connectedStateIndex = setTimeout(() => {
                 this.connectedFailed();
-            }, 60000);
+            }, 1000);
         })
     }
 

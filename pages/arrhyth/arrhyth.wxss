@@ -130,3 +130,7 @@ swiper{
   font-weight:500;
   color:rgba(255,255,255,1)
 }
+
+.temp-height{
+  height: 280rpx;
+}
