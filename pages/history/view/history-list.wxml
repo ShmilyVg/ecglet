@@ -1,0 +1,27 @@
+<template name="history-list" class="flex-column">
+    <view style="height: 30rpx"></view>
+    <view wx:if="{{logs.length}}" class="flex-column">
+        <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindtap="toPdfUrl" data-item="{{item}}">
+            <view class="flex-row align-items-center">
+                <image wx:if="{{item.isAbnormal}}" src="../../images/history/red.png" class="green-circle"></image>
+                <image wx:else src="../../images/history/green.png" class="green-circle"></image>
+                <view class="flex-column" style="margin-left: 18rpx;">
+                    <view class="flex-row align-items-center">
+                        <view class="item-title">{{item.type||'常规心电检测'}}</view>
+                        <view wx:if="{{item.isAbnormal}}" class="item-status-abnormal">异常</view>
+                    </view>
+                    <view class="item-name-and-time">{{item.name||'未知姓名'}}·{{item.dateStr}}·{{item.timeStr}}</view>
+                </view>
+            </view>
+            <view class="flex-column" style="align-items: flex-end">
+                <view class="item-num">{{item.hr}}</view>
+                <view class="item-unit">bmp</view>
+            </view>
+        </view>
+    </view>
+
+    <view wx:else class="none-history">
+        <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
+        <view class="none-history-hint">暂无检测记录</view>
+    </view>
+</template>

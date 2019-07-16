@@ -1,39 +1,29 @@
 import Toast from '../../utils/toast';
-import {createDateAndTime} from "../../utils/tools";
 import HiNavigator from "../../components/navigator/hi-navigator";
-// import Protocol from '../../../ecglet的副本/src/apis/network/protocol.js'
+import Protocol from "../../apis/network/protocol";
+import * as trend from "./view/trend";
+import {createDateAndTime} from "../../utils/tools";
 
 Page({
     data: {
         logs: [],
         page: 1,
-        selectedType: ''
+        selectedType: '',
+        rightChoseIsLeft: true,
+        trendRightChoseIsLeft: true
     },
 
-    onFilterSelected(e) {
-        console.log(e);
-        const {currentTarget: {dataset: {selectedType}}} = e;
-        this.setData({selectedType: selectedType === this.data.selectedType ? '' : selectedType});
-        // switch (selectedType) {
-        //
-        //     case 'time':
-        //
-        //         break;
-        //     case 'type':
-        //     default:
-        //
-        //         break;
-        // }
-    },
     onLoad() {
-        // this.getList({page: 1});
+        this.getList({page: 1});
+        trend.init(this);
+        trend.initTouchHandler();
         console.log(this.data.logs)
     },
 
     getList({page = 1, recorded = false}) {
         Toast.showLoading();
         Protocol.getHistoryList({page}).then((data) => {
-            let list = data.result.dataList
+            let list = data.result.dataList;
             if (list.length) {
                 list.forEach((item) => {
                     const {date, time} = createDateAndTime(parseInt(item.time));
@@ -71,5 +61,18 @@ Page({
     onReachBottom() {
         console.log('getList', this.data.page + 1);
         this.getList({page: ++this.data.page});
+    },
+
+
+    clickRightBtn() {
+        this.setData({
+            rightChoseIsLeft: !this.data.rightChoseIsLeft
+        })
+    },
+
+    clickTrendTop() {
+        this.setData({
+            trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
+        })
     }
 })
