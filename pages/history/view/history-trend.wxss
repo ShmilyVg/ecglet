@@ -1,0 +1,28 @@
+.top-text{
+    font-size:30rpx;
+    font-weight:500;
+    color:rgba(58,147,239,1);
+    line-height:28rpx;
+}
+
+.line {
+    height:4rpx;
+    background:rgba(58,147,239,1);
+    border-radius:2rpx;
+}
+
+.canvas-base-view{
+    width: 720rpx;
+    margin-left: 10rpx;
+}
+
+.canvas {
+    width: 720rpx;
+    height: 440rpx;
+    margin-top: 50rpx;
+}
+
+.canvas-bottom-text{
+    font-size: 30rpx;
+    color: #718EA0;
+}
