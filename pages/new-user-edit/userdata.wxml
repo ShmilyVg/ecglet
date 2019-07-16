@@ -24,7 +24,7 @@
             </view>
             <view class="weui-cell__bd">
                 <button wx:if="{{isPhoneNotAuth}}" class="weui-input cell-content" style="color: gray;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请输入手机号</button>
-                <input wx:else class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bind:input="onNumberChange"/>
+                <input wx:else class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bindinput="onNumberChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>

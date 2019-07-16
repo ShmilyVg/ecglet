@@ -3,6 +3,7 @@ import WXDialog from "../../utils/dialog";
 import * as tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import Protocol from "../../apis/network/protocol";
+import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
     data: {
@@ -81,7 +82,10 @@ Page({
     onNumberChange(e) {
         this.setData({
             number: e.detail.value
-        })
+        },()=>{
+            console.log(this.data.number);
+
+        });
     },
 
     onBirthChange(e) {
@@ -113,47 +117,51 @@ Page({
             Toast.showText('请填写完整信息');
             return;
         }
-
+        console.log(this.data.number);
         if (this.data.number.length != 11) {
             Toast.showText('手机号格式错误');
             return;
         }
-        WXDialog.showDialog({
-            title: '提示', content: '确认修改您的信息吗？', showCancel: true, confirmEvent: () => {
-                let birthTime = this.data.birthDate || '';
-                console.log(`birth time: ${birthTime}`);
-                try {
-                    let data = {
-                        nickName: this.data.name,
-                        phone: this.data.number,
-                        sex: this.data.sexIndex,
-                        birthday: birthTime,
-                        height: this.data.height,
-                        weight: this.data.weight,
-                        portraitUrl: this.data.portraitUrl
-                    }
-                    console.log('保存信息：', data);
-                    Protocol.accountUpdate(data).then((res) => {
-                        return UserInfo.get();
-                    }).then((res) => {
-                        Toast.success('修改成功');
-                        return UserInfo.set({...res.userInfo, ...data});
-                    }).then(() => {
-                        wx.navigateBack({delta: 1});
-                    }).catch((res) => {
-                        if (res.data.code == 2000) {
-                            console.log('手机号重复');
-                            Toast.showText('同一手机\n不能绑定两个账号')
-                        } else {
-                            Toast.showText('修改失败');
-                        }
-                    });
-                } catch (err) {
-                    console.log("onSubmit error: %o", err);
-                    Toast.showText('提交失败')
-                }
+        if (!this.data.birthDate.trim()) {
+            Toast.showText('请填写出生日期');
+            return;
+        }
+        let birthTime = this.data.birthDate || '';
+        console.log(`birth time: ${birthTime}`);
+        try {
+            Toast.showLoading();
+            let data = {
+                nickName: this.data.name,
+                phone: this.data.number,
+                sex: this.data.sexIndex,
+                birthday: birthTime,
+                height: this.data.height,
+                weight: this.data.weight,
+                portraitUrl: this.data.portraitUrl
             }
-        });
+            console.log('保存信息：', data);
+            Protocol.accountUpdate(data).then((res) => {
+                return UserInfo.get();
+            }).then((res) => {
+                Toast.success('保存成功');
+                return UserInfo.set({...res.userInfo, ...data});
+            }).then(() => {
+                HiNavigator.relaunchToStart();
+            }).catch((res) => {
+                if (res.data.code == 2000) {
+                    console.log('手机号重复');
+                    Toast.showText('同一手机\n不能绑定两个账号')
+                } else {
+                    Toast.showText('保存失败');
+                }
+            }).finally(() => {
+                Toast.hiddenLoading();
+            });
+        } catch (err) {
+            console.log("onSubmit error: %o", err);
+            Toast.showText('提交失败');
+            Toast.hiddenLoading();
+        }
     },
 
     chooseImage() {
