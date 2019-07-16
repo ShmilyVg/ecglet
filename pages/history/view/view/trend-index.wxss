@@ -1,0 +1,32 @@
+.trend-index-select-style{
+    font-size: 27rpx;
+    width: 182rpx;
+    line-height:27rpx;
+    text-align: center;
+    color: white;
+    padding: 20rpx 0;
+    border-radius: 50rpx;
+    background-color: #3A93EF;
+    margin-left: 20rpx;
+    border: 1rpx solid #3A93EF;
+}
+.trend-index-not-select-style{
+    font-size: 27rpx;
+    width: 182rpx;
+    line-height:27rpx;
+    text-align: center;
+    color: #3A93EF;
+    padding: 20rpx 0;
+    border-radius: 50rpx;
+    background-color: white;
+    border: 1rpx solid #3A93EF;
+    margin-left: 20rpx;
+}
+
+.trend-index-arr{
+    width: 0;
+    height: 0;
+    border: 15rpx solid transparent;
+    border-top-color: #3A93EF;
+    margin-left: 20rpx;
+}

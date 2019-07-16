@@ -1,7 +1,7 @@
 import Toast from '../../utils/toast';
 import HiNavigator from "../../components/navigator/hi-navigator";
 import Protocol from "../../apis/network/protocol";
-import * as trend from "./view/trend";
+import * as trend from "./view/view/trend";
 import {createDateAndTime} from "../../utils/tools";
 
 Page({
@@ -10,7 +10,8 @@ Page({
         page: 1,
         selectedType: '',
         rightChoseIsLeft: true,
-        trendRightChoseIsLeft: true
+        trendRightChoseIsLeft: true,
+        list: [1, 2, 3, 4]
     },
 
     onLoad() {
@@ -65,6 +66,8 @@ Page({
 
 
     clickRightBtn() {
+        trend.init(this);
+        trend.initTouchHandler();
         this.setData({
             rightChoseIsLeft: !this.data.rightChoseIsLeft
         })

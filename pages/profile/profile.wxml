@@ -58,7 +58,6 @@
                     <image class="icon" src="../../images/mine/xd.png"></image>
                     <view class="title">读懂心电图</view>
                 </view>
-
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
             </view>
         </view>

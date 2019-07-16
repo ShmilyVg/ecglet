@@ -1,4 +1,4 @@
-let charts = require('wxcharts.js');
+let charts = require('./wxcharts');
 
 let _page = null;
 let _data = null;

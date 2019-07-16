@@ -20,7 +20,7 @@
         </view>
     </view>
 
-    <view wx:else class="none-history">
+    <view wx:else class="none-history flex-column">
         <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
         <view class="none-history-hint">暂无检测记录</view>
     </view>
