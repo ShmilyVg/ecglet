@@ -25,7 +25,7 @@ Page({
         console.log(e);
         dealAuthUserInfo(e).then((res) => {
             this.setData({userInfo: res.userInfo});
-            HiNavigator.relaunchToStart();
+            HiNavigator.relaunchToNewUserEdit();
         }).catch((res) => {
             console.log(res);
         }).finally(() => {

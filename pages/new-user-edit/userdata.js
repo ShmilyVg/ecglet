@@ -16,19 +16,18 @@ Page({
         height: '',
         weight: '',
         number: '',
-        portraitUrl: ''
+        portraitUrl: '',
+        isPhoneNotAuth: true
     },
 
     onLoad(options) {
-        const isNewUser = parseInt(options.isNewUser || 0);//如果是新用户初次使用
-
-
         let birthEndDate = tools.createDateAndTime(new Date());
         this.setData({
             birthEndDate: birthEndDate
         });
         UserInfo.get().then((res) => {
             console.log('res:', res);
+
             this.setData({
                 name: res.userInfo.nickName,
                 number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
@@ -36,11 +35,43 @@ Page({
                 birthDate: res.userInfo.birthday || '请选择出生日期',
                 height: res.userInfo.height,
                 weight: res.userInfo.weight,
-                portraitUrl: res.userInfo.portraitUrl
+                portraitUrl: res.userInfo.portraitUrl,
+                isPhoneNotAuth: this.isPhoneNotAuth()
             })
         })
     },
-
+    isPhoneNotAuth() {
+        return !wx.getStorageSync('isNewUserPhoneAuth');
+    },
+    getPhoneNumber(e) {
+        const {detail: {encryptedData, iv, errMsg}} = e;
+        if (errMsg === 'getPhoneNumber:ok') {
+            Toast.showLoading();
+            Protocol.getPhoneNum({
+                encryptedData, iv
+            }).then((phoneNumber) => {
+                wx.setStorageSync('phoneNumber', phoneNumber);
+                wx.setStorageSync('isNewUserPhoneAuth', true);
+            }).then((res) => {
+                    this.setData({
+                        number: wx.getStorageSync('phoneNumber'),
+                        isPhoneNotAuth: this.isPhoneNotAuth()
+                    });
+                }
+            ).catch((res) => {
+                console.log(res);
+                Toast.showText('授权手机号失败，请重试');
+            }).finally(() => {
+                Toast.hiddenLoading();
+            });
+        } else {
+            wx.setStorageSync('isNewUserPhoneAuth', true);
+            this.setData({
+                number: wx.getStorageSync('phoneNumber'),
+                isPhoneNotAuth: this.isPhoneNotAuth()
+            });
+        }
+    },
     onNameChange(e) {
         this.setData({
             name: e.detail.value

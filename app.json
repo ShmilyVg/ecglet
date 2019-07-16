@@ -4,6 +4,7 @@
     "pages/arrhyth/arrhyth",
     "pages/profile/profile",
     "pages/userdata/userdata",
+    "pages/new-user-edit/userdata",
     "pages/history/history",
     "pages/disease-arrhyth/disease-arrhyth",
     "pages/feedback/feedback",

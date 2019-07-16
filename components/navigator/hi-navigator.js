@@ -4,6 +4,10 @@ export default class HiNavigator extends CommonNavigator {
     static relaunchToStart() {
         this.reLaunch({url: '/pages/start/start'});
     }
+
+    static relaunchToNewUserEdit() {
+        this.reLaunch({url: '/pages/new-user-edit/userdata'});
+    }
     static relaunchToWelcome() {
         this.reLaunch({url: '/pages/welcome/welcome'});
     }

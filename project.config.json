@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -68,6 +68,14 @@
 					"id": -1,
 					"name": "welcome",
 					"pathName": "pages/welcome/welcome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "完善个人资料",
+					"pathName": "pages/new-user-edit/userdata",
+					"query": "",
 					"scene": null
 				}
 			]

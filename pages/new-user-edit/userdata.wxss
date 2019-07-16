@@ -1,0 +1,75 @@
+.new-user-edit-remind{
+  font-size:30rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  opacity: 0.8;
+}
+
+.cell-hpe{
+  height: 25rpx;
+  padding: 50rpx 40rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cell-line-hpe {
+  width: 100%;
+  height: 2rpx;
+  background-color: #E6E6E6;
+}
+
+.new-user-edit-top-layout{
+  padding: 47rpx 40rpx 64rpx 52rpx;
+  background-color: transparent;
+}
+
+.avatar{
+  width:116rpx;
+  height:116rpx;
+  border-radius: 50%;
+  border: 12rpx solid rgba(255,255,255,0.2);
+  margin-left: 21rpx;
+}
+
+.finish {
+  width:605rpx;
+  height:100rpx;
+  background:rgba(57,147,238,1);
+  border-radius:50rpx;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: white;
+  margin-top: 30rpx;
+  align-self: center;
+}
+
+.cell-title{
+  font-size:30rpx;
+  color:rgba(51,51,51,1);
+}
+
+.cell-content {
+  font-size:30rpx;
+  margin-left: -40rpx;
+}
+
+.weui-label {
+  width: 210rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.weui-input {
+  height: 2.58823529em;
+  min-height: 2.58823529em;
+  line-height: 2.58823529em;
+}
+
+
+
+page {
+  background-color: #3a93ef;
+}
