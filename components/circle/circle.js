@@ -25,6 +25,7 @@ Component({
         step: 1,
         num: 100,
         rpx: 1,
+        maxPointNum: 15,
         ctx: {}
     },
 
@@ -62,11 +63,11 @@ Component({
                     size: 2 * r
                 });
             }
-            const ctx = wx.createCanvasContext(id, that), x1 = r, smallRadius = r / 12, y1 = smallRadius,
-                wholeDegree = 2 * Math.PI, a = 2 * Math.PI / 15, circleRadius = r - smallRadius,
-                maxPointNum = that.data.maxCount,
-                currentStep = Math.ceil(step / 2);
-            console.log(currentStep);
+            const ctx = wx.createCanvasContext(id, that), x1 = r, maxPointNum = that.data.maxPointNum,maxCount = that.data.maxCount,
+                smallRadius = r / 12, y1 = smallRadius,
+                wholeDegree = 2 * Math.PI, a = 2 * Math.PI / maxPointNum, circleRadius = r - smallRadius,
+                currentStep = Math.floor(step / (maxCount * 2 / maxPointNum));
+            console.log('currentStep', currentStep);
 
             let x = x1, y = y1;
             for (let i = 1; i <= maxPointNum; i++) {
@@ -80,17 +81,13 @@ Component({
             }
             if (step !== -1) {
                 ctx.setFontSize(65);
-                const maxWidthText1 = 60, maxWidthText2 = 75, centerX1 = r - maxWidthText1 / 2,
+                const currentNum = maxCount * 2 - step,
+                    maxWidthText1 = 30 * (currentNum < 100 ? 2 : 3),
+                    maxWidthText2 = 72,
+                    centerX1 = r - maxWidthText1 / 2,
                     centerX2 = r - maxWidthText2 / 3;
                 ctx.setFillStyle('white');
-                const currentNum = maxPointNum * 2 - step;
-                let text = '';
-                if (currentNum < 100) {
-                    text = ('00' + (maxPointNum * 2 - step)).slice(-2);
-                } else {
-                    text = ('00' + (maxPointNum * 2 - step)).slice(-3);
-                }
-                ctx.fillText(text, centerX1, r + 12, maxWidthText1);
+                ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), centerX1, r + 12, maxWidthText1);
                 ctx.setFontSize(12);
                 ctx.fillText('SECOND', centerX2, r + 30, maxWidthText2);
             }

@@ -164,7 +164,7 @@ Page({
     },
 
     getOriginTxt() {
-        return this.data.testType === 3 ? '180' : '30';
+        return this.data.testType === 3 ? '300' : '30';
     },
 
     onLoad(options) {
@@ -456,7 +456,7 @@ Page({
     },
 
     onReady() {
-        // TODO 将来删掉
+        // // TODO 将来删掉
         let that = this;
         setTimeout(() => {
             that.hideLoading()
