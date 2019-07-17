@@ -38,4 +38,11 @@ export default class HiNavigator extends CommonNavigator {
         }
     }
 
+    static navigateToShareCode() {
+        wx.navigateTo({url: '/pages/share-code/share-code'});
+    }
+
+    static navigateToKnowledge() {
+        wx.navigateTo({url: '/pages/knowledge/knowledge'});
+    }
 }
