@@ -38,6 +38,7 @@ export default class BaseNetworkImp {
                     }
                 },
             };
+            console.log('发送时的token',_token, requestWithoutLogin);
             if (!!_token || requestWithoutLogin) {
                 wx.request(requestObj);
             } else {

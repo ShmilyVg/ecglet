@@ -29,32 +29,32 @@ export function dealAuthUserInfo(e) {
                     iv
                 }
             } = e;
-            console.log('dealAuthUserInfo 用户信息',e);
+            console.log('dealAuthUserInfo 用户信息', e);
             if (!!userInfo) {
-                if (!!wx.getStorageSync('isRegister')) {
-                    UserInfo.get().then(res=>{
-                        resolve(res);
-                    }).catch(res=>{
-                        console.error('注册情况下获取用户信息失败',res);
-                        reject(res);
-                    })
-                } else {
-                    Toast.showLoading();
-                    Login.doRegister({
-                        encryptedData, iv
-                    }).then(() => UserInfo.get())
-                        .then((res) => {
-                                console.log('获取到用户信息', res);
-                                wx.setStorageSync('isRegister', true);
-                                resolve(res);
-                            }
-                        ).catch((res) => {
-                        console.log(res);
-                        reject(res);
-                    }).finally(() => {
-                        Toast.hiddenLoading();
-                    });
-                }
+                // if (!!wx.getStorageSync('isRegister')) {
+                //     UserInfo.get().then(res=>{
+                //         resolve(res);
+                //     }).catch(res=>{
+                //         console.error('注册情况下获取用户信息失败',res);
+                //         reject(res);
+                //     })
+                // } else {
+                Toast.showLoading();
+                Login.doRegister({
+                    encryptedData, iv
+                }).then(() => UserInfo.get())
+                    .then((res) => {
+                            console.log('获取到用户信息', res);
+                            wx.setStorageSync('isRegister', true);
+                            resolve(res);
+                        }
+                    ).catch((res) => {
+                    console.log(res);
+                    reject(res);
+                }).finally(() => {
+                    Toast.hiddenLoading();
+                });
+                // }
 
             } else {
                 WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});

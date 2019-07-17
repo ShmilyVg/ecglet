@@ -1,5 +1,15 @@
 <!--pages/knowledge/knowledge.wxml-->
-<view class="fill-width flex-column">
-    <video class="fill-width"></video>
+<view class="fill-width flex-column align-items-center" style="margin-bottom: 120rpx;">
+    <video src="{{videoUrl}}" class="fill-width"></video>
+    <view class="knowledge-title">{{title}}</view>
+    <image src="../../images/xdt.png" style="width: 552rpx;height: 340rpx;"></image>
+    <view class="knowledge-content-bottom-image">{{contentBottomImage}}</view>
 
+    <view class="fill-width flex-column box-sizing-border-box knowledge-content-layout" wx:for="{{contentList}}" wx:key="title">
+        <view class="flex-row align-items-center knowledge-content-title-layout">
+            <view class="flex-row align-items-center justify-center knowledge-content-index">{{index+1}}</view>
+            <view class="knowledge-content-title">{{item.title}}</view>
+        </view>
+        <view class="knowledge-content-text">{{item.content}}<span style="color: #4C9FF2;">{{item.content1}}</span>{{item.content2}}<span style="color: #4C9FF2;">{{item.content3}}</span>。</view>
+    </view>
 </view>
