@@ -11,11 +11,16 @@
       <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
         <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
         <view class="circle_info">
-          <image wx:if="{{!showLoading}}" src="./../../images/arrhyth/cg.png"
+          <image wx:if="{{isFilterArrhythData}}" src="./../../images/arrhyth/cg.png"
                  class="arrhyth-connected-confirm-size"></image>
         </view>
       </circle>
-        <text class="content-layout">你好</text>
+      <view class="fill-width flex-column align-items-center content-layout">
+        <block wx:if="{{isFilterArrhythData}}">
+          <view class="content-layout-success-title">连接成功</view>
+          <view class="content-layout-success-content">请保持当前姿势不要移动</view>
+        </block>
+      </view>
       <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
     </view>
   </view>
@@ -34,13 +39,13 @@
       </swiper>
       <cover-view class="fill-width toast" hidden="{{showLoading}}">
         <cover-view class="flex-column align-items-center tip">
-          <cover-view wx:if="{{isConnectedFailed}}" class="flex-column align-items-center temp-height">
+          <cover-view wx:if="{{isConnectedTimeout}}" class="flex-column align-items-center temp-height">
             <cover-view class="remind-text-big">连接失败</cover-view>
             <cover-view class="flex-row align-items-center justify-center connect-failed-button" bindtap="onClickConnectedFail">
               <cover-image class="reconnected-image" src="../../images/arrhyth/cl.png"></cover-image>
               <cover-view>连接失败</cover-view>
             </cover-view>
-            <cover-view class="cant-connected">连接不上?</cover-view>
+            <cover-view class="cant-connected" bindtap="onConnectedFailedReason">连接不上?</cover-view>
 
           </cover-view>
 

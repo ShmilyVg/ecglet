@@ -59,7 +59,7 @@ swiper{
 }
 
 .content-layout{
-  flex-grow: 1;
+  height: 300rpx;
   margin: 50rpx;
 }
 
@@ -133,4 +133,18 @@ swiper{
 
 .temp-height{
   height: 280rpx;
+}
+
+.content-layout-success-title{
+  font-size:50rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+}
+
+.content-layout-success-content{
+  font-size:30rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(193,224,255,1);
 }
