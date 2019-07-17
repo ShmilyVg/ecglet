@@ -5,32 +5,77 @@
   1. 如果没有语法高亮，且你使用的是 vscode 编辑器的话，建义在 vscode 插件库中安装 minapp-vscode 插件
 -->
 
-<view class="container" style="height:{{windowHeight}}px;">
-  <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
-    <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
-    <view class="circle_info">
-      <image wx:if="{{!showLoading}}" src="./../../images/arrhyth/collect_jingshubian.png" class="remind-large-size"></image>
+<view class="fill-width fill-height absolute">
+  <view hidden="{{isGuider}}">
+    <view class="fill-width fill-height absolute flex-column align-items-center">
+      <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
+        <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
+        <view class="circle_info">
+          <image wx:if="{{isFilterArrhythData}}" src="./../../images/arrhyth/cg.png"
+                 class="arrhyth-connected-confirm-size"></image>
+        </view>
+      </circle>
+      <view class="fill-width flex-column align-items-center content-layout">
+        <block wx:if="{{isFilterArrhythData}}">
+          <view class="content-layout-success-title">连接成功</view>
+          <view class="content-layout-success-content">请保持当前姿势不要移动</view>
+        </block>
+      </view>
+      <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
+    </view>
+  </view>
+
+  <block wx:if="{{isGuider}}">
+    <view class="flex-column align-items-center">
+      <swiper indicator-dots="{{true}}"
+              autoplay="{{false}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(255,255,255,1)"
+              indicator-color="rgba(255,255,255,0.2)">
+        <block wx:for="{{items}}" wx:key="path">
+          <swiper-item class="flex-column align-items-center" style="margin-top: 92rpx;">
+            <image src="../../images/arrhyth/{{item.path}}.png" class="arrhyth-guider-image"/>
+            <view class="arrhyth-guider-title">{{item.title}}</view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <cover-view class="fill-width toast" hidden="{{showLoading}}">
+        <cover-view class="flex-column align-items-center tip">
+          <cover-view wx:if="{{isConnectedTimeout}}" class="flex-column align-items-center temp-height">
+            <cover-view class="remind-text-big">连接失败</cover-view>
+            <cover-view class="flex-row align-items-center justify-center connect-failed-button" bindtap="onClickConnectedFail">
+              <cover-image class="reconnected-image" src="../../images/arrhyth/cl.png"></cover-image>
+              <cover-view>连接失败</cover-view>
+            </cover-view>
+            <cover-view class="cant-connected" bindtap="onConnectedFailedReason">连接不上?</cover-view>
+
+          </cover-view>
+
+          <cover-view wx:else class="flex-column align-items-center temp-height">
+            <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</cover-view>
+            <cover-view class="remind-text-big">{{bleStatus==='not_init'?'':'尝试设备连接'}}</cover-view>
+            <cover-view class="fill-width flex-row align-items-center justify-center" style="margin-top: 49rpx;">
+              <cover-image src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></cover-image>
+              <cover-view class="remind-text-small" style="margin-left: 8rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
+            </cover-view>
+          </cover-view>
+
+          <cover-view class="fill-width flex-column align-items-center" style="margin-top: 180rpx;">
+            <cover-view class="flex-row align-items-center">
+              <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
+              <cover-view class="remind-text-bottom">绿灯亮起/蓝灯闪烁：表示当前处于采集状态</cover-view>
+            </cover-view>
+            <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
+              <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
+              <cover-view class="remind-text-bottom">蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
+            </cover-view>
+          </cover-view>
+
+
+        </cover-view>
+      </cover-view>
     </view>
 
-  </circle>
+  </block>
 
-  <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
-
-  <cover-view class="toast" hidden="{{showLoading}}">
-    <cover-view class="flex-column align-items-center tip">
-      <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'等待设备连接'}}</cover-view>
-      <cover-view class="remind-text-small">{{bleStatus==='not_init'?' ':'将双手放在金属片上测试'}}</cover-view>
-      <cover-view class="remind-text-small" style="margin-bottom: 330rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
-      <cover-view class="flex-row align-items-center">
-        <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
-        <cover-view >绿灯亮起/蓝灯闪烁：表示当前处于采集状态</cover-view>
-      </cover-view>
-      <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
-        <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
-        <cover-view >蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
-      </cover-view>
-    </cover-view>
-  </cover-view>
 </view>
 
 

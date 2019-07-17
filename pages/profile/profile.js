@@ -3,6 +3,7 @@ import WXDialog from "../../utils/dialog";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import Protocol from "../../apis/network/protocol";
 import {dealAuthUserInfo} from "../../utils/tools";
+import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
     data: {
@@ -145,5 +146,11 @@ Page({
 
     clickCell3() {
         wx.navigateTo({url: '../feedback/feedback'})
+    },
+    toShareCodePage() {
+        HiNavigator.navigateToShareCode();
+    },
+    toKnowledgePage() {
+        HiNavigator.navigateToKnowledge();
     }
 })

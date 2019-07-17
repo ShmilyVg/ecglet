@@ -24,7 +24,7 @@ export default class UserInfo {
         globalData.userInfo = {...arguments[0]};
         return new Promise((resolve, reject) => {
             wx.setStorage({key: 'userInfo', data: globalData.userInfo, success: resolve, fail: reject});
-        })
+        });
     }
 
     static _postGetUserInfo({resolve, reject}) {

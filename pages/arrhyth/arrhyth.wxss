@@ -3,10 +3,26 @@
 
   注意：文件为空，编译时不会生成新文件
 */
+page{
+  background-color: #3a93ef;
+}
+swiper{
+  width: 100%;
+  height: 550rpx;
+}
 
+.arrhyth-guider-image{
+  width: 512rpx;
+  height: 334rpx;
+}
+.arrhyth-guider-title{
+  font-size:36rpx;
+  font-family:PingFang-SC-Bold;
+  font-weight:bold;
+  color:rgba(180,218,255,1);
+}
 /*圆环进度条文字*/
 .container{
-  background-color: #3a93ef;
   /*//background-color: black;*/
   position: relative;
 }
@@ -36,22 +52,17 @@
   margin-top: 10rpx;
   margin-bottom: 15rpx;
 }
- /*.circle_pannel {*/
- /*  flex: 0 0 200px;*/
- /*  width: 100%;*/
- /*  background-color: #104097;*/
- /*  display: flex;*/
- /* justify-content: center;*/
- /*  align-items: center;*/
- /*  flex-flow: row nowrap;*/
- /*  display: inline-block;*/
- /*  position: relative;*/
- /*  background-color: #0d69b1;*/
- /*}*/
+
 .circle_pannel{
   flex-grow: 1;
   height: 100%;
 }
+
+.content-layout{
+  height: 300rpx;
+  margin: 50rpx;
+}
+
 .ecg_pannel {
   flex-grow: 1;
   width: 100%;
@@ -59,15 +70,11 @@
   align-self: stretch;
 }
 .toast {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
+  margin-top: 41rpx;
 }
 .toast .tip {
   color: white;
   font-size: 26rpx;
-  margin-bottom: 107rpx;
 }
 
 .remind-image-size{
@@ -79,7 +86,6 @@
   font-size:50rpx;
   font-weight:500;
   color:rgba(255,255,255,1);
-  margin-bottom: 25rpx;
 }
 .remind-text-small{
   font-size:26rpx;
@@ -87,7 +93,58 @@
   height: 30rpx;
   color:rgba(153,204,255,1);
 }
-.remind-large-size{
-  width: 235rpx;
-  height: 146rpx;
+.arrhyth-connected-confirm-size{
+  width: 149rpx;
+  height: 149rpx;
+}
+
+.connect-failed-button{
+  width:338rpx;
+  padding: 36rpx;
+  background:rgba(255,255,255,0.08);
+  border:2rpx solid rgba(255,255,255,1);
+  border-radius:50rpx;
+  font-size:30rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  margin-top: 47rpx;
+  margin-bottom: 32rpx;
+}
+
+.reconnected-image{
+  width: 29rpx;
+  height: 29rpx;
+  margin-right: 8rpx;
+}
+
+.cant-connected{
+  font-size:26rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(132,193,255,1);
+}
+
+.remind-text-bottom{
+  font-size:26rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1)
+}
+
+.temp-height{
+  height: 280rpx;
+}
+
+.content-layout-success-title{
+  font-size:50rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+}
+
+.content-layout-success-content{
+  font-size:30rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(193,224,255,1);
 }

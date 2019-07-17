@@ -1,16 +1,55 @@
+import WXDialog from "../../utils/dialog";
+
 export class ArrhythStateManager {
 
-    constructor(_page) {
+    constructor(page) {
         this._page = page;
+        this._page.onClickConnectedFail = () => {
+            this.guider();
+        };
+        this._page.onConnectedFailedReason = () => {
+            WXDialog.showDialog({title:'连接不上?',content:
+                    '1、请检查网络状态和蓝牙是否开启 ；\n' +
+                    '2、 确认心电仪的蓝色指示灯是否亮起；\n' +
+                    '3、将手机尽可能靠近心电仪；\n' +
+                    '4、清理小程序后台进程，再进一遍看看是否能够重连；'})
+
+        };
+        this.connectedStateIndex = -1;
+        // this.prepareStateIndex = -1;
+    }
+
+    isFilterData() {
+        return this._page.data.isFilterArrhythData;
     }
 
     guider() {
-
+        this._page.setData({
+            isGuider: true,//是否是引导页
+            isConnectedTimeout: false,//；连接失败页面
+            isFilterArrhythData: true//是否5s内过滤数据
+        }, () => {
+            this.connectedStateIndex = setTimeout(() => {
+                this.connectedFailed();
+            }, 60000);
+        });
     }
 
     prepare() {
-
+        this._page.setData({
+            isGuider: false,
+            isConnectedTimeout: false,
+            isFilterArrhythData: true
+        }, () => {
+            showCanvasView(this._page, () => {
+                this._page.setData({
+                    isFilterArrhythData: false
+                })
+            });
+        });
     }
+
+
 
     test() {
 
@@ -21,7 +60,37 @@ export class ArrhythStateManager {
     }
 
     connectedFailed() {
-
+        clearTimeout(this.connectedStateIndex);
+        this._page.setData({
+            isGuider: true,
+            isConnectedTimeout: false,
+            isFilterArrhythData:false
+        })
     }
 
+}
+
+function showCanvasView(page, startCountFun) {
+    let that = page;
+
+    let query = that.createSelectorQuery()
+
+    that.data.progressCircle = that.selectComponent('#circle1')
+    let circle = that.data.progressCircle
+    circle.drawCircleBg('circle_bg1', 100)
+    // setTimeout(()=>{
+    query.select('#ecg').boundingClientRect((rect) => {
+        that.data.ecgPannel = that.selectComponent('#ecg')
+        console.log("ECG box rect: %o}", rect)
+        // let ecg: any = that.data.ecgPannel
+        // ecg.preparePannel(rect.width, rect.height)
+        that.data.canvasWidth = rect.width;
+        that.data.canvasHeight = rect.height;
+        that.preparePannelDark('white');
+        setTimeout(() => {
+            startCountFun && startCountFun();
+            that.startCount();
+        }, 4500);
+        // ecg.preparePannelDark(rect.width, rect.height);
+    }).exec()
 }

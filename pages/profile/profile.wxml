@@ -37,7 +37,7 @@
 
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
             </button>
-            <view class="flex-row cell space-between" bindtap="clickCell2">
+            <view class="flex-row cell space-between" bindtap="toShareCodePage">
                 <view class="flex-row align-items-center">
                     <image class="icon" src="../../images/mine/share.png"></image>
                     <view class="title">亲友共享记录</view>
@@ -53,7 +53,7 @@
 
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
             </view>
-            <view class="flex-row cell space-between" bindtap="clickCell2">
+            <view class="flex-row cell space-between" bindtap="toKnowledgePage">
                 <view class="flex-row align-items-center">
                     <image class="icon" src="../../images/mine/xd.png"></image>
                     <view class="title">读懂心电图</view>
