@@ -2,11 +2,10 @@
     <scroll-view scroll-x style="width: 750rpx;height: 155rpx;">
         <view class="flex-row" style="margin: 60rpx 0rpx 0rpx 10rpx;">
             <view class="flex-column" wx:for="{{list}}" wx:key="item_code" bindtap="clickIndexItem" data-current="{{index}}" >
-                <block>
+                <view class="flex-column" style="align-items: center">
                     <view class="trend-index-select-style" style="{{index===list.length-1?'margin-right: 30rpx':''}}">{{item}}</view>
-                    <!--<view class="trend-index-arr" style="{{index===list.length-1?'margin-right: 30rpx':''}}"></view>-->
-                    <!--<view style="height: 30rpx;"></view>-->
-                </block>
+                    <view class="trend-index-arr" style="{{index===list.length-1?'margin-right: 30rpx':''}}"></view>
+                </view>
             </view>
         </view>
     </scroll-view>
