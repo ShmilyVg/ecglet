@@ -11,7 +11,8 @@ Page({
         selectedType: '',
         rightChoseIsLeft: true,
         trendRightChoseIsLeft: true,
-        list: [1, 2, 3, 4]
+        list: [1, 2, 3, 4],
+        trendTag: [0, 1, 2, 3, 4]
     },
 
     onLoad() {
@@ -77,5 +78,9 @@ Page({
         this.setData({
             trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
         })
+    },
+    clickIndexItem(e) {
+        const {currentTarget: {dataset: {current}}} = e;
+        console.log(current);
     }
 })
