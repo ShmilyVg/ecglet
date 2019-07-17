@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -82,6 +82,13 @@
 					"id": 5,
 					"name": "同步记录给亲友",
 					"pathName": "pages/share-code/share-code",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "读懂心电图",
+					"pathName": "pages/knowledge/knowledge",
 					"query": "",
 					"scene": null
 				}

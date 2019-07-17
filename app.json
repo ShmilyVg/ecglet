@@ -13,7 +13,8 @@
     "pages/welcome/welcome",
     "pages/rich-content/rich-content",
     "pages/member-list/member-list",
-    "pages/share-code/share-code"
+    "pages/share-code/share-code",
+    "pages/knowledge/knowledge"
   ],
   "window": {
     "backgroundTextStyle": "light",

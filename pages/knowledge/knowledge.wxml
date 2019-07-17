@@ -1,0 +1,5 @@
+<!--pages/knowledge/knowledge.wxml-->
+<view class="fill-width flex-column">
+    <video class="fill-width"></video>
+
+</view>
