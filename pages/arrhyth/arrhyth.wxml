@@ -8,7 +8,7 @@
 <view class="fill-width fill-height absolute">
   <view hidden="{{isGuider}}">
     <view class="fill-width fill-height absolute flex-column align-items-center">
-      <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' bind:runEvent="_runEvent">
+      <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' max-count="{{maxCount}}" bind:runEvent="_runEvent">
         <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
         <view class="circle_info">
           <image wx:if="{{isFilterArrhythData}}" src="./../../images/arrhyth/cg.png"
