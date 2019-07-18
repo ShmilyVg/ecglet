@@ -19,6 +19,7 @@
         <canvas canvas-id="lineCanvas" class="canvas" disable-scroll="true"
                 bindtouchstart="touchHandler"
                 bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+        <view class="cishu">次数</view>
     </view>
     <template is="trend-index" data="{{list}}"></template>
     <template is="history-trend-list" data="{{logs}}"></template>

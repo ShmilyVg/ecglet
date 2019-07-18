@@ -10,6 +10,10 @@ let dataList = [];
 function init(page) {
     _page = page;
     _data = page.data;
+}
+
+function setData(data) {
+    dataList = data;
     normalTrend();
 }
 
@@ -44,23 +48,29 @@ function normalTrend() {
     } catch (e) {
         // do something when get system info failed
     }
+
+    let YPoint = [];
+
+    for (let i in dataList) {
+        YPoint.push('');
+    }
+
     lineChart = new charts({
         canvasId: 'lineCanvas',
         type: 'area',
         lineStyle: 'curve',
-        categories: ['2012', '2013', '2014', '2015', '2016', '2017','2012', '2013', '2014', '2015', '2016', '2017'],
+        categories: YPoint,
         series: [{
-            name: '成交量1',
             type: 'calibration',
-            data: [0.15, 0.2, 0.45, 0.37, 0.4, 0.8,0.15, 0.2, 0.45, 0.37, 0.4, 0.8],
+            data: dataList,
             format: function (val) {
-                return val.toFixed(2) + '万';
+                return val;
             }
         }],
         legend: false,
         yAxis: {
             format: function (val) {
-                return val.toFixed(2);
+                return val;
             },
             min: 0,
             fontColor: '#AABAC1'
@@ -79,5 +89,6 @@ function normalTrend() {
 
 module.exports = {
     init: init,
-    initTouchHandler: initTouchHandler
+    initTouchHandler: initTouchHandler,
+    setData: setData,
 };

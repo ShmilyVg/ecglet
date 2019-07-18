@@ -68,6 +68,14 @@ export default class Protocol {
         return Network.request({url: 'gather/list', data: {page, page_size}})
     }
 
+    static getLinearGraph({type, relevanceId}) {
+        return Network.request({url: 'gather/list/linearGraph', data: {type, relevanceId}})
+    }
+
+    static accountCreate({nickname, sex, phone, birthday, height, weight}){
+
+    }
+
     static accountUpdate({nickname, sex, phone, birthday, height, weight}) {
         return Network.request({url: 'account/update', data: arguments[0]});
     }

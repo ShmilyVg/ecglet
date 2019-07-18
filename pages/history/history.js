@@ -11,15 +11,18 @@ Page({
         selectedType: '',
         rightChoseIsLeft: true,
         trendRightChoseIsLeft: true,
+        trendResult: [],
         list: [1, 2, 3, 4],
         trendTag: [0, 1, 2, 3, 4]
     },
 
     onLoad() {
         this.getList({page: 1});
-        trend.init(this);
-        trend.initTouchHandler();
-        console.log(this.data.logs)
+        console.log(this.data.logs);
+        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        Protocol.getLinearGraph({type: type}).then(data => {
+            trend.setData(data.result.dataList);
+        })
     },
 
     getList({page = 1, recorded = false}) {
@@ -71,14 +74,20 @@ Page({
         trend.initTouchHandler();
         this.setData({
             rightChoseIsLeft: !this.data.rightChoseIsLeft
-        })
+        });
     },
 
     clickTrendTop() {
+        console.log('clickTrendTop');
         this.setData({
             trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
+        });
+        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        Protocol.getLinearGraph({type: type}).then(data => {
+            trend.setData(data.result.dataList);
         })
     },
+
     clickIndexItem(e) {
         const {currentTarget: {dataset: {current}}} = e;
         console.log(current);

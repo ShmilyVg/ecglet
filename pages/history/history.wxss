@@ -23,7 +23,6 @@ page {
 .name{
     color: #5B5B5B;
     margin-left: 20rpx;
-
 }
 
 .right-nice-choose{
