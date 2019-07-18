@@ -36,6 +36,7 @@ export class ArrhythStateManager {
     }
 
     prepare() {
+        clearTimeout(this.connectedStateIndex);
         this._page.setData({
             isGuider: false,
             isConnectedTimeout: false,
@@ -77,7 +78,7 @@ function showCanvasView(page, startCountFun) {
 
     that.data.progressCircle = that.selectComponent('#circle1')
     let circle = that.data.progressCircle
-    circle.drawCircleBg('circle_bg1', 100)
+    circle.drawCircleBg('circle_bg1', 100, that.data.maxCount);
     // setTimeout(()=>{
     query.select('#ecg').boundingClientRect((rect) => {
         that.data.ecgPannel = that.selectComponent('#ecg')

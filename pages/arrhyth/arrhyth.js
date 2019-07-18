@@ -164,7 +164,7 @@ Page({
     },
 
     getOriginTxt() {
-        return this.data.testType === 3 ? '180' : '30';
+        return this.data.testType === 3 ? '300' : '30';
     },
 
     onLoad(options) {
@@ -177,15 +177,15 @@ Page({
 
         let that = this;
         that.data.testType = parseInt(options.type) || 0;
-        that.data.maxCount = parseInt(this.getOriginTxt()) / 2;
-        console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
         that.setData({
+                maxCount: parseInt(this.getOriginTxt()) / 2,
                 testType: that.data.testType,
                 windowHeight: wx.getSystemInfoSync().windowHeight,
                 txt: this.getOriginTxt(),
 
             }
         );
+        console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
 
         try {
             // 设置设备发现监听回调
@@ -375,7 +375,7 @@ Page({
         let that = this
         if (!this.arrhythStateManager.isFilterData()) {
             let buffer = that.waveData ? that.waveData : new ArrayBuffer(0);
-            console.log('onFirstChannelChange waveData', that.waveData, 'buffer',buffer);
+            console.log('onFirstChannelChange waveData', that.waveData, 'buffer', buffer);
             that.waveData = buffer.concat(data);
         }
         // console.log('data: ' + that.ab2hex(that.data.waveData))
@@ -392,7 +392,7 @@ Page({
     startCount() {
         console.log('startCount...')
         let that = this
-        that.data.countTimer = setInterval(() => {
+        that.data.countTimer = setTimeout(function f() {
             that.data.count++
             if (that.data.count <= 2 * that.data.maxCount) {
                 console.log('count: ' + that.data.count, that.data.maxCount);
@@ -402,25 +402,25 @@ Page({
                     that.data.count = 0
                     // that.setData({ txt: '0' })
                     if (that.data.countTimer) {
-                        clearInterval(that.data.countTimer)
+                        clearTimeout(that.data.countTimer)
                         that.data.countTimer = undefined
                     }
 
                     that.data.completed = true
-                    that.closeBluetooth().then(()=>{
+                    that.closeBluetooth().then(() => {
                         console.log('prepare to upload data...')
                         that.uploadData()
                     })
 
 
+                } else {
+                    that.data.countTimer = setTimeout(f, 1000);
                 }
-
-
             }
         }, 1000)
     },
     onShow() {
-        console.log('onShow... isStartBLEDevices',this.isStartBLEDevices)
+        console.log('onShow... isStartBLEDevices', this.isStartBLEDevices)
         if (this.isStartBLEDevices) {
             return;
         }
@@ -456,7 +456,7 @@ Page({
     },
 
     onReady() {
-        // // TODO 将来删掉
+        // // // TODO 将来删掉
         // let that = this;
         // setTimeout(() => {
         //     that.hideLoading()
