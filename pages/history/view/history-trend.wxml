@@ -1,7 +1,7 @@
 <import src="view/trend-index"></import>
 <import src="view/history-trend-list"></import>
 <template name="history-trend">
-    <view class="flex-row" style="background-color: white;padding-top: 50rpx;justify-content: space-around" bindtap="clickTrendTop">
+    <view class="flex-row" style="background-color: white;padding-top: 20rpx;justify-content: space-around" bindtap="clickTrendTop">
         <view class="flex-column">
             <view class="top-text" style="color: {{trendRightChoseIsLeft?'':'#5B5B5B'}}">常规心电检测</view>
             <view style="height: 27rpx"></view>
@@ -14,13 +14,14 @@
         </view>
     </view>
 
-    <view class="flex-column" style="background-color: white;align-items: center;margin-top: 12rpx">
+    <view style="height: 12rpx"></view>
+    <template is="trend-index" data="{{list}}"></template>
+    <view class="flex-column" style="background-color: white;align-items: center;">
         <view class="xinlvdanwei">心率（单位：bpm）</view>
         <canvas canvas-id="lineCanvas" class="canvas" disable-scroll="true"
                 bindtouchstart="touchHandler"
                 bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
         <view class="cishu">次数</view>
     </view>
-    <template is="trend-index" data="{{list}}"></template>
     <template is="history-trend-list" data="{{logs}}"></template>
 </template>

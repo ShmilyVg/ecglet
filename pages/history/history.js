@@ -19,10 +19,6 @@ Page({
     onLoad() {
         this.getList({page: 1});
         console.log(this.data.logs);
-        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        Protocol.getLinearGraph({type: type}).then(data => {
-            trend.setData(data.result.dataList);
-        })
     },
 
     getList({page = 1, recorded = false}) {
@@ -75,15 +71,20 @@ Page({
         this.setData({
             rightChoseIsLeft: !this.data.rightChoseIsLeft
         });
+        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        Protocol.getLinearGraph({type: type}).then(data => {
+            trend.setData(data.result.dataList);
+        })
     },
 
     clickTrendTop() {
-        console.log('clickTrendTop');
         this.setData({
             trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
         });
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        console.log(type);
         Protocol.getLinearGraph({type: type}).then(data => {
+            console.log('趋势图：', data.result);
             trend.setData(data.result.dataList);
         })
     },

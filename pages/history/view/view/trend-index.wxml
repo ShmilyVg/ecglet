@@ -1,5 +1,5 @@
 <template name="trend-index">
-    <scroll-view scroll-x style="width: 750rpx;height: 155rpx;">
+    <scroll-view scroll-x style="width: 750rpx;height: 155rpx;background-color: white">
         <view class="flex-row" style="margin: 60rpx 0rpx 0rpx 10rpx;">
             <view class="flex-column" wx:for="{{list}}" wx:key="item_code" bindtap="clickIndexItem" data-current="{{index}}" >
                 <view class="flex-column" style="align-items: center">
