@@ -54,13 +54,14 @@ swiper{
 }
 
 .circle_pannel{
-  flex-grow: 1;
-  height: 100%;
+  /*flex-grow: 1;*/
+  height: 500rpx;
 }
 
 .content-layout{
-  height: 300rpx;
-  margin: 50rpx;
+  height: 350rpx;
+  margin-bottom: 50rpx;
+  margin-top: 50rpx;
 }
 
 .ecg_pannel {
@@ -147,4 +148,14 @@ swiper{
   font-family:PingFang-SC-Medium;
   font-weight:500;
   color:rgba(193,224,255,1);
+}
+
+.arrhyth-tip{
+  width: 70%;
+  height: 100%;
+  font-size:30rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(193,224,255,1);
+  text-align: center;
 }

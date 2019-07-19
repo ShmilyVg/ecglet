@@ -48,6 +48,8 @@ Page({
         showToast: false,
         toastMsg: undefined,
         showLoading: false,
+        tip: '',
+        tipAnimationData: {}
     },
 
     waveData: undefined,
@@ -456,7 +458,7 @@ Page({
     },
 
     onReady() {
-        // // // TODO 将来删掉
+        // // TODO 将来删掉
         // let that = this;
         // setTimeout(() => {
         //     that.hideLoading()
