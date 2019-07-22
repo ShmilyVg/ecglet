@@ -2,8 +2,9 @@
 <import src="view/history-trend"></import>
 
 <view class="top-view flex-row">
-    <view class="flex-row" style="align-items: center;">
+    <view class="flex-row" style="align-items: center;" bindtap="switchMember">
         <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
+        <image class="switch" src="../../images/history/qh.png"></image>
         <view class="name">{{userInfo.nickName}}</view>
     </view>
     <view class="right-nice-choose flex-row" bindtap="clickRightBtn">

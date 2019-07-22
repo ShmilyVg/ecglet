@@ -15,7 +15,7 @@
     width:26rpx;
     height:26rpx;
     border-radius: 50%;
-    /*border: 8rpx solid rgba(58, 147, 239, 0.2)*/
+    border: 8rpx solid #d8e9fc
 }
 
 .history-item{

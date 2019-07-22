@@ -157,5 +157,11 @@ Page({
                 itemList: dataList
             })
         })
+    },
+
+    switchMember() {
+        wx.navigateTo({
+            url: '../member-list/member-list?state=3'
+        })
     }
 })

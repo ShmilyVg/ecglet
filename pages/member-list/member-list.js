@@ -5,18 +5,27 @@ import UserInfo from "../../apis/network/network/libs/userInfo";
 
 Page({
     data: {
-        showTopText: false
+        showTopText: false,
+        haveMainMember: false
     },
 
-    onLoad(options){
+    onLoad(options) {
         let state = parseInt(options.state);
         if (state === 1) {
-
+            // 检测完成后的跳转
 
         } else if (state === 2) {
+            // 不带主成员的列表
             this.setData({
-                showTopText: true
+                showTopText: true,
+                haveMainMember: false
             })
+        } else if (state === 3) {
+            // 带主成员的列表
+            this.setData({
+                haveMainMember: true
+            })
+
         }
     },
 
@@ -26,9 +35,21 @@ Page({
             members.map(value => {
                 value.age = tools.jsGetAge(value.birthday);
             });
-            this.setData({
-                members: members
-            })
+            if (this.data.haveMainMember) {
+                UserInfo.get().then(res => {
+                    let userInfo = res.userInfo;
+                    userInfo.name = userInfo.nickName;
+                    userInfo.age = tools.jsGetAge(userInfo.birthday);
+                    members.splice(0, 0, userInfo);
+                    this.setData({
+                        members: members
+                    })
+                })
+            } else {
+                this.setData({
+                    members: members
+                })
+            }
         });
     },
 

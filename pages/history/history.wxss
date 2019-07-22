@@ -54,3 +54,13 @@ page {
     text-align: right;
     line-height: 44rpx;
 }
+
+.switch{
+    width: 28rpx;
+    height: 28rpx;
+    position: absolute;
+    top: 95rpx;
+    left: 90rpx;
+    border-radius: 50%;
+    border:7rpx solid white;
+}
