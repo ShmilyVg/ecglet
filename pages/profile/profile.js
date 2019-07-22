@@ -119,10 +119,13 @@ Page({
 
     toEditInfo() {
         if (!!wx.getStorageSync('isRegister')) {
-            wx.navigateTo({
-                    url: '../userdata/userdata'
-                }
-            );
+            UserInfo.get().then((res) => {
+                getApp().globalData.currentMember = res.userInfo;
+                wx.navigateTo({
+                        url: '../userdata/userdata?isNormalMember=true'
+                    }
+                );
+            })
         } else {
             Toast.warn('请您授权');
         }

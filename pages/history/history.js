@@ -4,6 +4,7 @@ import Protocol from "../../apis/network/protocol";
 import * as trend from "./view/view/trend";
 import {createDateAndTime} from "../../utils/tools";
 import * as Tools from "../../utils/tools";
+import UserInfo from "../../apis/network/network/libs/userInfo";
 
 Page({
     data: {
@@ -26,6 +27,11 @@ Page({
     onLoad() {
         this.getList({page: 1});
         console.log(this.data.logs);
+        UserInfo.get().then((res) => {
+            this.setData({
+                userInfo: res.userInfo
+            })
+        })
     },
 
     getList({page = 1, recorded = false}) {

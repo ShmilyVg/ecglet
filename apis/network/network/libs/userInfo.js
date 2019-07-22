@@ -19,7 +19,7 @@ export default class UserInfo {
         });
     }
 
-    static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex}) {
+    static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex, id}) {
         const globalData = getApp().globalData;
         globalData.userInfo = {...arguments[0]};
         return new Promise((resolve, reject) => {

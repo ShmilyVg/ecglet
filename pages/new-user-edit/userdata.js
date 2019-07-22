@@ -1,7 +1,6 @@
 import Toast from "../../utils/toast";
 import WXDialog from "../../utils/dialog";
 import * as tools from "../../utils/tools";
-import UserInfo from "../../apis/network/network/libs/userInfo";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 

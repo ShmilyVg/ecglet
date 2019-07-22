@@ -1,12 +1,26 @@
 // pages/member-list/member-list.js
 import Protocol from "../../apis/network/protocol";
 import * as tools from "../../utils/tools";
+import UserInfo from "../../apis/network/network/libs/userInfo";
 
 Page({
     data: {
         showTopText: false
     },
-    onLoad(options) {
+
+    onLoad(options){
+        let state = parseInt(options.state);
+        if (state === 1) {
+
+
+        } else if (state === 2) {
+            this.setData({
+                showTopText: true
+            })
+        }
+    },
+
+    onShow() {
         Protocol.memberRelevanceList({}).then((e) => {
             let members = e.result.dataList;
             members.map(value => {
@@ -15,15 +29,7 @@ Page({
             this.setData({
                 members: members
             })
-        })
-        if (options.state == 1) {
-
-
-        } else if (options.state == 2) {
-            this.setData({
-                showTopText: true
-            })
-        }
+        });
     },
 
     clickMember(e) {
@@ -37,6 +43,14 @@ Page({
                     case 0:
                         break;
                     case 1:
+                        getApp().globalData.currentMember = that.data.members[index];
+                        let isNormalMember = true;
+                        if (that.data.showTopText) {
+                            isNormalMember = !index;
+                        } else {
+                            isNormalMember = false
+                        }
+                        wx.navigateTo({url: '../userdata/userdata?isNormalMember=' + isNormalMember});
                         break;
                     case 2:
                         wx.showModal({

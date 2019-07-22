@@ -3,8 +3,8 @@
 
 <view class="top-view flex-row">
     <view class="flex-row" style="align-items: center;">
-        <view class="avatar"></view>
-        <view class="name">name</view>
+        <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
+        <view class="name">{{userInfo.nickName}}</view>
     </view>
     <view class="right-nice-choose flex-row" bindtap="clickRightBtn">
         <view style="margin-left: {{rightChoseIsLeft?10:20}}rpx"></view>

@@ -20,6 +20,7 @@ Page({
     },
 
     onLoad(options) {
+        let isNormalMember = options.isNormalMember === 'true';
         const isNewUser = parseInt(options.isNewUser || 0);//如果是新用户初次使用
 
 
@@ -27,18 +28,32 @@ Page({
         this.setData({
             birthEndDate: birthEndDate
         });
-        UserInfo.get().then((res) => {
-            console.log('res:', res);
+        let userInfo = getApp().globalData.currentMember;
+        console.log('用户信息:', userInfo);
+        if (isNormalMember) {
             this.setData({
-                name: res.userInfo.nickName,
-                number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
-                birthDate: res.userInfo.birthday || '请选择出生日期',
-                height: res.userInfo.height,
-                weight: res.userInfo.weight,
-                portraitUrl: res.userInfo.portraitUrl
+                name: userInfo.nickName,
+                number: userInfo.phone || wx.getStorageSync('phoneNumber'),
+                sexIndex: userInfo.sex === -1 ? 0 : userInfo.sex,
+                birthDate: userInfo.birthday || '请选择出生日期',
+                height: userInfo.height,
+                weight: userInfo.weight,
+                portraitUrl: userInfo.portraitUrl,
+                isNormalMember: isNormalMember
             })
-        })
+        } else {
+            this.setData({
+                name: userInfo.name,
+                number: userInfo.phone || wx.getStorageSync('phoneNumber'),
+                sexIndex: userInfo.sex === -1 ? 0 : userInfo.sex,
+                birthDate: userInfo.birthday || '请选择出生日期',
+                height: userInfo.height,
+                weight: userInfo.weight,
+                portraitUrl: userInfo.portraitUrl,
+                id: userInfo.id,
+                isNormalMember: isNormalMember
+            })
+        }
     },
 
     onNameChange(e) {
@@ -78,6 +93,7 @@ Page({
     },
 
     onSubmit() {
+        let that = this;
         if (this.data.name.length == 0) {
             Toast.showText('请填写完整信息');
             return;
@@ -92,31 +108,56 @@ Page({
                 let birthTime = this.data.birthDate || '';
                 console.log(`birth time: ${birthTime}`);
                 try {
-                    let data = {
-                        nickName: this.data.name,
-                        phone: this.data.number,
-                        sex: this.data.sexIndex,
-                        birthday: birthTime,
-                        height: this.data.height,
-                        weight: this.data.weight,
-                        portraitUrl: this.data.portraitUrl
+                    if (that.data.isNormalMember) {
+                        let data = {
+                            nickName: this.data.name,
+                            phone: this.data.number,
+                            sex: this.data.sexIndex,
+                            birthday: birthTime,
+                            height: this.data.height,
+                            weight: this.data.weight,
+                            portraitUrl: this.data.portraitUrl
+                        };
+                        console.log('保存信息：', data);
+                        Protocol.accountUpdate(data).then((res) => {
+                            return UserInfo.get();
+                        }).then((res) => {
+                            Toast.success('修改成功');
+                            return UserInfo.set({...res.userInfo, ...data});
+                        }).then(() => {
+                            wx.navigateBack({delta: 1});
+                        }).catch((res) => {
+                            if (res.data.code == 2000) {
+                                console.log('手机号重复');
+                                Toast.showText('同一手机\n不能绑定两个账号')
+                            } else {
+                                Toast.showText('修改失败');
+                            }
+                        });
+                    } else {
+                        let data = {
+                            nickName: this.data.name,
+                            phone: this.data.number,
+                            sex: this.data.sexIndex,
+                            birthday: birthTime,
+                            height: this.data.height,
+                            weight: this.data.weight,
+                            portraitUrl: this.data.portraitUrl,
+                            id: this.data.id
+                        };
+                        console.log('保存信息：', data);
+                        Protocol.memberRelevanceUpdate(data).then((res) => {
+                            wx.navigateBack({delta: 1});
+                        }).catch((res) => {
+                            if (res.data.code == 2000) {
+                                console.log('手机号重复');
+                                Toast.showText('同一手机\n不能绑定两个账号')
+                            } else {
+                                Toast.showText('修改失败');
+                            }
+                        });
                     }
-                    console.log('保存信息：', data);
-                    Protocol.accountUpdate(data).then((res) => {
-                        return UserInfo.get();
-                    }).then((res) => {
-                        Toast.success('修改成功');
-                        return UserInfo.set({...res.userInfo, ...data});
-                    }).then(() => {
-                        wx.navigateBack({delta: 1});
-                    }).catch((res) => {
-                        if (res.data.code == 2000) {
-                            console.log('手机号重复');
-                            Toast.showText('同一手机\n不能绑定两个账号')
-                        } else {
-                            Toast.showText('修改失败');
-                        }
-                    });
+
                 } catch (err) {
                     console.log("onSubmit error: %o", err);
                     Toast.showText('提交失败')
@@ -126,6 +167,7 @@ Page({
     },
 
     chooseImage() {
+        let that = this;
         console.log('chooseImage');
         wx.chooseImage({
             count: 1,
@@ -137,16 +179,17 @@ Page({
                 wx.uploadFile({
                     url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
                     filePath: path,
-                    name: path
-                }).then((res) => {
-                    console.log(res);
-                    Toast.hiddenLoading();
-                    let data = res.data;
-                    let image = JSON.parse(data).result.img_url;
-                    console.log('图片：', image);
-                    this.setData({
-                        portraitUrl: image
-                    })
+                    name: path,
+                    success(res) {
+                        console.log(res);
+                        Toast.hiddenLoading();
+                        let data = res.data;
+                        let image = JSON.parse(data).result.img_url;
+                        console.log('图片：', image);
+                        that.setData({
+                            portraitUrl: image
+                        })
+                    }
                 })
             }
         })

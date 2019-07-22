@@ -96,6 +96,13 @@ export default class Protocol {
         return Network.request({url: 'member/relevance/list', data: {}})
     }
 
+    static memberRelevanceUpdate({id, phone, nickName, portraitUrl, birthday, height, weight, sex}) {
+        return Network.request({
+            url: 'member/relevance/update',
+            data: {id, phone, nickName, portraitUrl, birthday, height, weight, sex}
+        })
+    }
+
     static accountUpdate({nickname, sex, phone, birthday, height, weight}) {
         return Network.request({url: 'account/update', data: arguments[0]});
     }

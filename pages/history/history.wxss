@@ -16,7 +16,6 @@ page {
 .avatar{
     height: 80rpx;
     width: 80rpx;
-    background-color: red;
     border-radius: 50%;
 }
 
