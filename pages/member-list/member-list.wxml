@@ -4,7 +4,7 @@
         <view class="title-0">这是谁的检测记录</view>
         <view class="title-1">点击您要选择的对象</view>
     </block>
-    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" bindtap="clickMember" data-index="{{index}}">
+    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" data-index="{{index}}" bindtap="switchMember" data-index="{{index}}">
         <view class="flex-row">
             <image class="avatar" src="{{item.portraitUrl?item.portraitUrl:'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 25rpx">
@@ -15,7 +15,9 @@
                 </view>
             </view>
         </view>
-        <image src="../../images/members/{{showTopText?'bj':'gl'}}.png" style="height: 36rpx;width: 36rpx"></image>
+        <view catchtap="clickMember" data-index="{{index}}">
+            <image src="../../images/members/{{showTopText?'bj':'gl'}}.png" style="height: 36rpx;width: 36rpx"></image>
+        </view>
     </view>
 </view>
 

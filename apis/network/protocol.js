@@ -65,16 +65,16 @@ export default class Protocol {
         return Network.request({url: 'device/bind/info'})
     }
 
-    static getHistoryList({page, page_size = 15}) {
-        return Network.request({url: 'gather/list', data: {page, page_size}})
+    static getHistoryList({data}) {
+        return Network.request({url: 'gather/list', data: data})
     }
 
     static getLinearGraph({type, target, relevanceId}) {
         return Network.request({url: 'gather/list/linearGraph', data: {type, relevanceId, target}})
     }
 
-    static getLinearGraphList({page = 1, pageSize = 15, type, target}) {
-        return Network.request({url: 'gather/list/linearGraphList', data: {page, pageSize, type, target}})
+    static getLinearGraphList({data}) {
+        return Network.request({url: 'gather/list/linearGraphList', data: data})
     }
 
     static getTargetByType({type}) {

@@ -62,6 +62,7 @@ Page({
             success(e) {
                 switch (e.tapIndex) {
                     case 0:
+                        that.toTabbarHistory(index);
                         break;
                     case 1:
                         getApp().globalData.currentMember = that.data.members[index];
@@ -105,6 +106,18 @@ Page({
     addMember() {
         wx.navigateTo({
             url: '../new-user-edit/userdata'
+        })
+    },
+
+    switchMember(e) {
+        let index = e.currentTarget.dataset.index;
+        this.toTabbarHistory(index);
+    },
+
+    toTabbarHistory(index) {
+        getApp().globalData.currentMember = this.data.members[index];
+        wx.switchTab({
+            url: '../history/history?member'
         })
     }
 })

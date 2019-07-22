@@ -21,22 +21,42 @@ Page({
             {id: 2, title: '2', state: false}
         ],
         tagChose: 1,
-        itemList: []
+        itemList: [],
+        isNormalMember: true
     },
 
     onLoad() {
-        this.getList({page: 1});
-        console.log(this.data.logs);
-        UserInfo.get().then((res) => {
+    },
+
+    onShow() {
+        let userInfo = getApp().globalData.currentMember;
+        if (userInfo.name) {
             this.setData({
-                userInfo: res.userInfo
+                userInfo: userInfo,
+                isNormalMember: false,
+                rightChoseIsLeft: true,
+                trendRightChoseIsLeft: true,
             })
-        })
+        } else {
+            UserInfo.get().then((res) => {
+                this.setData({
+                    userInfo: res.userInfo,
+                    isNormalMember: true,
+                    rightChoseIsLeft: true,
+                    trendRightChoseIsLeft: true,
+                })
+            })
+        }
+        this.getList({page: 1});
     },
 
     getList({page = 1, recorded = false}) {
         Toast.showLoading();
-        Protocol.getHistoryList({page}).then((data) => {
+        let data = {data: {page}};
+        if (!this.data.isNormalMember) {
+            data = {data: {page, relevanceId: this.data.userInfo.id}}
+        }
+        Protocol.getHistoryList({data}).then((data) => {
             let list = data.result.dataList;
             if (list.length) {
                 list.forEach((item) => {
@@ -101,6 +121,7 @@ Page({
 
     getTags() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+
         Protocol.getTargetByType({type}).then(data => {
             let tag = data.result.data;
             tag.map((value, index) => {
@@ -146,7 +167,11 @@ Page({
 
     tagItemListData() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        Protocol.getLinearGraphList({type, target: this.data.tagChose}).then(data => {
+        let data = {data: {type, target: this.data.tagChose}};
+        if (!this.data.isNormalMember) {
+            data = {data: {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id}}
+        }
+        Protocol.getLinearGraphList({data}).then(data => {
             let {result: {dataList}} = data;
             dataList.map(value => {
                 let dataAndTime = Tools.createDateAndTime(parseInt(value.created_timestamp));
