@@ -136,14 +136,21 @@ Component({
 
       ctx.draw()
 
-      that.data.ctx = wx.createCanvasContext('ecg_draw', that)
-      ctx = that.data.ctx
+      let ctx2 = wx.createCanvasContext('ecg_draw', that)
+      // ctx = that.data.ctx
 
-      ctx.fillStyle = "transparent"
-      ctx.fillRect(0, 0, rw, rh)
-      ctx.draw()
+      ctx2.fillStyle = "transparent"
+      ctx2.fillRect(0, 0, rw, rh)
+      ctx2.draw();
+      this.setCanvasDefaultOptions(ctx2);
+      that.data.ctx = ctx2;
 
-      that.data.ctx = ctx
+    },
+
+    setCanvasDefaultOptions(ctx) {
+      ctx.strokeStyle = "#3993EE";
+      ctx.setLineJoin("round");
+      ctx.lineWidth = 1.2;
     },
 
     drawWaveDark(data) {
@@ -153,59 +160,64 @@ Component({
         console.log('canvas context empty...')
         return
       }
-      const ctx = that.data.ctx
+      const ctx = that.data.ctx;
 
-      ctx.strokeStyle = "#3993EE"
-      ctx.setLineJoin("round")
-      ctx.lineWidth = 1.5
 
-      let buffer = new Uint16Array(data)
+      let buffer = new Uint16Array(data);
 
-      const speed = that.data.px1sec / that.data.sampleHz
-      const yunit = that.data.px1mv / that.data.adGain
+      const speed = that.data.px1sec / that.data.sampleHz;
+      const yunit = that.data.px1mv / that.data.adGain;
       // const scanBarWidth = 30
       // const h = that.data.height
-      let opx = that.data.lastPoint.x, opy = that.data.lastPoint.y || that.data.baseY
-      let px = opx
-      let py = opy
-      let ogn = that.data.lastPoint.adGain || buffer[0]
+      let opx = that.data.lastPoint.x, opy = that.data.lastPoint.y || that.data.baseY;
+      let px = opx;
+      let py = opy;
+      let ogn = that.data.lastPoint.adGain || buffer[0];
 
-      ctx.beginPath()
-      ctx.moveTo(opx, opy)
+      ctx.beginPath();
+      ctx.moveTo(opx, opy);
       // console.log('传入的数据',buffer);
       const len = buffer.length;
+      let reserve = true,isOverWidth = false;
       buffer.forEach((gain, index) => {
-        px += speed
-        py += ((gain - ogn) * yunit)
+        px += speed;
+        py += ((gain - ogn) * yunit);
         // ctx.clearRect(px, 0, scanBarWidth, h)
-        ctx.lineTo(px, py)
-        ctx.stroke()
+        ctx.lineTo(px, py);
+        ctx.stroke();
         // ctx.closePath()
         // console.log(`line -- from(${opx},${opy}) to (${px},${py})`)
 
-        opx = px
-        opy = py
-        ogn = gain
+        opx = px;
+        opy = py;
+        ogn = gain;
 
         if (px > that.data.width) {
           console.log('已经越界', buffer);
-          ctx.closePath()
-          ctx.clearRect(0, 0, that.data.width + 20, that.data.height)
-          px = opx = -speed
-          py = opy = that.data.baseY
-          ctx.beginPath()
-          ctx.moveTo(opx, opy)
+          ctx.closePath();
+          ctx.draw(false);
+          // ctx.clearRect(0, 0, that.data.width + 20, that.data.height);
+          reserve = false;
+          px = opx = -speed;
+          py = opy = that.data.baseY;
+          this.setCanvasDefaultOptions(ctx);
+          ctx.beginPath();
+          ctx.moveTo(opx, opy);
         }
 
-        if (index == (len - 1)) {
-          that.data.lastPoint.index += index
-          that.data.lastPoint.adGain = ogn
-          that.data.lastPoint.x = px
-          that.data.lastPoint.y = py
+        if (index === (len - 1)) {
+          that.data.lastPoint.index += index;
+          that.data.lastPoint.adGain = ogn;
+          that.data.lastPoint.x = px;
+          that.data.lastPoint.y = py;
         }
-      })
+      });
 
-      ctx.draw(true)
+      //本次绘制是否接着上一次绘制。
+      // 即 reserve 参数为 false，则在本次调用绘制之前 native 层会先清空画布再继续绘制；
+      // 若 reserve 参数为 true，则保留当前画布上的内容，本次调用 drawCanvas 绘制的内容覆盖在上面，
+      // 默认 false。
+      ctx.draw(reserve);
     },
 
     resetPannel() {

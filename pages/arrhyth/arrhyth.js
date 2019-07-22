@@ -48,6 +48,8 @@ Page({
         showToast: false,
         toastMsg: undefined,
         showLoading: false,
+        tip: '',
+        tipAnimationData: {}
     },
 
     waveData: undefined,
@@ -376,7 +378,7 @@ Page({
         let that = this
         if (!this.arrhythStateManager.isFilterData()) {
             let buffer = that.waveData ? that.waveData : new ArrayBuffer(0);
-            console.log('onFirstChannelChange waveData', that.waveData, 'buffer', buffer);
+            // console.log('onFirstChannelChange waveData', that.waveData, 'buffer', buffer);
             that.waveData = buffer.concat(data);
         }
         // console.log('data: ' + that.ab2hex(that.data.waveData))
@@ -457,7 +459,7 @@ Page({
     },
 
     onReady() {
-        // // // TODO 将来删掉
+        // // TODO 将来删掉
         // let that = this;
         // setTimeout(() => {
         //     that.hideLoading()
