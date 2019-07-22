@@ -15,7 +15,7 @@ import {
     stopBluetoothDevicesDiscovery
 } from "../../apis/ble/manager";
 import HiNavigator from "../../components/navigator/hi-navigator";
-import {ArrhythStateManager} from "./state";
+import {ArrhythStateManager, getCircleRadius} from "./state";
 
 ArrayBuffer.prototype.concat = function (b2) {
     let tmp = new Uint8Array(this.byteLength + b2.byteLength);
@@ -66,7 +66,7 @@ Page({
 
         if (that.data.progressCircle) {
             let circle = that.data.progressCircle
-            circle.drawCircle('circle_draw1', 100, -1);
+            circle.drawCircle('circle_draw1', getCircleRadius(), -1);
             that.preparePannelDark('');
             that.setData({txt: this.getOriginTxt()});
         }
@@ -400,7 +400,7 @@ Page({
             if (that.data.count <= 2 * that.data.maxCount) {
                 console.log('count: ' + that.data.count, that.data.maxCount);
                 let circle = that.data.progressCircle;
-                circle.drawCircle('circle_draw1', 100, that.data.count);
+                circle.drawCircle('circle_draw1', getCircleRadius(), that.data.count);
                 if (that.data.count >= 2 * that.data.maxCount) {
                     that.data.count = 0
                     // that.setData({ txt: '0' })

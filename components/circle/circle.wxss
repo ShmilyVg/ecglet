@@ -6,7 +6,7 @@
 
 .circle_box, .circle_draw {
   position: relative;
-  margin-top: 85rpx;
+  margin-top: 55rpx;
 }
 .circle_bg {
   position: absolute;

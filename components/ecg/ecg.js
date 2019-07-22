@@ -150,7 +150,7 @@ Component({
     setCanvasDefaultOptions(ctx) {
       ctx.strokeStyle = "#3993EE";
       ctx.setLineJoin("round");
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 0.8;
     },
 
     drawWaveDark(data) {
@@ -173,7 +173,6 @@ Component({
       let px = opx;
       let py = opy;
       let ogn = that.data.lastPoint.adGain || buffer[0];
-
       ctx.beginPath();
       ctx.moveTo(opx, opy);
       // console.log('传入的数据',buffer);
@@ -185,6 +184,7 @@ Component({
         // ctx.clearRect(px, 0, scanBarWidth, h)
         ctx.lineTo(px, py);
         ctx.stroke();
+
         // ctx.closePath()
         // console.log(`line -- from(${opx},${opy}) to (${px},${py})`)
 

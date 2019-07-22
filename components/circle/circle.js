@@ -26,7 +26,8 @@ Component({
         num: 100,
         rpx: 1,
         maxPointNum: 15,
-        ctx: {}
+        ctx: {},
+        textWidth: 0
     },
 
     options: {
@@ -52,12 +53,12 @@ Component({
             // ctx.draw()
             //源代码 end------------
 
-            this.drawCircle(id, radius, -1);
+            this.drawCircle('circle_draw1', radius, -1);
         },
 
         drawCircle(id, radius, step) {
-            let that = this
-            const r = radius * that.data.rpx
+            let that = this;
+            const textWidth = that.data.textWidth, r = radius * that.data.rpx;
             if (!that.data.size) {
                 that.setData({
                     size: 2 * r
@@ -80,14 +81,14 @@ Component({
                 y = y1 + circleRadius - circleRadius * Math.cos(degree);
             }
             if (step !== -1) {
-                ctx.setFontSize(65);
+                ctx.setFontSize(43);
                 const currentNum = maxCount * 2 - step,
-                    maxWidthText1 = 30 * (currentNum < 100 ? 2 : 3),
+                    maxWidthText1 = 30 * (currentNum < 100 ? 2 : 3) ,
                     maxWidthText2 = 72,
-                    centerX1 = r - maxWidthText1 / 2,
+                    centerX1 = r - maxWidthText1 / 2.4,
                     centerX2 = r - maxWidthText2 / 3;
                 ctx.setFillStyle('white');
-                ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), centerX1, r + 12, maxWidthText1);
+                ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), centerX1, r + 10, maxWidthText1);
                 ctx.setFontSize(12);
                 ctx.fillText('SECOND', centerX2, r + 30, maxWidthText2);
             }
@@ -103,7 +104,11 @@ Component({
     lifetimes: {
         created() {
             let that = this
-            that.data.rpx = wx.getSystemInfoSync().windowWidth / 375
+            that.data.rpx = wx.getSystemInfoSync().windowWidth / 375;
+            that.data.textWidth = parseFloat((that.data.rpx / 1.4).toFixed(2));
+
+
+            console.log('像素比', that.data.rpx, that.data.textWidth);
         },
     },
 

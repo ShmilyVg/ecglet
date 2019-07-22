@@ -1,7 +1,7 @@
 import WXDialog from "../../utils/dialog";
-import {getRemindData, RandomRemindData, randomRemindData} from "../../utils/tools";
+import {RandomRemindData} from "../../utils/tools";
 
-const WAIT_TIME = 4500;
+const WAIT_TIME = 4500, radius = 80;
 
 export class ArrhythStateManager {
 
@@ -38,6 +38,8 @@ export class ArrhythStateManager {
         this.randomRemindData = new RandomRemindData();
         // this.prepareStateIndex = -1;
     }
+
+
 
     isFilterData() {
         return this._page.data.isFilterArrhythData;
@@ -141,7 +143,9 @@ export class ArrhythStateManager {
         });
     }
 }
-
+export function getCircleRadius() {
+    return radius;
+}
 function showCanvasView(page, startCountFun) {
     let that = page;
 
@@ -149,7 +153,7 @@ function showCanvasView(page, startCountFun) {
 
     that.data.progressCircle = that.selectComponent('#circle1')
     let circle = that.data.progressCircle
-    circle.drawCircleBg('circle_bg1', 100, that.data.maxCount);
+    circle.drawCircleBg('circle_bg1', getCircleRadius(), that.data.maxCount);
     // setTimeout(()=>{
     query.select('#ecg').boundingClientRect((rect) => {
         that.data.ecgPannel = that.selectComponent('#ecg')
