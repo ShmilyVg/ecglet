@@ -55,13 +55,13 @@ swiper{
 
 .circle_pannel{
   /*flex-grow: 1;*/
-  height: 500rpx;
+  /*height: 500rpx;*/
 }
 
 .content-layout{
   height: 350rpx;
-  margin-bottom: 50rpx;
-  margin-top: 50rpx;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
 }
 
 .ecg_pannel {
