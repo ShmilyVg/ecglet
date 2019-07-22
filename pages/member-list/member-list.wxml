@@ -10,7 +10,7 @@
             <view class="flex-column" style="margin-left: 25rpx">
                 <view class="name">{{item.name}}</view>
                 <view class="flex-row" style="align-items: center;margin-top: 10rpx">
-                    <image class="sex" src="../../images/rich/{{item.sex?'m':'w'}}.png"></image>
+                    <image class="sex" src="../../images/rich/{{item.sex==0?'w':'m'}}.png"></image>
                     <view class="age">{{item.age}}岁</view>
                 </view>
             </view>

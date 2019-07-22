@@ -21,7 +21,7 @@ Page({
 
     onLoad(options) {
         let isNormalMember = options.isNormalMember === 'true';
-        console.log('是否为基本成员：',isNormalMember);
+        console.log('是否为基本成员：', isNormalMember);
         const isNewUser = parseInt(options.isNewUser || 0);//如果是新用户初次使用
 
 
@@ -31,11 +31,17 @@ Page({
         });
         let userInfo = getApp().globalData.currentMember;
         console.log('用户信息:', userInfo);
+        let sexIndex = 1;
+        if (userInfo.sex == null) {
+
+        } else {
+            sexIndex = userInfo.sex === -1 ? 0 : userInfo.sex;
+        }
         if (isNormalMember) {
             this.setData({
                 name: userInfo.nickName,
                 number: userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: userInfo.sex === -1 ? 0 : userInfo.sex,
+                sexIndex: sexIndex,
                 birthDate: userInfo.birthday || '请选择出生日期',
                 height: userInfo.height,
                 weight: userInfo.weight,
@@ -46,7 +52,7 @@ Page({
             this.setData({
                 name: userInfo.name,
                 number: userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: userInfo.sex === -1 ? 0 : userInfo.sex,
+                sexIndex: sexIndex,
                 birthDate: userInfo.birthday || '请选择出生日期',
                 height: userInfo.height,
                 weight: userInfo.weight,
