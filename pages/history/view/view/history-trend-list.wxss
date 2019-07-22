@@ -11,8 +11,9 @@
 }
 
 .green-circle{
-    width:42rpx;
-    height:42rpx;
+    background-color: #3A93EF;
+    width:26rpx;
+    height:26rpx;
     border-radius: 50%;
 }
 
@@ -56,7 +57,7 @@
 .item-num{
     font-size:70rpx;
     font-weight:bold;
-    color:rgba(91,91,91,1);
+    color:#3A93EF;
     font-family:DINCondensed-Bold;
     margin-bottom: -10rpx;
     line-height: 70rpx;
@@ -65,7 +66,7 @@
 .item-unit{
     font-size:24rpx;
     font-weight:400;
-    color:rgba(158,158,158,1);
+    color:#3A93EF;
 }
 
 .history-type-selected{
@@ -137,4 +138,10 @@
     font-size:30rpx;
     font-weight:500;
     color:rgba(153,153,153,1);
+}
+
+.state-text{
+    font-size:32rpx;
+    color: #3A93EF;
+    margin-left: 44rpx;
 }

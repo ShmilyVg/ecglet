@@ -3,6 +3,7 @@ import HiNavigator from "../../components/navigator/hi-navigator";
 import Protocol from "../../apis/network/protocol";
 import * as trend from "./view/view/trend";
 import {createDateAndTime} from "../../utils/tools";
+import * as Tools from "../../utils/tools";
 
 Page({
     data: {
@@ -13,7 +14,13 @@ Page({
         trendRightChoseIsLeft: true,
         trendResult: [],
         list: [1, 2, 3, 4],
-        trendTag: [0, 1, 2, 3, 4]
+        trendTag: [
+            {id: 0, title: '0', state: true},
+            {id: 1, title: '1', state: false},
+            {id: 2, title: '2', state: false}
+        ],
+        tagChose: 1,
+        itemList: []
     },
 
     onLoad() {
@@ -71,26 +78,74 @@ Page({
         this.setData({
             rightChoseIsLeft: !this.data.rightChoseIsLeft
         });
+        if (this.data.rightChoseIsLeft) {
+            this.choseBigList()
+        } else {
+            this.choseBigTrend();
+        }
+    },
+
+    choseBigList() {
+
+    },
+
+    choseBigTrend() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        Protocol.getLinearGraph({type: type}).then(data => {
-            trend.setData(data.result.dataList);
-        })
+
+        Protocol.getTargetByType({type}).then(data => {
+            let tag = data.result.data;
+            tag.map((value, index) => {
+                value.state = !index
+            });
+            this.setData({
+                trendTag: tag
+            })
+        });
+        this.tagAllDataHandle();
     },
 
     clickTrendTop() {
         this.setData({
             trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
         });
+        this.tagAllDataHandle();
+    },
+
+    tagAllDataHandle() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        console.log(type);
-        Protocol.getLinearGraph({type: type}).then(data => {
-            console.log('趋势图：', data.result);
+        Protocol.getLinearGraph({type, target: this.data.tagChose}).then(data => {
             trend.setData(data.result.dataList);
-        })
+        });
+        this.tagItemListData();
     },
 
     clickIndexItem(e) {
         const {currentTarget: {dataset: {current}}} = e;
         console.log(current);
+        this.data.trendTag.map((value) => {
+            value.state = current === value.id
+        });
+
+        this.setData({
+            trendTag: this.data.trendTag,
+            tagChose: current
+        });
+
+        this.tagAllDataHandle();
+    },
+
+    tagItemListData() {
+        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        Protocol.getLinearGraphList({type, target: this.data.tagChose}).then(data => {
+            let {result: {dataList}} = data;
+            dataList.map(value => {
+                let dataAndTime = Tools.createDateAndTime(parseInt(value.created_timestamp));
+                value.titleTime = dataAndTime.time;
+                value.titleDate = dataAndTime.date;
+            });
+            this.setData({
+                itemList: dataList
+            })
+        })
     }
 })
