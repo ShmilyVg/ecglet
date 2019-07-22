@@ -90,6 +90,7 @@ Page({
             console.log("startBluetooth error: %o", error)
         });
 
+
     },
     onDeviceConnect(connected, devId) {
         let that = this

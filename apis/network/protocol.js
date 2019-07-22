@@ -7,7 +7,7 @@ export default class Protocol {
     static getNetworkType() {
         return new Promise((resolve, reject) => {
             wx.getNetworkType({
-                success:resolve,
+                success: resolve,
                 fail: reject
             });
         });
@@ -15,15 +15,16 @@ export default class Protocol {
     }
 
     static checkHaveNetwork() {
-        return this.getNetworkType().then(res=>{
-            console.log('当前网络状态',res);
+        return this.getNetworkType().then(res => {
+            console.log('当前网络状态', res);
             if (res.networkType === 'none' || res.networkType === 'unknown') {
                 return Promise.reject();
-            }else{
+            } else {
                 return Promise.resolve();
             }
         })
     }
+
     static uploadGatherFile({filePath}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
@@ -37,7 +38,7 @@ export default class Protocol {
                         // 'session_token': wx.getStorageSync('session_token')
                     },
                     success: function (res) {
-                        console.log('上传成功的文件',res);
+                        console.log('上传成功的文件', res);
                         let data = JSON.parse(res.data);
                         resolve(data);
                     },
@@ -68,11 +69,19 @@ export default class Protocol {
         return Network.request({url: 'gather/list', data: {page, page_size}})
     }
 
-    static getLinearGraph({type, relevanceId}) {
-        return Network.request({url: 'gather/list/linearGraph', data: {type, relevanceId}})
+    static getLinearGraph({type, target, relevanceId}) {
+        return Network.request({url: 'gather/list/linearGraph', data: {type, relevanceId, target}})
     }
 
-    static accountCreate({nickname, sex, phone, birthday, height, weight}){
+    static getLinearGraphList({page = 1, pageSize = 15, type, target}) {
+        return Network.request({url: 'gather/list/linearGraphList', data: {page, pageSize, type, target}})
+    }
+
+    static getTargetByType({type}) {
+        return Network.request({url: 'gather/getTargetByType', data: {type}})
+    }
+
+    static accountCreate({nickname, sex, phone, birthday, height, weight}) {
 
     }
 
