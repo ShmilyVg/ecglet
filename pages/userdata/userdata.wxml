@@ -9,7 +9,7 @@
                 <view class="weui-label cell-title">姓名</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="13" bind:input="onNameChange"/>
+                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="13" bindinput="onNameChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -18,7 +18,7 @@
                 <view class="weui-label cell-title">手机号</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bind:input="onNumberChange"/>
+                <input class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bindinput="onNumberChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -50,7 +50,7 @@
                 <view class="weui-label cell-title">身高（cm)</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入身高" type="number" value="{{height}}" type="number" maxlength="3" bind:input="onHeightChange"/>
+                <input class="weui-input cell-content" placeholder="请输入身高" type="number" value="{{height}}" type="number" maxlength="3" bindinput="onHeightChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -59,7 +59,7 @@
                 <view class="weui-label cell-title">体重（kg）</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入体重" type="number" value="{{weight}}" type="number" maxlength="4" bind:input="onWeightChange"/>
+                <input class="weui-input cell-content" placeholder="请输入体重" type="number" value="{{weight}}" type="number" maxlength="4" bindinput="onWeightChange"/>
             </view>
         </view>
     </view>

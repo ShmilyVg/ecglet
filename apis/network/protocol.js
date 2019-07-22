@@ -81,8 +81,19 @@ export default class Protocol {
         return Network.request({url: 'gather/getTargetByType', data: {type}})
     }
 
-    static accountCreate({nickname, sex, phone, birthday, height, weight}) {
+    static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl}) {
+        return Network.request({
+            url: 'member/relevance/create',
+            data: {nickName, sex, phone, birthday, height, weight, portraitUrl}
+        })
+    }
 
+    static memberRelevanceDel({id}) {
+        return Network.request({url: 'member/relevance/del', data: {id}})
+    }
+
+    static memberRelevanceList({}) {
+        return Network.request({url: 'member/relevance/list', data: {}})
     }
 
     static accountUpdate({nickname, sex, phone, birthday, height, weight}) {

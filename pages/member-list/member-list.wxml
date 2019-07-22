@@ -1,22 +1,24 @@
 <!--pages/member-list/member-list.wxml-->
 <view class="big-view">
-    <view class="title-0">这是谁的检测记录</view>
-    <view class="title-1">点击您要选择的对象</view>
-    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{16}}">
+    <block wx:if="{{showTopText}}">
+        <view class="title-0">这是谁的检测记录</view>
+        <view class="title-1">点击您要选择的对象</view>
+    </block>
+    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" bindtap="clickMember" data-index="{{index}}">
         <view class="flex-row">
-            <view class="avatar"></view>
+            <image class="avatar" src="{{item.portraitUrl?item.portraitUrl:'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 25rpx">
-                <view class="name">name</view>
+                <view class="name">{{item.name}}</view>
                 <view class="flex-row" style="align-items: center;margin-top: 10rpx">
-                    <image class="sex" src="../../images/rich/w.png"></image>
-                    <view class="age">32岁</view>
+                    <image class="sex" src="../../images/rich/{{item.sex?'m':'w'}}.png"></image>
+                    <view class="age">{{item.age}}岁</view>
                 </view>
             </view>
         </view>
-        <image src="../../images/members/bj.png" style="height: 36rpx;width: 36rpx"></image>
+        <image src="../../images/members/{{showTopText?'bj':'gl'}}.png" style="height: 36rpx;width: 36rpx"></image>
     </view>
 </view>
 
 <view class="flex-column" style="align-items: center;width: 100%">
-    <view class="button-radius btn">+ 添加成员</view>
+    <view class="button-radius btn" bindtap="addMember">+ 添加成员</view>
 </view>

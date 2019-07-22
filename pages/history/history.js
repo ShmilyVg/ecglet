@@ -15,8 +15,8 @@ Page({
         trendResult: [],
         list: [1, 2, 3, 4],
         trendTag: [
-            {id: 0, title: '0', state: true},
-            {id: 1, title: '1', state: false},
+            {id: 1, title: 'HR', state: true},
+            {id: 1, title: '', state: false},
             {id: 2, title: '2', state: false}
         ],
         tagChose: 1,
@@ -90,25 +90,29 @@ Page({
     },
 
     choseBigTrend() {
-        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        this.getTags();
+    },
 
+    getTags() {
+        let type = this.data.trendRightChoseIsLeft ? 1 : 2;
         Protocol.getTargetByType({type}).then(data => {
             let tag = data.result.data;
             tag.map((value, index) => {
                 value.state = !index
             });
             this.setData({
-                trendTag: tag
-            })
+                trendTag: tag,
+                tagChose: tag[0].id
+            });
+            this.tagAllDataHandle();
         });
-        this.tagAllDataHandle();
     },
 
     clickTrendTop() {
         this.setData({
             trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
         });
-        this.tagAllDataHandle();
+        this.getTags();
     },
 
     tagAllDataHandle() {

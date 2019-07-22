@@ -26,20 +26,6 @@ Page({
         this.setData({
             birthEndDate: birthEndDate
         });
-        UserInfo.get().then((res) => {
-            console.log('res:', res);
-
-            this.setData({
-                name: res.userInfo.nickName,
-                number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
-                birthDate: res.userInfo.birthday || '请选择出生日期',
-                height: res.userInfo.height,
-                weight: res.userInfo.weight,
-                portraitUrl: res.userInfo.portraitUrl,
-                isPhoneNotAuth: this.isPhoneNotAuth()
-            })
-        })
     },
     isPhoneNotAuth() {
         return !wx.getStorageSync('isNewUserPhoneAuth');
@@ -84,9 +70,8 @@ Page({
     onNumberChange(e) {
         this.setData({
             number: e.detail.value
-        },()=>{
+        }, () => {
             console.log(this.data.number);
-
         });
     },
 
@@ -140,14 +125,9 @@ Page({
                 height: this.data.height,
                 weight: this.data.weight,
                 portraitUrl: this.data.portraitUrl
-            }
+            };
             console.log('保存信息：', data);
-            Protocol.accountUpdate(data).then((res) => {
-                return UserInfo.get();
-            }).then((res) => {
-                Toast.success('保存成功');
-                return UserInfo.set({...res.userInfo, ...data});
-            }).then(() => {
+            Protocol.accountCreate(data).then((res) => {
                 HiNavigator.relaunchToStart();
             }).catch((res) => {
                 if (res.data.code == 2000) {
@@ -167,7 +147,7 @@ Page({
     },
 
     chooseImage() {
-        console.log('chooseImage');
+        let that = this;
         wx.chooseImage({
             count: 1,
             sizeType: ['compressed'],
@@ -178,16 +158,18 @@ Page({
                 wx.uploadFile({
                     url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
                     filePath: path,
-                    name: path
-                }).then((res) => {
-                    console.log(res);
-                    Toast.hiddenLoading();
-                    let data = res.data;
-                    let image = JSON.parse(data).result.img_url;
-                    console.log('图片：', image);
-                    this.setData({
-                        portraitUrl: image
-                    })
+                    name: path,
+                    success(res) {
+                        console.log(res);
+                        Toast.hiddenLoading();
+                        let data = res.data;
+                        let image = JSON.parse(data).result.img_url;
+                        console.log('图片：', image);
+                        that.setData({
+                            portraitUrl: image
+                        })
+                    }
+
                 })
             }
         })

@@ -10,11 +10,12 @@
     background-color: white;
 }
 
-.green-circle{
+.circle{
     background-color: #3A93EF;
     width:26rpx;
     height:26rpx;
     border-radius: 50%;
+    /*border: 8rpx solid rgba(58, 147, 239, 0.2)*/
 }
 
 .history-item{
