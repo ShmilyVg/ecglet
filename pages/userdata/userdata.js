@@ -21,6 +21,7 @@ Page({
 
     onLoad(options) {
         let isNormalMember = options.isNormalMember === 'true';
+        console.log('是否为基本成员：',isNormalMember);
         const isNewUser = parseInt(options.isNewUser || 0);//如果是新用户初次使用
 
 

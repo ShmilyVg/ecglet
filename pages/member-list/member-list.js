@@ -66,7 +66,7 @@ Page({
                     case 1:
                         getApp().globalData.currentMember = that.data.members[index];
                         let isNormalMember = true;
-                        if (that.data.showTopText) {
+                        if (that.data.haveMainMember) {
                             isNormalMember = !index;
                         } else {
                             isNormalMember = false
