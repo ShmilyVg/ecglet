@@ -45,4 +45,8 @@ export default class HiNavigator extends CommonNavigator {
     static navigateToKnowledge() {
         wx.navigateTo({url: '/pages/knowledge/knowledge'});
     }
+
+    static redirectToRichContent({tempFileUrl,type}) {
+        wx.redirectTo({url: '/pages/rich-content/rich-content?type=' + type + '&tempFileUrl=' + encodeURIComponent(tempFileUrl)});
+    }
 }

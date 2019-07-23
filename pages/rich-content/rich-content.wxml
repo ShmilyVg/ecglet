@@ -3,16 +3,16 @@
     <view class="title">基本信息</view>
     <view class="flex-row" style="width: 660rpx;align-items: center;justify-content: space-between;margin-top: 42rpx">
         <view class="flex-row" style="align-items: center">
-            <view class="avatar"></view>
+            <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
             <view class="flex-column" style="margin-left: 16rpx">
-                <view class="name">name</view>
+                <view class="name">{{userInfo.nickName}}</view>
                 <view class="flex-row" style="align-items: center">
-                    <image class="sex" src="../../images/rich/m.png"></image>
-                    <view class="age">25岁</view>
+                    <image class="sex" src="../../images/rich/{{userInfo.sex===1?'m':'w'}}.png"></image>
+                    <view class="age">{{userInfo.age}}岁</view>
                 </view>
             </view>
         </view>
-        <view class="flex-row" style="align-items: center">
+        <view class="flex-row" style="align-items: center" bindtap="switchMember">
             <view class="qiehuantaren">切换他人</view>
             <image src="../../images/rich/arr.png" class="arr"></image>
         </view>
@@ -20,14 +20,14 @@
     <view class="line"></view>
     <view class="title">常见症状<mark style="font-size: 24rpx">（可多选)</mark></view>
     <view class="tag-view flex-row">
-        <view wx:for="{{ill}}" class="tag {{item.value?'tag-chose':''}}" bindtap="clickIll" data-index="{{index}}">
+        <view wx:for="{{ill}}" wx:key="text" class="tag {{item.value?'tag-chose':''}}" bindtap="clickIll" data-index="{{index}}">
             {{item.text}}
         </view>
     </view>
     <view class="line"></view>
     <view class="title">详细活动记录</view>
     <view class="tag-view flex-row">
-        <view wx:for="{{detailed}}" class="tag {{item.value?'tag-chose':''}}" bindtap="clickDetailed"
+        <view wx:for="{{detailed}}" wx:key="text" class="tag {{item.value?'tag-chose':''}}" bindtap="clickDetailed"
               data-index="{{index}}">{{item.text}}
         </view>
     </view>
@@ -38,4 +38,4 @@
     </textarea>
 </view>
 
-<view class="btn">确定</view>
+<view class="btn" bindtap="uploadBaseInfo">确定</view>
