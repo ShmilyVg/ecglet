@@ -16,7 +16,7 @@
             </view>
         </view>
         <view catchtap="clickBtn" data-index="{{index}}">
-            <image src="../../images/members/{{state==1?'gl':'bj'}}.png" style="height: 36rpx;width: 36rpx"></image>
+            <image src="../../images/members/{{state==1?'bj':'gl'}}.png" style="height: 36rpx;width: 36rpx"></image>
         </view>
     </view>
 </view>

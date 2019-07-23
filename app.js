@@ -45,7 +45,7 @@ App({
     },
 
     globalData: {
-        userInfo: {}, tempGatherResult: {}, isConnected: true, currentMember: {}
+        userInfo: {}, tempGatherResult: {}, isConnected: true, currentMember: {}, editMember: {}
     },
 
     onLoginSuccess: null,

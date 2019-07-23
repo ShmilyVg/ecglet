@@ -89,7 +89,7 @@ Page({
                         that.toTabbarHistory(index);
                         break;
                     case 1:
-                        getApp().globalData.currentMember = that.data.members[index];
+                        getApp().globalData.editMember = that.data.members[index];
                         let isNormalMember = true;
                         if (that.data.haveMainMember) {
                             isNormalMember = !index;
@@ -129,7 +129,7 @@ Page({
 
     addMember() {
         wx.navigateTo({
-            url: '../new-user-edit/userdata'
+            url: '../userdata/userdata'
         })
     }
 })

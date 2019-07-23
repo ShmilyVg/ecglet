@@ -137,7 +137,7 @@ Page({
                 haveAuthorize: true,
                 userInfo: res.userInfo
             });
-            wx.navigateTo({url: '../member-list/member-list?state=1'});
+            wx.navigateTo({url: '../member-list/member-list?state=2'});
         }).catch((res) => {
             console.log(res);
         });
