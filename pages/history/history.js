@@ -30,7 +30,8 @@ Page({
 
     onShow() {
         let userInfo = getApp().globalData.currentMember;
-        if (userInfo.name) {
+        console.log('切换成员：', userInfo);
+        if (userInfo.thirdpartyUId === null) {
             this.setData({
                 userInfo: userInfo,
                 isNormalMember: false,
