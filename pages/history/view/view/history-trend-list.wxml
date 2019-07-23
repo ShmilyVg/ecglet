@@ -4,19 +4,20 @@
         <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{itemList}}" wx:key="{{item.pdfUrl}}" bindtap="toPdfUrl" data-item="{{item}}">
             <view class="flex-row align-items-center">
                 <view class="circle"></view>
-                <view class="flex-column" style="margin-left: 33rpx;">
+                <view class="flex-column" style="margin-left: 33rpx">
                     <view class="flex-row align-items-center">
                         <view class="item-title">{{item.titleTime}}</view>
+                        <view style="width: 20rpx"></view>
+                        <view class="item-name-and-time">{{item.titleDate}}</view>
                     </view>
-                    <view class="item-name-and-time">{{item.titleDate}}</view>
+                    <view wx:if="{{item.des}}" class="state-text" style="justify-items: left;margin-left: 0">{{item.des}}</view>
                 </view>
             </view>
             <view class="flex-row" style="align-items: center">
                 <view class="flex-column" style="align-items: flex-end">
                     <view class="item-num">{{item.time}}</view>
-                    <view class="item-unit">bmp</view>
+                    <view wx:if="{{item.unit}}" class="trend-item-unit">{{item.unit}}</view>
                 </view>
-                <view class="state-text">{{item.des}}</view>
             </view>
         </view>
     </view>
