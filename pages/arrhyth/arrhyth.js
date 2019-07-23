@@ -543,19 +543,20 @@ Page({
                     console.log("fsp.getFileInfo(%s) result -- %o", filePath, res)
 
                     Protocol.checkHaveNetwork().then(() => {
-                        Protocol.uploadGatherFile({filePath}).then((data) => {
-                            getApp().globalData.tempGatherResult = data.result;
-                            HiNavigator.redirectToResult();
-                        }).catch((res) => {
-                            WXDialog.showDialog({
-                                content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
-                                    wx.navigateBack({delta: 1});
-                                }
-                            });
-                            console.error('上传解析过程中报错', res);
-                        }).finally(() => {
-                            Toast.hiddenLoading();
-                        });
+                        HiNavigator.redirectToRichContent({tempFileUrl: filePath, type: this.data.testType});
+                        // Protocol.uploadGatherFile({filePath}).then((data) => {
+                        //     getApp().globalData.tempGatherResult = data.result;
+                        //     HiNavigator.redirectToResult();
+                        // }).catch((res) => {
+                        //     WXDialog.showDialog({
+                        //         content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
+                        //             wx.navigateBack({delta: 1});
+                        //         }
+                        //     });
+                        //     console.error('上传解析过程中报错', res);
+                        // }).finally(() => {
+                        //     Toast.hiddenLoading();
+                        // });
                     }).catch((res) => {
                         WXDialog.showDialog({
                             content: '网络断开，请检查网络后重新测试', confirmEvent: () => {

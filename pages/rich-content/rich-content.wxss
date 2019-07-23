@@ -14,7 +14,7 @@
     width:100rpx;
     height:100rpx;
     border-radius:50%;
-    border:10rpx solid #F6F7F7
+    border:10rpx solid #F6F7F7;
 }
 
 .name{
@@ -77,6 +77,7 @@
 
 .text{
     margin-top: 42rpx;
+    margin-bottom: 150rpx;
     width:610rpx;
     height:190rpx;
     background:rgba(246,247,247,1);

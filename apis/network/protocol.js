@@ -25,7 +25,7 @@ export default class Protocol {
         })
     }
 
-    static uploadGatherFile({filePath}) {
+    static uploadGatherFile({filePath, symptom, record, memberId: relevanceId, type}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
@@ -34,6 +34,7 @@ export default class Protocol {
                     name: filePath,
                     header: {"Cookie": `JSESSIONID=${wx.getStorageSync('cookie')}`},
                     formData: {
+                        symptom, record, relevanceId, type
                         //和服务器约定的token, 一般也可以放在header中
                         // 'session_token': wx.getStorageSync('session_token')
                     },
