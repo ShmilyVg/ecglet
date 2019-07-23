@@ -1,5 +1,6 @@
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import ResultTop from "../../components/result-top/index.js";
 
 Page({
     data: {
@@ -53,7 +54,8 @@ Page({
         UserInfo.get().then((res) => {
             this.setData({userInfo: res.userInfo});
         });
-
+        this.resultTop = new ResultTop(this);
+        this.resultTop.showItems({items: this.data.result.info});
         // const result = getApp().globalData.tempGatherResult;
         //
         // console.log('接收到的结果', result);
