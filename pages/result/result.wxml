@@ -1,8 +1,9 @@
-<view class="flex-column {{isGreen?'page-green':'page-blue'}}">
+<import src="../../components/result-bottom/index.wxml"></import>
+<view class="flex-column align-items-center {{isGreen?'page-green':'page-blue'}}">
     <image wx:if="{{isGreen}}" src="../../images/result/bg_green.png" style="height: 273rpx;width: 100%"></image>
     <image wx:else src="../../images/result/bg_blue.png" style="height: 273rpx;width: 100%"></image>
 <!--    <view class="share">分享给亲友</view>-->
-    <view class="avatar-border flex-column {{isGreen?'avatar-border-green':'avatar-border-blue'}}">
+    <view class="avatar-border flex-column align-items-center {{isGreen?'avatar-border-green':'avatar-border-blue'}}">
         <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
     </view>
     <view class="title">心电智能分析报告</view>
@@ -15,12 +16,12 @@
             <view class="cell flex-row">
                 <view class="flex-row">
                     <view class="point-comm {{item.status===0?'point-red':(isGreen?'point-green':'point-blue')}}"></view>
-                    <view class="flex-column" style="align-items: flex-start">
+                    <view class="flex-column align-items-center" style="align-items: flex-start">
                         <view class="cell-title">{{item.name}}</view>
                         <view class="cell-state {{item.status===0?'cell-red':(isGreen?'cell-green':'cell-blue')}}">{{item.status===0?'异常':'正常'}}</view>
                     </view>
                 </view>
-                <view class="flex-column" style="align-items: flex-end">
+                <view class="flex-column align-items-center" style="align-items: flex-end">
                     <view class="cell-num {{item.status===0?'cell-red':(isGreen?'cell-green':'cell-blue')}}">{{item.time}}</view>
                     <view class="cell-eng">{{item.unit}}</view>
                 </view>
@@ -28,47 +29,5 @@
         </block>
     </view>
 
-    <view class="result-advice">HiPee建议您</view>
-    <view class="flex-row table-02 align-items-center space-between" style="padding: 0;flex-wrap: wrap;position: relative">
-        <view class="flex-column advice-item-layout">
-            <image wx:if="{{isGreen}}" src="../../images/result/green_01.png" class="icon-common"></image>
-            <image wx:else src="../../images/result/blue_01.png" class="icon-common"></image>
-            <view class="flex-row">
-                <view class="common-advice-circle {{isGreen?'background-green-color':'background-blue-color'}}"></view>
-                <text class="advice-content">常参加各种强度\n适宜的运动</text>
-            </view>
-        </view>
-        <view class="flex-column advice-item-layout" style="margin-right: 30rpx;">
-            <image wx:if="{{isGreen}}" src="../../images/result/green_02.png" class="icon-common"></image>
-            <image wx:else src="../../images/result/blue_02.png" class="icon-common"></image>
-            <view class="flex-row">
-                <view class="common-advice-circle {{isGreen?'background-green-color':'background-blue-color'}}"></view>
-                <text class="advice-content">严重时及时到医院\n就诊 不要贻误病情</text>
-            </view>
-        </view>
-        <view class="flex-column advice-item-layout">
-            <image wx:if="{{isGreen}}" src="../../images/result/green_03.png" class="icon-common"></image>
-            <image wx:else src="../../images/result/blue_03.png" class="icon-common"></image>
-            <view class="flex-row">
-                <view class="common-advice-circle {{isGreen?'background-green-color':'background-blue-color'}}"></view>
-                <text class="advice-content">尽量不熬夜吸烟饮酒\n少喝浓茶 定时通便</text>
-            </view>
-        </view>
-        <view class="flex-column advice-item-layout" style="margin-right: 30rpx;">
-            <image wx:if="{{isGreen}}" src="../../images/result/green_04.png" class="icon-common"></image>
-            <image wx:else src="../../images/result/blue_04.png" class="icon-common"></image>
-            <view class="flex-row">
-                <view class="common-advice-circle {{isGreen?'background-green-color':'background-blue-color'}}"></view>
-                <text class="advice-content">生活中保持心态平和\n善于调节自我情绪</text>
-            </view>
-        </view>
-
-        <view style="width: 100%;height: 3rpx;background-color: #E8E8E8;position: absolute;left: 0;top: 50%;"></view>
-        <view style="height: 100%;width: 3rpx;background-color: #E8E8E8;position: absolute;left: 50%;top: 0;"></view>
-    </view>
-
-
-    <image src="../../images/result/logo-ch.png" style="width: 114rpx;height: 67rpx;margin-top: 50rpx"></image>
-    <view class="bottom-text"><text>上海交通大学医学附属仁济医院远程\n心电诊断中心</text></view>
-    <view class="cell-bottom-view {{(isGreen?'cell-green':'cell-blue')}}" bindtap="lookDetail">查看详细报告</view>
+    <template is="result-bottom" data="{{resultColor:'#3A93EF'}}"></template>
 </view>
