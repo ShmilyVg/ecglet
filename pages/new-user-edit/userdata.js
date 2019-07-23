@@ -126,7 +126,7 @@ Page({
                 portraitUrl: this.data.portraitUrl
             };
             console.log('保存信息：', data);
-            Protocol.accountCreate(data).then((res) => {
+            Protocol.accountUpdate(data).then((res) => {
                 HiNavigator.relaunchToStart();
             }).catch((res) => {
                 if (res.data.code == 2000) {

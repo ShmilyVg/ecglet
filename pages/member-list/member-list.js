@@ -11,6 +11,7 @@ Page({
 
     onLoad(options) {
         let state = parseInt(options.state);
+        console.log('状态：', state);
         if (state === 1) {
             // 检测完成后的跳转
             this.setData({
@@ -54,6 +55,7 @@ Page({
 
     clickCell(e) {
         let index = e.currentTarget.dataset.index;
+        console.log(index);
         switch (this.data.state) {
             case 1:
                 getApp().globalData.currentMember = this.data.members[index];
@@ -87,7 +89,7 @@ Page({
                         that.toTabbarHistory(index);
                         break;
                     case 1:
-                        getApp().globalData.currentMember = that.data.members[index];
+                        getApp().globalData.editMember = that.data.members[index];
                         let isNormalMember = true;
                         if (that.data.haveMainMember) {
                             isNormalMember = !index;
@@ -127,7 +129,7 @@ Page({
 
     addMember() {
         wx.navigateTo({
-            url: '../new-user-edit/userdata'
+            url: '../userdata/userdata'
         })
     }
 })

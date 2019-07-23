@@ -3,6 +3,7 @@ import WXDialog from "../../utils/dialog";
 import * as tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import Protocol from "../../apis/network/protocol";
+import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
     data: {
@@ -16,21 +17,27 @@ Page({
         height: '',
         weight: '',
         number: '',
-        portraitUrl: ''
+        portraitUrl: '',
+        isNewMember: false
     },
 
     onLoad(options) {
         let isNormalMember = options.isNormalMember === 'true';
         console.log('是否为基本成员：', isNormalMember);
-        const isNewUser = parseInt(options.isNewUser || 0);//如果是新用户初次使用
-
-
         let birthEndDate = tools.createDateAndTime(new Date());
         this.setData({
             birthEndDate: birthEndDate
         });
-        let userInfo = getApp().globalData.currentMember;
+
+        let userInfo = getApp().globalData.editMember;
         console.log('用户信息:', userInfo);
+
+        if (JSON.stringify(userInfo) === "{}") {
+            this.setData({
+                isNewMember: true
+            });
+            return;
+        }
         let sexIndex = 1;
         if (userInfo.sex == null) {
 
@@ -50,7 +57,7 @@ Page({
             })
         } else {
             this.setData({
-                name: userInfo.name,
+                name: userInfo.nickName,
                 number: userInfo.phone || wx.getStorageSync('phoneNumber'),
                 sexIndex: sexIndex,
                 birthDate: userInfo.birthday || '请选择出生日期',
@@ -115,23 +122,39 @@ Page({
                 let birthTime = this.data.birthDate || '';
                 console.log(`birth time: ${birthTime}`);
                 try {
-                    if (that.data.isNormalMember) {
-                        let data = {
-                            nickName: this.data.name,
-                            phone: this.data.number,
-                            sex: this.data.sexIndex,
-                            birthday: birthTime,
-                            height: this.data.height,
-                            weight: this.data.weight,
-                            portraitUrl: this.data.portraitUrl
-                        };
-                        console.log('保存信息：', data);
+                    let data = {
+                        nickName: this.data.name,
+                        phone: this.data.number,
+                        sex: this.data.sexIndex,
+                        birthday: birthTime,
+                        height: this.data.height,
+                        weight: this.data.weight,
+                        portraitUrl: this.data.portraitUrl
+                    };
+                    console.log('保存信息：', data);
+                    if (that.data.isNewMember) {
+                        Protocol.accountCreate(data).then((res) => {
+                            HiNavigator.navigateBack({
+                                delta: 1
+                            });
+                        }).catch((res) => {
+                            if (res.data.code == 2000) {
+                                console.log('手机号重复');
+                                Toast.showText('同一手机\n不能绑定两个账号')
+                            } else {
+                                Toast.showText('保存失败');
+                            }
+                        }).finally(() => {
+                            Toast.hiddenLoading();
+                        });
+                    } else if (that.data.isNormalMember) {
                         Protocol.accountUpdate(data).then((res) => {
                             return UserInfo.get();
                         }).then((res) => {
                             Toast.success('修改成功');
                             return UserInfo.set({...res.userInfo, ...data});
                         }).then(() => {
+                            getApp().globalData.editMember = {};
                             wx.navigateBack({delta: 1});
                         }).catch((res) => {
                             if (res.data.code == 2000) {
