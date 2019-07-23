@@ -1,0 +1,27 @@
+<template name="result-top">
+    <image src="../../images/result/logo.png" class="logo" style="background-color: {{resultColor}};border-color: {{resultColor}}"></image>
+    <view class="flex-column box-sizing-border-box table">
+        <block wx:for="{{items}}" wx:key="index">
+            <view class="flex-row box-sizing-border-box space-between cell" bindtap="onShowDetail" data-index="{{index}}" data-item="{{item}}">
+                <view class="flex-row align-items-center">
+                    <view class="point-comm {{item.status===0?'point-red':(isGreen?'point-green':'point-blue')}}"></view>
+                    <view class="flex-column align-items-center" style="align-items: flex-start">
+                        <view class="cell-title">{{item.name}}</view>
+                        <view class="cell-state {{item.status===0?'cell-red':(isGreen?'cell-green':'cell-blue')}}">{{item.status===0?'异常':'正常'}}</view>
+                    </view>
+                </view>
+                <view class="flex-row align-items-center">
+                    <view class="flex-column align-items-center" style="align-items: flex-end">
+                        <view class="cell-num {{item.status===0?'cell-red':(isGreen?'cell-green':'cell-blue')}}">{{item.time}}</view>
+                        <view class="cell-eng">{{item.unit}}</view>
+                    </view>
+                    <view class="flex-row align-items-center justify-center result-item-extra">
+                        <image src="../../images/result/arrow_{{item.showDetail?'up':'down'}}.png" class="result-item-arrow"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="result-item-detail {{item.showDetail?'display':'hidden'}}">心率是指正常人安静状态下每分钟心跳的次数，成人正常心率为60～100次/分钟，理想心率应为55～70次/分钟，如果心率低于40次/分钟，应考虑有病态窦房结综合征、房室传导阻滞等情况；如果出现胸闷、乏力、头晕等不适症状，应立即到医院进一步检查。</view>
+            <view class="result-item-line" wx:if="{{index!==items.length-1}}"></view>
+        </block>
+    </view>
+</template>

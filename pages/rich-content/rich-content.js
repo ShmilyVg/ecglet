@@ -67,7 +67,7 @@ Page({
         } else {
             UserInfo.get().then(res => {
                 console.log(res);
-                this.setData({userInfo: {...res.userInfo, age: jsGetAge(res.userInfo.birthday)}});
+                this.setData({userInfo: {...res.userInfo}});
             });
         }
     },
