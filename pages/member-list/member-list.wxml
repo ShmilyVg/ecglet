@@ -4,19 +4,19 @@
         <view class="title-0">这是谁的检测记录</view>
         <view class="title-1">点击您要选择的对象</view>
     </block>
-    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" data-index="{{index}}" bindtap="switchMember" data-index="{{index}}">
+    <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" data-index="{{index}}" bindtap="clickCell">
         <view class="flex-row">
             <image class="avatar" src="{{item.portraitUrl?item.portraitUrl:'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 25rpx">
-                <view class="name">{{item.name}}</view>
+                <view class="name">{{item.nickName}}</view>
                 <view class="flex-row" style="align-items: center;margin-top: 10rpx">
                     <image class="sex" src="../../images/rich/{{item.sex==0?'w':'m'}}.png"></image>
                     <view class="age">{{item.age}}岁</view>
                 </view>
             </view>
         </view>
-        <view catchtap="clickMember" data-index="{{index}}">
-            <image src="../../images/members/{{showTopText?'bj':'gl'}}.png" style="height: 36rpx;width: 36rpx"></image>
+        <view catchtap="clickBtn" data-index="{{index}}">
+            <image src="../../images/members/{{state==1?'gl':'bj'}}.png" style="height: 36rpx;width: 36rpx"></image>
         </view>
     </view>
 </view>

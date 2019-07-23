@@ -13,34 +13,33 @@ Page({
         let state = parseInt(options.state);
         if (state === 1) {
             // 检测完成后的跳转
-
+            this.setData({
+                showTopText: true,
+                haveMainMember: true,
+                state: 1
+            })
         } else if (state === 2) {
             // 不带主成员的列表
             this.setData({
-                showTopText: true,
-                haveMainMember: false
+                showTopText: false,
+                haveMainMember: false,
+                state: 2
             })
         } else if (state === 3) {
             // 带主成员的列表
             this.setData({
-                haveMainMember: true
+                haveMainMember: true,
+                state: 3
             })
-
         }
     },
 
     onShow() {
         Protocol.memberRelevanceList({}).then((e) => {
             let members = e.result.dataList;
-            members.map(value => {
-                value.age = tools.jsGetAge(value.birthday);
-            });
             if (this.data.haveMainMember) {
                 UserInfo.get().then(res => {
-                    let userInfo = res.userInfo;
-                    userInfo.name = userInfo.nickName;
-                    userInfo.age = tools.jsGetAge(userInfo.birthday);
-                    members.splice(0, 0, userInfo);
+                    members.splice(0, 0, res.userInfo);
                     this.setData({
                         members: members
                     })
@@ -53,10 +52,33 @@ Page({
         });
     },
 
-    clickMember(e) {
+    clickCell(e) {
         let index = e.currentTarget.dataset.index;
+        switch (this.data.state) {
+            case 1:
+                getApp().globalData.currentMember = this.data.members[index];
+                wx.navigateBack({
+                    delta: 1
+                });
+                break;
+            case 2:
+                break;
+            case 3:
+                getApp().globalData.currentMember = this.data.members[index];
+                wx.switchTab({
+                    url: '../history/history?member'
+                });
+                break;
+        }
+    },
+
+    clickBtn(e) {
+        let index = e.currentTarget.dataset.index;
+        this.showSheet(index);
+    },
+
+    showSheet(index) {
         let that = this;
-        console.log(index);
         wx.showActionSheet({
             itemList: ['检测记录', '修改资料', '删除成员'],
             success(e) {
@@ -106,18 +128,6 @@ Page({
     addMember() {
         wx.navigateTo({
             url: '../new-user-edit/userdata'
-        })
-    },
-
-    switchMember(e) {
-        let index = e.currentTarget.dataset.index;
-        this.toTabbarHistory(index);
-    },
-
-    toTabbarHistory(index) {
-        getApp().globalData.currentMember = this.data.members[index];
-        wx.switchTab({
-            url: '../history/history?member'
         })
     }
 })

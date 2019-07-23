@@ -85,17 +85,21 @@ Page({
     },
 
     onPullDownRefresh() {
-        this.setData({
-            page: 1,
-            logs: []
-        });
-        this.getList({page: 1});
+        if (this.data.rightChoseIsLeft) {
+            this.setData({
+                page: 1,
+                logs: []
+            });
+            this.getList({page: 1});
+        } else {
+
+        }
     },
 
-    onReachBottom() {
-        console.log('getList', this.data.page + 1);
-        this.getList({page: ++this.data.page});
-    },
+    // onReachBottom() {
+    //     console.log('getList', this.data.page + 1);
+    //     this.getList({page: ++this.data.page});
+    // },
 
 
     clickRightBtn() {
@@ -121,7 +125,6 @@ Page({
 
     getTags() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-
         Protocol.getTargetByType({type}).then(data => {
             let tag = data.result.data;
             tag.map((value, index) => {
