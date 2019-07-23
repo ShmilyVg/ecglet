@@ -15,13 +15,19 @@
     </view>
 
     <view style="height: 12rpx"></view>
-    <template is="trend-index" data="{{trendTag}}"></template>
-    <view class="flex-column" style="background-color: white;align-items: center;">
-        <view class="xinlvdanwei">心率（单位：bpm）</view>
-        <canvas canvas-id="lineCanvas" class="canvas" disable-scroll="true"
-                bindtouchstart="touchHandler"
-                bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
-        <view class="cishu">次数</view>
+    <block wx:if="{{itemList}}">
+        <template is="trend-index" data="{{trendTag}}"></template>
+        <view class="flex-column" style="background-color: white;align-items: center;">
+            <view class="xinlvdanwei">心率（单位：bpm）</view>
+            <canvas canvas-id="lineCanvas" class="canvas" disable-scroll="true"
+                    bindtouchstart="touchHandler"
+                    bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+            <view class="cishu">次数</view>
+        </view>
+        <template is="history-trend-list" data="{{itemList}}"></template>
+    </block>
+    <view wx:else class="none-history flex-column">
+        <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
+        <view class="none-history-hint">暂无检测记录</view>
     </view>
-    <template is="history-trend-list" data="{{itemList}}"></template>
 </template>
