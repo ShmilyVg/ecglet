@@ -64,10 +64,10 @@
     line-height: 70rpx;
 }
 
-.item-unit{
+.trend-item-unit{
     font-size:24rpx;
     font-weight:400;
-    color:#3A93EF;
+    color:#9C9C9C;
 }
 
 .history-type-selected{

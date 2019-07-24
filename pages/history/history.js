@@ -171,9 +171,9 @@ Page({
 
     tagItemListData() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        let data = {data: {type, target: this.data.tagChose}};
+        let data = {type, target: this.data.tagChose};
         if (!this.data.isNormalMember) {
-            data = {data: {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id}}
+            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id}
         }
         Protocol.getLinearGraphList({data}).then(data => {
             let {result: {dataList}} = data;
