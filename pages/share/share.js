@@ -7,7 +7,8 @@ Page({
 
     data: {
         logs: [],
-        page: 1
+        page: 1,
+        isFollow: true
     },
     onLoad(options) {
         let memberId = options.memberId;
@@ -19,7 +20,6 @@ Page({
             });
             this.getList({});
         });
-
     },
 
     onPullDownRefresh() {
@@ -62,6 +62,8 @@ Page({
     },
 
     noFollow() {
-
+        this.setData({
+            isFollow: false
+        })
     }
 })
