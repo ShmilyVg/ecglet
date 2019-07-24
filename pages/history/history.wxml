@@ -5,7 +5,7 @@
     <view class="flex-row" style="align-items: center;" bindtap="switchMember">
         <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
         <image class="switch" src="../../images/history/qh.png"></image>
-        <view class="name">{{userInfo.nickName?userInfo.nickName:userInfo.name}}</view>
+        <view class="name">{{userInfo.nickName||userInfo.name}}</view>
     </view>
     <view class="right-nice-choose flex-row" bindtap="clickRightBtn">
         <view style="margin-left: {{rightChoseIsLeft?10:20}}rpx"></view>
@@ -18,3 +18,11 @@
 <template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
 
 <template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList}}"></template>
+
+<view class="bottom-view flex-row" wx:if="{{!bottomViewIsHidden}}">
+    <view class="bottom-view-text">
+        <text>亲友扫码可随时查看您的检测记录\n 如结果异常，亲友可接到提醒</text>
+    </view>
+    <view class="bottom-view-btn" bindtap="toFamily">同步给亲友</view>
+    <image src="../../images/history/x.png" class="bottom-view-close" bindtap="hiddenBottomView"></image>
+</view>

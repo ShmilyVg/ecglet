@@ -22,10 +22,15 @@ Page({
         ],
         tagChose: 1,
         itemList: [],
-        isNormalMember: true
+        isNormalMember: true,
+        bottomViewIsHidden: false
     },
 
     onLoad() {
+        let bottomViewIsHidden = wx.getStorageSync('bottomViewIsHidden');
+        this.setData({
+            bottomViewIsHidden: bottomViewIsHidden
+        })
     },
 
     onShow() {
@@ -86,6 +91,7 @@ Page({
     },
 
     onPullDownRefresh() {
+        console.log('onPullDownRefresh');
         if (this.data.rightChoseIsLeft) {
             this.setData({
                 page: 1,
@@ -97,10 +103,15 @@ Page({
         }
     },
 
-    // onReachBottom() {
-    //     console.log('getList', this.data.page + 1);
-    //     this.getList({page: ++this.data.page});
-    // },
+    onReachBottom() {
+        if (this.data.rightChoseIsLeft) {
+            console.log('getList', this.data.page + 1);
+            this.getList({page: ++this.data.page});
+        } else {
+            Toast.hiddenLoading();
+            wx.stopPullDownRefresh();
+        }
+    },
 
 
     clickRightBtn() {
@@ -191,6 +202,17 @@ Page({
     switchMember() {
         wx.navigateTo({
             url: '../member-list/member-list?state=3'
+        })
+    },
+
+    toFamily() {
+        HiNavigator.navigateToShareCode();
+    },
+
+    hiddenBottomView() {
+        wx.setStorageSync('bottomViewIsHidden', true);
+        this.setData({
+            bottomViewIsHidden: true
         })
     }
 })

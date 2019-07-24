@@ -15,6 +15,7 @@
     "pages/member-list/member-list",
     "pages/share-code/share-code",
     "pages/knowledge/knowledge",
+    "pages/share/share",
     "pages/pressure-result/pressure-result"
   ],
   "window": {

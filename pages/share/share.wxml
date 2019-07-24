@@ -1,0 +1,12 @@
+<!--pages/share/share.wxml-->
+<import src="../history/view/history-list"></import>
+
+<view class="top-view flex-row">
+    <view class="flex-row" style="align-items: center;">
+        <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
+        <view class="name">{{userInfo.nickName||userInfo.name}}</view>
+    </view>
+    <view class="follow" bindtap="noFollow">不再关注</view>
+</view>
+
+<template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
