@@ -13,7 +13,7 @@
                 </view>
             </view>
             <view class="flex-column" style="align-items: flex-end">
-                <view class="item-num" style="color: #5B5B5B;">{{item.hr}}</view>
+                <view class="item-num" style="color: #5B5B5B;">{{item.times}}</view>
                 <view class="item-unit">bmp</view>
             </view>
         </view>

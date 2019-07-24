@@ -11,11 +11,10 @@
 }
 
 .circle{
-    background-color: #3A93EF;
     width:26rpx;
     height:26rpx;
     border-radius: 50%;
-    border: 8rpx solid #d8e9fc
+    border: 8rpx solid #d8e9fc;
 }
 
 .history-item{

@@ -61,7 +61,7 @@ Page({
             let list = data.result.dataList;
             if (list.length) {
                 list.forEach((item) => {
-                    const {date, time} = createDateAndTime(parseInt(item.time));
+                    const {date, time} = createDateAndTime(parseInt(item.created_timestamp));
                     item.dateStr = date;
                     item.timeStr = time;
                 });
