@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "检测记录",
+  "backgroundColor": "#f2f2f2",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

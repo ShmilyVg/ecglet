@@ -86,6 +86,14 @@ export default class Protocol {
         return Network.request({url: 'shared/getRelatedQRCode'})
     }
 
+    static getRelativesInfo({memberId}) {
+        return Network.request({url: 'relatives/info', data: {memberId}})
+    }
+
+    static getRelativesList({memberId, page = 1}) {
+        return Network.request({url: 'relatives/list', data: {memberId, page}})
+    }
+
     static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl}) {
         return Network.request({
             url: 'member/relevance/create',

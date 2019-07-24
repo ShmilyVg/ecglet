@@ -9,4 +9,4 @@
     <view class="follow" bindtap="noFollow">不再关注</view>
 </view>
 
-<template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
+<template is="history-list" data="{{logs}}"></template>
