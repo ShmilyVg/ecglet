@@ -29,10 +29,10 @@
   <block wx:if="{{isGuider}}">
     <view class="flex-column align-items-center">
       <swiper indicator-dots="{{true}}"
-              autoplay="{{false}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(255,255,255,1)"
+              autoplay="{{true}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(255,255,255,1)"
               indicator-color="rgba(255,255,255,0.2)">
         <block wx:for="{{items}}" wx:key="path">
-          <swiper-item class="flex-column align-items-center" style="margin-top: 92rpx;">
+          <swiper-item class="flex-column align-items-center" style="margin-top: 92rpx;" autoplay="{{true}}" interval="{{5000}}" duration="{{300}}">
             <image src="../../images/arrhyth/{{item.path}}.png" class="arrhyth-guider-image"/>
             <view class="arrhyth-guider-title">{{item.title}}</view>
           </swiper-item>
