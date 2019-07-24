@@ -1,0 +1,14 @@
+/* pages/share/share.wxss */
+@import "../history/history.wxss";
+
+.follow{
+    width:154rpx;
+    height:64rpx;
+    border:1rpx solid rgba(55,148,240,1);
+    border-radius:32rpx;
+    font-size:24rpx;
+    font-weight:500;
+    color:rgba(55,148,240,1);
+    line-height:64rpx;
+    text-align: center;
+}
