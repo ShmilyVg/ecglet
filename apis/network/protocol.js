@@ -82,6 +82,10 @@ export default class Protocol {
         return Network.request({url: 'gather/getTargetByType', data: {type}})
     }
 
+    static getQRCode({}) {
+        return Network.request({url: 'shared/getRelatedQRCode'})
+    }
+
     static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl}) {
         return Network.request({
             url: 'member/relevance/create',

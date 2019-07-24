@@ -210,9 +210,17 @@ Page({
     },
 
     hiddenBottomView() {
-        wx.setStorageSync('bottomViewIsHidden', true);
-        this.setData({
-            bottomViewIsHidden: true
+        let that = this;
+        wx.showModal({
+            content: '关闭后，您可以在“我的”页面继续设置将记录同步给亲友',
+            showCancel: false,
+            confirmText: '确定',
+            success() {
+                wx.setStorageSync('bottomViewIsHidden', true);
+                that.setData({
+                    bottomViewIsHidden: true
+                })
+            }
         })
     }
 })
