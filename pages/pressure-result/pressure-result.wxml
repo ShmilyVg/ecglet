@@ -1,0 +1,16 @@
+<import src="../../components/result-top/index.wxml"></import>
+<import src="../../components/result-bottom/index.wxml"></import>
+<view class="flex-column align-items-center">
+    <!--    <view class="share">分享给亲友</view>-->
+
+
+    <view class="title">心脏负荷检测结果报告</view>
+    <view class="content">{{result.time}}</view>
+    <template is="result-top" data="{{resultColor:'#22C7BF',items,isGreen:true}}"></template>
+
+    <view class="pressure-result-title">心脏压力指数</view>
+
+
+
+    <template is="result-bottom" data="{{resultColor:'#22C7BF'}}"></template>
+</view>

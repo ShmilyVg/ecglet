@@ -1,6 +1,6 @@
 <template name="result-bottom">
     <view class="result-advice">HiPee建议您</view>
-    <view class="flex-row table-02 align-items-center space-between" style="padding: 0;flex-wrap: wrap;position: relative">
+    <view class="flex-row table-02 align-items-center space-between" style="padding: 0;flex-wrap: wrap;position: relative;box-shadow:0 8rpx 20rpx 0 rgba(0,190,180,0.3);">
         <view class="flex-column advice-item-layout">
             <image src="../../images/result/jy01.png" class="icon-common" style="background-color: {{resultColor}}"></image>
             <view class="flex-row">

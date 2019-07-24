@@ -10,15 +10,12 @@
 }
 
 .result-advice{
-    font-size:44rpx;
-    font-family:PingFang-SC-Regular;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-    margin-top: 60rpx;
-    margin-bottom: 30rpx;
-    margin-left: 33rpx;
+    font-size:40rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(255,254,254,1);
+    margin: 59rpx 0 41rpx 50rpx;
     align-self: flex-start;
-
 }
 
 .icon-common{

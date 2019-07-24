@@ -14,6 +14,7 @@
     border-radius: 30rpx;
     width:91.6%;
     z-index: 1;
+    box-shadow:0 8rpx 20rpx 0 rgba(0,190,180,0.3);
 }
 
 .cell{
@@ -108,4 +109,11 @@
 
 .hidden{
     display: none;
+}
+
+.cell-blue{
+    color:#3A93EF;
+}
+.cell-green{
+    color: #00C6BC;
 }

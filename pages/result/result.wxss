@@ -64,21 +64,3 @@ page {
   line-height:33rpx;
   margin-top: 10rpx;
 }
-
-
-
-.table-02{
-  background-color: white;
-  padding-top: 50rpx;
-  border-radius: 30rpx;
-  width:91.6%;
-  z-index: 1;
-}
-
-.cell-blue{
-  color:#3A93EF;
-}
-.cell-green{
-  color: #00C6BC;
-}
-
