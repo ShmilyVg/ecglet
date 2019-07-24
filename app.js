@@ -5,11 +5,12 @@ import 'utils/config';
 import Login from "./apis/network/network/libs/login";
 import UserInfo from "./apis/network/network/libs/userInfo";
 import HiNavigator from "./components/navigator/hi-navigator";
+import {initAnalysisOnApp} from "./analysis/mta";
 
 App({
     onLaunch: function () {
         // 展示本地存储能力
-        console.log('qqq')
+        initAnalysisOnApp();
         wx.onNetworkStatusChange((res) => {
             console.log('网络状态变更', res);
             this.globalData.isConnected = res.isConnected;

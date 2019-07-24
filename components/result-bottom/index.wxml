@@ -38,5 +38,5 @@
 
     <image src="../../images/result/logo-ch.png" style="width: 114rpx;height: 67rpx;"></image>
     <view class="bottom-text"><text>上海交通大学医学附属仁济医院\n远程心电诊断中心</text></view>
-    <view class="cell-bottom-view" style="color: {{resultColor}}" bindtap="lookDetail">查看专业分析报告</view>
+    <cover-view class="cell-bottom-view" style="color: {{resultColor}}" bindtap="lookDetail">查看专业分析报告</cover-view>
 </template>

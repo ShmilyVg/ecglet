@@ -1,9 +1,12 @@
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
+import Canvas from './canvas.js';
 
 Page({
+  ...Canvas.options,
   data: {
+    ...Canvas.data,
     isGreen: false,
     result: {
       "time": "1560757586488",
@@ -51,11 +54,13 @@ Page({
   },
 
   onLoad(options) {
+    //等级 1——7.5%；2——31%； 3——56%；4——80%；
     UserInfo.get().then((res) => {
       this.setData({userInfo: res.userInfo});
     });
     this.resultTop = new ResultTop(this);
     this.resultTop.showItems({items: this.data.result.info});
+    this.draw('runCanvas', 90, 100);
     // const result = getApp().globalData.tempGatherResult;
     //
     // console.log('接收到的结果', result);

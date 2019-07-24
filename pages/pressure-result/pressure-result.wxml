@@ -3,14 +3,49 @@
 <view class="flex-column align-items-center">
     <!--    <view class="share">分享给亲友</view>-->
 
-
-    <view class="title">心脏负荷检测结果报告</view>
-    <view class="content">{{result.time}}</view>
-    <template is="result-top" data="{{resultColor:'#22C7BF',items,isGreen:true}}"></template>
+    <view class="fill-width flex-column align-items-center pressure-result-title-bg">
+        <view class="title">心脏负荷检测结果报告</view>
+        <view class="content">{{result.time}}</view>
+    </view>
+    <template is="result-top" data="{{resultColor:'#00beb4',items,isGreen:true}}"></template>
 
     <view class="pressure-result-title">心脏压力指数</view>
 
+    <view class='flex-column align-items-center table-02 table-02-bg'>
+        <view class="canvasBox">
+            <view class='outerCircle'></view>
+            <view class='coreCircle'></view>
+            <canvas canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
 
+        </view>
+        <view class="pressure-score-title">您当前的压力处于正常状态</view>
+        <view class="pressure-score-content">生活、工作平衡的不错，生活有滋有味，工作得心应手，请继续保持！如果偶尔觉得压力大，可以来一次说走就走的旅行或一场酣畅淋漓的运动，一定会让您能量满满。</view>
+        <view class="pressure-score-content">生活、工作平衡的不错，生活有滋有味，工作得心应手，请继续保持！如果偶尔觉得压力大，可以来一次说走就走的旅行或一场酣畅淋漓的运动，一定会让您能量满满。</view>
+    </view>
+    <view class="flex-column pressure-result-title">
+        <view>疲劳程度</view>
+        <view class="pressure-result-subtitle">与人的压力和能量储备相关，反映了您当前身体的疲劳程度</view>
+    </view>
 
-    <template is="result-bottom" data="{{resultColor:'#22C7BF'}}"></template>
+    <view class='flex-column align-items-center table-02 table-02-bg'>
+        <view class="flex-row align-items-center" style="position: relative;height: 96rpx;">
+            <image class="level-image" src="../../images/pressure-result/pl.png"></image>
+            <image class="level-status-image absolute" src="../../images/pressure-result/pl01.png" style="left: 80%;"></image>
+        </view>
+        <view class="pressure-score-content">您现在的能量有所消耗，但所剩能量足以完成当前的活动和预期的目标，甚至可以兼顾其他方面的任务。</view>
+    </view>
+
+    <view class="flex-column pressure-result-title">
+        <view>情绪指数</view>
+        <view class="pressure-result-subtitle">反映您的整体健康状况和精神状态，数值越大越好</view>
+    </view>
+
+    <view class='flex-column align-items-center table-02 table-02-bg'>
+        <view class="flex-row align-items-center" style="position: relative;height: 96rpx;">
+            <image class="level-image" src="../../images/pressure-result/qx.png"></image>
+            <image class="level-status-image absolute" src="../../images/pressure-result/qx01.png" style="left: 80%;"></image>
+        </view>
+        <view class="pressure-score-content">您当前有点兴奋，可能是因为喝了咖啡或者浓茶，也可能是因为刚刚做了一些简单的运动活动筋骨，甚至可能有些紧张、焦虑、烦躁。某些促进心率的药物也会增加兴奋度。短时间内数值维持在2以上没有问题，但是长时间在2以上需要适时平复自己的内心不要给心脏过多压力。</view>
+    </view>
+    <template is="result-bottom" data="{{resultColor:'#00beb4'}}"></template>
 </view>
