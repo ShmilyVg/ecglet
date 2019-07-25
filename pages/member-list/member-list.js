@@ -17,7 +17,7 @@ Page({
                 this.setData({
                     showTopText: true,
                     haveMainMember: true,
-                    state: 1
+                    state: state
                 });
                 break;
             case 2:
@@ -25,14 +25,14 @@ Page({
                 this.setData({
                     showTopText: false,
                     haveMainMember: false,
-                    state: 2
+                    state: state
                 });
                 break;
             case 3:
                 // 检测记录-切换成员进入
                 this.setData({
                     haveMainMember: true,
-                    state: 3
+                    state: state
                 });
                 break;
         }
