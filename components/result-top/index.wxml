@@ -4,16 +4,19 @@
         <block wx:for="{{items}}" wx:key="index">
             <view class="flex-row box-sizing-border-box space-between cell" bindtap="onShowDetail" data-index="{{index}}" data-item="{{item}}">
                 <view class="flex-row align-items-center">
-                    <view class="point-comm {{item.status===0?'point-red':(isGreen?'point-green':'point-blue')}}"></view>
+                    <view class="flex-row align-items-center justify-center outer-circle" style="position: relative;">
+                        <view class="absolute outer-circle" style="background-color: {{item.color}};opacity: 0.2;"></view>
+                        <view class="point-comm" style="background-color: {{item.color}}"></view>
+                    </view>
                     <view class="flex-column align-items-center" style="align-items: flex-start">
                         <view class="cell-title">{{item.name}}</view>
                         <view wx:if="{{isGreen}}" class="cell-green-state">{{item.des}}</view>
-                        <view wx:else class="cell-state {{item.status===0?'cell-red':(isGreen?'cell-green':'cell-blue')}}">{{item.des}}</view>
+                        <view wx:else class="cell-state" style="color: {{item.color}};">{{item.des}}</view>
                     </view>
                 </view>
                 <view class="flex-row align-items-center">
                     <view class="flex-column align-items-center" style="align-items: flex-end">
-                        <view class="cell-num {{item.status===0?'cell-red':(isGreen?'cell-green':'cell-blue')}}">{{item.time||item.frequency||item.conclusion||''}}</view>
+                        <view class="cell-num" style="color: {{item.color}};">{{item.time||item.frequency||item.conclusion||''}}</view>
                         <view class="cell-eng">{{item.unit}}</view>
                     </view>
                     <view class="flex-row align-items-center justify-center result-item-extra">

@@ -21,14 +21,17 @@
     height: 180rpx;
     padding-left: 50rpx;
 }
-
+.outer-circle{
+    border-radius: 50%;
+    width: 42rpx;
+    height: 42rpx;
+    margin-right: 33rpx;
+}
 .point-comm{
     border-radius: 50%;
-    border-style: solid;
-    border-width: 8rpx;
     width: 26rpx;
     height: 26rpx;
-    margin-right: 33rpx;
+    z-index: 2;
 }
 
 .point-red{
@@ -70,9 +73,8 @@
 
 
 .cell-num {
-    font-size:70rpx;
+    font-size:64rpx;
     font-weight:500;
-    line-height:84rpx;
 }
 
 .cell-eng {
