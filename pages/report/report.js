@@ -4,7 +4,7 @@ import WXDialog from "../../utils/dialog";
 
 Page({
     data: {
-        reportUrl: 'https://backend.hipee.cn/hipee-web-hiecg/pdf/fe760a5a9bfe41a7b7d449430846d8f8.jpg',
+        reportUrl: '',
     },
 
     saveFile() {

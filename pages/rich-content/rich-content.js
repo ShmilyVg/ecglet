@@ -59,6 +59,7 @@ Page({
     arrhythType: '',
     onLoad(options) {
         this.filePath = options.tempFileUrl?decodeURIComponent(options.tempFileUrl):'';
+        this.arrhythType = options.type;
     },
     onShow() {
         const currentMember = app.globalData.currentMember;
@@ -117,8 +118,7 @@ Page({
                 record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
                 memberId: this.data.userInfo.memberId,
             }).then(data => {
-                console.log('', data);
-                HiNavigator.redirectToResultPageByType({type, dataId: ''});
+                HiNavigator.redirectToResultPageByType({type: this.arrhythType, dataId: data.result});
             }).catch(res => {
                 console.error(res);
             }).finally(Toast.hiddenLoading);
