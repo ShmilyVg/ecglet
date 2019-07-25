@@ -27,9 +27,10 @@ Page({
     },
 
     onLoad() {
-        let bottomViewIsHidden = wx.getStorageSync('bottomViewIsHidden');
-        this.setData({
-            bottomViewIsHidden: bottomViewIsHidden
+        Protocol.getRelativesGetToolTip({}).then((res) => {
+            this.setData({
+                bottomViewIsHidden: !res.result.isShow
+            })
         })
     },
 
@@ -216,9 +217,10 @@ Page({
             showCancel: false,
             confirmText: '确定',
             success() {
-                wx.setStorageSync('bottomViewIsHidden', true);
-                that.setData({
-                    bottomViewIsHidden: true
+                Protocol.getRelativesDelToolTip({}).then(() => {
+                    that.setData({
+                        bottomViewIsHidden: true
+                    })
                 })
             }
         })

@@ -94,6 +94,14 @@ export default class Protocol {
         return Network.request({url: 'relatives/list', data: {memberId, page}})
     }
 
+    static getRelativesGetToolTip({}) {
+        return Network.request({url:'relatives/getToolTip'})
+    }
+
+    static getRelativesDelToolTip({}){
+        return Network.request({url:'relatives/delToolTip'})
+    }
+
     static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl}) {
         return Network.request({
             url: 'member/relevance/create',
