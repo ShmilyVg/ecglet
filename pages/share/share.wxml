@@ -1,12 +1,19 @@
 <!--pages/share/share.wxml-->
 <import src="../history/view/history-list"></import>
 
-<view class="top-view flex-row">
-    <view class="flex-row" style="align-items: center;">
-        <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
-        <view class="name">{{userInfo.nickName||userInfo.name}}</view>
+<block wx:if="{{logs.length&&isFollow}}">
+    <view class="top-view flex-row">
+        <view class="flex-row" style="align-items: center;">
+            <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
+            <view class="name">{{userInfo.nickName||userInfo.name}}</view>
+        </view>
+        <view class="follow" bindtap="noFollow">不再关注</view>
     </view>
-    <view class="follow" bindtap="noFollow">不再关注</view>
-</view>
-
-<template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
+    <template is="history-list" data="{{logs,isShare:true}}"></template>
+</block>
+<block wx:else>
+    <view class="none-history flex-column">
+        <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
+        <view class="none-history-hint" style="margin-top: 40rpx"><text>如需查看对方心电检测记录\n请重新扫码</text></view>
+    </view>
+</block>
