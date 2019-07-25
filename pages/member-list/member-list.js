@@ -76,10 +76,14 @@ Page({
 
     clickBtn(e) {
         let index = e.currentTarget.dataset.index;
-        if (this.data.state === 1) {
-            this.toEditMember(this, index);
-        } else {
-            this.showSheet(index);
+        switch (this.data.state) {
+            case 1:
+                this.toEditMember(this, index);
+                break;
+            case 2:
+            case 3:
+                this.showSheet(index);
+                break
         }
     },
 
@@ -107,7 +111,7 @@ Page({
         wx.showModal({
             content: '删除成员的同时，该成员下的所有数据也被删除',
             showCancel: true,
-            confirmText: '执以删除',
+            confirmText: '执意删除',
             success(res) {
                 if (res.confirm) {
                     let members = that.data.members;
