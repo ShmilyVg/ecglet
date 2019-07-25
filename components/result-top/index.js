@@ -5,7 +5,9 @@ export default class ResultTop {
 
     showItems({items}) {
         this._page.setData({
-            items
+            items:items.map(item=>{
+                return {...item};
+            })
         });
         this._page.onShowDetail = (e) => {
             const {currentTarget: {dataset: {index,item}}} = e;

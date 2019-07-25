@@ -8,11 +8,11 @@
     <view class="content">{{result.time}}</view>
     <view class="flex-row fill-width align-items-center space-between box-sizing-border-box result-top-image-bg">
         <view class="flex-column">
-            <view class="result-title">节律稳定</view>
-            <view class="result-content">多喝水，好心态，别熬夜~</view>
+            <view class="result-title">{{result.title}}</view>
+            <view class="result-content">{{result.subTitle}}</view>
         </view>
         <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
     </view>
     <template is="result-top" data="{{resultColor:'#3A93EF',items}}"></template>
-    <template is="result-bottom" data="{{resultColor:'#3A93EF'}}"></template>
+    <template is="result-bottom" data="{{resultColor:'#3A93EF',resultBottomRemindColor:'rgba(180,218,255,1)'}}"></template>
 </view>

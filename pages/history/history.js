@@ -88,7 +88,7 @@ Page({
 
     toPdfUrl(e) {
         getApp().globalData.tempGatherResult = e.currentTarget.dataset.item;
-        HiNavigator.navigateToResult();
+        HiNavigator.navigateToNormalResult({dataId: 31});
     },
 
     onPullDownRefresh() {

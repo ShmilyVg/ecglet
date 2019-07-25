@@ -3,6 +3,7 @@ import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import {jsGetAge} from "../../utils/tools";
+import Toast from "../../utils/toast";
 
 const app = getApp();
 Page({
@@ -103,17 +104,25 @@ Page({
     },
     uploadBaseInfo() {
         if (this.filePath) {
-            Protocol.uploadGatherFile({
+            Toast.showLoading();
+            let promise = undefined;
+            if (parseInt(this.arrhythType) === 3) {
+                promise = Protocol.uploadGatherCardiacFile;
+            } else {
+                promise = Protocol.uploadGatherRoutineFile;
+            }
+            promise({
                 filePath: this.filePath, symptom: this.data.ill.filter(item => item.value).join(','),
                 record: this.detailed.filter(item => item.value).join(',') + (this.data.text || ''),
                 memberId: this.data.userInfo.memberId,
-                type: this.arrhythType,
             }).then(data => {
                 console.log('', data);
-                HiNavigator.redirectToResult({type});
+                HiNavigator.redirectToResultPageByType({type});
             }).catch(res => {
                 console.error(res);
-            });
+            }).finally(Toast.hiddenLoading);
+        } else {
+            Toast.showLoading('心电数据上传异常\n请重新检测');
         }
     }
 });
