@@ -1,6 +1,5 @@
 // pages/member-list/member-list.js
 import Protocol from "../../apis/network/protocol";
-import * as tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 
 Page({
@@ -12,26 +11,30 @@ Page({
     onLoad(options) {
         let state = parseInt(options.state);
         console.log('状态：', state);
-        if (state === 1) {
-            // 检测完成后的跳转
-            this.setData({
-                showTopText: true,
-                haveMainMember: true,
-                state: 1
-            })
-        } else if (state === 2) {
-            // 不带主成员的列表
-            this.setData({
-                showTopText: false,
-                haveMainMember: false,
-                state: 2
-            })
-        } else if (state === 3) {
-            // 带主成员的列表
-            this.setData({
-                haveMainMember: true,
-                state: 3
-            })
+        switch (state) {
+            case 1:
+                // 检测完成后切换成员进入
+                this.setData({
+                    showTopText: true,
+                    haveMainMember: true,
+                    state: 1
+                });
+                break;
+            case 2:
+                // 我的-成员管理进入
+                this.setData({
+                    showTopText: false,
+                    haveMainMember: false,
+                    state: 2
+                });
+                break;
+            case 3:
+                // 检测记录-切换成员进入
+                this.setData({
+                    haveMainMember: true,
+                    state: 3
+                });
+                break;
         }
     },
 
@@ -58,7 +61,7 @@ Page({
         console.log(index);
         switch (this.data.state) {
             case 1:
-                getApp().globalData.currentMember = this.data.members[index];
+                this.saveCurrentMember(index);
                 wx.navigateBack({
                     delta: 1
                 });
@@ -66,17 +69,18 @@ Page({
             case 2:
                 break;
             case 3:
-                getApp().globalData.currentMember = this.data.members[index];
-                wx.switchTab({
-                    url: '../history/history?member'
-                });
+                this.toTabbarHistory(index);
                 break;
         }
     },
 
     clickBtn(e) {
         let index = e.currentTarget.dataset.index;
-        this.showSheet(index);
+        if (this.data.state === 1) {
+            this.toEditMember(this, index);
+        } else {
+            this.showSheet(index);
+        }
     },
 
     showSheet(index) {
@@ -89,42 +93,61 @@ Page({
                         that.toTabbarHistory(index);
                         break;
                     case 1:
-                        getApp().globalData.editMember = that.data.members[index];
-                        let isNormalMember = true;
-                        if (that.data.haveMainMember) {
-                            isNormalMember = !index;
-                        } else {
-                            isNormalMember = false
-                        }
-                        wx.navigateTo({url: '../userdata/userdata?isNormalMember=' + isNormalMember});
+                        that.toEditMember(that, index);
                         break;
                     case 2:
-                        wx.showModal({
-                            content: '删除成员的同时，该成员下的所有数据也被删除',
-                            showCancel: true,
-                            confirmText: '执以删除',
-                            success(res) {
-                                if (res.confirm) {
-                                    let members = that.data.members;
-                                    let id = members[index].id;
-                                    Protocol.memberRelevanceDel({id}).then(() => {
-                                        members.splice(index, 1);
-                                        that.setData({
-                                            members: members
-                                        })
-                                    });
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
-                                }
-                            },
-                            fail() {
-                                console.log('fail');
-                            }
-                        });
+                        that.toDeleteMember(that, index);
                         break;
                 }
             }
         })
+    },
+
+    toDeleteMember(that, index) {
+        wx.showModal({
+            content: '删除成员的同时，该成员下的所有数据也被删除',
+            showCancel: true,
+            confirmText: '执以删除',
+            success(res) {
+                if (res.confirm) {
+                    let members = that.data.members;
+                    let id = members[index].id;
+                    Protocol.memberRelevanceDel({id}).then(() => {
+                        members.splice(index, 1);
+                        that.setData({
+                            members: members
+                        })
+                    });
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
+            },
+            fail() {
+                console.log('fail');
+            }
+        });
+    },
+
+    toEditMember(that, index) {
+        getApp().globalData.editMember = that.data.members[index];
+        let isNormalMember = true;
+        if (that.data.haveMainMember) {
+            isNormalMember = !index;
+        } else {
+            isNormalMember = false
+        }
+        wx.navigateTo({url: '../userdata/userdata?isNormalMember=' + isNormalMember});
+    },
+
+    toTabbarHistory(index) {
+        this.saveCurrentMember(index);
+        wx.switchTab({
+            url: '../history/history'
+        });
+    },
+
+    saveCurrentMember(index) {
+        getApp().globalData.currentMember = this.data.members[index];
     },
 
     addMember() {

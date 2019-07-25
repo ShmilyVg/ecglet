@@ -54,7 +54,7 @@ Page({
                 })
             })
         }
-        this.getList({page: 1});
+        this.getList({page: 1, recorded: true});
     },
 
     getList({page = 1, recorded = false}) {
