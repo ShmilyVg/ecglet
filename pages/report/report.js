@@ -1,12 +1,71 @@
+import Protocol from "../../apis/network/protocol";
+import Toast from "../../utils/toast";
+import WXDialog from "../../utils/dialog";
+
 Page({
     data: {
-        reportUrl: 'http://backend.stage.hipee.cn/hipee-web-hiecg/pdf/cf46b88dc0700e8bc2366b4d1c690bae_15820.pdf',
+        reportUrl: 'https://backend.hipee.cn/hipee-web-hiecg/pdf/fe760a5a9bfe41a7b7d449430846d8f8.jpg',
     },
 
     saveFile() {
+        Protocol.downloadFile({url: this.data.reportUrl}).then(res => {
+            const tempFilePath = res.tempFilePath;
+            this.saveToLocal(tempFilePath);
+        });
 
     },
 
+    saveToLocal(tempFilePath) {
+        wx.saveImageToPhotosAlbum({
+            filePath: tempFilePath,
+            success: (res) => {
+                Toast.success('保存成功');
+            }, fail: (res) => {
+                console.log(res);
+                if (res.errMsg.indexOf('fail auth deny') !== -1) {
+                    // WXDialog.showDialog({
+                    //     title: '提示', content: '请您授权保存功能后\n才可正常使用该功能', confirmEvent: () => {
+                    //         wx.getSetting({
+                    //             success: (res) => {
+                    //                 if (!res.authSetting['scope.writePhotosAlbum']) {
+                    //                     wx.authorize({
+                    //                         scope: 'scope.writePhotosAlbum',
+                    //                         success: () => {
+                    //                             // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+                    //                             this.saveToLocal();
+                    //                         },fail:res=>{
+                    //                             console.log('1253',res);
+                    //                             // wx.openSetting({
+                    //                             //     success (res) {
+                    //                             //         console.log(res.authSetting)
+                    //                             //         // res.authSetting = {
+                    //                             //         //   "scope.userInfo": true,
+                    //                             //         //   "scope.userLocation": true
+                    //                             //         // }
+                    //                             //     },fail:res=>{
+                    //                             //         console.log('1253',res);
+                    //                             //
+                    //                             //     }
+                    //                             // })
+                    //                         }
+                    //                     })
+                    //                 }
+                    //             },fail:res=>{
+                    //                 console.log('123',res);
+                    //             }
+                    //         });
+                    //     }
+                    // })
+
+                } else {
+                    Toast.warn('保存失败');
+                }
+            }
+        })
+    },
+    prewview() {
+        wx.previewImage({current: this.data.reportUrl, urls: [this.data.reportUrl]});
+    },
     onLoad(options) {
         console.log("options: %o", options);
 

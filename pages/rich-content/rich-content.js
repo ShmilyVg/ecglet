@@ -58,8 +58,7 @@ Page({
     filePath: '',
     arrhythType: '',
     onLoad(options) {
-        this.filePath = decodeURIComponent(options.tempFileUrl);
-
+        this.filePath = options.tempFileUrl?decodeURIComponent(options.tempFileUrl):'';
     },
     onShow() {
         const currentMember = app.globalData.currentMember;
@@ -103,8 +102,10 @@ Page({
         })
     },
     uploadBaseInfo() {
-        if (this.filePath) {
-            Toast.showLoading();
+        if (!!this.filePath) {
+            console.log(this.filePath,'2');
+
+            // Toast.showLoading();
             let promise = undefined;
             if (parseInt(this.arrhythType) === 3) {
                 promise = Protocol.uploadGatherCardiacFile;
@@ -112,17 +113,17 @@ Page({
                 promise = Protocol.uploadGatherRoutineFile;
             }
             promise({
-                filePath: this.filePath, symptom: this.data.ill.filter(item => item.value).join(','),
-                record: this.detailed.filter(item => item.value).join(',') + (this.data.text || ''),
+                filePath: this.filePath, symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
+                record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
                 memberId: this.data.userInfo.memberId,
             }).then(data => {
                 console.log('', data);
-                HiNavigator.redirectToResultPageByType({type});
+                HiNavigator.redirectToResultPageByType({type, dataId: ''});
             }).catch(res => {
                 console.error(res);
             }).finally(Toast.hiddenLoading);
         } else {
-            Toast.showLoading('心电数据上传异常\n请重新检测');
+            Toast.showText('心电数据上传异常\n请重新检测');
         }
     }
 });

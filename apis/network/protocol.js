@@ -14,6 +14,22 @@ export default class Protocol {
 
     }
 
+    static downloadFile({url}) {
+        return new Promise((resolve, reject) => {
+            wx.downloadFile({
+                url, //仅为示例，并非真实的资源
+                success: (res) => {
+                    // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+                    if (res.statusCode === 200) {
+                        resolve({tempFilePath: res.tempFilePath});
+                    } else {
+                        reject();
+                    }
+                }, fail: reject
+            });
+        });
+    }
+
     static checkHaveNetwork() {
         return this.getNetworkType().then(res => {
             console.log('当前网络状态', res);
@@ -37,7 +53,7 @@ export default class Protocol {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
-                    url: PostUrl + 'gather/upload',
+                    url: PostUrl + 'gather/routine',
                     filePath: filePath,
                     name: filePath,
                     header: {"Cookie": `JSESSIONID=${wx.getStorageSync('cookie')}`},
@@ -73,7 +89,7 @@ export default class Protocol {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
-                    url: PostUrl + 'gather/upload',
+                    url: PostUrl + 'gather/cardiac',
                     filePath: filePath,
                     name: filePath,
                     header: {"Cookie": `JSESSIONID=${wx.getStorageSync('cookie')}`},

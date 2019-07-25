@@ -1,0 +1,11 @@
+.btn-fill-width{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(57,147,238,1);
+    padding: 25rpx;
+    font-size:30rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+}

@@ -1,5 +1,7 @@
 <view class="container">
-    <image src="{{reportUrl}}" style="width: 100%;height: 100%;"></image>
+    <image src="{{reportUrl}}" bindtap="prewview" mode="aspectFit" style="width: 100%;height: 100%;"></image>
+
+    <button class="fill-width btn-fill-width" bindtap="saveFile">下载报告到本地</button>
 </view>
 
 
