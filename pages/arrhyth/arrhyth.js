@@ -55,6 +55,10 @@ Page({
     waveData: undefined,
 
 
+    getOriginTxt() {
+        return this.data.testType === 3 ? '300' : '30';
+    },
+
     reset() {
         let that = this
 
@@ -164,10 +168,6 @@ Page({
             }
 
         }
-    },
-
-    getOriginTxt() {
-        return this.data.testType === 3 ? '300' : '30';
     },
 
     onLoad(options) {
