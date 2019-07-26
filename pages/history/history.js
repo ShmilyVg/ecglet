@@ -27,17 +27,16 @@ Page({
         bottomViewIsHidden: false
     },
 
-    onLoad() {
+    onShow() {
+        let userInfo = getApp().globalData.currentMember;
+        console.log('切换成员：', userInfo);
+
         Protocol.getRelativesGetToolTip({}).then((res) => {
             this.setData({
                 bottomViewIsHidden: !res.result.isShow
             })
         })
-    },
 
-    onShow() {
-        let userInfo = getApp().globalData.currentMember;
-        console.log('切换成员：', userInfo);
         if (userInfo.thirdpartyUId === null) {
             this.setData({
                 userInfo: userInfo,
