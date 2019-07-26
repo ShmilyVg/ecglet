@@ -24,7 +24,7 @@ Page({
     onLoad(options) {
         let isNormalMember = options.isNormalMember === 'true';
         console.log('是否为基本成员：', isNormalMember);
-        let {year,month,day} = getFormatDate(Date.now());
+        let {year, month, day} = getFormatDate(Date.now());
         this.setData({
             birthEndDate: year + '-' + month + '-' + day
         });
@@ -114,9 +114,19 @@ Page({
         }
 
         if (this.data.number.length != 11) {
-            Toast.showText('手机号格式错误');
+            if (this.data.number.length > 0) {
+                Toast.showText('手机号格式错误');
+            } else if (this.data.number.length == 0) {
+                Toast.showText('请填写手机号');
+            }
             return;
         }
+
+        if (this.data.birthDate === '请选择出生日期' || this.data.birthDate === "") {
+            Toast.showText('请选择出生日期');
+            return;
+        }
+
         WXDialog.showDialog({
             title: '提示', content: '确认修改您的信息吗？', showCancel: true, confirmEvent: () => {
                 Toast.showLoading();
@@ -188,7 +198,6 @@ Page({
                             }
                         });
                     }
-
                 } catch (err) {
                     console.log("onSubmit error: %o", err);
                     Toast.showText('提交失败')

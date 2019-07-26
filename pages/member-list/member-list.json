@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "navigationBarBackgroundColor": "#3993EE",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "成员管理"
 }

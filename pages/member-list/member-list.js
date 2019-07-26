@@ -39,6 +39,7 @@ Page({
     },
 
     onShow() {
+        getApp().globalData.editMember = {};
         Protocol.memberRelevanceList({}).then((e) => {
             let members = e.result.dataList;
             if (this.data.haveMainMember) {
@@ -90,7 +91,7 @@ Page({
     showSheet(index) {
         let that = this;
         wx.showActionSheet({
-            itemList: ['检测记录', '修改资料', '删除成员'],
+            itemList: ['检测记录', '编辑资料', '删除成员'],
             success(e) {
                 switch (e.tapIndex) {
                     case 0:
