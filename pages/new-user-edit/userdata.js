@@ -3,6 +3,7 @@ import WXDialog from "../../utils/dialog";
 import * as tools from "../../utils/tools";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import UserInfo from "../../apis/network/network/libs/userInfo";
 
 Page({
     data: {
@@ -25,6 +26,20 @@ Page({
         this.setData({
             birthEndDate: birthEndDate
         });
+        UserInfo.get().then((res) => {
+            console.log('res:', res);
+
+            this.setData({
+                name: res.userInfo.nickName,
+                number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
+                sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
+                birthDate: res.userInfo.birthday || '请选择出生日期',
+                height: res.userInfo.height,
+                weight: res.userInfo.weight,
+                portraitUrl: res.userInfo.portraitUrl,
+                isPhoneNotAuth: this.isPhoneNotAuth()
+            })
+        })
     },
     isPhoneNotAuth() {
         return !wx.getStorageSync('isNewUserPhoneAuth');
