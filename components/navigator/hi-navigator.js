@@ -55,6 +55,14 @@ export default class HiNavigator extends CommonNavigator {
         }
     }
 
+    static navigateToResultPageByType({type, dataId}) {
+        if (type === 3) {
+            this.navigateToHeartPressureResult({dataId});
+        } else {
+            this.navigateToNormalResult({dataId});
+        }
+    }
+
     static navigateToNormalResult({dataId}) {
         wx.navigateTo({url: '/pages/result/result?dataId=' + dataId});
     }
