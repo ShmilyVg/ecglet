@@ -49,7 +49,7 @@ export default class Protocol {
      * @param relevanceId
      * @returns {Promise<any>}
      */
-    static uploadGatherRoutineFile({filePath, symptom, record, memberId: relevanceId}) {
+    static uploadGatherRoutineFile({filePath, symptom, record, relevanceId}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
@@ -85,7 +85,7 @@ export default class Protocol {
      * @param relevanceId
      * @returns {Promise<any>}
      */
-    static uploadGatherCardiacFile({filePath, symptom, record, memberId: relevanceId}) {
+    static uploadGatherCardiacFile({filePath, symptom, record, relevanceId}) {
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
