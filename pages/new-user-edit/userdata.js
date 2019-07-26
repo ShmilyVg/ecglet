@@ -142,6 +142,10 @@ Page({
             };
             console.log('保存信息：', data);
             Protocol.accountUpdate(data).then((res) => {
+                return UserInfo.get();
+            }).then(res => {
+                return UserInfo.set({...res.userInfo, ...data});
+            }).then(() => {
                 HiNavigator.relaunchToStart();
             }).catch((res) => {
                 if (res.data.code == 2000) {
