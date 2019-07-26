@@ -26,7 +26,7 @@ Page({
         console.log('是否为基本成员：', isNormalMember);
         let birthEndDate = tools.createDateAndTime(new Date());
         this.setData({
-            birthEndDate: birthEndDate
+            birthEndDate: birthEndDate.date
         });
 
         let userInfo = getApp().globalData.editMember;

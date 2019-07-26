@@ -40,7 +40,7 @@
             <view class="flex-row cell space-between" bindtap="toShareCodePage">
                 <view class="flex-row align-items-center">
                     <image class="icon" src="../../images/mine/share.png"></image>
-                    <view class="title">亲友共享记录</view>
+                    <view class="title">共享记录给亲友</view>
                 </view>
 
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
