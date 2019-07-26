@@ -1,7 +1,7 @@
 <template name="trend-index">
     <scroll-view scroll-x style="width: 750rpx;height: 155rpx;background-color: white">
         <view class="flex-row" style="margin: 60rpx 0rpx 0rpx 10rpx;">
-            <view class="flex-column" wx:for="{{trendTag}}" wx:key="item_code" bindtap="clickIndexItem" data-current="{{item.id}}" >
+            <view class="flex-column" wx:for="{{trendTag}}" wx:key="item_code" bindtap="clickTag" data-current="{{item.id}}" >
                 <view class="flex-column" style="align-items: center">
                     <view class="{{item.state?'trend-index-select-style':'trend-index-not-select-style'}}" style="{{index===list.length-1?'margin-right: 30rpx':''}}">{{item.des}}</view>
                     <view wx:if="{{item.state}}" class="trend-index-arr" style="{{index===list.length-1?'margin-right: 30rpx':''}}"></view>

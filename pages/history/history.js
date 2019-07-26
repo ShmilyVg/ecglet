@@ -178,16 +178,16 @@ Page({
         this.getItemListData({recorded: true});
     },
 
-    clickIndexItem(e) {
-        const {currentTarget: {dataset: {current}}} = e;
-        console.log(current);
+    clickTag(e) {
+        const {currentTarget: {dataset: {current: index}}} = e;
         this.data.trendTag.map((value) => {
-            value.state = current === value.id
+            value.state = index === value.id
         });
 
         this.setData({
             trendTag: this.data.trendTag,
-            tagChose: current
+            tagChose: index,
+            itemPage: 1
         });
 
         this.tagAllDataHandle({recorded: true});
@@ -200,7 +200,6 @@ Page({
             data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id, page: this.data.itemPage}
         }
         Protocol.getLinearGraphList({data}).then(data => {
-            console.log('getLinearGraphList', data, recorded);
             let {result: {dataList: list}} = data;
             if (list.length) {
                 list.map(value => {
