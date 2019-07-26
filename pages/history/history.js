@@ -119,7 +119,9 @@ Page({
         trend.init(this);
         trend.initTouchHandler();
         this.setData({
-            rightChoseIsLeft: !this.data.rightChoseIsLeft
+            rightChoseIsLeft: !this.data.rightChoseIsLeft,
+            page: 1,
+            itemPage: 1
         });
         if (this.data.rightChoseIsLeft) {
             this.choseBigList()
