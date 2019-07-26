@@ -6,7 +6,7 @@
     </view>
         <view class="middle-text">扫描二维码</view>
 
-        <text class="bottom-text">家人扫描此码可随时查看您的检测记录\n如有异常时，亲友可接到提醒</text>
+        <text class="bottom-text">亲友扫描此码可随时查看您的检测记录\n如有异常时，亲友可接到提醒</text>
         <view class="button-radius" hover-class="press-style" bindtap="saveCanvas"
               style="margin-top: 160rpx;margin-bottom: 80rpx;">保存二维码至相册
         </view>
