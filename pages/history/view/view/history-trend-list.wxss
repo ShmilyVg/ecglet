@@ -10,11 +10,29 @@
     background-color: white;
 }
 
+.circle-view{
+    width: 42rpx;
+    height: 42rpx;
+    position: relative;
+}
+
+.circle-big{
+    width: 42rpx;
+    height: 42rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.2;
+}
+
 .circle{
     width:26rpx;
     height:26rpx;
     border-radius: 50%;
-    border: 8rpx solid #d8e9fc;
+    position: absolute;
+    top: 8rpx;
+    right: 8rpx;
 }
 
 .history-item{

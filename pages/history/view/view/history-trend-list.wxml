@@ -3,7 +3,10 @@
     <view wx:if="{{itemList.length}}" class="flex-column">
         <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{itemList}}" wx:key="{{item.pdfUrl}}" data-item="{{item}}">
             <view class="flex-row align-items-center">
-                <view class="circle" style="background-color: {{item.color}};"></view>
+                <view class="circle-view flex-column">
+                    <view class="circle" style="background-color:{{item.color}}"></view>
+                    <view class="circle-big" style="background-color:{{item.color}}"></view>
+                </view>
                 <view class="flex-column" style="margin-left: 33rpx">
                     <view class="flex-row align-items-center">
                         <view class="item-title">{{item.titleTime}}</view>
