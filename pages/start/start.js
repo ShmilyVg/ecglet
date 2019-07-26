@@ -1,29 +1,41 @@
 import UserInfo from '../../apis/network/userInfo.js';
-import {dealAuthUserInfo} from "../../utils/tools";
+import {dealAuthUserInfo, MyUsed} from "../../utils/tools";
 import WXDialog from "../../base/heheda-common-view/dialog";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import {RandomRemindData} from "../../utils/tips";
 
 Page({
     data: {
         userInfo: {},
-        isConnected: true
+        isConnected: true,
+        isFirstUsed: true
     },
 
     onLoad(param) {
-        getApp().onLoginSuccess = ()=>{
-            this.setData({haveAuthorize: true});
+        const isFirstUsed = MyUsed.isFirstUsed();
+
+        if (isFirstUsed) {
+            MyUsed.setUsed();
+            this.setData({isFirstUsed: true});
+        } else {
+            const tip = new RandomRemindData();
+            tip.random();
+            this.setData({isFirstUsed: false, tip: tip.getRemindData()});
         }
+        getApp().onLoginSuccess = () => {
+            this.setData({haveAuthorize: true});
+        };
     },
 
-    onShow(){
+    onShow() {
         Protocol.checkHaveNetwork().then(() => {
             this.setData({isConnected: true});
         }).catch(() => {
             this.setData({isConnected: false});
         });
         this.setData({isConnected: getApp().globalData.isConnected});
-        UserInfo.get().then((res)=>{
+        UserInfo.get().then((res) => {
             this.setData({
                 userInfo: res.userInfo,
             })
@@ -31,16 +43,16 @@ Page({
     },
 
     toNormalTestPage() {
-        Protocol.checkHaveNetwork().then(()=>{
+        Protocol.checkHaveNetwork().then(() => {
             HiNavigator.navigateToArrhyth();
-        }).catch(()=>{
+        }).catch(() => {
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
         })
     },
     to02TestPage() {
-        Protocol.checkHaveNetwork().then(()=>{
+        Protocol.checkHaveNetwork().then(() => {
             HiNavigator.navigateToArrhyth({type: 3});
-        }).catch(()=>{
+        }).catch(() => {
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
         })
     },

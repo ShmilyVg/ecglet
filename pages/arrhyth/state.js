@@ -1,5 +1,5 @@
 import WXDialog from "../../utils/dialog";
-import {RandomRemindData} from "../../utils/tools";
+import {RandomRemindData} from "../../utils/tips";
 
 const WAIT_TIME = 4500, radius = 80;
 
