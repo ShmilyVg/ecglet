@@ -15,7 +15,7 @@
     </view>
 
     <view style="height: 12rpx"></view>
-    <block wx:if="{{itemList}}">
+    <block wx:if="{{itemList.length>0}}">
         <template is="trend-index" data="{{trendTag}}"></template>
         <view class="flex-column" style="background-color: white;align-items: center;">
             <view class="xinlvdanwei">{{trend.yTitle}}</view>

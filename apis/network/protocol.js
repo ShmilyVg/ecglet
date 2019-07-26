@@ -131,8 +131,8 @@ export default class Protocol {
         return Network.request({url: 'gather/list', data: data})
     }
 
-    static getLinearGraph({type, target, relevanceId}) {
-        return Network.request({url: 'gather/list/linearGraph', data: {type, relevanceId, target}})
+    static getLinearGraph({data}) {
+        return Network.request({url: 'gather/list/linearGraph', data: data})
     }
 
     static getLinearGraphList({data}) {

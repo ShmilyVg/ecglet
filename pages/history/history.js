@@ -161,14 +161,20 @@ Page({
 
     tagAllDataHandle() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        Protocol.getLinearGraph({type, target: this.data.tagChose}).then(data => {
+        let data = {type, target: this.data.tagChose};
+        if (!this.data.isNormalMember) {
+            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id};
+        }
+        Protocol.getLinearGraph({data}).then(data => {
             const {result: {xTitle, yTitle}} = data;
             this.setData({
                 trend: {xTitle, yTitle}
             });
-            trend.setData(data.result);
+            if (data.result.dataList.length > 0) {
+                trend.setData(data.result);
+            }
         });
-        this.tagItemListData({});
+        this.tagItemListData({recorded: true});
     },
 
     clickIndexItem(e) {
@@ -183,7 +189,7 @@ Page({
             tagChose: current
         });
 
-        this.tagAllDataHandle();
+        this.tagAllDataHandle({recorded: true});
     },
 
     tagItemListData({page = 1, recorded = false}) {
@@ -200,6 +206,15 @@ Page({
                     value.titleTime = dataAndTime.time;
                     value.titleDate = dataAndTime.date;
                 });
+                if (!recorded) {
+                    list = this.data.itemList.concat(list);
+                } else {
+                    this.data.itemPage = 1;
+                }
+                this.setData({
+                    itemList: list
+                })
+            } else {
                 if (!recorded) {
                     list = this.data.itemList.concat(list);
                 } else {
