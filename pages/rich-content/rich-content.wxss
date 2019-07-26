@@ -79,11 +79,11 @@
     margin-top: 42rpx;
     margin-bottom: 150rpx;
     width:610rpx;
-    height:190rpx;
+    height:140rpx;
     background:rgba(246,247,247,1);
     border:1rpx solid rgba(232,232,232,1);
     border-radius:30rpx;
-    padding: 50rpx 30rpx;
+    padding: 50rpx 30rpx 100rpx;
     color: #5B5B5B;
     font-size: 28rpx;
     line-height:50rpx;

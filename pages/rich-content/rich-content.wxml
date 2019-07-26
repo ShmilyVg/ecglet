@@ -33,8 +33,8 @@
     </view>
 
     <textarea class="text" placeholder="如果还有其他症状、活动需要说明，请在此处补充。如是否饮酒、吸烟、是否剧烈运动，以及是否服用了控制心率的药物等。"
-              placeholder-class="text-placeholder" bindinput="textContent" value="{{text}}">
-        <view class="count">{{count}}/100</view>
+              placeholder-class="text-placeholder" bindinput="textContent" value="{{text}}" maxlength="-1">
+        <view class="count" style="{{count>100?'color:red':''}}">{{count}}/100</view>
     </textarea>
 </view>
 

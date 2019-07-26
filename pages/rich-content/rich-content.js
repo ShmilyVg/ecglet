@@ -58,7 +58,7 @@ Page({
     filePath: '',
     arrhythType: '',
     onLoad(options) {
-        this.filePath = options.tempFileUrl?decodeURIComponent(options.tempFileUrl):'';
+        this.filePath = options.tempFileUrl ? decodeURIComponent(options.tempFileUrl) : '';
         this.arrhythType = options.type;
     },
     onShow() {
@@ -77,9 +77,6 @@ Page({
     },
     textContent(e) {
         let {detail: {cursor, value}} = e;
-        if (cursor > 100) {
-            value = value.slice(0, 99);
-        }
         this.setData({
             count: cursor,
             text: value
@@ -103,8 +100,12 @@ Page({
         })
     },
     uploadBaseInfo() {
+        if (this.data.count > 100) {
+            Toast.showText('字符超出限制');
+            return;
+        }
         if (!!this.filePath) {
-            console.log(this.filePath,'2');
+            console.log(this.filePath, '2');
 
             // Toast.showLoading();
             let promise = undefined;
@@ -115,7 +116,8 @@ Page({
             }
             const {userInfo} = this.data;
             promise({
-                filePath: this.filePath, symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
+                filePath: this.filePath,
+                symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
                 record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
                 relevanceId: userInfo.isMainMember ? '' : userInfo.relevanceId,
             }).then(data => {

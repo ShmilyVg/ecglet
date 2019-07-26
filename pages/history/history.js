@@ -15,12 +15,7 @@ Page({
         rightChoseIsLeft: true,
         trendRightChoseIsLeft: true,
         trendResult: [],
-        list: [1, 2, 3, 4],
-        trendTag: [
-            {id: 1, title: 'HR', state: true},
-            {id: 1, title: '', state: false},
-            {id: 2, title: '2', state: false}
-        ],
+        trendTag: [],
         tagChose: 1,
         itemList: [],
         isNormalMember: true,
@@ -35,7 +30,7 @@ Page({
             this.setData({
                 bottomViewIsHidden: !res.result.isShow
             })
-        })
+        });
 
         if (userInfo.thirdpartyUId === null) {
             this.setData({
@@ -120,17 +115,17 @@ Page({
             itemPage: 1
         });
         if (this.data.rightChoseIsLeft) {
-            this.rightTopList()
+            this.handleRightTopList()
         } else {
-            this.rightTopTrend();
+            this.handleRightTopTrend();
         }
     },
 
-    rightTopList() {
-
+    handleRightTopList() {
+        // to do ...
     },
 
-    rightTopTrend() {
+    handleRightTopTrend() {
         trend.init(this);
         trend.initTouchHandler();
         this.getTags();
