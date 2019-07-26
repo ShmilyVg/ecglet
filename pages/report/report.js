@@ -14,7 +14,16 @@ Page({
         });
 
     },
-
+    imageLoadSuccess(e) {
+        const {detail:{width,height}} = e;
+        console.log('图片宽高',width, height);
+        const {windowWidth} = wx.getSystemInfoSync();
+        let imageWidth = windowWidth, imageHeight = windowWidth * height / width;
+        this.setData({
+            imageWidth,
+            imageHeight
+        });
+    },
     saveToLocal(tempFilePath) {
         wx.saveImageToPhotosAlbum({
             filePath: tempFilePath,

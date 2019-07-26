@@ -56,7 +56,7 @@ Page({
 
 
     getOriginTxt() {
-        return this.data.testType === 3 ? '300' : '30';
+        return this.data.testType === 2 ? '300' : '30';
     },
 
     reset() {
@@ -180,7 +180,7 @@ Page({
 
         let that = this;
         that.data.testType = parseInt(options.type) || 0;
-        wx.setNavigationBarTitle({title: that.data.testType === 3 ? '心脏负荷评估' : '常规心电检测'});
+        wx.setNavigationBarTitle({title: that.data.testType === 2 ? '心脏负荷评估' : '常规心电检测'});
         that.setData({
                 maxCount: parseInt(this.getOriginTxt()) / 2,
                 testType: that.data.testType,

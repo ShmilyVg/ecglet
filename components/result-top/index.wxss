@@ -106,7 +106,7 @@
 }
 
 .result-item-line{
-    width:100%;
+    width:calc(100% - 8rpx);
     border: 1rpx solid #E8E8E8;
 }
 
