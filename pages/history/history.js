@@ -93,7 +93,7 @@ Page({
                 page: 1,
                 logs: []
             });
-            this.getMainList({page: 1});
+            this.getMainList({recorded: true});
         } else {
             this.getItemListData({recorded: true});
         }
