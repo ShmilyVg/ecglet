@@ -238,7 +238,7 @@ export default class Protocol {
         return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data => {
             data.result.list.forEach(item => {
 
-                switch (item.name) {
+                switch (item.target) {
                     case 'HR': {
                         item.description = '心率是指正常人安静状态下每分钟心跳的次数，成人正常心率为60～100次/分钟，如果心率低于40次/分钟，应考虑有病态窦房结综合征、房室传导阻滞等情况；如果出现胸闷、乏力、头晕等不适症状，应立即到医院进一步检查。';
                         if (item.status === '0') {

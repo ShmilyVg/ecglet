@@ -51,7 +51,7 @@ Page({
     },
     to02TestPage() {
         Protocol.checkHaveNetwork().then(() => {
-            HiNavigator.navigateToArrhyth({type: 3});
+            HiNavigator.navigateToArrhyth({type: 2});
         }).catch(() => {
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
         })
@@ -76,7 +76,7 @@ Page({
         console.log('onGotUserInfo02Test isConnected=', this.data.isConnected);
         dealAuthUserInfo(e).then((res) => {
             this.setData({userInfo: res.userInfo});
-            HiNavigator.navigateToArrhyth({type: 3});
+            HiNavigator.navigateToArrhyth({type: 2});
         }).catch((res) => {
             console.log(res);
         });

@@ -13,7 +13,7 @@ export default class HiNavigator extends CommonNavigator {
         this.reLaunch({url: '/pages/welcome/welcome'});
     }
 
-    static navigateToArrhyth({type = 0} = {}) {
+    static navigateToArrhyth({type = 1} = {}) {
         this.navigateTo({url: '/pages/arrhyth/arrhyth?type=' + type});
     }
 
@@ -48,7 +48,7 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static redirectToResultPageByType({type,dataId}) {
-        if (type === 3) {
+        if (type === 2) {
             this.redirectToHeartPressureResult({dataId});
         } else {
             this.redirectToNormalResult({dataId});
@@ -56,7 +56,7 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static navigateToResultPageByType({type, dataId}) {
-        if (type === 3) {
+        if (type === 2) {
             this.navigateToHeartPressureResult({dataId});
         } else {
             this.navigateToNormalResult({dataId});
