@@ -120,7 +120,7 @@ Page({
     toEditInfo() {
         if (!!wx.getStorageSync('isRegister')) {
             UserInfo.get().then((res) => {
-                getApp().globalData.currentMember = res.userInfo;
+                getApp().globalData.editMember = res.userInfo;
                 wx.navigateTo({
                         url: '../userdata/userdata?isNormalMember=true'
                     }
