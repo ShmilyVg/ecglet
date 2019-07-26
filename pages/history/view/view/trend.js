@@ -4,7 +4,7 @@ let _page = null;
 let _data = null;
 let lineChart = null;
 let index = 0;
-let dataList = [];
+let trendData = {};
 
 
 function init(page) {
@@ -13,7 +13,7 @@ function init(page) {
 }
 
 function setData(data) {
-    dataList = data;
+    trendData = data;
     normalTrend();
 }
 
@@ -51,6 +51,7 @@ function normalTrend() {
 
     let YPoint = [];
 
+    const {dataList, yAxisSplit, yMax} = trendData;
     for (let i in dataList) {
         YPoint.push('');
     }
@@ -73,6 +74,7 @@ function normalTrend() {
                 return val;
             },
             min: 0,
+            max: yMax,
             fontColor: '#AABAC1'
         },
         xAxis: {
@@ -83,7 +85,7 @@ function normalTrend() {
         enableScroll: true,
         dataLabel: false,
         haveNum: true,
-        yAxisSplit: 5
+        yAxisSplit: yAxisSplit-1
     });
 }
 

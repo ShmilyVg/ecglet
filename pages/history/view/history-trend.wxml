@@ -18,11 +18,11 @@
     <block wx:if="{{itemList}}">
         <template is="trend-index" data="{{trendTag}}"></template>
         <view class="flex-column" style="background-color: white;align-items: center;">
-            <view class="xinlvdanwei">心率（单位：bpm）</view>
+            <view class="xinlvdanwei">{{trend.yTitle}}</view>
             <canvas canvas-id="lineCanvas" class="canvas" disable-scroll="true"
                     bindtouchstart="touchHandler"
                     bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
-            <view class="cishu">次数</view>
+            <view class="cishu">{{trend.xTitle}}</view>
         </view>
         <template is="history-trend-list" data="{{itemList}}"></template>
     </block>

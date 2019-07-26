@@ -17,7 +17,7 @@
 
 <template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
 
-<template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList}}"></template>
+<template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList,trend}}"></template>
 
 <view class="bottom-view flex-row" wx:if="{{!bottomViewIsHidden}}">
     <view class="bottom-view-text">
