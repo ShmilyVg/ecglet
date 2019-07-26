@@ -10,6 +10,7 @@ Page({
     data: {
         logs: [],
         page: 1,
+        itemPage: 1,
         selectedType: '',
         rightChoseIsLeft: true,
         trendRightChoseIsLeft: true,
@@ -100,17 +101,17 @@ Page({
             });
             this.getList({page: 1});
         } else {
-
+            this.tagItemListData({recorded: true});
         }
     },
 
     onReachBottom() {
+        console.log('onReachBottom');
         if (this.data.rightChoseIsLeft) {
             console.log('getList', this.data.page + 1);
             this.getList({page: ++this.data.page});
         } else {
-            Toast.hiddenLoading();
-            wx.stopPullDownRefresh();
+            this.tagItemListData({page: ++this.data.itemPage});
         }
     },
 
@@ -167,7 +168,7 @@ Page({
             });
             trend.setData(data.result);
         });
-        this.tagItemListData();
+        this.tagItemListData({});
     },
 
     clickIndexItem(e) {
@@ -185,23 +186,33 @@ Page({
         this.tagAllDataHandle();
     },
 
-    tagItemListData() {
+    tagItemListData({page = 1, recorded = false}) {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        let data = {type, target: this.data.tagChose};
+        let data = {type, target: this.data.tagChose, page: this.data.itemPage};
         if (!this.data.isNormalMember) {
-            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id}
+            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id, page: this.data.itemPage}
         }
         Protocol.getLinearGraphList({data}).then(data => {
-            let {result: {dataList}} = data;
-            dataList.map(value => {
-                let dataAndTime = Tools.createDateAndTime(parseInt(value.created_timestamp));
-                value.titleTime = dataAndTime.time;
-                value.titleDate = dataAndTime.date;
-            });
-            this.setData({
-                itemList: dataList
-            })
-        })
+            let {result: {dataList: list}} = data;
+            if (list.length) {
+                list.map(value => {
+                    let dataAndTime = Tools.createDateAndTime(parseInt(value.created_timestamp));
+                    value.titleTime = dataAndTime.time;
+                    value.titleDate = dataAndTime.date;
+                });
+                if (!recorded) {
+                    list = this.data.itemList.concat(list);
+                } else {
+                    this.data.itemPage = 1;
+                }
+                this.setData({
+                    itemList: list
+                })
+            }
+        }).finally(() => {
+            Toast.hiddenLoading();
+            wx.stopPullDownRefresh();
+        });
     },
 
     switchMember() {
