@@ -24,7 +24,7 @@ Page({
     onLoad(options) {
         let isNormalMember = options.isNormalMember === 'true';
         console.log('是否为基本成员：', isNormalMember);
-        let {year,month,day} = getFormatDate(Date.now());
+        let {year, month, day} = getFormatDate(Date.now());
         this.setData({
             birthEndDate: year + '-' + month + '-' + day
         });
@@ -114,7 +114,11 @@ Page({
         }
 
         if (this.data.number.length != 11) {
-            Toast.showText('请填写手机号');
+            if (this.data.number.length > 0) {
+                Toast.showText('手机号格式错误');
+            } else if (this.data.number.length == 0) {
+                Toast.showText('请填写手机号');
+            }
             return;
         }
 
