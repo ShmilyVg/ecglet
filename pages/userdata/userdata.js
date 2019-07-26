@@ -114,11 +114,11 @@ Page({
         }
 
         if (this.data.number.length != 11) {
-            Toast.showText('手机号格式错误');
+            Toast.showText('请填写手机号');
             return;
         }
 
-        if (this.data.birthDate === '请选择出生日期') {
+        if (this.data.birthDate === '请选择出生日期' || this.data.birthDate === "") {
             Toast.showText('请选择出生日期');
             return;
         }
