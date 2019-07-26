@@ -56,6 +56,7 @@
     line-height:56rpx;
 }
 .cell-green-state{
+    width:246rpx;
     font-size:24rpx;
     font-family:PingFang-SC-Regular;
     font-weight:400;
@@ -73,7 +74,7 @@
 
 
 .cell-num {
-    font-size:64rpx;
+    font-size:44rpx;
     font-weight:500;
 }
 
@@ -82,7 +83,6 @@
     font-weight:400;
     color:rgba(158,158,158,1);
     line-height:33rpx;
-    margin-top: -10rpx;
 }
 
 .result-item-extra{

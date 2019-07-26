@@ -55,7 +55,7 @@ Page({
                 time: this.getTime(parseInt(time)), pdfUrl, stress, tired: {
                     ...tired,
                     position: this.getImagePosition(tired.level)
-                },emotion:{
+                }, emotion: {
                     ...emotion,
                     position: this.getImagePosition(emotion.level)
                 }
@@ -75,5 +75,9 @@ Page({
         //         timingFunc: 'easeIn'
         //     }
         // });
+    },
+
+    onShareAppMessage() {
+        return {title:'',imageUrl:'', path: ''};
     }
-})
+});
