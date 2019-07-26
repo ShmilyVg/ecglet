@@ -89,10 +89,6 @@ Page({
     onPullDownRefresh() {
         console.log('onPullDownRefresh');
         if (this.data.rightChoseIsLeft) {
-            this.setData({
-                page: 1,
-                logs: []
-            });
             this.getMainList({recorded: true});
         } else {
             this.getItemListData({recorded: true});
