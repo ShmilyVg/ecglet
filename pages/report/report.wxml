@@ -1,5 +1,5 @@
-<view class="container">
-    <image src="{{reportUrl}}" bindtap="prewview" mode="aspectFit" style="width: 100%;height: 100%;"></image>
+<view class="flex-column">
+    <image src="{{reportUrl}}" bindload="imageLoadSuccess" bindtap="prewview" style="width: {{imageWidth}}px;height: {{imageHeight}}px;margin-bottom: 110rpx;"></image>
 
     <button class="fill-width btn-fill-width" bindtap="saveFile">下载报告到本地</button>
 </view>
