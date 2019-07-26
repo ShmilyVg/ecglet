@@ -86,7 +86,7 @@ Page({
         });
     },
 
-    toPdfUrl(e) {
+    toResultPage(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
         HiNavigator.navigateToResultPageByType({type, dataId})
     },
@@ -113,27 +113,26 @@ Page({
         }
     },
 
-
-    clickRightBtn() {
-        trend.init(this);
-        trend.initTouchHandler();
+    clickRightTopBtn() {
         this.setData({
             rightChoseIsLeft: !this.data.rightChoseIsLeft,
             page: 1,
             itemPage: 1
         });
         if (this.data.rightChoseIsLeft) {
-            this.choseBigList()
+            this.rightTopList()
         } else {
-            this.choseBigTrend();
+            this.rightTopTrend();
         }
     },
 
-    choseBigList() {
+    rightTopList() {
 
     },
 
-    choseBigTrend() {
+    rightTopTrend() {
+        trend.init(this);
+        trend.initTouchHandler();
         this.getTags();
     },
 

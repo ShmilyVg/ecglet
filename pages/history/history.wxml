@@ -7,7 +7,7 @@
         <image class="switch" src="../../images/history/qh.png"></image>
         <view class="name">{{userInfo.nickName||userInfo.name}}</view>
     </view>
-    <view class="right-nice-choose flex-row" bindtap="clickRightBtn">
+    <view class="right-nice-choose flex-row" bindtap="clickRightTopBtn">
         <view style="margin-left: {{rightChoseIsLeft?10:20}}rpx"></view>
         <view class="{{rightChoseIsLeft?'right-nice-choose-item-chose':'right-nice-choose-item'}}">列表</view>
         <view style="width: 16rpx"></view>
