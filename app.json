@@ -38,8 +38,8 @@
       {
         "pagePath": "pages/history/history",
         "text": "检测记录",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home_select.png"
+        "iconPath": "images/jl.png",
+        "selectedIconPath": "images/jl_select.png"
       },
       {
         "pagePath": "pages/profile/profile",
