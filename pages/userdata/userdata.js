@@ -117,6 +117,12 @@ Page({
             Toast.showText('手机号格式错误');
             return;
         }
+
+        if (this.data.birthDate === '请选择出生日期') {
+            Toast.showText('请选择出生日期');
+            return;
+        }
+
         WXDialog.showDialog({
             title: '提示', content: '确认修改您的信息吗？', showCancel: true, confirmEvent: () => {
                 Toast.showLoading();
@@ -188,7 +194,6 @@ Page({
                             }
                         });
                     }
-
                 } catch (err) {
                     console.log("onSubmit error: %o", err);
                     Toast.showText('提交失败')

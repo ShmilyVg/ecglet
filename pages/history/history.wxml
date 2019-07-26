@@ -3,7 +3,7 @@
 
 <view class="top-view flex-row">
     <view class="flex-row" style="align-items: center;" bindtap="switchMember">
-        <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
+        <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
         <image class="switch" src="../../images/history/qh.png"></image>
         <view class="name">{{userInfo.nickName||userInfo.name}}</view>
     </view>

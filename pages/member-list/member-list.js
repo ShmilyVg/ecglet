@@ -39,6 +39,7 @@ Page({
     },
 
     onShow() {
+        getApp().globalData.editMember = {};
         Protocol.memberRelevanceList({}).then((e) => {
             let members = e.result.dataList;
             if (this.data.haveMainMember) {
