@@ -1,7 +1,7 @@
 <import src="view/trend-index"></import>
 <import src="view/history-trend-list"></import>
 <template name="history-trend">
-    <view class="flex-row" style="background-color: white;padding-top: 20rpx;justify-content: space-around" bindtap="clickTrendTop">
+    <view class="flex-row" style="background-color: white;padding-top: 20rpx;justify-content: space-around" bindtap="switchTestType">
         <view class="flex-column">
             <view class="top-text" style="color: {{trendRightChoseIsLeft?'':'#5B5B5B'}}">常规心电检测</view>
             <view style="height: 27rpx"></view>

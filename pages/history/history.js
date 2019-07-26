@@ -55,10 +55,10 @@ Page({
                 })
             })
         }
-        this.getList({page: 1, recorded: true});
+        this.getMainList({page: 1, recorded: true});
     },
 
-    getList({page = 1, recorded = false}) {
+    getMainList({page = 1, recorded = false}) {
         Toast.showLoading();
         let data = {data: {page}};
         if (!this.data.isNormalMember) {
@@ -99,19 +99,18 @@ Page({
                 page: 1,
                 logs: []
             });
-            this.getList({page: 1});
+            this.getMainList({page: 1});
         } else {
-            this.tagItemListData({recorded: true});
+            this.getItemListData({recorded: true});
         }
     },
 
     onReachBottom() {
         console.log('onReachBottom');
         if (this.data.rightChoseIsLeft) {
-            console.log('getList', this.data.page + 1);
-            this.getList({page: ++this.data.page});
+            this.getMainList({page: ++this.data.page});
         } else {
-            this.tagItemListData({page: ++this.data.itemPage});
+            this.getItemListData({page: ++this.data.itemPage});
         }
     },
 
@@ -152,9 +151,11 @@ Page({
         });
     },
 
-    clickTrendTop() {
+    switchTestType() {
         this.setData({
-            trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
+            trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft,
+            page: 1,
+            itemPage: 1
         });
         this.getTags();
     },
@@ -174,7 +175,7 @@ Page({
                 trend.setData(data.result);
             }
         });
-        this.tagItemListData({recorded: true});
+        this.getItemListData({recorded: true});
     },
 
     clickIndexItem(e) {
@@ -192,13 +193,14 @@ Page({
         this.tagAllDataHandle({recorded: true});
     },
 
-    tagItemListData({page = 1, recorded = false}) {
+    getItemListData({page = 1, recorded = false}) {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
         let data = {type, target: this.data.tagChose, page: this.data.itemPage};
         if (!this.data.isNormalMember) {
             data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id, page: this.data.itemPage}
         }
         Protocol.getLinearGraphList({data}).then(data => {
+            console.log('getLinearGraphList', data, recorded);
             let {result: {dataList: list}} = data;
             if (list.length) {
                 list.map(value => {
