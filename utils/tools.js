@@ -15,6 +15,15 @@ export function createDateAndTime(timeStamp) {
     return {date: dateT, time: time, day: day, month: month};
 }
 
+export function getFormatDate(timestamp) {
+    const date = new Date(timestamp);
+    return {
+        year: date.getFullYear(),
+        month: ('0' + (date.getMonth() + 1)).slice(-2),
+        day: ('0' + date.getDate()).slice(-2)
+    };
+}
+
 export function dealAuthUserInfo(e) {
     return new Promise((resolve, reject) => {
         Protocol.getNetworkType().then((res) => {

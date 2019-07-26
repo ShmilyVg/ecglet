@@ -1,6 +1,6 @@
 import Toast from "../../utils/toast";
 import WXDialog from "../../utils/dialog";
-import * as tools from "../../utils/tools";
+import {getFormatDate} from "../../utils/tools";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import UserInfo from "../../apis/network/network/libs/userInfo";
@@ -10,7 +10,7 @@ Page({
         sexies: ['女', '男'],
         sexIndex: 1,
         birthEndDate: '',
-        birthDate: '请选择出生日期',
+        birthDate: '',
         submitOpacity: 0.4,
         submitDisabled: true,
         name: '',
@@ -22,9 +22,9 @@ Page({
     },
 
     onLoad(options) {
-        let birthEndDate = tools.createDateAndTime(new Date());
+        let {year,month,day} = getFormatDate(Date.now());
         this.setData({
-            birthEndDate: birthEndDate
+            birthEndDate: year + '-' + month + '-' + day
         });
         UserInfo.get().then((res) => {
             console.log('res:', res);
@@ -33,7 +33,7 @@ Page({
                 name: res.userInfo.nickName,
                 number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
                 sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
-                birthDate: res.userInfo.birthday || '请选择出生日期',
+                birthDate: res.userInfo.birthday || '',
                 height: res.userInfo.height,
                 weight: res.userInfo.weight,
                 portraitUrl: res.userInfo.portraitUrl,
@@ -115,12 +115,12 @@ Page({
 
     onSubmit() {
         if (this.data.name.length == 0) {
-            Toast.showText('请填写完整信息');
+            Toast.showText('请填写昵称');
             return;
         }
         console.log(this.data.number);
         if (this.data.number.length != 11) {
-            Toast.showText('手机号格式错误');
+            Toast.showText('请填写手机号');
             return;
         }
         if (!this.data.birthDate.trim()) {
