@@ -36,7 +36,7 @@
     </view>
 
     <view class="flex-column pressure-result-title">
-        <view>情绪指数</view>
+        <view>兴奋指数</view>
         <view class="pressure-result-subtitle">反映您的整体健康状况和精神状态，数值越大越好</view>
     </view>
 

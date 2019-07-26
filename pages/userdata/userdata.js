@@ -1,6 +1,6 @@
 import Toast from "../../utils/toast";
 import WXDialog from "../../utils/dialog";
-import * as tools from "../../utils/tools";
+import {getFormatDate} from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
@@ -10,7 +10,7 @@ Page({
         sexies: ['女', '男'],
         sexIndex: 1,
         birthEndDate: '',
-        birthDate: '请选择出生日期',
+        birthDate: '',
         submitOpacity: 0.4,
         submitDisabled: true,
         name: '',
@@ -24,9 +24,9 @@ Page({
     onLoad(options) {
         let isNormalMember = options.isNormalMember === 'true';
         console.log('是否为基本成员：', isNormalMember);
-        let birthEndDate = tools.createDateAndTime(new Date());
+        let {year,month,day} = getFormatDate(Date.now());
         this.setData({
-            birthEndDate: birthEndDate.date
+            birthEndDate: year + '-' + month + '-' + day
         });
 
         let userInfo = getApp().globalData.editMember;
@@ -49,7 +49,7 @@ Page({
                 name: userInfo.nickName,
                 number: userInfo.phone || wx.getStorageSync('phoneNumber'),
                 sexIndex: sexIndex,
-                birthDate: userInfo.birthday || '请选择出生日期',
+                birthDate: userInfo.birthday || '',
                 height: userInfo.height,
                 weight: userInfo.weight,
                 portraitUrl: userInfo.portraitUrl,
