@@ -118,9 +118,13 @@ Page({
                 record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
                 memberId: this.data.userInfo.memberId,
             }).then(data => {
+                if (!data.result) {
+                    throw new Error();
+                }
                 HiNavigator.redirectToResultPageByType({type: this.arrhythType, dataId: data.result});
             }).catch(res => {
                 console.error(res);
+                Toast.showText('服务器异常，请稍后重试');
             }).finally(Toast.hiddenLoading);
         } else {
             Toast.showText('心电数据上传异常\n请重新检测');
