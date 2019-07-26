@@ -62,7 +62,7 @@
           <cover-view class="fill-width flex-column align-items-center" style="margin-top: 180rpx;">
             <cover-view class="flex-row align-items-center">
               <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
-              <cover-view class="remind-text-bottom">绿灯亮起/蓝灯闪烁：表示当前处于采集状态</cover-view>
+              <cover-view class="remind-text-bottom">绿灯亮起：表示当前处于采集状态</cover-view>
             </cover-view>
             <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
               <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>

@@ -50,13 +50,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "share",
 					"pathName": "pages/share/share",
 					"query": "memberId=5",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/rich-content/rich-content",
+					"pathName": "pages/rich-content/rich-content",
+					"query": "",
 					"scene": null
 				}
 			]
