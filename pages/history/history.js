@@ -87,8 +87,8 @@ Page({
     },
 
     toPdfUrl(e) {
-        getApp().globalData.tempGatherResult = e.currentTarget.dataset.item;
-        HiNavigator.navigateToNormalResult({dataId: 31});
+        const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
+        HiNavigator.navigateToResultPageByType({type, dataId})
     },
 
     onPullDownRefresh() {
@@ -161,7 +161,11 @@ Page({
     tagAllDataHandle() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
         Protocol.getLinearGraph({type, target: this.data.tagChose}).then(data => {
-            trend.setData(data.result.dataList);
+            const {result: {xTitle, yTitle}} = data;
+            this.setData({
+                trend: {xTitle, yTitle}
+            });
+            trend.setData(data.result);
         });
         this.tagItemListData();
     },
