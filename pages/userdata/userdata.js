@@ -119,6 +119,7 @@ Page({
         }
         WXDialog.showDialog({
             title: '提示', content: '确认修改您的信息吗？', showCancel: true, confirmEvent: () => {
+                Toast.showLoading();
                 let birthTime = this.data.birthDate || '';
                 console.log(`birth time: ${birthTime}`);
                 try {

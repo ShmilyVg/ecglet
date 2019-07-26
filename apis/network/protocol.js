@@ -77,6 +77,7 @@ export default class Protocol {
             }
         });
     };
+
     /**
      * 上传心脏负荷心电
      * @param filePath
@@ -113,6 +114,7 @@ export default class Protocol {
             }
         });
     };
+
     static getAccountInfo() {
         return Network.request({url: 'account/info'});
     }
@@ -134,6 +136,7 @@ export default class Protocol {
     }
 
     static getLinearGraphList({data}) {
+        console.log('getLinearGraphList', data);
         return Network.request({url: 'gather/list/linearGraphList', data: data})
     }
 
@@ -154,11 +157,11 @@ export default class Protocol {
     }
 
     static getRelativesGetToolTip({}) {
-        return Network.request({url:'relatives/getToolTip'})
+        return Network.request({url: 'relatives/getToolTip'})
     }
 
-    static getRelativesDelToolTip({}){
-        return Network.request({url:'relatives/delToolTip'})
+    static getRelativesDelToolTip({}) {
+        return Network.request({url: 'relatives/delToolTip'})
     }
 
     static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl}) {
@@ -193,36 +196,33 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getRoutine({id}) {
-        return Network.request({url: 'gather/getRoutine', data: arguments[0]}).then(data=>{
+        return Network.request({url: 'gather/getRoutine', data: arguments[0]}).then(data => {
             let isAbNormal = false;
             data.result.report.forEach(item => {
                 item.name = item.introduction;
                 if (!isAbNormal) {
-                    isAbNormal = parseInt(item.status)===0;
+                    isAbNormal = parseInt(item.status) === 0;
                 }
                 switch (item.targetDes) {
-                    case 'HR':
-                    {
+                    case 'HR': {
                         item.description = '心率是指正常人安静状态下每分钟心跳的次数，成人正常心率为60～100次/分钟，如果心率低于40次/分钟，应考虑有病态窦房结综合征、房室传导阻滞等情况；如果出现胸闷、乏力、头晕等不适症状，应立即到医院进一步检查。';
                         if (item.status === '0') {
                             item.description += '\n一次的心率过快或过慢只能反映当前检测期间的数值未在正常区间内，也可能是其他行为导致的异常；建议长期检测，反复多测查看趋势再做判断；';
                         }
                     }
                         break;
-                    case 'QRS':
-                    {
+                    case 'QRS': {
                         item.description = 'QRS是心电图心室除极的时间，是心室活动的表现，故QRS异常常见心室问题。成人QRS间期应在60~100ms内，超过110ms为QRS时限延长，见于心室肥大、束支传导阻滞、预激综合征、心室内差异传导、高钾血症、急性损伤传导阻滞及药物毒性反应等';
                     }
                         break;
-                    case 'QTC':
-                    {
+                    case 'QTC': {
                         item.description = 'QTC间期是按心率校正的QT间期，是反映心脏去极化和复极作用的指标。QTc间期延长表示心脏复极延迟，反映了心电异常，通常与心律失常敏感性增高密切相关。男性正常范围＜430ms，女性＜450ms；';
                     }
                 }
             });
             if (isAbNormal) {
                 data.result.subTitle = '多喝水，好心态，别熬夜~';
-            }else {
+            } else {
                 data.result.subTitle = '注意身体，继续保持~';
             }
             return Promise.resolve(data);
@@ -235,20 +235,18 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getCardiac({id}) {
-        return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data=>{
+        return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data => {
             data.result.list.forEach(item => {
 
                 switch (item.name) {
-                    case 'HR':
-                    {
+                    case 'HR': {
                         item.description = '心率是指正常人安静状态下每分钟心跳的次数，成人正常心率为60～100次/分钟，如果心率低于40次/分钟，应考虑有病态窦房结综合征、房室传导阻滞等情况；如果出现胸闷、乏力、头晕等不适症状，应立即到医院进一步检查。';
                         if (item.status === '0') {
                             item.description += '\n一次的心率过快或过慢只能反映当前检测期间的数值未在正常区间内，也可能是其他行为导致的异常；建议长期检测，反复多测查看趋势再做判断；';
                         }
                     }
                         break;
-                    case 'SDNN':
-                    {
+                    case 'SDNN': {
                         item.description = '心率变异性(HRV)是指两次心跳时间间隔的微小变化。心率变异性为评估自主神经功能的有效指标，能够预测心脏性猝死，对高血压、心衰、心脏移植、甲亢等疾病的临床应用都有潜在价值。';
                     }
                 }
@@ -257,6 +255,7 @@ export default class Protocol {
             return Promise.resolve(data);
         });
     }
+
     static getPhoneNum({encryptedData, iv}) {
         return new Promise((resolve, reject) =>
             this.wxLogin().then(res => {
