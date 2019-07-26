@@ -27,17 +27,16 @@ Page({
         bottomViewIsHidden: false
     },
 
-    onLoad() {
+    onShow() {
+        let userInfo = getApp().globalData.currentMember;
+        console.log('切换成员：', userInfo);
+
         Protocol.getRelativesGetToolTip({}).then((res) => {
             this.setData({
                 bottomViewIsHidden: !res.result.isShow
             })
         })
-    },
 
-    onShow() {
-        let userInfo = getApp().globalData.currentMember;
-        console.log('切换成员：', userInfo);
         if (userInfo.thirdpartyUId === null) {
             this.setData({
                 userInfo: userInfo,
@@ -55,10 +54,10 @@ Page({
                 })
             })
         }
-        this.getList({page: 1, recorded: true});
+        this.getMainList({page: 1, recorded: true});
     },
 
-    getList({page = 1, recorded = false}) {
+    getMainList({page = 1, recorded = false}) {
         Toast.showLoading();
         let data = {data: {page}};
         if (!this.data.isNormalMember) {
@@ -87,7 +86,7 @@ Page({
         });
     },
 
-    toPdfUrl(e) {
+    toResultPage(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
         HiNavigator.navigateToResultPageByType({type, dataId})
     },
@@ -99,41 +98,41 @@ Page({
                 page: 1,
                 logs: []
             });
-            this.getList({page: 1});
+            this.getMainList({page: 1});
         } else {
-            this.tagItemListData({recorded: true});
+            this.getItemListData({recorded: true});
         }
     },
 
     onReachBottom() {
         console.log('onReachBottom');
         if (this.data.rightChoseIsLeft) {
-            console.log('getList', this.data.page + 1);
-            this.getList({page: ++this.data.page});
+            this.getMainList({page: ++this.data.page});
         } else {
-            this.tagItemListData({page: ++this.data.itemPage});
+            this.getItemListData({page: ++this.data.itemPage});
         }
     },
 
-
-    clickRightBtn() {
-        trend.init(this);
-        trend.initTouchHandler();
+    clickRightTopBtn() {
         this.setData({
-            rightChoseIsLeft: !this.data.rightChoseIsLeft
+            rightChoseIsLeft: !this.data.rightChoseIsLeft,
+            page: 1,
+            itemPage: 1
         });
         if (this.data.rightChoseIsLeft) {
-            this.choseBigList()
+            this.rightTopList()
         } else {
-            this.choseBigTrend();
+            this.rightTopTrend();
         }
     },
 
-    choseBigList() {
+    rightTopList() {
 
     },
 
-    choseBigTrend() {
+    rightTopTrend() {
+        trend.init(this);
+        trend.initTouchHandler();
         this.getTags();
     },
 
@@ -152,41 +151,49 @@ Page({
         });
     },
 
-    clickTrendTop() {
+    switchTestType() {
         this.setData({
-            trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft
+            trendRightChoseIsLeft: !this.data.trendRightChoseIsLeft,
+            page: 1,
+            itemPage: 1
         });
         this.getTags();
     },
 
     tagAllDataHandle() {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
-        Protocol.getLinearGraph({type, target: this.data.tagChose}).then(data => {
+        let data = {type, target: this.data.tagChose};
+        if (!this.data.isNormalMember) {
+            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id};
+        }
+        Protocol.getLinearGraph({data}).then(data => {
             const {result: {xTitle, yTitle}} = data;
             this.setData({
                 trend: {xTitle, yTitle}
             });
-            trend.setData(data.result);
+            if (data.result.dataList.length > 0) {
+                trend.setData(data.result);
+            }
         });
-        this.tagItemListData({});
+        this.getItemListData({recorded: true});
     },
 
-    clickIndexItem(e) {
-        const {currentTarget: {dataset: {current}}} = e;
-        console.log(current);
+    clickTag(e) {
+        const {currentTarget: {dataset: {current: index}}} = e;
         this.data.trendTag.map((value) => {
-            value.state = current === value.id
+            value.state = index === value.id
         });
 
         this.setData({
             trendTag: this.data.trendTag,
-            tagChose: current
+            tagChose: index,
+            itemPage: 1
         });
 
-        this.tagAllDataHandle();
+        this.tagAllDataHandle({recorded: true});
     },
 
-    tagItemListData({page = 1, recorded = false}) {
+    getItemListData({page = 1, recorded = false}) {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
         let data = {type, target: this.data.tagChose, page: this.data.itemPage};
         if (!this.data.isNormalMember) {
@@ -200,6 +207,15 @@ Page({
                     value.titleTime = dataAndTime.time;
                     value.titleDate = dataAndTime.date;
                 });
+                if (!recorded) {
+                    list = this.data.itemList.concat(list);
+                } else {
+                    this.data.itemPage = 1;
+                }
+                this.setData({
+                    itemList: list
+                })
+            } else {
                 if (!recorded) {
                     list = this.data.itemList.concat(list);
                 } else {

@@ -1,7 +1,7 @@
 <template name="history-list" class="flex-column">
     <view style="height: 30rpx"></view>
     <view wx:if="{{logs.length}}" class="flex-column">
-        <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindtap="toPdfUrl" data-item="{{item}}">
+        <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindtap="toResultPage" data-item="{{item}}">
             <view class="flex-row align-items-center">
                 <image src="../../images/history/{{item.type==1?'cg':'fh'}}.png" class="green-circle"></image>
                 <view class="flex-column" style="margin-left: 18rpx;">
