@@ -19,7 +19,7 @@ Page({
         tagChose: 1,
         itemList: [],
         isNormalMember: true,
-        bottomViewIsHidden: false
+        bottomViewIsHidden: true
     },
 
     onShow() {
