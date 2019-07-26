@@ -11,7 +11,7 @@ export default class UserInfo {
             }
             wx.getStorage({
                 key: 'userInfo', success: res => {
-                    resolve({userInfo: globalData.userInfo = {...res.data}});
+                    resolve({userInfo: globalData.userInfo = {...res.data, isMainMember: true}});
                 }, fail: () => {
                     this._postGetUserInfo({resolve, reject});
                 }
@@ -19,7 +19,7 @@ export default class UserInfo {
         });
     }
 
-    static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex, id}) {
+    static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex, id, isMainMember}) {
         const globalData = getApp().globalData;
         globalData.userInfo = {...arguments[0]};
         return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ export default class UserInfo {
     static _postGetUserInfo({resolve, reject}) {
         CommonProtocol.getAccountInfo().then(data => {
             if (!!data.result) {
-                this.set({...data.result});
+                this.set({...data.result, isMainMember: true});
                 resolve({userInfo: getApp().globalData.userInfo});
             } else {
                 reject({errMsg: 'data result is empty!'});

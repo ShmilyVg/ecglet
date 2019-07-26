@@ -113,10 +113,11 @@ Page({
             } else {
                 promise = Protocol.uploadGatherRoutineFile;
             }
+            const {userInfo} = this.data;
             promise({
                 filePath: this.filePath, symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
                 record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
-                memberId: this.data.userInfo.memberId,
+                relevanceId: userInfo.isMainMember ? '' : userInfo.relevanceId,
             }).then(data => {
                 if (!data.result) {
                     throw new Error();
