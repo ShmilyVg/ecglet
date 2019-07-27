@@ -76,7 +76,7 @@ Page({
                 this.setData({
                     logs: list
                 })
-            }else if(list.length===0){
+            }else if(list.length===0 &&  this.data.page === 1){
                 this.setData({
                     logs: []
                 })
