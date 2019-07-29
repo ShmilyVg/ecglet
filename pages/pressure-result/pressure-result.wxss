@@ -29,6 +29,7 @@ page {
     align-self: flex-start;
 }
 .pressure-result-subtitle{
+    width: 90%;
     font-size:24rpx;
     font-family:PingFang-SC-Regular;
     font-weight:400;
