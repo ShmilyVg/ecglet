@@ -93,8 +93,10 @@ Page({
                 this.toEditMember(this, index);
                 break;
             case 2:
-            case 3:
                 this.showSheet(index);
+                break;
+            case 3:
+                this.toEditMember(this, index);
                 break
         }
     },
