@@ -55,7 +55,6 @@
         <view class="pressure-score-content">{{emotion.content}}</view>
     </view>
 
-    <block wx:if="{{isAbNormal}}">
-        <template is="result-bottom" data="{{resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
-    </block>
+    <template is="result-bottom" data="{{isAbnormal,resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
+
 </view>
