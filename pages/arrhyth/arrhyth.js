@@ -457,28 +457,29 @@ Page({
             that.reset()
             that.data.completed = true
             this.isStartBLEDevices = false;
+            this.arrhythStateManager.guider();
         });
 
     },
 
     onReady() {
-        // TODO 将来删掉
-        let that = this;
-        setTimeout(() => {
-            that.hideLoading()
-
-            // 每次重新连接，采集数据缓存清空一次
-            that.waveData = undefined
-
-            // 计时开始
-            if (!that.data.countTimer) {
-                that.preparePannelDark('white');
-                this.arrhythStateManager.prepare();
-                // setTimeout(() => {
-                //     that.startCount();
-                // });
-            }
-        }, 1000);
+        // // TODO 将来删掉
+        // let that = this;
+        // setTimeout(() => {
+        //     that.hideLoading()
+        //
+        //     // 每次重新连接，采集数据缓存清空一次
+        //     that.waveData = undefined
+        //
+        //     // 计时开始
+        //     if (!that.data.countTimer) {
+        //         that.preparePannelDark('white');
+        //         this.arrhythStateManager.prepare();
+        //         // setTimeout(() => {
+        //         //     that.startCount();
+        //         // });
+        //     }
+        // }, 1000);
     },
 
     preparePannelDark(bgColor) {
