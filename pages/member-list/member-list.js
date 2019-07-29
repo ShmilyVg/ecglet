@@ -5,7 +5,8 @@ import UserInfo from "../../apis/network/network/libs/userInfo";
 Page({
     data: {
         showTopText: false,
-        haveMainMember: false
+        haveMainMember: false,
+        members: []
     },
 
     onLoad(options) {
