@@ -583,14 +583,14 @@ Page({
 
         }).catch(err => {
             console.log("fsp.access -- failed", err)
-            return fsp.mkdir({
+            fsp.mkdir({
                 dirPath: dirPath,
                 recursive: true
-            })
-        }).then(ret => {
-            console.log("fsp.mkdir -- success", ret)
-            return this.accessFile();
-        })
+            }).then(ret => {
+                console.log("fsp.mkdir -- success", ret)
+                return this.accessFile();
+            });
+        });
     },
 
     uploadData() {
