@@ -385,11 +385,11 @@ Page({
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
         // ecg.drawWave(data)
-        const now = Date.now();
-        if (now - this.currentTimestamp >= 33) {
-            this.currentTimestamp = now;
+        // const now = Date.now();
+        // if (now - this.currentTimestamp >= 33) {
+        //     this.currentTimestamp = now;
             ecg.drawWaveDark(data);
-        }
+        // }
         // ecg.drawWaveAnimation(data, that.data.completed)
     },
 
