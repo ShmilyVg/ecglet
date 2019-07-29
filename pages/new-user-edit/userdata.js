@@ -22,15 +22,20 @@ Page({
     },
 
     onLoad(options) {
-        let {year,month,day} = getFormatDate(Date.now());
+        let {year, month, day} = getFormatDate(Date.now());
         this.setData({
             birthEndDate: year + '-' + month + '-' + day
         });
         UserInfo.get().then((res) => {
             console.log('res:', res);
 
+            let name = res.userInfo.nickName;
+            if (name.length > 8) {
+                name = name.slice(0, 7) + '…';
+            }
+
             this.setData({
-                name: res.userInfo.nickName,
+                name: name,
                 number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
                 sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
                 birthDate: res.userInfo.birthday || '',
