@@ -38,4 +38,4 @@
     </textarea>
 </view>
 
-<view class="btn" bindtap="uploadBaseInfo">确定</view>
+<cover-view class="btn" bindtap="uploadBaseInfo">确定</cover-view>
