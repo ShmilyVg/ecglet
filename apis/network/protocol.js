@@ -200,6 +200,8 @@ export default class Protocol {
             let isAbNormal = false;
             data.result.report.forEach(item => {
                 item.name = item.introduction;
+                item.rightContent = item.time;
+                item.fontSize = !Number.isNaN(parseInt(item.rightContent)) ? '64' : '44';
                 if (!isAbNormal) {
                     isAbNormal = parseInt(item.status) === 0;
                 }
@@ -237,7 +239,8 @@ export default class Protocol {
     static getCardiac({id}) {
         return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data => {
             data.result.list.forEach(item => {
-
+                item.rightContent = item.frequency || item.conclusion;
+                item.fontSize = !Number.isNaN(parseInt(item.rightContent)) ? '64' : '44';
                 switch (item.target) {
                     case 'HR': {
                         item.description = '心率是指正常人安静状态下每分钟心跳的次数，成人正常心率为60～100次/分钟，如果心率低于40次/分钟，应考虑有病态窦房结综合征、房室传导阻滞等情况；如果出现胸闷、乏力、头晕等不适症状，应立即到医院进一步检查。';

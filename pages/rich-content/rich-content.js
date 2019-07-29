@@ -109,7 +109,7 @@ Page({
 
             // Toast.showLoading();
             let promise = undefined;
-            if (parseInt(this.arrhythType) === 3) {
+            if (parseInt(this.arrhythType) === 2) {
                 promise = Protocol.uploadGatherCardiacFile;
             } else {
                 promise = Protocol.uploadGatherRoutineFile;
@@ -124,7 +124,8 @@ Page({
                 if (!data.result) {
                     throw new Error();
                 }
-                HiNavigator.redirectToResultPageByType({type: this.arrhythType, dataId: data.result});
+                console.log("12312312312312",this.arrhythType)
+                HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: data.result});
             }).catch(res => {
                 console.error(res);
                 Toast.showText('服务器异常，请稍后重试');
