@@ -80,7 +80,7 @@ page {
     bottom: 0;
     right: 0;
     margin: auto auto;
-    z-index: 99;
+    z-index: 3;
 }
 
 .pressure-result-title-bg{
