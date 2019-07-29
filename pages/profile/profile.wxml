@@ -12,7 +12,7 @@
                     </view>
                 </view>
             </view>
-            <view class="name">{{userInfo.nickName}}</view>
+            <view class="name">{{name}}</view>
         </view>
 
         <view style="margin-top: -100rpx"></view>

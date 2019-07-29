@@ -5,7 +5,7 @@
     <view class="flex-row" style="align-items: center;" bindtap="switchMember">
         <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
         <image class="switch" src="../../images/history/qh.png"></image>
-        <view class="name">{{userInfo.nickName||userInfo.name}}</view>
+        <view class="name">{{name}}</view>
     </view>
     <view class="right-nice-choose flex-row" bindtap="clickRightTopBtn">
         <view style="margin-left: {{rightChoseIsLeft?10:20}}rpx"></view>

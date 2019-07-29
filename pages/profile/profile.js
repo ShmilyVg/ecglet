@@ -1,5 +1,6 @@
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import * as tools from "../../utils/tools";
 
 Page({
     data: {
@@ -17,8 +18,10 @@ Page({
 
     onShow() {
         UserInfo.get().then((res) => {
+            let name = tools.HandleShortName(res.userInfo.nickName);
             this.setData({
                 userInfo: res.userInfo,
+                name:name
             })
         })
     },

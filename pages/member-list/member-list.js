@@ -1,6 +1,7 @@
 // pages/member-list/member-list.js
 import Protocol from "../../apis/network/protocol";
 import UserInfo from "../../apis/network/network/libs/userInfo";
+import * as Tools from "../../utils/tools";
 
 Page({
     data: {
@@ -46,16 +47,25 @@ Page({
             if (this.data.haveMainMember) {
                 UserInfo.get().then(res => {
                     members.splice(0, 0, res.userInfo);
+                    members = this.handleNameShow(members);
                     this.setData({
                         members: members
                     })
                 })
             } else {
+                members = this.handleNameShow(members);
                 this.setData({
                     members: members
                 })
             }
         });
+    },
+
+    handleNameShow(members) {
+        members.map(item => {
+            item.shortName = Tools.HandleShortName(item.nickName);
+        })
+        return members;
     },
 
     clickCell(e) {
