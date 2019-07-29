@@ -66,7 +66,7 @@ Page({
                 Toast.hiddenLoading();
             });
         } else {
-            WXDialog.showDialog({content: '因您拒绝授权，无法使用更多专业服务', showCancel: false});
+            WXDialog.showDialog({content: '因您拒绝授权手机号，可能对后续专业服务造成影响。您可以再次点击进行手动填写', showCancel: false});
             wx.setStorageSync('isNewUserPhoneAuth', true);
             this.setData({
                 number: wx.getStorageSync('phoneNumber'),
