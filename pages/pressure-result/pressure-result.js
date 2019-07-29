@@ -50,9 +50,10 @@ Page({
         });
         this.resultTop = new ResultTop(this);
         Protocol.getCardiac({id: parseInt(options.dataId)}).then(data => {
-            const {result: {list: items, stress, emotion, tired, time, pdfUrl}} = data;
+            const {result: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}} = data;
 
             this.setData({
+                isAbNormal,
                 time: this.getTime(parseInt(time)), pdfUrl, stress, tired: {
                     ...tired,
                     position: this.getImagePosition(tired.level)

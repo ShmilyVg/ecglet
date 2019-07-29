@@ -235,6 +235,7 @@ export default class Protocol {
             } else {
                 data.result.subTitle = '注意身体，继续保持~';
             }
+            data.result.isAbNormal = isAbNormal;
             return Promise.resolve(data);
         });
     }
@@ -246,7 +247,11 @@ export default class Protocol {
      */
     static getCardiac({id}) {
         return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data => {
+            let isAbNormal = false;
             data.result.list.forEach(item => {
+                if (!isAbNormal) {
+                    isAbNormal = parseInt(item.status) === 0;
+                }
                 item.rightContent = item.frequency || item.conclusion;
                 createFontSize(item);
                 switch (item.target) {
@@ -262,7 +267,7 @@ export default class Protocol {
                     }
                 }
             });
-
+            data.result.isAbNormal = isAbNormal;
             return Promise.resolve(data);
         });
     }

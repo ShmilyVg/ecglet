@@ -1,6 +1,6 @@
 <import src="../../components/result-top/index.wxml"></import>
 <import src="../../components/result-bottom/index.wxml"></import>
-<view class="flex-column align-items-center">
+<view class="flex-column align-items-center" style="padding-bottom: 50rpx;">
     <!--    <view class="share">分享给亲友</view>-->
     <view class="fill-width flex-column align-items-center pressure-result-top-layout">
         <view class="fill-width flex-column align-items-center pressure-result-title-bg">
@@ -54,5 +54,8 @@
         </view>
         <view class="pressure-score-content">{{emotion.content}}</view>
     </view>
-    <template is="result-bottom" data="{{resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
+
+    <block wx:if="{{isAbNormal}}">
+        <template is="result-bottom" data="{{resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
+    </block>
 </view>
