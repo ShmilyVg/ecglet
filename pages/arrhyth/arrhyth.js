@@ -374,7 +374,6 @@ Page({
             console.log('释放蓝牙资源错误<' + error.title + '>: ' + error.message)
         }
     },
-    currentTimestamp: 0,
     onFirstChannelChange(data) {
         let that = this
         if (!this.arrhythStateManager.isFilterData()) {
@@ -385,11 +384,7 @@ Page({
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
         // ecg.drawWave(data)
-        const now = Date.now();
-        if (now - this.currentTimestamp >= 33) {
-            this.currentTimestamp = now;
-            ecg.drawWaveDark(data);
-        }
+        ecg.drawWaveDark(data);
         // ecg.drawWaveAnimation(data, that.data.completed)
     },
 

@@ -150,7 +150,7 @@ Component({
     setCanvasDefaultOptions(ctx) {
       ctx.strokeStyle = "#3993EE";
       ctx.setLineJoin("round");
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 1.2;
     },
 
     drawWaveDark(data) {

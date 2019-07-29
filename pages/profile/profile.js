@@ -131,16 +131,8 @@ Page({
         }
     },
 
-    onGotUserInfoAndToHistory(e) {
-        dealAuthUserInfo(e).then((res) => {
-            this.setData({
-                haveAuthorize: true,
-                userInfo: res.userInfo
-            });
-            wx.navigateTo({url: '../member-list/member-list?state=2'});
-        }).catch((res) => {
-            console.log(res);
-        });
+    toMemeberListPage(e) {
+        wx.navigateTo({url: '../member-list/member-list?state=2'});
     },
 
     clickCell2() {
