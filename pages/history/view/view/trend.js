@@ -74,7 +74,7 @@ function normalTrend() {
                 return val;
             },
             min: 0,
-            max: yMax,
+            max: parseInt(yMax),
             fontColor: '#AABAC1'
         },
         xAxis: {
