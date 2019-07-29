@@ -124,7 +124,6 @@ Page({
                 if (!data.result) {
                     throw new Error();
                 }
-                console.log("12312312312312",this.arrhythType)
                 HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: data.result});
             }).catch(res => {
                 console.error(res);

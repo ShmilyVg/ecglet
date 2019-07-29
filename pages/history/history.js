@@ -60,7 +60,6 @@ Page({
         }
         Protocol.getHistoryList({data}).then((data) => {
             let list = data.result.dataList;
-            console.log(list.length,"898989")
             if (list.length>0) {
                 list.forEach((item) => {
                     const {date, time} = createDateAndTime(parseInt(item.created_timestamp));
@@ -72,7 +71,6 @@ Page({
                 } else {
                     this.data.page = 1;
                 }
-                console.log("99999",list)
                 this.setData({
                     logs: list
                 })
