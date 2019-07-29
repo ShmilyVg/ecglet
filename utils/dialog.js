@@ -1,4 +1,4 @@
-let _cancelColor = '#000000', _confirmColor = '#D16730';
+let _cancelColor = '#000000', _confirmColor = '#3A93EF';
 
 export default class WXDialog {
 

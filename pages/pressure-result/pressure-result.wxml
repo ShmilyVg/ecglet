@@ -11,7 +11,12 @@
     </view>
 
 
-    <view class="pressure-result-title">心脏压力指数</view>
+    <view class="fill-width flex-row pressure-result-title align-items-center">
+        <view class="">心脏压力指数</view>
+        <view style="padding: 20rpx;" bindtap="lookReasonDialog">
+            <image style="width: 36rpx;height: 36rpx;" src="../../images/pressure-result/question.png"></image>
+        </view>
+    </view>
 
     <view class='flex-column align-items-center table-02 table-02-bg'>
         <view class="canvasBox">
