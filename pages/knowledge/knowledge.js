@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    videoUrl: '',
+    videoUrl: 'https://backend.hipee.cn/hipee-web-hiecg/cardiac_ecg_loop_AM_2.mp4',
     title: '正常心电图波形及相关名词解读',
     contentBottomImage: '心电图多描记在记录纸上。当走纸速度为25mm/s时，每两条纵线间1mm表示0.04s，当标准电压1mV=10mm时，两条横线间表示0.1mV',
     contentList: [{title: 'P波：心房除极', content: 'P波由心房除极所产生，是每一波组中的第一波，它反映了左、右心房的除极过程。前半部分代表右房，后半部分代表左房；当心房扩大，两房间传导出现异常时，P波可表现为高尖或双峰的P波'},
