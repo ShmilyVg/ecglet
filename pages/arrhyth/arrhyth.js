@@ -384,7 +384,12 @@ Page({
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
         // ecg.drawWave(data)
-        ecg.drawWaveDark(data);
+
+        if (ecg) {
+            ecg.drawWaveDark(data);
+        } else {
+            console.warn('此时ecg还是undefined');
+        }
         // ecg.drawWaveAnimation(data, that.data.completed)
     },
 
