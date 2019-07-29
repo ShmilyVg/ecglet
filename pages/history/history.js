@@ -38,7 +38,8 @@ Page({
                 isNormalMember: false,
                 rightChoseIsLeft: true,
                 trendRightChoseIsLeft: true,
-            })
+            });
+            this.getMainList({page: 1, recorded: true});
         } else {
             UserInfo.get().then((res) => {
                 this.setData({
@@ -46,10 +47,10 @@ Page({
                     isNormalMember: true,
                     rightChoseIsLeft: true,
                     trendRightChoseIsLeft: true,
-                })
+                });
+                this.getMainList({page: 1, recorded: true});
             })
         }
-        this.getMainList({page: 1, recorded: true});
     },
 
     getMainList({page = 1, recorded = false}) {
@@ -60,25 +61,21 @@ Page({
         }
         Protocol.getHistoryList({data}).then((data) => {
             let list = data.result.dataList;
-            if (list.length>0) {
+            if (list.length) {
                 list.forEach((item) => {
                     const {date, time} = createDateAndTime(parseInt(item.created_timestamp));
                     item.dateStr = date;
                     item.timeStr = time;
                 });
-                if (!recorded) {
-                    list = this.data.logs.concat(list);
-                } else {
-                    this.data.page = 1;
-                }
-                this.setData({
-                    logs: list
-                })
-            }else if(list.length===0 &&  this.data.page === 1){
-                this.setData({
-                    logs: []
-                })
             }
+            if (!recorded) {
+                list = this.data.logs.concat(list);
+            } else {
+                this.data.page = 1;
+            }
+            this.setData({
+                logs: list
+            })
         }).finally(() => {
             Toast.hiddenLoading();
             wx.stopPullDownRefresh();

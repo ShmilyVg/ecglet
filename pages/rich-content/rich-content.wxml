@@ -3,7 +3,7 @@
     <view class="title">基本信息</view>
     <view class="flex-row" style="width: 660rpx;align-items: center;justify-content: space-between;margin-top: 42rpx">
         <view class="flex-row" style="align-items: center">
-            <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
+            <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 16rpx">
                 <view class="name">{{userInfo.nickName}}</view>
                 <view class="flex-row" style="align-items: center">
