@@ -58,6 +58,7 @@ export default class Protocol {
      * @returns {Promise<any>}
      */
     static uploadGatherRoutineFile({filePath, symptom, record, relevanceId}) {
+        console.log('filePath', filePath, 'sys', symptom, 'record', record, 'relevan', relevanceId);
         return new Promise((resolve, reject) => {
             if (filePath) {
                 wx.uploadFile({
