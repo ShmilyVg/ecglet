@@ -506,9 +506,11 @@ Page({
             wx.showToast({title: '处理中，请稍后', icon: 'none', duration: 35000});
             let dirPath = wx.env.USER_DATA_PATH + "/cache/bs-upload"
             let fileName = "rawdata"
-            let filePath = `${dirPath}/${fileName}`
-            fsp.access({path: dirPath}).then(res => {
-                console.log("fsp.access -- %o", res)
+            let filePath = `${dirPath}/${fileName}`;
+
+
+            const promise = fsp.access({path: dirPath}).then(res => {
+                console.log("fsp.access -- success", res)
 
                 console.log("先删除原来的文件，再创建新的上传文件...")
                 fsp.removeSavedFile({
@@ -575,14 +577,17 @@ Page({
                 });
 
 
-            }).catch(err => {
-                console.log("fsp.access -- %o", err)
+            });
+
+            promise.catch(err => {
+                console.log("fsp.access -- failed", err)
                 return fsp.mkdir({
                     dirPath: dirPath,
                     recursive: true
                 })
             }).then(ret => {
-                console.log("fsp.mkdir -- %o", ret)
+                console.log("fsp.mkdir -- success", ret)
+                return promise;
             })
 
         } catch (error) {
@@ -592,7 +597,7 @@ Page({
                     wx.navigateBack({delta: 1});
                 }
             });
-            console.log("uploadData: %o", error)
+            console.log("uploadData: failed", error)
         }
     },
     showLoading() {
