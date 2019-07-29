@@ -4,6 +4,7 @@ import WXDialog from "../../base/heheda-common-view/dialog";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {RandomRemindData} from "../../utils/tips";
+import * as tools from "../../utils/tools";
 
 Page({
     data: {
@@ -36,8 +37,10 @@ Page({
         });
         this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res) => {
+            let name = tools.HandleShortName(res.userInfo.nickName);
             this.setData({
                 userInfo: res.userInfo,
+                name: name
             })
         })
     },

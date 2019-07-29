@@ -38,15 +38,18 @@ Page({
                 isNormalMember: false,
                 rightChoseIsLeft: true,
                 trendRightChoseIsLeft: true,
+                name: Tools.HandleShortName(userInfo.nickName)
             });
             this.getMainList({page: 1, recorded: true});
         } else {
             UserInfo.get().then((res) => {
+                let name = Tools.HandleShortName(res.userInfo.nickName);
                 this.setData({
                     userInfo: res.userInfo,
                     isNormalMember: true,
                     rightChoseIsLeft: true,
                     trendRightChoseIsLeft: true,
+                    name: name
                 });
                 this.getMainList({page: 1, recorded: true});
             })

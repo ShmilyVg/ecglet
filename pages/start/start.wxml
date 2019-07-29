@@ -2,7 +2,7 @@
     <view class="flex-row align-items-center">
         <image wx:if="{{userInfo.portraitUrl}}" class="user-head" src="{{userInfo.portraitUrl}}"></image>
         <image wx:else class="user-head" src="../../images/user.png"></image>
-        <view class="user-name">{{userInfo.nickName}}</view>
+        <view class="user-name">{{name}}</view>
     </view>
 
     <view class="title" style="margin-top: 100rpx;">{{isFirstUsed?'欢迎使用':'你知道吗？'}}</view>

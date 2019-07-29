@@ -61,6 +61,14 @@ export function jsGetAge(strBirthday) {
     return returnAge;//返回周岁年龄
 }
 
+export function HandleShortName(name) {
+    let nickName = name;
+    if (name.length > 8) {
+        nickName = name.slice(0, 7) + '…';
+    }
+    return nickName;
+}
+
 export function getFormatDate(timestamp) {
     const date = new Date(timestamp);
     return {
@@ -121,9 +129,10 @@ export function dealAuthUserInfo(e) {
 
 
 export class MyUsed {
-   static isFirstUsed() {
+    static isFirstUsed() {
         return !wx.getStorageSync('isUsed');
     }
+
     static setUsed() {
         wx.setStorageSync('isUsed', true);
     }
