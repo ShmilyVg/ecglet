@@ -2,12 +2,14 @@
 <import src="../../components/result-bottom/index.wxml"></import>
 <view class="flex-column align-items-center">
     <!--    <view class="share">分享给亲友</view>-->
-
-    <view class="fill-width flex-column align-items-center pressure-result-title-bg">
-        <view class="title">心脏负荷检测结果报告</view>
-        <view class="content">{{time}}</view>
+    <view class="fill-width flex-column align-items-center pressure-result-top-layout">
+        <view class="fill-width flex-column align-items-center pressure-result-title-bg">
+            <view class="title">心脏负荷检测结果报告</view>
+            <view class="content">{{time}}</view>
+        </view>
+        <template is="result-top" data="{{resultColor:'#00beb4',items,isGreen:true}}"></template>
     </view>
-    <template is="result-top" data="{{resultColor:'#00beb4',items,isGreen:true}}"></template>
+
 
     <view class="pressure-result-title">心脏压力指数</view>
 
