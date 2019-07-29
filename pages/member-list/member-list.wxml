@@ -1,5 +1,5 @@
 <!--pages/member-list/member-list.wxml-->
-<view class="big-view">
+<view wx:if="{{members.length}}" class="big-view">
     <block wx:if="{{showTopText}}">
         <view class="title-0">这是谁的检测记录</view>
         <view class="title-1">点击您要选择的对象</view>
@@ -19,6 +19,11 @@
             <image src="../../images/members/{{state==1?'bj':'gl'}}.png" style="height: 36rpx;width: 36rpx"></image>
         </view>
     </view>
+</view>
+
+<view class="flex-column align-items-center" style="margin-top: 300rpx" wx:else>
+    <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
+    <view class="none-history-hint">暂无成员</view>
 </view>
 
 <view class="flex-column" style="align-items: center;width: 100%">

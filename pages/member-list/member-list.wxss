@@ -49,3 +49,16 @@
     position: fixed;
     bottom: 80rpx;
 }
+
+.none-history-pic{
+    width: 422rpx;
+    height: 370rpx;
+}
+
+.none-history-hint{
+    width: 100%;
+    text-align: center;
+    font-size:30rpx;
+    font-weight:500;
+    color:rgba(153,153,153,1);
+}
