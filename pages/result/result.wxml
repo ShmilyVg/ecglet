@@ -1,6 +1,6 @@
 <import src="../../components/result-top/index.wxml"></import>
 <import src="../../components/result-bottom/index.wxml"></import>
-<view class="flex-column align-items-center">
+<view class="flex-column align-items-center" style="padding-bottom: 50rpx;">
 <!--    <view class="share">分享给亲友</view>-->
 
 
@@ -14,5 +14,5 @@
         <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
     </view>
     <template is="result-top" data="{{resultColor:'#3A93EF',items}}"></template>
-    <template is="result-bottom" data="{{resultColor:'#3A93EF',resultBottomRemindColor:'rgba(180,218,255,1)'}}"></template>
+    <template is="result-bottom" data="{{isAbnormal:result.isAbnormal,resultColor:'#3A93EF',resultBottomRemindColor:'rgba(180,218,255,1)'}}"></template>
 </view>

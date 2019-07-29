@@ -18,8 +18,7 @@
 }
 
 .cell{
-    height: 180rpx;
-    padding-left: 50rpx;
+    padding: 42rpx 0 30rpx 50rpx;
 }
 .outer-circle{
     border-radius: 50%;

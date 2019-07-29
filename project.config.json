@@ -50,7 +50,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -92,6 +92,13 @@
 					"name": "pages/pressure-result/pressure-result",
 					"pathName": "pages/pressure-result/pressure-result",
 					"query": "dataId=52",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/arrhyth/arrhyth",
+					"pathName": "pages/arrhyth/arrhyth",
+					"query": "",
 					"scene": null
 				}
 			]

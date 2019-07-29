@@ -462,23 +462,23 @@ Page({
     },
 
     onReady() {
-        // // TODO 将来删掉
-        // let that = this;
-        // setTimeout(() => {
-        //     that.hideLoading()
-        //
-        //     // 每次重新连接，采集数据缓存清空一次
-        //     that.waveData = undefined
-        //
-        //     // 计时开始
-        //     if (!that.data.countTimer) {
-        //         that.preparePannelDark('white');
-        //         this.arrhythStateManager.prepare();
-        //         // setTimeout(() => {
-        //         //     that.startCount();
-        //         // });
-        //     }
-        // }, 1000);
+        // TODO 将来删掉
+        let that = this;
+        setTimeout(() => {
+            that.hideLoading()
+
+            // 每次重新连接，采集数据缓存清空一次
+            that.waveData = undefined
+
+            // 计时开始
+            if (!that.data.countTimer) {
+                that.preparePannelDark('white');
+                this.arrhythStateManager.prepare();
+                // setTimeout(() => {
+                //     that.startCount();
+                // });
+            }
+        }, 1000);
     },
 
     preparePannelDark(bgColor) {
@@ -505,97 +505,100 @@ Page({
 
     },
 
-    uploadData() {
-        console.log("uploadData...")
-        let that = this
 
-        try {
-            wx.showToast({title: '处理中，请稍后', icon: 'none', duration: 35000});
-            let dirPath = wx.env.USER_DATA_PATH + "/cache/bs-upload"
-            let fileName = "rawdata"
-            let filePath = `${dirPath}/${fileName}`;
+    accessFile() {
+        let dirPath = wx.env.USER_DATA_PATH + "/cache/bs-upload"
+        let fileName = "rawdata"
+        let filePath = `${dirPath}/${fileName}`;
+        let that = this;
 
 
-            const promise = fsp.access({path: dirPath}).then(res => {
-                console.log("fsp.access -- success", res)
+        return fsp.access({path: dirPath}).then(res => {
+            console.log("fsp.access -- success", res)
 
-                console.log("先删除原来的文件，再创建新的上传文件...")
-                fsp.removeSavedFile({
-                    filePath: filePath
-                }).catch(err => {
-                    console.log("fsp.removeSavedFile error -- %o", err);
-                }).then(res => {
-                    console.log("fsp.removeSavedFile result -- %o", res)
-                    if (!that.waveData) {
-                        throw new Error("上传数据为空...")
-                    }
+            console.log("先删除原来的文件，再创建新的上传文件...")
+            fsp.removeSavedFile({
+                filePath: filePath
+            }).catch(err => {
+                console.log("fsp.removeSavedFile error -- %o", err);
+            }).then(res => {
+                console.log("fsp.removeSavedFile result -- %o", res)
+                if (!that.waveData) {
+                    throw new Error("上传数据为空...")
+                }
 
-                    console.log("开始创建上传数据临时文件...")
-                    return fsp.writeFile({
-                        filePath: filePath,
-                        // encoding: "binary",
-                        data: that.waveData
-                    });
-
-
-                }).then(res => {
-                    console.log("fsp.writeFile result -- %o", res)
-                    return fsp.getFileInfo({
-                        filePath: filePath
-                    });
-
-                }).then(res => {
-                    console.log("fsp.getFileInfo(%s) result -- %o", filePath, res)
-
-                    Protocol.checkHaveNetwork().then(() => {
-                        HiNavigator.redirectToRichContent({tempFileUrl: filePath, type: this.data.testType});
-                        // Protocol.uploadGatherFile({filePath}).then((data) => {
-                        //     getApp().globalData.tempGatherResult = data.result;
-                        //     HiNavigator.redirectToResult();
-                        // }).catch((res) => {
-                        //     WXDialog.showDialog({
-                        //         content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
-                        //             wx.navigateBack({delta: 1});
-                        //         }
-                        //     });
-                        //     console.error('上传解析过程中报错', res);
-                        // }).finally(() => {
-                        //     Toast.hiddenLoading();
-                        // });
-                    }).catch((res) => {
-                        WXDialog.showDialog({
-                            content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
-                                wx.navigateBack({delta: 1});
-                            }
-                        });
-                        this.reset();
-                        Toast.hiddenLoading();
-                        console.error('', res);
-                    });
-
-                }).catch(err => {
-                    Toast.hiddenLoading();
-                    WXDialog.showDialog({
-                        content: '您的检测数据不完整，请重新测试', confirmEvent: () => {
-                            wx.navigateBack({delta: 1});
-                        }
-                    });
-                    console.log("uploadData: %o", error)
+                console.log("开始创建上传数据临时文件...")
+                return fsp.writeFile({
+                    filePath: filePath,
+                    // encoding: "binary",
+                    data: that.waveData
                 });
 
 
+            }).then(res => {
+                console.log("fsp.writeFile result -- %o", res)
+                return fsp.getFileInfo({
+                    filePath: filePath
+                });
+
+            }).then(res => {
+                console.log("fsp.getFileInfo(%s) result -- %o", filePath, res)
+
+                Protocol.checkHaveNetwork().then(() => {
+                    HiNavigator.redirectToRichContent({tempFileUrl: filePath, type: this.data.testType});
+                    // Protocol.uploadGatherFile({filePath}).then((data) => {
+                    //     getApp().globalData.tempGatherResult = data.result;
+                    //     HiNavigator.redirectToResult();
+                    // }).catch((res) => {
+                    //     WXDialog.showDialog({
+                    //         content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
+                    //             wx.navigateBack({delta: 1});
+                    //         }
+                    //     });
+                    //     console.error('上传解析过程中报错', res);
+                    // }).finally(() => {
+                    //     Toast.hiddenLoading();
+                    // });
+                }).catch((res) => {
+                    WXDialog.showDialog({
+                        content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
+                            wx.navigateBack({delta: 1});
+                        }
+                    });
+                    this.reset();
+                    Toast.hiddenLoading();
+                    console.error('', res);
+                });
+
+            }).catch(err => {
+                Toast.hiddenLoading();
+                WXDialog.showDialog({
+                    content: '您的检测数据不完整，请重新测试', confirmEvent: () => {
+                        wx.navigateBack({delta: 1});
+                    }
+                });
+                console.log("uploadData: %o", error)
             });
 
-            promise.catch(err => {
-                console.log("fsp.access -- failed", err)
-                return fsp.mkdir({
-                    dirPath: dirPath,
-                    recursive: true
-                })
+
+        }).catch(err => {
+            console.log("fsp.access -- failed", err)
+            fsp.mkdir({
+                dirPath: dirPath,
+                recursive: true
             }).then(ret => {
                 console.log("fsp.mkdir -- success", ret)
-                return promise;
-            })
+                return this.accessFile();
+            });
+        });
+    },
+
+    uploadData() {
+        console.log("uploadData...")
+
+        try {
+            wx.showToast({title: '处理中，请稍后', icon: 'none', duration: 35000});
+            this.accessFile();
 
         } catch (error) {
             Toast.hiddenLoading();
