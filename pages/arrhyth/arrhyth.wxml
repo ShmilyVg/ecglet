@@ -54,8 +54,8 @@
             <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</cover-view>
             <cover-view class="remind-text-big">{{bleStatus==='not_init'?'':'尝试设备连接'}}</cover-view>
             <cover-view class="fill-width flex-row align-items-center justify-center" style="margin-top: 49rpx;">
-              <cover-image src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></cover-image>
-              <cover-view class="remind-text-small" style="margin-left: 8rpx;">{{bleStatus==='not_init'?' ':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
+              <cover-image wx:if="{{bleStatus!=='not_init'}}" src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></cover-image>
+              <cover-view class="remind-text-small" style="margin-left: 8rpx;">{{bleStatus==='not_init'?'':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
             </cover-view>
           </cover-view>
 
