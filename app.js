@@ -7,13 +7,6 @@ import UserInfo from "./apis/network/network/libs/userInfo";
 import HiNavigator from "./components/navigator/hi-navigator";
 import {initAnalysisOnApp} from "./analysis/mta";
 
-ArrayBuffer.prototype.concat = function (b2) {
-    let tmp = new Uint8Array(this.byteLength + b2.byteLength);
-    tmp.set(new Uint8Array(this), 0);
-    tmp.set(new Uint8Array(b2), this.byteLength);
-    return tmp.buffer;
-};
-
 App({
     onLaunch: function () {
         // 展示本地存储能力

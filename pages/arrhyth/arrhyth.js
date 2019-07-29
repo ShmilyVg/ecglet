@@ -17,6 +17,13 @@ import {
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {ArrhythStateManager, getCircleRadius} from "./state";
 
+ArrayBuffer.prototype.concat = function (b2) {
+    let tmp = new Uint8Array(this.byteLength + b2.byteLength);
+    tmp.set(new Uint8Array(this), 0);
+    tmp.set(new Uint8Array(b2), this.byteLength);
+    return tmp.buffer;
+};
+
 Page({
     data: {
         items: [{title: '- 手握式 -', path: 'sws'}, {title: '- 贴胸式 -', path: 'txs'}],
@@ -372,7 +379,9 @@ Page({
         if (!this.arrhythStateManager.isFilterData()) {
             let buffer = that.waveData ? that.waveData : new ArrayBuffer(0);
             // console.log('onFirstChannelChange waveData', that.waveData, 'buffer', buffer);
-            that.waveData = buffer.concat(data);
+            if (buffer) {
+                that.waveData = buffer.concat(data);
+            }
         }
         // console.log('data: ' + that.ab2hex(that.data.waveData))
         let ecg = that.data.ecgPannel
@@ -381,7 +390,7 @@ Page({
         if (ecg) {
             ecg.drawWaveDark(data);
         } else {
-            console.warn('此时ecg还是undefined');
+            console.warn('此时ecg是undefined');
         }
         // ecg.drawWaveAnimation(data, that.data.completed)
     },
