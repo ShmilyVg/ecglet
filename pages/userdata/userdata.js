@@ -4,6 +4,7 @@ import {getFormatDate} from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import * as tools from "../../utils/tools";
 
 Page({
     data: {
@@ -163,6 +164,7 @@ Page({
                             return UserInfo.get();
                         }).then((res) => {
                             Toast.success('修改成功');
+                            data.age = tools.jsGetAge(data.birthday);
                             return UserInfo.set({...res.userInfo, ...data});
                         }).then(() => {
                             getApp().globalData.editMember = {};
