@@ -38,7 +38,8 @@ Page({
                 isNormalMember: false,
                 rightChoseIsLeft: true,
                 trendRightChoseIsLeft: true,
-            })
+            });
+            this.getMainList({page: 1, recorded: true});
         } else {
             UserInfo.get().then((res) => {
                 this.setData({
@@ -46,10 +47,10 @@ Page({
                     isNormalMember: true,
                     rightChoseIsLeft: true,
                     trendRightChoseIsLeft: true,
-                })
+                });
+                this.getMainList({page: 1, recorded: true});
             })
         }
-        this.getMainList({page: 1, recorded: true});
     },
 
     getMainList({page = 1, recorded = false}) {
