@@ -17,13 +17,6 @@ import {
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {ArrhythStateManager, getCircleRadius} from "./state";
 
-ArrayBuffer.prototype.concat = function (b2) {
-    let tmp = new Uint8Array(this.byteLength + b2.byteLength);
-    tmp.set(new Uint8Array(this), 0);
-    tmp.set(new Uint8Array(b2), this.byteLength);
-    return tmp.buffer;
-};
-
 Page({
     data: {
         items: [{title: '- 手握式 -', path: 'sws'}, {title: '- 贴胸式 -', path: 'txs'}],
