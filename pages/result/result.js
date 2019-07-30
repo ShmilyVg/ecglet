@@ -32,7 +32,7 @@ Page({
         });
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
-        Protocol.getRoutine({id: parseInt(options.dataId)}).then(data => {
+        Protocol.getRoutine({id: options.dataId}).then(data => {
             console.log(data);
             const {result} = data;
             result.time = this.getTime(parseInt(result.time));

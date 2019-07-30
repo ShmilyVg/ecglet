@@ -47,7 +47,7 @@ export default class HiNavigator extends CommonNavigator {
         wx.navigateTo({url: '/pages/rich-content/rich-content?type=' + type + '&tempFileUrl=' + encodeURIComponent(tempFileUrl)});
     }
 
-    static redirectToResultPageByType({type,dataId}) {
+    static redirectToResultPageByType({type, dataId}) {
         if (type === 2) {
             this.redirectToHeartPressureResult({dataId});
         } else {
