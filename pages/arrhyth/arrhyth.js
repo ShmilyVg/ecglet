@@ -62,10 +62,10 @@ Page({
     reset() {
         let that = this
 
-        if (that.data.countTimer) {
-            clearInterval(that.data.countTimer)
-            that.data.countTimer = undefined
-            that.data.count = 0
+        if (that.data.countTimer !== undefined) {
+            clearInterval(that.data.countTimer);
+            that.data.countTimer = undefined;
+            that.data.count = 0;
         }
 
         if (that.data.progressCircle) {
