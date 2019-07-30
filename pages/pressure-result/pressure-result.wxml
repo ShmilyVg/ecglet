@@ -55,6 +55,6 @@
         <view class="pressure-score-content">{{emotion.content}}</view>
     </view>
 
-    <template is="result-bottom" data="{{isAbNormal,resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
+    <template is="result-bottom" data="{{isAbNormal:false,resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
 
 </view>
