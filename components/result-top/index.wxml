@@ -4,7 +4,7 @@
         <block wx:for="{{items}}" wx:key="index">
             <view class="flex-row box-sizing-border-box space-between cell" bindtap="onShowDetail" data-index="{{index}}" data-item="{{item}}">
                 <view class="flex-row align-items-center">
-                    <view class="flex-row align-items-center justify-center outer-circle" style="position: relative;">
+                    <view class="flex-row align-items-center justify-center outer-circle box-sizing-border-box" style="position: relative;padding: 8rpx;">
                         <view class="absolute outer-circle" style="background-color: {{item.color}};opacity: 0.2;"></view>
                         <view class="point-comm" style="background-color: {{item.color}}"></view>
                     </view>
