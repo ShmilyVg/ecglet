@@ -105,9 +105,7 @@ Page({
             return;
         }
         if (!!this.filePath) {
-            console.log(this.filePath, '2');
-
-            // Toast.showLoading();
+            Toast.showLoading();
             let promise = undefined;
             if (parseInt(this.arrhythType) === 2) {
                 promise = Protocol.uploadGatherCardiacFile;
