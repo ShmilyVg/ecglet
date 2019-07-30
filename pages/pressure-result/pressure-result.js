@@ -1,9 +1,10 @@
-import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
 import Canvas from './canvas.js';
 import Protocol from "../../apis/network/protocol";
 import WXDialog from "../../utils/dialog";
+import {reloginWithoutLogin} from "../../utils/tools";
+
 
 Page({
     ...Canvas.options,
@@ -43,6 +44,10 @@ Page({
         }
     },
 
+    onUnload() {
+        reloginWithoutLogin();
+    },
+
     onLoad(options) {
         //等级 1——7.5%；2——31%； 3——56%；4——80%；
         this.resultTop = new ResultTop(this);
@@ -79,7 +84,11 @@ Page({
     },
 
     onShareAppMessage() {
-        return {title: '', imageUrl: '', path: '/pages/pressure-result/pressure-result?isShared=true&dataId=' + this.dataId};
+        return {
+            title: '',
+            imageUrl: '',
+            path: '/pages/pressure-result/pressure-result?withoutLogin=true&dataId=' + this.dataId
+        };
     },
     lookReasonDialog() {
         WXDialog.showDialog({

@@ -205,7 +205,7 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getRoutine({id}) {
-        return Network.request({url: 'gather/getRoutine', data: arguments[0]}).then(data => {
+        return Network.request({url: 'gather/getRoutine', data: arguments[0], requestWithoutLogin: true}).then(data => {
             let isAbNormal = false;
             const {result: {dataList, userInfo}} = data;
             dataList.report.forEach(item => {
@@ -248,7 +248,7 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getCardiac({id}) {
-        return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data => {
+        return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true}).then(data => {
             let isAbNormal = false;
             const {result: {dataList, userInfo}} = data;
             dataList.list.forEach(item => {

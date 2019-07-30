@@ -1,7 +1,7 @@
-import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
 import Protocol from "../../apis/network/protocol";
+import {reloginWithoutLogin} from "../../utils/tools";
 
 Page({
     data: {
@@ -52,7 +52,10 @@ Page({
         //     }
         // });
     },
+    onUnload() {
+        reloginWithoutLogin();
+    },
     onShareAppMessage() {
-        return {title: '', imageUrl: '', path: '/pages/result/result?isShared=true&dataId=' + this.dataId};
+        return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=true&dataId=' + this.dataId};
     },
 })

@@ -8,7 +8,8 @@ import HiNavigator from "./components/navigator/hi-navigator";
 import {initAnalysisOnApp} from "./analysis/mta";
 
 App({
-    onLaunch: function () {
+    onLaunch(options) {
+        this.globalData.options = options;
         // 展示本地存储能力
         initAnalysisOnApp();
         wx.onNetworkStatusChange((res) => {
@@ -22,7 +23,15 @@ App({
             }
             // }
         });
+        console.log('App.js options', options);
+        if (!this.globalData.options.query.withoutLogin) {
+            this.doLogin();
+        }
 
+
+    },
+
+    doLogin() {
         Login.doLogin().then((data) => {
             return UserInfo.get();
         }).then((res) => {
@@ -46,7 +55,12 @@ App({
     },
 
     globalData: {
-        userInfo: {}, tempGatherResult: {}, isConnected: true, currentMember: {}, editMember: {}
+        options: {query:{withoutLogin: false}},//无需登录即可使用？
+        userInfo: {},
+        tempGatherResult: {},
+        isConnected: true,
+        currentMember: {},
+        editMember: {},
     },
 
     onLoginSuccess: null,

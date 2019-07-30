@@ -137,3 +137,13 @@ export class MyUsed {
         wx.setStorageSync('isUsed', true);
     }
 }
+
+
+export function reloginWithoutLogin() {
+    const app = getApp()
+    const {query} = app.globalData.options;
+    if (query.withoutLogin) {
+        query.withoutLogin = false;
+        app.doLogin();
+    }
+}
