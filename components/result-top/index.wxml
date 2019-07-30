@@ -16,7 +16,7 @@
                 </view>
                 <view class="flex-row align-items-center">
                     <view class="flex-column align-items-center" style="align-items: flex-end">
-                        <view class="cell-num" style="color: {{item.color}};font-size: {{item.fontSize}}rpx;">{{item.rightContent||''}}</view>
+                        <view class="cell-num" style="color: {{item.color}};font-size: {{item.fontSize}}rpx;line-height: {{item.fontSize}}rpx;">{{item.rightContent||''}}</view>
                         <view class="cell-eng">{{item.unit}}</view>
                     </view>
                     <view class="flex-row align-items-center justify-center result-item-extra">

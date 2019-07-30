@@ -76,7 +76,7 @@
     font-size:44rpx;
     font-weight:500;
     font-family:DINCondensed-Bold;
-    margin-bottom: -20rpx;
+    margin-bottom: -10rpx;
 }
 
 .cell-eng {
