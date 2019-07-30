@@ -235,7 +235,7 @@ export default class Protocol {
             if (isAbNormal) {
                 dataList.subTitle = '多喝水，好心态，别熬夜~';
             } else {
-                dataList.subTitle = '注意身体，继续保持~';
+                dataList.subTitle = '注意身体，关爱心脏~';
             }
             dataList.isAbNormal = isAbNormal;
             return Promise.resolve({dataList, userInfo});
