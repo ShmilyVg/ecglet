@@ -4,6 +4,7 @@ import HiNavigator from "../../components/navigator/hi-navigator";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import {jsGetAge} from "../../utils/tools";
 import Toast from "../../utils/toast";
+import * as Tools from "../../utils/tools";
 
 const app = getApp();
 Page({
@@ -64,10 +65,12 @@ Page({
     onShow() {
         const currentMember = app.globalData.currentMember;
         if (currentMember && currentMember.memberId) {
+            currentMember.shortName = Tools.HandleShortName(currentMember.nickName);
             this.setData({userInfo: currentMember});
         } else {
             UserInfo.get().then(res => {
                 console.log(res);
+                res.userInfo.shortName = Tools.HandleShortName(res.userInfo.nickName);
                 this.setData({userInfo: {...res.userInfo}});
             });
         }
