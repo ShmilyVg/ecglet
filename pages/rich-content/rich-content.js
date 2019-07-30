@@ -122,7 +122,7 @@ Page({
                 filePath: this.filePath,
                 symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
                 record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
-                relevanceId: userInfo.isMainMember ? '' : userInfo.relevanceId,
+                relevanceId: userInfo.isMainMember ? '' : userInfo.memberId,
             }).then(data => {
                 if (!data.result) {
                     throw new Error();
