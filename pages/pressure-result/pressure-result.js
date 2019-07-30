@@ -50,7 +50,7 @@ Page({
         });
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
-        Protocol.getCardiac({id: parseInt(options.dataId)}).then(data => {
+        Protocol.getCardiac({id: options.dataId}).then(data => {
             const {result: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}} = data;
 
             this.setData({

@@ -84,7 +84,7 @@ page {
     z-index: 3;
 }
 .pressure-result-top-layout{
-    min-height: 608rpx;
+    min-height: 628rpx;
 }
 .pressure-result-title-bg{
     margin-top: 50rpx;
