@@ -1,6 +1,6 @@
 <!--pages/rich-content/rich-content.wxml-->
 <view class="flex-column" style="align-items: center">
-    <view class="title">基本信息</view>
+    <view class="title">这是谁的检测结果？</view>
     <view class="flex-row" style="width: 660rpx;align-items: center;justify-content: space-between;margin-top: 42rpx">
         <view class="flex-row" style="align-items: center">
             <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
@@ -18,7 +18,7 @@
         </view>
     </view>
     <view class="line"></view>
-    <view class="title">常见症状<mark style="font-size: 24rpx">（可多选)</mark></view>
+    <view class="title">症状记录<mark style="font-size: 24rpx">（可多选)</mark></view>
     <view class="tag-view flex-row">
         <view wx:for="{{ill}}" wx:key="text" class="tag {{item.value?'tag-chose':''}}" bindtap="clickIll" data-index="{{index}}">
             {{item.text}}
