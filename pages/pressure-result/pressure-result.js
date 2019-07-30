@@ -49,6 +49,7 @@ Page({
             this.setData({userInfo: res.userInfo});
         });
         this.resultTop = new ResultTop(this);
+        this.dataId = options.dataId;
         Protocol.getCardiac({id: parseInt(options.dataId)}).then(data => {
             const {result: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}} = data;
 
@@ -80,7 +81,7 @@ Page({
     },
 
     onShareAppMessage() {
-        return {title: '', imageUrl: '', path: ''};
+        return {title: '分享给亲友', imageUrl: '', path: '/pages/pressure-result/pressure-result?dataId=' + this.dataId};
     },
     lookReasonDialog() {
         WXDialog.showDialog({

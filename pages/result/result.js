@@ -31,6 +31,7 @@ Page({
             this.setData({userInfo: res.userInfo});
         });
         this.resultTop = new ResultTop(this);
+        this.dataId = options.dataId;
         Protocol.getRoutine({id: parseInt(options.dataId)}).then(data => {
             console.log(data);
             const {result} = data;
