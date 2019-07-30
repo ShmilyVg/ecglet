@@ -27,17 +27,14 @@ Page({
     },
 
     onLoad(options) {
-        UserInfo.get().then((res) => {
-            this.setData({userInfo: res.userInfo});
-        });
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
         Protocol.getRoutine({id: options.dataId}).then(data => {
             console.log(data);
-            const {result} = data;
-            result.time = this.getTime(parseInt(result.time));
-            this.setData({result});
-            this.resultTop.showItems({items: result.report});
+            const {dataList,userInfo} = data;
+            dataList.time = this.getTime(parseInt(dataList.time));
+            this.setData({result: dataList, userInfo});
+            this.resultTop.showItems({items: dataList.report});
         });
 
 
@@ -54,5 +51,8 @@ Page({
         //         timingFunc: 'easeIn'
         //     }
         // });
-    }
+    },
+    onShareAppMessage() {
+        return {title: '', imageUrl: '', path: '/pages/result/result?isShared=true&dataId=' + this.dataId};
+    },
 })

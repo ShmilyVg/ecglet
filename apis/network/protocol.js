@@ -207,7 +207,8 @@ export default class Protocol {
     static getRoutine({id}) {
         return Network.request({url: 'gather/getRoutine', data: arguments[0]}).then(data => {
             let isAbNormal = false;
-            data.result.report.forEach(item => {
+            const {result: {dataList, userInfo}} = data;
+            dataList.report.forEach(item => {
                 item.name = item.introduction;
                 item.rightContent = item.time;
                 createFontSize(item);
@@ -232,12 +233,12 @@ export default class Protocol {
                 }
             });
             if (isAbNormal) {
-                data.result.subTitle = '多喝水，好心态，别熬夜~';
+                dataList.subTitle = '多喝水，好心态，别熬夜~';
             } else {
-                data.result.subTitle = '注意身体，继续保持~';
+                dataList.subTitle = '注意身体，继续保持~';
             }
-            data.result.isAbNormal = isAbNormal;
-            return Promise.resolve(data);
+            dataList.isAbNormal = isAbNormal;
+            return Promise.resolve({dataList, userInfo});
         });
     }
 
