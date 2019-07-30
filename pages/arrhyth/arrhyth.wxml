@@ -38,41 +38,41 @@
           </swiper-item>
         </block>
       </swiper>
-      <cover-view class="fill-width toast" hidden="{{showLoading}}">
-        <cover-view class="flex-column align-items-center tip">
-          <cover-view wx:if="{{isConnectedTimeout}}" class="flex-column align-items-center temp-height">
-            <cover-view class="remind-text-big">连接失败</cover-view>
-            <cover-view class="flex-row align-items-center justify-center connect-failed-button" bindtap="onClickConnectedFail">
-              <cover-image class="reconnected-image" src="../../images/arrhyth/cl.png"></cover-image>
-              <cover-view>连接失败</cover-view>
-            </cover-view>
-            <cover-view class="cant-connected" bindtap="onConnectedFailedReason">连接不上?</cover-view>
+      <view class="fill-width toast" hidden="{{showLoading}}">
+        <view class="flex-column align-items-center tip">
+          <view wx:if="{{isConnectedTimeout}}" class="flex-column align-items-center temp-height">
+            <view class="remind-text-big">连接失败</view>
+            <view class="flex-row align-items-center justify-center connect-failed-button" bindtap="onClickConnectedFail">
+              <image class="reconnected-image" src="../../images/arrhyth/cl.png"></image>
+              <view>连接失败</view>
+            </view>
+            <view class="cant-connected" bindtap="onConnectedFailedReason">连接不上?</view>
 
-          </cover-view>
+          </view>
 
-          <cover-view wx:else class="flex-column align-items-center temp-height">
-            <cover-view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</cover-view>
-            <cover-view class="remind-text-big">{{bleStatus==='not_init'?'':'尝试设备连接'}}</cover-view>
-            <cover-view class="fill-width flex-row align-items-center justify-center" style="margin-top: 49rpx;">
-              <cover-image wx:if="{{bleStatus!=='not_init'}}" src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></cover-image>
-              <cover-view class="remind-text-small" style="margin-left: 8rpx;">{{bleStatus==='not_init'?'':'过程中勿交谈、移动、保持静息状态'}}</cover-view>
-            </cover-view>
-          </cover-view>
+          <view wx:else class="flex-column align-items-center temp-height">
+            <view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</view>
+            <view class="remind-text-big">{{bleStatus==='not_init'?'':'尝试设备连接'}}</view>
+            <view class="fill-width flex-row align-items-center justify-center" style="margin-top: 49rpx;">
+              <image wx:if="{{bleStatus!=='not_init'}}" src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></image>
+              <view class="remind-text-small" style="margin-left: 8rpx;">{{bleStatus==='not_init'?'':'过程中勿交谈、移动、保持静息状态'}}</view>
+            </view>
+          </view>
 
-          <cover-view class="fill-width flex-column align-items-center" style="margin-top: 180rpx;">
-            <cover-view class="flex-row align-items-center">
-              <cover-image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></cover-image>
-              <cover-view class="remind-text-bottom">绿灯亮起：表示当前处于采集状态</cover-view>
-            </cover-view>
-            <cover-view class="flex-row align-items-center" style="margin-top: 19rpx;">
-              <cover-image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></cover-image>
-              <cover-view class="remind-text-bottom">蓝灯亮起：表示仪器开启，尝试与手机连接</cover-view>
-            </cover-view>
-          </cover-view>
+          <view class="fill-width flex-column align-items-center" style="margin-top: 180rpx;">
+            <view class="flex-row align-items-center">
+              <image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></image>
+              <view class="remind-text-bottom">绿灯亮起：表示当前处于采集状态</view>
+            </view>
+            <view class="flex-row align-items-center" style="margin-top: 19rpx;">
+              <image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></image>
+              <view class="remind-text-bottom">蓝灯亮起：表示仪器开启，尝试与手机连接</view>
+            </view>
+          </view>
 
 
-        </cover-view>
-      </cover-view>
+        </view>
+      </view>
     </view>
 
   </block>

@@ -91,6 +91,7 @@ swiper{
 .remind-text-small{
   font-size:26rpx;
   font-weight:500;
+  line-height: 30rpx;
   height: 30rpx;
   color:rgba(153,204,255,1);
 }
