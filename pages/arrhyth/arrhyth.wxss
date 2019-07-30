@@ -138,6 +138,7 @@ swiper{
 
 .content-layout-success-title{
   font-size:50rpx;
+  line-height: 50rpx;
   font-family:PingFang-SC-Medium;
   font-weight:500;
   color:rgba(255,255,255,1);
@@ -145,15 +146,18 @@ swiper{
 
 .content-layout-success-content{
   font-size:30rpx;
+  line-height: 30rpx;
   font-family:PingFang-SC-Medium;
   font-weight:500;
   color:rgba(193,224,255,1);
+  margin-top: 20rpx;
 }
 
 .arrhyth-tip{
   width: 70%;
   height: 100%;
   font-size:30rpx;
+  line-height: 46rpx;
   font-family:PingFang-SC-Medium;
   font-weight:500;
   color:rgba(193,224,255,1);
