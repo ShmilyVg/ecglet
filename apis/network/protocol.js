@@ -250,7 +250,8 @@ export default class Protocol {
     static getCardiac({id}) {
         return Network.request({url: 'gather/getCardiac', data: arguments[0]}).then(data => {
             let isAbNormal = false;
-            data.result.list.forEach(item => {
+            const {result: {dataList, userInfo}} = data;
+            dataList.list.forEach(item => {
                 if (!isAbNormal) {
                     isAbNormal = parseInt(item.status) === 0;
                 }
@@ -269,8 +270,8 @@ export default class Protocol {
                     }
                 }
             });
-            data.result.isAbNormal = isAbNormal;
-            return Promise.resolve(data);
+            dataList.isAbNormal = isAbNormal;
+            return Promise.resolve({dataList, userInfo});
         });
     }
 

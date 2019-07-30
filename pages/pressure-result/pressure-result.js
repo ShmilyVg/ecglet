@@ -45,15 +45,13 @@ Page({
 
     onLoad(options) {
         //等级 1——7.5%；2——31%； 3——56%；4——80%；
-        UserInfo.get().then((res) => {
-            this.setData({userInfo: res.userInfo});
-        });
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
         Protocol.getCardiac({id: options.dataId}).then(data => {
-            const {result: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}} = data;
+            const {dataList: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}, userInfo} = data;
 
             this.setData({
+                userInfo,
                 isAbNormal,
                 time: this.getTime(parseInt(time)), pdfUrl, stress, tired: {
                     ...tired,
@@ -81,7 +79,7 @@ Page({
     },
 
     onShareAppMessage() {
-        return {title: '分享给亲友', imageUrl: '', path: '/pages/pressure-result/pressure-result?dataId=' + this.dataId};
+        return {title: '', imageUrl: '', path: '/pages/pressure-result/pressure-result?isShared=true&dataId=' + this.dataId};
     },
     lookReasonDialog() {
         WXDialog.showDialog({
