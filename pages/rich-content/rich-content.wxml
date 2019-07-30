@@ -5,7 +5,7 @@
         <view class="flex-row" style="align-items: center">
             <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 16rpx">
-                <view class="name">{{userInfo.nickName}}</view>
+                <view class="name">{{userInfo.shortName}}</view>
                 <view class="flex-row" style="align-items: center">
                     <image class="sex" src="../../images/rich/{{userInfo.sex===1?'m':'w'}}.png"></image>
                     <view class="age">{{userInfo.age}}岁</view>
