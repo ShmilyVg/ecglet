@@ -17,11 +17,25 @@
     margin: 59rpx 0 41rpx 50rpx;
     align-self: flex-start;
 }
-
+.icon-common-layout{
+    position: relative;
+    width: 70rpx;
+    height: 64rpx;
+    margin-bottom: 35rpx;
+}
 .icon-common{
-    width: 66rpx;
-    height: 60rpx;
-    margin-bottom: 39rpx;
+    width: 70rpx;
+    height: 64rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.icon-common-bg{
+    margin: 2rpx;
+    width: calc(100% - 4rpx);
+    height: calc(100% - 4rpx);
 }
 
 .common-advice-circle{
