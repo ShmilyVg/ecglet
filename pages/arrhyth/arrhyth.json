@@ -2,7 +2,8 @@
 {
   "usingComponents": {
     "circle": "../../components/circle/circle",
-    "ecg": "../../components/ecg/ecg"
+    "ecg": "../../components/ecg/ecg",
+    "opacity-text": "../../components/opacity-text/opacity-text"
   },
    "backgroundColor": "#f2f2f2"
 }

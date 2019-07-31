@@ -1,5 +1,4 @@
 import WXDialog from "../../utils/dialog";
-import {RandomRemindData} from "../../utils/tips";
 
 const WAIT_TIME = 4500, radius = 80;
 
@@ -22,20 +21,6 @@ export class ArrhythStateManager {
         };
         this.connectedStateIndex = -1;
         this.remindIntervalIndex = -1;
-        this.showOptions = {
-            duration: 500,
-            timingFunction: 'linear',
-            delay: 300,
-            transformOrigin: '50% 50% 0'
-        };
-        this.hiddenOptions = {
-            duration: 500,
-            timingFunction: 'linear',
-            delay: 6000,
-            transformOrigin: '50% 50% 0'
-        };
-        this.animation = wx.createAnimation();
-        this.randomRemindData = new RandomRemindData();
         // this.prepareStateIndex = -1;
     }
 
@@ -58,7 +43,6 @@ export class ArrhythStateManager {
     }
 
     prepare() {
-        this.randomRemindData.random();
         clearTimeout(this.connectedStateIndex);
         clearInterval(this.remindIntervalIndex);
         this._page.setData({
@@ -71,13 +55,6 @@ export class ArrhythStateManager {
                 this._page.setData({
                     isFilterArrhythData: false,
                 });
-                this.remindAnimation();
-                // setTimeout(() => {
-                //     this.animation.opacity(0).step();
-                //     this._page.setData({
-                //         tipAnimationData: this.animation.export()
-                //     });
-                // }, 5500);
             });
         });
     }
@@ -102,46 +79,7 @@ export class ArrhythStateManager {
     }
 
 
-    remindAnimation() {
-        // this.animation.opacity(1).step(this.showOptions);
-        // this._page.setData({
-        //     tipAnimationData: this.animation.export()
-        // }, () => {
-        //     setTimeout(() => {
-        //         this.animation.opacity(0).step(this.hiddenOptions);
-        //         this._page.setData({
-        //             tipAnimationData: this.animation.export()
-        //         }, this.remindAnimationAlways.bind(this, {showFun, hiddenFun}));
-        //     }, this.showOptions.delay);
-        // });
-        this.remindAnimationAlways({
-            showFun: () => {
-                this.animation.opacity(1).step(this.showOptions);
-            }, hiddenFun: () => {
-                this.animation.opacity(0).step(this.hiddenOptions);
-            }
-        })
-    }
 
-    remindAnimationAlways({showFun, hiddenFun}) {
-        showFun();
-        this._page.setData({
-            tip: this.randomRemindData.getRemindData(),
-            tipAnimationData: this.animation.export()
-        }, () => {
-            setTimeout(() => {
-                hiddenFun();
-                this._page.setData({
-                    tipAnimationData: this.animation.export()
-                }, () => {
-                    setTimeout(() => {
-                        console.log('开始重复');
-                        !!this._page.data.countTimer && this.remindAnimationAlways({showFun, hiddenFun});
-                    }, this.hiddenOptions.delay + this.hiddenOptions.duration);
-                });
-            }, this.showOptions.delay + this.showOptions.duration);
-        });
-    }
 }
 export function getCircleRadius() {
     return radius;
@@ -162,7 +100,7 @@ function showCanvasView(page, startCountFun) {
         // ecg.preparePannel(rect.width, rect.height)
         that.data.canvasWidth = rect.width;
         that.data.canvasHeight = rect.height;
-        that.preparePannelDark('white');
+        that.data.ecgPannel.preparePannelDark(that.data.canvasWidth, that.data.canvasHeight);
         setTimeout(() => {
             startCountFun && startCountFun();
             that.startCount();

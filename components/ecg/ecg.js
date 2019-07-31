@@ -50,7 +50,7 @@ Component({
     multipleSlot: true
   },
   methods:{
-    preparePannelDark(w, h, bgColor) {
+    preparePannelDark(w, h) {
       console.log(`Canvas size(${w}, ${h})`)
       let that = this
       const rw = w * that.data.rpx
@@ -66,7 +66,7 @@ Component({
       })
       let ctx = wx.createCanvasContext("ecg_bg", that)
 
-      ctx.fillStyle = bgColor || 'transparent';
+      ctx.fillStyle = 'white';
       ctx.beginPath();
       ctx.moveTo(r, 0);
       ctx.lineTo(rw - r, 0);
@@ -81,7 +81,7 @@ Component({
       const d = that.data.pxmm
       // // 绘制竖行网格
       // if (that.data.showColumnAndRowLine) {
-      if (!!bgColor&&that.data.showColumnAndRowLine) {
+      if (that.data.showColumnAndRowLine) {
         for (var i = 0; i < rw / d; i++) {
           if (i % 5 == 0) {
             ctx.strokeStyle = "#eeeeee"

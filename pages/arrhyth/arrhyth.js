@@ -71,7 +71,6 @@ Page({
         if (that.data.progressCircle) {
             let circle = that.data.progressCircle
             circle.drawCircle('circle_draw1', getCircleRadius(), -1);
-            that.preparePannelDark('');
             that.setData({txt: this.getOriginTxt()});
         }
 
@@ -122,7 +121,6 @@ Page({
                         wx.showToast({title: '信号质量差，请重新测试', icon: 'none'});
                     }
                     that.reset()
-                    that.preparePannelDark('');
                     this.arrhythStateManager.connectedFailed();
                     // await wx.showLoading({
                     //   title: "等待设备接通...",
@@ -146,7 +144,6 @@ Page({
                 }
             }
         } catch (err) {
-            that.preparePannelDark('');
             console.log("onDeviceConnected error -- %o", err)
 
         }
@@ -163,7 +160,6 @@ Page({
                     }
                 });
                 this.reset();
-                this.preparePannelDark('');
                 this.showLoading();
             }
 
@@ -473,7 +469,6 @@ Page({
         //
         //     // 计时开始
         //     if (!that.data.countTimer) {
-        //         that.preparePannelDark('white');
         //         this.arrhythStateManager.prepare();
         //         // setTimeout(() => {
         //         //     that.startCount();
@@ -481,12 +476,6 @@ Page({
         //     }
         // }, 1000);
     },
-
-    preparePannelDark(bgColor) {
-        const ecg = this.data.ecgPannel || this.selectComponent('#ecg');
-        ecg.preparePannelDark(this.data.canvasWidth, this.data.canvasHeight, bgColor || '');
-    },
-
 
     closeBluetooth() {
         return getConnectedBluetoothDevices({services: ['FFB1']}).then(connectedDevices => {
