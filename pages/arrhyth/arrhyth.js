@@ -168,7 +168,14 @@ Page({
         this.arrhythStateManager = new ArrhythStateManager(this);
         this.arrhythStateManager.guider();
         // console.log(await wx.getUserInfo())
-        wx.setKeepScreenOn({keepScreenOn: true});
+        wx.setKeepScreenOn({
+            keepScreenOn: true, success: (res) => {
+                console.log('始终亮屏成功', res);
+            }, fail: res => {
+                console.error('始终亮屏失败', res);
+            }
+        });
+
         console.log('onLoad', options);
         this.isNetworkNotConnected = false;
 
@@ -357,7 +364,13 @@ Page({
             // that.hideLoading()
             that.isStartBLEDevices = false;
             that.reset();
-            wx.setKeepScreenOn({keepScreenOn: false});
+            wx.setKeepScreenOn({
+                keepScreenOn: false, success: (res) => {
+                    console.log('可以息屏成功', res);
+                }, fail: res => {
+                    console.error('可以息屏失败', res);
+                }
+            });
 
             closeBluetoothAdapter().then(res => {
                 console.log('关闭蓝牙适配: %o', res)
