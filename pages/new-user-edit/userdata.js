@@ -147,6 +147,7 @@ Page({
             };
             console.log('保存信息：', data);
             Protocol.accountUpdate(data).then((res) => {
+                UserInfo.clear();
                 return UserInfo.get();
             }).then(res => {
                 return UserInfo.set({...res.userInfo, ...data});

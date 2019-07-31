@@ -19,12 +19,18 @@ export default class UserInfo {
         });
     }
 
-    static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex, id}) {
+    static set({nickName, portraitUrl, memberId, phone, birthday, height, weight, sex, id, age}) {
         const globalData = getApp().globalData;
         globalData.userInfo = {...arguments[0], isMainMember: true};
         return new Promise((resolve, reject) => {
             wx.setStorage({key: 'userInfo', data: globalData.userInfo, success: resolve, fail: reject});
         });
+    }
+
+    static clear() {
+        const globalData = getApp().globalData;
+        globalData.userInfo = {};
+        wx.removeStorageSync('userInfo');
     }
 
     static _postGetUserInfo({resolve, reject}) {
