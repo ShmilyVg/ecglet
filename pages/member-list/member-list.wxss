@@ -47,7 +47,18 @@
 
 .btn{
     position: fixed;
-    bottom: 80rpx;
+    display: flex;
+    flex-directrion: row;
+    justify-content: center;
+    align-items: center;
+    width:750rpx;
+    height:110rpx;
+    background:rgba(57,147,238,1);
+    font-size:38rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color: white;
+    bottom: 0;
 }
 
 .none-history-pic{
