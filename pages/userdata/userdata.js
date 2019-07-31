@@ -197,11 +197,16 @@ Page({
                         Protocol.memberRelevanceUpdate(data).then((res) => {
                             wx.navigateBack({delta: 1});
                         }).catch((res) => {
-                            if (res.data.code == 2000) {
-                                console.log('手机号重复');
-                                Toast.showText('同一手机\n不能绑定两个账号')
-                            } else {
-                                Toast.showText('修改失败');
+                            switch (res.data.code) {
+                                case 2000:
+                                    Toast.showText('同一手机\n不能绑定两个账号');
+                                    break;
+                                case 3000:
+                                    Toast.showText('暂不支持表情');
+                                    break;
+                                default:
+                                    Toast.showText('修改失败');
+                                    break;
                             }
                         });
                     }
