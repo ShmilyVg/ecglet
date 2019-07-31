@@ -1,6 +1,6 @@
 import WXDialog from "../../utils/dialog";
 
-const WAIT_TIME = 4500, radius = 80;
+const WAIT_TIME = 5000, radius = 80;
 
 export class ArrhythStateManager {
 
@@ -98,7 +98,9 @@ function showCanvasView(page, startCountFun) {
         console.log("ECG box rect: %o}", rect)
         // let ecg: any = that.data.ecgPannel
         // ecg.preparePannel(rect.width, rect.height)
-        that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
+        setTimeout(() => {
+            that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
+        }, 300);
         setTimeout(() => {
             startCountFun && startCountFun();
             that.startCount();
