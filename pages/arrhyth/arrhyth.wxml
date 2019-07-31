@@ -39,7 +39,7 @@
       <view class="fill-width toast" hidden="{{showLoading}}">
         <view class="flex-column align-items-center tip">
           <view wx:if="{{isConnectedTimeout}}" class="flex-column align-items-center temp-height">
-            <view class="remind-text-big">连接失败</view>
+            <view class="remind-text-big">重新连接</view>
             <view class="flex-row align-items-center justify-center connect-failed-button" bindtap="onClickConnectedFail">
               <image class="reconnected-image" src="../../images/arrhyth/cl.png"></image>
               <view>连接失败</view>
