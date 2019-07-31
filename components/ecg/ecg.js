@@ -63,88 +63,88 @@ Component({
       that.setData({
         width: rw,
         height: rh
+      },()=>{
+        let ctx = wx.createCanvasContext("ecg_bg", that)
+        console.log('ecg_bg canvas:',ctx);
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.moveTo(r, 0);
+        ctx.lineTo(rw - r, 0);
+        ctx.arcTo(rw, 0, rw, r, r);
+        ctx.lineTo(rw, rh);
+        ctx.lineTo(0, rh);
+        ctx.lineTo(0, rh-r);
+        ctx.arcTo(0, 0, r, 0, r);
+        ctx.closePath();
+        ctx.fill();
+        // ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
+        const d = that.data.pxmm
+        // // 绘制竖行网格
+        // if (that.data.showColumnAndRowLine) {
+        if (that.data.showColumnAndRowLine) {
+          for (var i = 0; i < rw / d; i++) {
+            if (i % 5 == 0) {
+              ctx.strokeStyle = "#eeeeee"
+              ctx.lineWidth = 0.8
+            } else {
+              ctx.strokeStyle = "#eeeeee"
+              ctx.lineWidth = 0.4
+            }
+            let x = i * d + offsetX;
+            ctx.beginPath();
+            ctx.moveTo(x, offsetY);
+            ctx.lineTo(x, offsetY + rh);
+            ctx.stroke();
+            ctx.closePath();
+          }
+
+          // 绘制横行网格
+          for (var j = 0; j < rh / d; j++) {
+            if (j % 5 == 0) {
+              ctx.strokeStyle = "#eeeeee"
+              ctx.lineWidth = 0.8
+            } else {
+              ctx.strokeStyle = "#eeeeee"
+              ctx.lineWidth = 0.4
+            }
+            let y = j * d + offsetY
+            ctx.beginPath()
+            ctx.moveTo(offsetX, y)
+            ctx.lineTo(rw + offsetX, y)
+            ctx.stroke()
+            ctx.closePath()
+          }
+        }
+
+        ctx.fillStyle = '#3a93ef';
+        ctx.beginPath();
+        ctx.moveTo(0, r);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(r, 0);
+        ctx.arcTo(0, 0, 0, r, r);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+
+        ctx.moveTo(rw - r, 0);
+        ctx.lineTo(rw, 0);
+        ctx.lineTo(rw, r);
+        ctx.arcTo(rw, 0, rw - r, 0, r);
+        ctx.closePath();
+        ctx.fill();
+        that.data.baseY = rh / (2 * d) * d + offsetY
+
+        ctx.draw()
+        console.log('ecg_bg canvas绘制完成');
+        let ctx2 = wx.createCanvasContext('ecg_draw', that)
+        // ctx = that.data.ctx
+
+        ctx2.fillStyle = "transparent"
+        ctx2.fillRect(0, 0, rw, rh)
+        ctx2.draw();
+        this.setCanvasDefaultOptions(ctx2);
+        that.data.ctx = ctx2;
       })
-      let ctx = wx.createCanvasContext("ecg_bg", that)
-      console.log('ecg_bg canvas:',ctx);
-      ctx.fillStyle = 'white';
-      ctx.beginPath();
-      ctx.moveTo(r, 0);
-      ctx.lineTo(rw - r, 0);
-      ctx.arcTo(rw, 0, rw, r, r);
-      ctx.lineTo(rw, rh);
-      ctx.lineTo(0, rh);
-      ctx.lineTo(0, rh-r);
-      ctx.arcTo(0, 0, r, 0, r);
-      ctx.closePath();
-      ctx.fill();
-      // ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
-      const d = that.data.pxmm
-      // // 绘制竖行网格
-      // if (that.data.showColumnAndRowLine) {
-      if (that.data.showColumnAndRowLine) {
-        for (var i = 0; i < rw / d; i++) {
-          if (i % 5 == 0) {
-            ctx.strokeStyle = "#eeeeee"
-            ctx.lineWidth = 0.8
-          } else {
-            ctx.strokeStyle = "#eeeeee"
-            ctx.lineWidth = 0.4
-          }
-          let x = i * d + offsetX;
-          ctx.beginPath();
-          ctx.moveTo(x, offsetY);
-          ctx.lineTo(x, offsetY + rh);
-          ctx.stroke();
-          ctx.closePath();
-        }
-
-        // 绘制横行网格
-        for (var j = 0; j < rh / d; j++) {
-          if (j % 5 == 0) {
-            ctx.strokeStyle = "#eeeeee"
-            ctx.lineWidth = 0.8
-          } else {
-            ctx.strokeStyle = "#eeeeee"
-            ctx.lineWidth = 0.4
-          }
-          let y = j * d + offsetY
-          ctx.beginPath()
-          ctx.moveTo(offsetX, y)
-          ctx.lineTo(rw + offsetX, y)
-          ctx.stroke()
-          ctx.closePath()
-        }
-      }
-
-      ctx.fillStyle = '#3a93ef';
-      ctx.beginPath();
-      ctx.moveTo(0, r);
-      ctx.lineTo(0, 0);
-      ctx.lineTo(r, 0);
-      ctx.arcTo(0, 0, 0, r, r);
-      ctx.closePath();
-      ctx.fill();
-      ctx.beginPath();
-
-      ctx.moveTo(rw - r, 0);
-      ctx.lineTo(rw, 0);
-      ctx.lineTo(rw, r);
-      ctx.arcTo(rw, 0, rw - r, 0, r);
-      ctx.closePath();
-      ctx.fill();
-      that.data.baseY = rh / (2 * d) * d + offsetY
-
-      ctx.draw()
-      console.log('ecg_bg canvas绘制完成');
-      let ctx2 = wx.createCanvasContext('ecg_draw', that)
-      // ctx = that.data.ctx
-
-      ctx2.fillStyle = "transparent"
-      ctx2.fillRect(0, 0, rw, rh)
-      ctx2.draw();
-      this.setCanvasDefaultOptions(ctx2);
-      that.data.ctx = ctx2;
-
     },
 
     setCanvasDefaultOptions(ctx) {
