@@ -357,8 +357,8 @@ Page({
     },
 
     onUnload() {
-        console.log('onUnload...', that.data.countTimer);
         let that = this
+        console.log('onUnload...', that.data.countTimer);
         if (that.data.countTimer !== undefined) {
             clearInterval(that.data.countTimer);
             that.data.countTimer = undefined;
