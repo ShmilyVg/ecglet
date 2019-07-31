@@ -572,13 +572,13 @@ Page({
                 });
 
             }).catch(err => {
+                console.error("uploadData: failed", err)
                 Toast.hiddenLoading();
                 WXDialog.showDialog({
                     content: '您的检测数据不完整，请重新测试', confirmEvent: () => {
                         wx.navigateBack({delta: 1});
                     }
                 });
-                console.log("uploadData: %o", error)
             });
 
 
