@@ -77,7 +77,7 @@ Component({
       ctx.arcTo(0, 0, r, 0, r);
       ctx.closePath();
       ctx.fill();
-      ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
+      // ctx.setShadow(0, 2, 9, 'rgba(101,101,101,0.07)');
       const d = that.data.pxmm
       // // 绘制竖行网格
       // if (that.data.showColumnAndRowLine) {
