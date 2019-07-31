@@ -61,7 +61,7 @@ Page({
         let that = this
 
         if (that.data.countTimer !== undefined) {
-            clearTimeout(that.data.countTimer);
+            clearInterval(that.data.countTimer);
             that.data.countTimer = undefined;
             that.data.count = 0;
         }
@@ -405,7 +405,7 @@ Page({
     startCount() {
         console.log('startCount...')
         let that = this
-        that.data.countTimer = setTimeout(function f() {
+        that.data.countTimer = setInterval(function f() {
             that.data.count++
             if (that.data.count <= 2 * that.data.maxCount) {
                 console.log('count: ' + that.data.count, that.data.maxCount);
@@ -415,7 +415,7 @@ Page({
                     that.data.count = 0
                     // that.setData({ txt: '0' })
                     if (that.data.countTimer) {
-                        clearTimeout(that.data.countTimer)
+                        clearInterval(that.data.countTimer)
                         that.data.countTimer = undefined
                     }
 
@@ -426,8 +426,6 @@ Page({
                     })
 
 
-                } else {
-                    that.data.countTimer = setTimeout(f, 1000);
                 }
             }
         }, 1000)
