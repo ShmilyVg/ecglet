@@ -26,6 +26,5 @@
     <view class="none-history-hint">暂无成员</view>
 </view>
 
-<view class="flex-column" style="align-items: center;width: 100%">
-    <view class="button-radius btn" bindtap="addMember">+ 添加成员</view>
-</view>
+<view class="btn" bindtap="addMember">+ 添加成员</view>
+
