@@ -354,7 +354,7 @@ Page({
         let that = this
         try {
             // await wx.hideLoading()
-            that.hideLoading()
+            // that.hideLoading()
             that.isStartBLEDevices = false;
             that.reset();
             wx.setKeepScreenOn({keepScreenOn: false});
