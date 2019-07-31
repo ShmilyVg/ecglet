@@ -82,15 +82,13 @@ Component({
             }
             if (step !== -1) {
                 ctx.setFontSize(43);
+                ctx.setTextAlign('center');
                 const currentNum = maxCount * 2 - step,
-                    maxWidthText1 = 30 * (currentNum < 100 ? 2 : 3) ,
-                    maxWidthText2 = 72,
-                    centerX1 = r - maxWidthText1 / 2.4,
-                    centerX2 = r - maxWidthText2 / 3;
+                    maxWidthText1 = 90;
                 ctx.setFillStyle('white');
-                ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), centerX1, r + 10, maxWidthText1);
+                ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), r, r + 10, maxWidthText1);
                 ctx.setFontSize(12);
-                ctx.fillText('SECOND', centerX2, r + 30, maxWidthText2);
+                ctx.fillText('SECOND', r, r + 30, maxWidthText1);
             }
             ctx.draw();
 
