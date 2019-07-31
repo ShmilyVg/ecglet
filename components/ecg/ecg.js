@@ -65,7 +65,7 @@ Component({
         height: rh
       })
       let ctx = wx.createCanvasContext("ecg_bg", that)
-
+      console.log('ecg_bg canvas:',ctx);
       ctx.fillStyle = 'white';
       ctx.beginPath();
       ctx.moveTo(r, 0);
@@ -135,7 +135,7 @@ Component({
       that.data.baseY = rh / (2 * d) * d + offsetY
 
       ctx.draw()
-
+      console.log('ecg_bg canvas绘制完成');
       let ctx2 = wx.createCanvasContext('ecg_draw', that)
       // ctx = that.data.ctx
 
