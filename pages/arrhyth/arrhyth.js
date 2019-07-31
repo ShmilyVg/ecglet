@@ -119,7 +119,7 @@ Page({
                         wx.showToast({title: '信号质量差，请重新测试', icon: 'none'});
                     }
                     that.reset()
-                    this.arrhythStateManager.connectedFailed();
+                    this.arrhythStateManager.guider();
                     // await wx.showLoading({
                     //   title: "等待设备接通...",
                     //   mask: true

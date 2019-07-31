@@ -3,7 +3,7 @@ export class RandomRemindData {
         this.tempRemindDataList = [];
         this.currentIndex = 0;
         this.remindData = [
-            {content: '将双手放到金属片上测试，\n过程中勿交谈、移动，保持静息状态',},
+            {content: '将双手放到金属片上测试，过程中勿交谈、移动，保持静息状态',},
             {content: 'P波由心房除极所产生，是每一波中的第一波，前半部分代表右房，后半部分代表左房。故P波异常代表心房问题。',},
             {content: 'QRS波群是心电图心室除极的时间，是心室活动的表现，故QRS异常常见心室问题。',},
             {content: '心房出问题不会马上出人命，但心室会！',},

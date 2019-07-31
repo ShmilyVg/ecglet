@@ -25,7 +25,6 @@ export class ArrhythStateManager {
     }
 
 
-
     isFilterData() {
         return this._page.data.isFilterArrhythData;
     }
@@ -73,17 +72,18 @@ export class ArrhythStateManager {
         clearInterval(this.remindIntervalIndex);
         this._page.setData({
             isGuider: true,
-            isConnectedTimeout: false,
+            isConnectedTimeout: true,
             isFilterArrhythData: false
         })
     }
 
 
-
 }
+
 export function getCircleRadius() {
     return radius;
 }
+
 function showCanvasView(page, startCountFun) {
     let that = page;
 

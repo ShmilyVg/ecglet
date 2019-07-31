@@ -59,11 +59,14 @@ Component({
             };
         },
         attached() {
+            console.log('opacity-text 链接到页面');
+
             this.isCircly = true;
             this.randomRemindData.random();
             this.remindAnimation();
         },
         detached() {
+            console.log('opacity-text 移除节点');
             this.isCircly = false;
             this.randomRemindData = null;
         }
