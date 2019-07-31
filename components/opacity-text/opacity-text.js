@@ -3,7 +3,8 @@ import {RandomRemindData} from "../../utils/tips";
 Component({
 
     data: {
-
+        tipAnimationData: {},
+        tip: ''
     },
 
 
@@ -31,10 +32,9 @@ Component({
                         tipAnimationData: this.animation.export()
                     }, () => {
                         setTimeout(() => {
-                            console.log('开始重复');
+                            console.log('开始重复', this);
                             // !!this.data.countTimer && this.remindAnimationAlways({showFun, hiddenFun});
-                            //TODO 待修改
-                            this.remindAnimationAlways({showFun, hiddenFun});
+                            this.isCircly && this.remindAnimationAlways({showFun, hiddenFun});
                         }, this.hiddenOptions.delay + this.hiddenOptions.duration);
                     });
                 }, this.showOptions.delay + this.showOptions.duration);
@@ -59,8 +59,13 @@ Component({
             };
         },
         attached() {
+            this.isCircly = true;
             this.randomRemindData.random();
             this.remindAnimation();
+        },
+        detached() {
+            this.isCircly = false;
+            this.randomRemindData = null;
         }
     },
 });

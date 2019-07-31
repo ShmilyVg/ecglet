@@ -28,8 +28,6 @@ Page({
     data: {
         items: [{title: '- 手握式 -', path: 'sws'}, {title: '- 贴胸式 -', path: 'txs'}],
         bleStatus: '',
-        canvasHeight: 0,
-        canvasWidth: 0,
         windowHeight: 0,
         logs: [],
         deviceList: [],
