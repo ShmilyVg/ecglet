@@ -20,9 +20,11 @@ Component({
     },
     methods: {
 
-        show({title = '', content = '', confirmEvent, confirmText, confirmTextColor, cancelEvent, cancelText, cancelTextColor, showCancel}) {
-            this.setData({title, content, confirmText, confirmTextColor, cancelText, cancelTextColor, showCancel,
-                showDialog: true});
+        show({title = '', content = '', confirmEvent, confirmText = '确定', confirmTextColor, cancelEvent, cancelText = '取消', cancelTextColor, showCancel = false}) {
+            this.setData({
+                title, content, confirmText, cancelText, showCancel,
+                showDialog: true
+            });
         },
 
         _confirmEvent() {
