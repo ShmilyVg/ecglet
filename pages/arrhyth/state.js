@@ -95,9 +95,9 @@ function showCanvasView(page, startCountFun) {
         console.log("ECG box rect: %o}", rect)
         // let ecg: any = that.data.ecgPannel
         // ecg.preparePannel(rect.width, rect.height)
-        setTimeout(() => {
-            that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
-        }, 300);
+        that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
+        that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
+        that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
         setTimeout(() => {
             startCountFun && startCountFun();
             that.startCount();
