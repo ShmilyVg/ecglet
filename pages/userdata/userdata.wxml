@@ -47,7 +47,7 @@
         <view class="cell-line-hpe"></view>
         <view class="weui-cell_input cell-hpe">
             <view class="weui-cell__hd">
-                <view class="weui-label cell-title">身高（cm)</view>
+                <view class="weui-label cell-title">身高(cm)</view>
             </view>
             <view class="weui-cell__bd">
                 <input class="weui-input cell-content" placeholder="请输入身高" type="number" value="{{height}}" type="number" maxlength="3" bindinput="onHeightChange"/>
@@ -56,7 +56,7 @@
         <view class="cell-line-hpe"></view>
         <view class="weui-cell_input cell-hpe">
             <view class="weui-cell__hd">
-                <view class="weui-label cell-title">体重（kg）</view>
+                <view class="weui-label cell-title">体重(kg)</view>
             </view>
             <view class="weui-cell__bd">
                 <input class="weui-input cell-content" placeholder="请输入体重" type="number" value="{{weight}}" type="number" maxlength="4" bindinput="onWeightChange"/>
