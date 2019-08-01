@@ -131,10 +131,13 @@ Page({
                     let members = that.data.members;
                     let id = members[index].id;
                     Protocol.memberRelevanceDel({id}).then(() => {
+                        if (id == getApp().globalData.currentMember.id) {
+                            getApp().globalData.currentMember = {};
+                        }
                         members.splice(index, 1);
                         that.setData({
                             members: members
-                        })
+                        });
                     });
                 } else if (res.cancel) {
                     console.log('用户点击取消')
