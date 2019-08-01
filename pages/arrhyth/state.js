@@ -67,6 +67,7 @@ export class ArrhythStateManager {
     connectedFailed() {
         clearTimeout(this.connectedStateIndex);
         clearInterval(this.remindIntervalIndex);
+        this._page.onConnectedFailedReason();
         this._page.setData({
             isGuider: true,
             isConnectedTimeout: true,
