@@ -1,5 +1,3 @@
-import WXDialog from "../../utils/dialog";
-
 const WAIT_TIME = 5000, radius = 80;
 
 export class ArrhythStateManager {
@@ -10,13 +8,12 @@ export class ArrhythStateManager {
             this.guider();
         };
         this._page.onConnectedFailedReason = () => {
-            WXDialog.showDialog({
-                title: '连接不上?', content:
+            const remindDialog = this._page.selectComponent('#myDialog');
+            remindDialog.show({title:'连接不上?',content:
                     '1、请检查网络状态和蓝牙是否开启 ；\n' +
                     '2、 确认心电仪的蓝色指示灯是否亮起；\n' +
                     '3、将手机尽可能靠近心电仪；\n' +
-                    '4、清理小程序后台进程，再进一遍看看是否能够重连；'
-            })
+                    '4、清理小程序后台进程，再进一遍看看\n是否能够重连；'})
 
         };
         this.connectedStateIndex = -1;

@@ -75,7 +75,7 @@
 
 
 </view>
-
+<dialog id="myDialog"></dialog>
 
 <!-- <i-toast id="toast" /> -->
 

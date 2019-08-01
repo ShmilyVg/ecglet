@@ -473,6 +473,7 @@ Page({
     },
 
     onReady() {
+
         // // TODO 将来删掉
         // let that = this;
         // setTimeout(() => {

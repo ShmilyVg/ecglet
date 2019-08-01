@@ -1,0 +1,5 @@
+<modal hidden="{{!showDialog}}" title="{{title}}" no-cancel="{{!showCancel}}" confirm-text="{{confirmText}}" cancel-text="{{cancelText}}"  height='40%' bindcancel="_cancelEvent" bindconfirm='_confirmEvent'>
+    <view class="flex-row align-items-center justify-center">
+        <text>{{content}}</text>
+    </view>
+</modal>

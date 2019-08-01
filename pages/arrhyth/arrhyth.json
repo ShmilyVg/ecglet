@@ -3,7 +3,8 @@
   "usingComponents": {
     "circle": "../../components/circle/circle",
     "ecg": "../../components/ecg/ecg",
-    "opacity-text": "../../components/opacity-text/opacity-text"
+    "opacity-text": "../../components/opacity-text/opacity-text",
+    "dialog": "../../components/dialog/dialog"
   },
    "backgroundColor": "#f2f2f2"
 }
