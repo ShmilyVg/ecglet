@@ -21,8 +21,8 @@
 }
 
 .new-user-edit-top-layout{
-  padding: 47rpx 40rpx 64rpx 52rpx;
-  background-color: transparent;
+  padding: 47rpx 40rpx 144rpx 52rpx;
+  background-color: #3a93ef;
 }
 
 .avatar{
@@ -71,5 +71,5 @@
 
 
 page {
-  background-color: #3a93ef;
+  background-color: white;
 }
