@@ -1,4 +1,4 @@
-<view class="flex-column fill-width fill-height absolute">
+<view class="flex-column fill-width fill-height">
     <view class="fill-width flex-row align-items-center space-between box-sizing-border-box new-user-edit-top-layout">
         <view class="flex-column">
             <view class="new-user-edit-remind">首先，</view>
