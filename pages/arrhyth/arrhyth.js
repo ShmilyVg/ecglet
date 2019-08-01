@@ -173,6 +173,7 @@ Page({
                 console.log('始终亮屏成功', res);
             }, fail: res => {
                 console.error('始终亮屏失败', res);
+                wx.setKeepScreenOn({keepScreenOn: true});
             }
         });
 
@@ -374,6 +375,7 @@ Page({
                     console.log('可以息屏成功', res);
                 }, fail: res => {
                     console.error('可以息屏失败', res);
+                    wx.setKeepScreenOn({keepScreenOn: false});
                 }
             });
 
