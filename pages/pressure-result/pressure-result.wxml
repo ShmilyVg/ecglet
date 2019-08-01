@@ -1,7 +1,6 @@
 <import src="../../components/result-top/index.wxml"></import>
 <import src="../../components/result-bottom/index.wxml"></import>
 <view class="flex-column align-items-center" style="padding-bottom: 50rpx;">
-    <!--    <view class="share">分享给亲友</view>-->
     <view class="fill-width flex-column align-items-center pressure-result-top-layout">
         <view class="fill-width flex-column align-items-center pressure-result-title-bg">
             <view class="title">心脏负荷检测结果报告</view>
@@ -11,7 +10,7 @@
     </view>
 
 
-    <view class="fill-width flex-row pressure-result-title align-items-center">
+    <view class="fill-width flex-row box-sizing-border-box pressure-result-title align-items-center">
         <view class="">心脏压力指数</view>
         <view style="padding: 20rpx 20rpx;" bindtap="lookReasonDialog" class="flex-row align-items-center">
             <image style="width: 36rpx;height: 36rpx;" src="../../images/pressure-result/question.png"></image>
@@ -29,7 +28,7 @@
 
         <view wx:for="{{stress.content}}" wx:key="index" class="pressure-score-content">{{item}}</view>
     </view>
-    <view class="fill-width flex-column pressure-result-title">
+    <view class="fill-width flex-column box-sizing-border-box pressure-result-title">
         <view>疲劳程度</view>
         <view class="pressure-result-subtitle">与人的压力和能量储备相关，反映了您当前身体的疲劳程度</view>
     </view>
@@ -42,7 +41,7 @@
         <view class="pressure-score-content">{{tired.content}}</view>
     </view>
 
-    <view class="fill-width flex-column pressure-result-title">
+    <view class="fill-width flex-column box-sizing-border-box pressure-result-title">
         <view>兴奋指数</view>
         <view class="pressure-result-subtitle">反映您的整体健康状况和精神状态，数值越小表示神经越放松，越大表示神经越兴奋</view>
     </view>
