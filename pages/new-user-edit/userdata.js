@@ -42,7 +42,7 @@ Page({
                 height: res.userInfo.height,
                 weight: res.userInfo.weight,
                 portraitUrl: res.userInfo.portraitUrl,
-                isPhoneNotAuth: this.isPhoneNotAuth()
+                isPhoneNotAuth: !res.userInfo.phone
             })
         })
     },
