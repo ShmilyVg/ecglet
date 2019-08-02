@@ -142,8 +142,9 @@ export class MyUsed {
 export function reLoginWithoutLogin() {
     const app = getApp();
     const {query} = app.globalData.options;
-    if (query.withoutLogin) {
+    if (query.withoutLogin || query.isGetUserInfo) {
         query.withoutLogin = false;
+        query.isGetUserInfo = 0;
         app.doLogin();
     }
 }
