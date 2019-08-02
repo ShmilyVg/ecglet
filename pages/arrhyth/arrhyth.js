@@ -471,12 +471,10 @@ Page({
         //     that.waveData = undefined
         //
         //     // 计时开始
-        //     if (!that.data.countTimer) {
         //         this.arrhythStateManager.prepare();
         //         // setTimeout(() => {
         //         //     that.startCount();
         //         // });
-        //     }
         // }, 1000);
     },
 
