@@ -19,6 +19,7 @@
 .code{
   display: block;
   width: 490rpx;
+  height: 490rpx;
   margin: 0 auto;
 }
 .main-footer{
