@@ -1,6 +1,9 @@
+import {PostUrl} from "../../utils/config";
 
 Page({
-    data: {},
+    data: {
+        postUrl: PostUrl
+    },
 
     onLoad() {
     }
