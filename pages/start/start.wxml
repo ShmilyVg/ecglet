@@ -1,7 +1,7 @@
 <view class="flex-column box-sizing-border-box" style="padding: 80rpx 50rpx;">
     <view class="flex-row align-items-center">
-        <image wx:if="{{userInfo.portraitUrl}}" class="user-head" src="{{userInfo.portraitUrl}}"></image>
-        <image wx:else class="user-head" src="../../images/user.png"></image>
+        <image wx:if="{{userInfo.portraitUrl}}" mode="aspectFill" class="user-head" src="{{userInfo.portraitUrl}}"></image>
+        <image wx:else class="user-head" mode="aspectFill" src="../../images/user.png"></image>
         <view class="user-name">{{name}}</view>
     </view>
 

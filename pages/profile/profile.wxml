@@ -3,8 +3,7 @@
         <view class="top-image">
             <view class="flex-row" style="width: 100%;justify-content: space-between">
                 <view class="flex-row align-items-center" style="margin-top: 48rpx;margin-left: 40rpx">
-                    <image wx:if="{{userInfo.portraitUrl}}" src="{{userInfo.portraitUrl}}" class="avatar"></image>
-                    <image wx:else src="../../images/user.png" class="avatar"></image>
+                    <image mode="aspectFill" src="{{userInfo.portraitUrl||'../../images/user.png'}}" class="avatar"></image>
                 </view>
                 <view class="box-sizing-border-box shouquan">
                     <view style="display: flex;flex-direction: column">
