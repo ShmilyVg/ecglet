@@ -4,7 +4,7 @@
 <block wx:if="{{isFollow}}">
     <view class="top-view flex-row">
         <view class="flex-row" style="align-items: center;">
-            <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
+            <image class="avatar" mode="aspectFill" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
             <view class="name">{{userInfo.nickName||userInfo.name}}</view>
         </view>
         <view class="follow" bindtap="noFollow">不再关注</view>

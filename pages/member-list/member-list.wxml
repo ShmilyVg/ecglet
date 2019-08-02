@@ -6,7 +6,7 @@
     </block>
     <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" data-index="{{index}}" bindtap="clickCell">
         <view class="flex-row">
-            <image class="avatar" src="{{item.portraitUrl?item.portraitUrl:'../../images/avatar.png'}}"></image>
+            <image class="avatar" mode="aspectFill" src="{{item.portraitUrl?item.portraitUrl:'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 25rpx">
                 <view class="name">{{item.shortName}}</view>
                 <view class="flex-row" style="align-items: center;margin-top: 10rpx">

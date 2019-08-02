@@ -1,7 +1,7 @@
 <view class="flex-column" style="margin-bottom: 50rpx;">
     <view class="top-image"></view>
     <view class="avatar-view flex-row" bindtap="chooseImage">
-        <image src="{{portraitUrl?portraitUrl:'../../images/avatar.png'}}" class="avatar"></image>
+        <image mode="aspectFill" src="{{portraitUrl?portraitUrl:'../../images/avatar.png'}}" class="avatar"></image>
     </view>
     <view style="padding-top: 120rpx;margin-top: -120rpx;background-color: white;border-top-left-radius: 80rpx;border-top-right-radius: 80rpx;">
         <view class="weui-cell_input cell-hpe">
