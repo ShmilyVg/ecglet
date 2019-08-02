@@ -2,13 +2,15 @@
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
 import {createDateAndTime} from "../../utils/tools";
+import WXDialog from "../../base/heheda-common-view/dialog";
+import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
 
     data: {
         logs: [],
         page: 1,
-        isFollow: true
+        isFollow: false
     },
     onLoad(options) {
         let memberId = options.memberId;
@@ -16,9 +18,14 @@ Page({
         Protocol.getRelativesInfo({memberId}).then((res) => {
             this.setData({
                 userInfo: res.result,
-                memberId: memberId
+                memberId: memberId,
+                isFollow: true
             });
             this.getList({});
+        }).catch((res) => {
+            if (res.data.code == 0) {
+                console.log('未关注');
+            }
         });
     },
 
@@ -62,8 +69,20 @@ Page({
     },
 
     noFollow() {
-        this.setData({
-            isFollow: false
-        })
+        WXDialog.showDialog({
+            showCancel: true,
+            content: '不再关注后，将无法继续查看对方检测记录，给您的定期推送也将取消', confirmEvent: () => {
+                Protocol.shareRelativesDelRelatives({memberId: this.data.memberId}).then(() => {
+                    this.setData({
+                        isFollow: false
+                    })
+                })
+            }
+        });
+    },
+
+    toResultPage(e) {
+        const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
+        HiNavigator.navigateToResultPageByType({type, dataId})
     }
 })
