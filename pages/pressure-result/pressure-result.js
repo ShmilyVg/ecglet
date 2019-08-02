@@ -3,7 +3,7 @@ import ResultTop from "../../components/result-top/index.js";
 import Canvas from './canvas.js';
 import Protocol from "../../apis/network/protocol";
 import WXDialog from "../../utils/dialog";
-import {reloginWithoutLogin} from "../../utils/tools";
+import {reLoginWithoutLogin} from "../../utils/tools";
 
 
 Page({
@@ -45,7 +45,7 @@ Page({
     },
 
     onUnload() {
-        reloginWithoutLogin();
+        reLoginWithoutLogin();
     },
 
     onLoad(options) {

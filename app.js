@@ -10,6 +10,7 @@ import {initAnalysisOnApp} from "./analysis/mta";
 App({
     onLaunch(options) {
         this.globalData.options = options;
+        console.log(options);
         // 展示本地存储能力
         initAnalysisOnApp();
         wx.onNetworkStatusChange((res) => {
@@ -41,7 +42,11 @@ App({
             if (!wx.getStorageSync('phoneNumber')) {
                 wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
             }
-            if (!phone || !birthday) {
+
+            const {query} = this.globalData.options;
+            if (!!query.isGetUserInfo) {
+                this.onLoginSuccess && this.onLoginSuccess();
+            } else if (!phone || !birthday) {
                 HiNavigator.relaunchToWelcome();
             } else {
                 this.onLoginSuccess && this.onLoginSuccess();
