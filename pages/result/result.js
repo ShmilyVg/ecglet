@@ -1,7 +1,7 @@
 import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
 import Protocol from "../../apis/network/protocol";
-import {reloginWithoutLogin} from "../../utils/tools";
+import {reLoginWithoutLogin} from "../../utils/tools";
 
 Page({
     data: {
@@ -53,7 +53,7 @@ Page({
         // });
     },
     onUnload() {
-        reloginWithoutLogin();
+        reLoginWithoutLogin();
     },
     onShareAppMessage() {
         return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=true&dataId=' + this.dataId};
