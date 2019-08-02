@@ -1,7 +1,7 @@
 <!--pages/share/share.wxml-->
 <import src="../history/view/history-list"></import>
 
-<block wx:if="{{logs.length&&isFollow}}">
+<block wx:if="{{isFollow}}">
     <view class="top-view flex-row">
         <view class="flex-row" style="align-items: center;">
             <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
@@ -9,7 +9,15 @@
         </view>
         <view class="follow" bindtap="noFollow">不再关注</view>
     </view>
-    <template is="history-list" data="{{logs,isShare:true}}"></template>
+    <block wx:if="{{logs.length}}">
+        <template is="history-list" data="{{logs,isShare:true}}"></template>
+    </block>
+    <block wx:else>
+        <view class="none-history flex-column">
+            <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
+            <view class="none-history-hint" style="margin-top: 40rpx"><text>暂无检测记录</text></view>
+        </view>
+    </block>
 </block>
 <block wx:else>
     <view class="none-history flex-column">

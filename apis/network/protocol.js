@@ -5,8 +5,8 @@ import {PostUrl, UploadUrl} from "../../utils/config";
 
 function createFontSize(item) {
     if (!Number.isNaN(parseInt(item.rightContent))) {
-        item.fontSize ='64';
-    }else{
+        item.fontSize = '64';
+    } else {
         item.fontSize = (item.rightContent || '').length < 4 ? '44' : '36';
     }
 }
@@ -186,6 +186,10 @@ export default class Protocol {
 
     static memberRelevanceList({}) {
         return Network.request({url: 'member/relevance/list', data: {}})
+    }
+
+    static shareRelativesDelRelatives({memberId}) {
+        return Network.request({url: 'relatives/delRelatives ', data: {memberId}})
     }
 
     static memberRelevanceUpdate({id, phone, nickName, portraitUrl, birthday, height, weight, sex}) {
