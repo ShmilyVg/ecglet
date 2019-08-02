@@ -87,7 +87,7 @@ Page({
         return {
             title: '',
             imageUrl: '',
-            path: '/pages/pressure-result/pressure-result?withoutLogin=true&dataId=' + this.dataId
+            path: '/pages/pressure-result/pressure-result?withoutLogin=1&dataId=' + this.dataId
         };
     },
     lookReasonDialog() {

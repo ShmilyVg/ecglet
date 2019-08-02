@@ -56,6 +56,6 @@ Page({
         reLoginWithoutLogin();
     },
     onShareAppMessage() {
-        return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=true&dataId=' + this.dataId};
+        return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=1&dataId=' + this.dataId};
     },
 })
