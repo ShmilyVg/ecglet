@@ -128,8 +128,10 @@ Page({
             return;
         }
 
+        let dialogTitle = that.data.isNewMember?'确认添加此成员吗？':'确认修改您的信息吗？';
+
         WXDialog.showDialog({
-            title: '提示', content: '确认修改您的信息吗？', showCancel: true, confirmEvent: () => {
+            title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
                 Toast.showLoading();
                 let birthTime = this.data.birthDate || '';
                 console.log(`birth time: ${birthTime}`);
