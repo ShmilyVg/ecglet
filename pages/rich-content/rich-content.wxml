@@ -3,7 +3,7 @@
     <view class="title">这是谁的检测结果？</view>
     <view class="flex-row" style="width: 660rpx;align-items: center;justify-content: space-between;margin-top: 42rpx">
         <view class="flex-row" style="align-items: center">
-            <image class="avatar" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
+            <image class="avatar" mode="aspectFill" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
             <view class="flex-column" style="margin-left: 16rpx">
                 <view class="name">{{userInfo.shortName}}</view>
                 <view class="flex-row" style="align-items: center">
