@@ -30,9 +30,6 @@ Page({
             console.log('res:', res);
 
             let name = res.userInfo.nickName;
-            if (name.length > 8) {
-                name = name.slice(0, 7) + '…';
-            }
 
             this.setData({
                 name: name,
