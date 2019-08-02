@@ -60,11 +60,8 @@ Page({
     reset() {
         let that = this
 
-        if (that.data.countTimer !== undefined) {
-            clearInterval(that.data.countTimer);
-            that.data.countTimer = undefined;
-            that.data.count = 0;
-        }
+        clearInterval(that.data.countTimer);
+        that.data.count = 0;
 
         if (that.data.progressCircle) {
             let circle = that.data.progressCircle
@@ -137,9 +134,7 @@ Page({
                 that.waveData = undefined
 
                 // 计时开始
-                if (!that.data.countTimer) {
-                    this.arrhythStateManager.prepare();
-                }
+                this.arrhythStateManager.prepare();
             }
         } catch (err) {
             console.log("onDeviceConnected error -- %o", err)
@@ -359,12 +354,7 @@ Page({
 
     onUnload() {
         let that = this
-        console.log('onUnload...', that.data.countTimer);
-        if (that.data.countTimer !== undefined) {
-            clearInterval(that.data.countTimer);
-            that.data.countTimer = undefined;
-            that.data.count = 0;
-        }
+        console.warn('onUnload...', that.data.countTimer);
         try {
             // await wx.hideLoading()
             // that.hideLoading()
@@ -421,10 +411,7 @@ Page({
                 if (that.data.count >= 2 * that.data.maxCount) {
                     that.data.count = 0
                     // that.setData({ txt: '0' })
-                    if (that.data.countTimer) {
-                        clearInterval(that.data.countTimer)
-                        that.data.countTimer = undefined
-                    }
+                    clearInterval(that.data.countTimer);
 
                     that.data.completed = true
                     that.closeBluetooth().then(() => {
@@ -484,12 +471,10 @@ Page({
         //     that.waveData = undefined
         //
         //     // 计时开始
-        //     if (!that.data.countTimer) {
         //         this.arrhythStateManager.prepare();
         //         // setTimeout(() => {
         //         //     that.startCount();
         //         // });
-        //     }
         // }, 1000);
     },
 
