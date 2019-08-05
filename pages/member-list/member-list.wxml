@@ -1,7 +1,7 @@
 <!--pages/member-list/member-list.wxml-->
 <view wx:if="{{members.length}}" class="big-view">
     <block wx:if="{{showTopText}}">
-        <view class="title-0">这是谁的检测记录</view>
+        <view class="title-0">这是谁的检测结果？</view>
         <view class="title-1">点击您要选择的对象</view>
     </block>
     <view class="flex-row" style="margin-top: 73rpx;align-items: center;justify-content: space-between" wx:for="{{members}}" data-index="{{index}}" bindtap="clickCell">
