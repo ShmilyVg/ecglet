@@ -124,7 +124,7 @@ Page({
         }
 
         if (!/^\d+$/.test(this.data.number)) {
-            Toast.showText('手机号非法');
+            Toast.showText('手机号格式错误');
             return;
         }
 
