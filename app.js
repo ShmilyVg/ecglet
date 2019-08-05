@@ -33,6 +33,7 @@ App({
     },
 
     doLogin() {
+        console.log('doLogin');
         Login.doLogin().then((data) => {
             return UserInfo.get();
         }).then((res) => {
@@ -60,7 +61,7 @@ App({
     },
 
     globalData: {
-        options: {query:{withoutLogin: false}},//无需登录即可使用？
+        options: {query: {withoutLogin: false}},//无需登录即可使用？
         userInfo: {},
         tempGatherResult: {},
         isConnected: true,

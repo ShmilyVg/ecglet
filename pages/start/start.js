@@ -14,6 +14,9 @@ Page({
     },
 
     onLoad(param) {
+        if (param.onLoginSuccess){
+            this.setData({haveAuthorize: true});
+        }
         const isFirstUsed = MyUsed.isFirstUsed();
 
         if (isFirstUsed) {
