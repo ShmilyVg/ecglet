@@ -10,21 +10,27 @@ Page({
     data: {
         logs: [],
         page: 1,
-        isFollow: false
+        isFollow: false,
+        isFinish: false
     },
     onLoad(options) {
+        this.globalData.options = options;
         let memberId = options.memberId;
         console.log('家人id：', memberId);
         Protocol.getRelativesInfo({memberId}).then((res) => {
             this.setData({
                 userInfo: res.result,
                 memberId: memberId,
-                isFollow: true
+                isFollow: true,
+                isFinish: true
             });
             this.getList({});
         }).catch((res) => {
             if (res.data.code == 0) {
                 console.log('未关注');
+                this.setData({
+                    isFinish: true
+                })
             }
         });
     },
