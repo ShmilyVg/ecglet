@@ -1,0 +1,107 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"enhance": true,
+		"coverView": true,
+		"checkSiteMap": false,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.7",
+	"appid": "wx2397b8a167812462",
+	"projectname": "ecglet",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/pressure-result/pressure-result",
+					"pathName": "pages/pressure-result/pressure-result",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/rich-content/rich-content",
+					"pathName": "pages/rich-content/rich-content",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/new-user-edit/userdata",
+					"pathName": "pages/new-user-edit/userdata",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/userdata/userdata",
+					"pathName": "pages/userdata/userdata",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/result/result",
+					"pathName": "pages/result/result",
+					"query": "dataId=51",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/pressure-result/pressure-result",
+					"pathName": "pages/pressure-result/pressure-result",
+					"query": "dataId=52",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/arrhyth/arrhyth",
+					"pathName": "pages/arrhyth/arrhyth",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
