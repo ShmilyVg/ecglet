@@ -1,5 +1,5 @@
 // pages/welcome/welcome.js
-import {dealAuthUserInfo} from "../../utils/tools";
+import {dealAuthUserInfo, MyUsed} from "../../utils/tools";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import Toast from "../../utils/toast";
 
@@ -17,6 +17,11 @@ Page({
                 path: 'item2'
             }, {title: '医院专业报告', content: '三甲医院信息中心，线上输出报告', path: 'item3'},]
     },
+
+    onShow (){
+        MyUsed.initUsed();
+    },
+
     onClick() {
         console.log('onClick');
         Toast.showLoading();
