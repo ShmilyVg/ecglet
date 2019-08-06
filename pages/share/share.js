@@ -14,7 +14,7 @@ Page({
         isFinish: false
     },
     onLoad(options) {
-        getApp().globalData.options = options;
+        getApp().globalData.options.query = options;
         let memberId = options.memberId;
         console.log('家人id：', memberId);
         Protocol.getRelativesInfo({memberId}).then((res) => {

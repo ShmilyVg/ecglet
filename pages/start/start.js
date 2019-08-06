@@ -10,11 +10,13 @@ Page({
     data: {
         userInfo: {},
         isConnected: true,
-        isFirstUsed: true
+        isFirstUsed: true,
+        haveAuthorize: false
     },
 
     onLoad(param) {
-        if (param.onLoginSuccess){
+        let that = this;
+        if (param.onLoginSuccess) {
             this.setData({haveAuthorize: true});
         }
         const isFirstUsed = MyUsed.isFirstUsed();
@@ -28,7 +30,10 @@ Page({
             this.setData({isFirstUsed: false, tip: tip.getRemindData()});
         }
         getApp().onLoginSuccess = () => {
-            this.setData({haveAuthorize: true});
+            console.log('startOnLoginSuccess');
+            that.setData({
+                haveAuthorize: true
+            })
         };
     },
 
