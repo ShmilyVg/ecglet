@@ -32,11 +32,11 @@ export default {
       if(c<100){
         that.data.ctx2.fillText(c, w - 10, h);
         that.data.ctx2.setFontSize(15);
-        that.data.ctx2.fillText("分", w + 20, h + 10);
+        that.data.ctx2.fillText("分", w + 20, h + 7);
       }else{
         that.data.ctx2.fillText(c, w - 10, h);
         that.data.ctx2.setFontSize(15);
-        that.data.ctx2.fillText("分", w + 30, h + 10);
+        that.data.ctx2.fillText("分", w + 30, h + 7);
       }
 
       that.data.ctx2.draw();
