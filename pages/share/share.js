@@ -13,6 +13,7 @@ Page({
         isFollow: false,
         isFinish: false
     },
+
     onLoad(options) {
         getApp().globalData.options.query = options;
         let memberId = options.memberId;
@@ -32,6 +33,10 @@ Page({
                 })
             }
         });
+    },
+
+    onShow() {
+        getApp().globalData.options.query.isGetUserInfo = 1;
     },
 
     onPullDownRefresh() {
@@ -93,6 +98,11 @@ Page({
 
     toResultPage(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
-        HiNavigator.navigateToResultPageByType({type, dataId})
+        // HiNavigator.navigateToResultPageByType({type, dataId});
+        if (type == 2) {
+            wx.navigateTo({url: '/pages/pressure-result/pressure-result?dataId=' + dataId+'&isGetUserInfo=1'});
+        } else {
+            wx.navigateTo({url: '/pages/result/result?dataId=' + dataId+'&isGetUserInfo=1'});
+        }
     }
 })
