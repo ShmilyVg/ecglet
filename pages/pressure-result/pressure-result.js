@@ -49,6 +49,7 @@ Page({
     },
 
     onLoad(options) {
+        getApp().globalData.options.query = options;
         //等级 1——7.5%；2——31%； 3——56%；4——80%；
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
