@@ -14,7 +14,7 @@ Page({
         isFinish: false
     },
     onLoad(options) {
-        this.globalData.options = options;
+        getApp().globalData.options = options;
         let memberId = options.memberId;
         console.log('家人id：', memberId);
         Protocol.getRelativesInfo({memberId}).then((res) => {
@@ -22,7 +22,6 @@ Page({
                 userInfo: res.result,
                 memberId: memberId,
                 isFollow: true,
-                isFinish: true
             });
             this.getList({});
         }).catch((res) => {
@@ -65,7 +64,8 @@ Page({
                     this.data.page = 1;
                 }
                 this.setData({
-                    logs: list
+                    logs: list,
+                    isFinish: true
                 })
             }
         }).finally(() => {
