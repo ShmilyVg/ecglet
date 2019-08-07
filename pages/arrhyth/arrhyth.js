@@ -465,20 +465,17 @@ Page({
     },
 
     onReady() {
-        // // TODO 将来删掉
-        // let that = this;
-        // setTimeout(() => {
-        //     that.hideLoading()
-        //
-        //     // 每次重新连接，采集数据缓存清空一次
-        //     that.waveData = undefined
-        //
-        //     // 计时开始
-        //         this.arrhythStateManager.prepare();
-        //         // setTimeout(() => {
-        //         //     that.startCount();
-        //         // });
-        // }, 1000);
+        // TODO 将来删掉
+        let that = this;
+        setTimeout(() => {
+            that.hideLoading()
+
+            // 每次重新连接，采集数据缓存清空一次
+            that.waveData = undefined
+
+            // 计时开始
+                this.arrhythStateManager.prepare();
+        }, 1000);
     },
 
     closeBluetooth() {

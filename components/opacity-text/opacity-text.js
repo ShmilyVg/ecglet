@@ -46,13 +46,13 @@ Component({
             this.animation = wx.createAnimation();
             this.randomRemindData = new RandomRemindData();
             this.showOptions = {
-                duration: 500,
+                duration: 600,
                 timingFunction: 'linear',
-                delay: 300,
+                delay: 0,
                 transformOrigin: '50% 50% 0'
             };
             this.hiddenOptions = {
-                duration: 500,
+                duration: 800,
                 timingFunction: 'linear',
                 delay: 6000,
                 transformOrigin: '50% 50% 0'
