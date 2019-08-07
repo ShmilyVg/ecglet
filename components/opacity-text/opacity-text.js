@@ -3,8 +3,8 @@ import {RandomRemindData} from "../../utils/tips";
 Component({
 
     data: {
-        tipAnimationData: {},
-        tip: ''
+        tip: '',
+        opacity: 1
     },
 
 
@@ -13,9 +13,9 @@ Component({
         remindAnimation() {
             this.remindAnimationAlways({
                 showFun: () => {
-                    this.animation.opacity(1).step(this.showOptions);
+                    this.setData({opacity: 1});
                 }, hiddenFun: () => {
-                    this.animation.opacity(0).step(this.hiddenOptions);
+                    this.setData({opacity: 0});
                 }
             })
         },
@@ -24,37 +24,32 @@ Component({
             showFun();
             this.setData({
                 tip: this.randomRemindData.getRemindData(),
-                tipAnimationData: this.animation.export()
+                // tipAnimationData: this.animation.export()
             }, () => {
                 setTimeout(() => {
                     hiddenFun();
-                    this.setData({
-                        tipAnimationData: this.animation.export()
-                    }, () => {
-                        setTimeout(() => {
-                            console.log('开始重复', this);
-                            // !!this.data.countTimer && this.remindAnimationAlways({showFun, hiddenFun});
-                            this.isCircly && this.remindAnimationAlways({showFun, hiddenFun});
-                        }, this.hiddenOptions.delay + this.hiddenOptions.duration);
-                    });
+                    setTimeout(() => {
+                        console.log('开始重复', this);
+                        // !!this.data.countTimer && this.remindAnimationAlways({showFun, hiddenFun});
+                        this.isCircly && this.remindAnimationAlways({showFun, hiddenFun});
+                    }, this.hiddenOptions.delay + this.hiddenOptions.duration);
                 }, this.showOptions.delay + this.showOptions.duration);
             });
         }
     },
     lifetimes:{
         created() {
-            this.animation = wx.createAnimation();
             this.randomRemindData = new RandomRemindData();
             this.showOptions = {
-                duration: 600,
-                timingFunction: 'linear',
-                delay: 0,
-                transformOrigin: '50% 50% 0'
-            };
-            this.hiddenOptions = {
                 duration: 800,
                 timingFunction: 'linear',
                 delay: 6000,
+                transformOrigin: '50% 50% 0'
+            };
+            this.hiddenOptions = {
+                duration: 1000,
+                timingFunction: 'linear',
+                delay: 0,
                 transformOrigin: '50% 50% 0'
             };
         },

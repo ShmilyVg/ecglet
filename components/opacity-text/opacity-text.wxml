@@ -1,1 +1,1 @@
-<text class="arrhyth-tip" animation="{{tipAnimationData}}">{{tip}}</text>
+<text class="arrhyth-tip" style="opacity: {{opacity}}">{{tip}}</text>
