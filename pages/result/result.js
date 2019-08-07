@@ -54,7 +54,6 @@ Page({
         // });
     },
     onUnload() {
-        reLoginWithoutLogin();
     },
     onShareAppMessage() {
         return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=1&dataId=' + this.dataId};

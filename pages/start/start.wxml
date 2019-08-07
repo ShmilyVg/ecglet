@@ -1,4 +1,4 @@
-<view wx:if="{{haveAuthorize}}" class="flex-column box-sizing-border-box" style="padding: 80rpx 50rpx;">
+<view class="flex-column box-sizing-border-box" style="padding: 80rpx 50rpx;">
     <view class="flex-row align-items-center">
         <image wx:if="{{userInfo.portraitUrl}}" mode="aspectFill" class="user-head" src="{{userInfo.portraitUrl}}"></image>
         <image wx:else class="user-head" mode="aspectFill" src="../../images/user.png"></image>

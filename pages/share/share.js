@@ -1,9 +1,8 @@
 // pages/share/share.js
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
-import {createDateAndTime, reLoginWithoutLogin} from "../../utils/tools";
+import {createDateAndTime} from "../../utils/tools";
 import WXDialog from "../../base/heheda-common-view/dialog";
-import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
 
@@ -93,7 +92,6 @@ Page({
     },
 
     onUnload() {
-        reLoginWithoutLogin();
     },
 
     toResultPage(e) {

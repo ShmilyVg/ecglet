@@ -2,7 +2,6 @@ import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
 import Canvas from './canvas.js';
 import Protocol from "../../apis/network/protocol";
-import {reLoginWithoutLogin} from "../../utils/tools";
 
 
 Page({
@@ -45,7 +44,6 @@ Page({
     },
 
     onUnload() {
-        reLoginWithoutLogin();
     },
 
     onLoad(options) {
