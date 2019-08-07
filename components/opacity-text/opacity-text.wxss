@@ -7,10 +7,10 @@
     font-weight:500;
     color:rgba(193,224,255,1);
     text-align: center;
-    -webkit-transition: opacity 0.8s;
-    -moz-transition: opacity 0.8s;
-    -ms-transition: opacity 0.8s;
-    -o-transition: opacity 0.8s;
-    transition: opacity 0.8s;
+    -webkit-transition: opacity 0.8s linear;
+    -moz-transition: opacity 0.8s linear;
+    -ms-transition: opacity 0.8s linear;
+    -o-transition: opacity 0.8s linear;
+    transition: opacity 0.8s linear;
 }
 
