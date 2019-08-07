@@ -5,14 +5,15 @@ export default {
   data: {
     percentage: '', //百分比
     animTime: '', // 动画执行时间
+    rpx: 2
   },
   options: {
     // 绘制圆形进度条方法
     run(c, w, h) {
       let that = this;
       //Math.PI 180
-      const num = (2 * Math.PI / 100 * c) - 0.5 * Math.PI,lineWidth = 9;
-      that.data.ctx2.arc(w, h, w - 4, -0.5 * Math.PI, num); //每个间隔绘制的弧度
+      const num = (2 * Math.PI / 100 * c) - 0.5 * Math.PI, px = this.data.rpx, lineWidth = 9 * px;
+      that.data.ctx2.arc(w+0.1, h, w - 5 * px, -0.5 * Math.PI, num); //每个间隔绘制的弧度
       //that.data.ctx2.setStrokeStyle("#00c6bc");
       //颜色渐变 XY
       var gradient = that.data.ctx2.createLinearGradient(0, 170);
@@ -66,6 +67,7 @@ export default {
     draw: function (id, percent, animTime) {
       var that = this;
       const ctx2 = wx.createCanvasContext(id);
+      this.data.rpx = wx.getSystemInfoSync().windowWidth / 375;
       that.setData({
         ctx2: ctx2,
         percentage: percent,

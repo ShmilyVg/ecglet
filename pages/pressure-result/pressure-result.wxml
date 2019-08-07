@@ -19,8 +19,8 @@
 
     <view class='flex-column align-items-center table-02 table-02-bg'>
         <view class="canvasBox">
-            <view class='outerCircle'></view>
-            <view class='coreCircle'></view>
+<!--            <view class='outerCircle'></view>-->
+<!--            <view class='coreCircle'></view>-->
             <canvas style="display: {{showScore?'block':'none'}};" canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
 
         </view>
