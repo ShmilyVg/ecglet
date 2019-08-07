@@ -23,7 +23,7 @@ ArrayBuffer.prototype.concat = function (b2) {
     tmp.set(new Uint8Array(b2), this.byteLength);
     return tmp.buffer;
 };
-
+const app = getApp();
 Page({
     data: {
         items: [{title: '- 手握式 -', path: 'sws'}, {title: '- 贴胸式 -', path: 'txs'}],
@@ -61,6 +61,7 @@ Page({
         let that = this
 
         clearInterval(that.data.countTimer);
+        clearInterval(app.globalData.countTimer);
         that.data.count = 0;
 
         if (that.data.progressCircle) {
@@ -355,6 +356,7 @@ Page({
     onUnload() {
         let that = this
         console.warn('onUnload...', that.data.countTimer);
+        clearInterval(app.globalData.countTimer);
         try {
             // await wx.hideLoading()
             // that.hideLoading()
@@ -422,7 +424,8 @@ Page({
 
                 }
             }
-        }, 1000)
+        }, 1000);
+        app.globalData.countTimer = that.data.countTimer;
     },
     onShow() {
         console.log('onShow... isStartBLEDevices', this.isStartBLEDevices)
