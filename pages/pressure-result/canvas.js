@@ -70,14 +70,19 @@ export default {
         ctx2: ctx2,
         percentage: percent,
         animTime: animTime
+      }, () => {
+          var time = that.data.animTime / that.data.percentage + 10;
+          console.log(time)
+          setTimeout(() => {
+              wx.createSelectorQuery().select('#' + id).boundingClientRect(function (rect) { //监听canvas的宽高
+                  var w = parseInt(rect.width / 2); //获取canvas宽的的一半
+                  var h = parseInt(rect.height / 2); //获取canvas高的一半，
+                  that.canvasTap(0, that.data.percentage, time, w, h)
+              }).exec();
+          }, 100);
+
       });
-      var time = that.data.animTime / that.data.percentage+10;
-      console.log(time)
-      wx.createSelectorQuery().select('#' + id).boundingClientRect(function (rect) { //监听canvas的宽高
-        var w = parseInt(rect.width / 2); //获取canvas宽的的一半
-        var h = parseInt(rect.height / 2); //获取canvas高的一半，
-        that.canvasTap(0, that.data.percentage, time, w, h)
-      }).exec();
+
     },
   }
 }

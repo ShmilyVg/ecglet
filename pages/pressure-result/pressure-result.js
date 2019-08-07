@@ -53,23 +53,7 @@ Page({
         //等级 1——7.5%；2——31%； 3——56%；4——80%；
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
-        Protocol.getCardiac({id: options.dataId}).then(data => {
-            const {dataList: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}, userInfo} = data;
 
-            this.setData({
-                userInfo,
-                isAbNormal,
-                time: this.getTime(parseInt(time)), pdfUrl, stress, tired: {
-                    ...tired,
-                    position: this.getImagePosition(tired.level)
-                }, emotion: {
-                    ...emotion,
-                    position: this.getImagePosition(emotion.level)
-                }
-            });
-            this.resultTop.showItems({items});
-            this.draw('runCanvas', stress.score, 100);
-        });
 
 
         // const result = getApp().globalData.tempGatherResult;
@@ -86,6 +70,25 @@ Page({
         // });
     },
 
+    onReady() {
+        Protocol.getCardiac({id: this.dataId}).then(data => {
+            const {dataList: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}, userInfo} = data;
+
+            this.setData({
+                userInfo,
+                isAbNormal,
+                time: this.getTime(parseInt(time)), pdfUrl, stress, tired: {
+                    ...tired,
+                    position: this.getImagePosition(tired.level)
+                }, emotion: {
+                    ...emotion,
+                    position: this.getImagePosition(emotion.level)
+                }
+            });
+            this.resultTop.showItems({items});
+            this.draw('runCanvas', stress.score, 100);
+        });
+    },
     onShareAppMessage() {
         return {
             title: '',

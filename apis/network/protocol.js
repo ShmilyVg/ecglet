@@ -255,6 +255,7 @@ export default class Protocol {
         return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true}).then(data => {
             let isAbNormal = false;
             const {result: {dataList, userInfo}} = data;
+            dataList.stress.score = '24';
             dataList.list.forEach(item => {
                 if (!isAbNormal) {
                     isAbNormal = parseInt(item.status) === 0;
