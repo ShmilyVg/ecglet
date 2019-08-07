@@ -1,6 +1,7 @@
 <!--pages/share/share.wxml-->
 <import src="../history/view/history-list"></import>
 
+<block wx:if="{{isFinish}}">
 <block wx:if="{{isFollow}}">
     <view class="top-view flex-row">
         <view class="flex-row" style="align-items: center;">
@@ -24,4 +25,5 @@
         <view class="none-history-pic"><cover-image src="../../images/history/history.png" alt=""/></view>
         <view class="none-history-hint" style="margin-top: 40rpx"><text>如需查看对方心电检测记录\n请重新扫码</text></view>
     </view>
+</block>
 </block>

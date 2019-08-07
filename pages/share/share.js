@@ -10,23 +10,33 @@ Page({
     data: {
         logs: [],
         page: 1,
-        isFollow: false
+        isFollow: false,
+        isFinish: false
     },
+
     onLoad(options) {
+        getApp().globalData.options.query = options;
         let memberId = options.memberId;
         console.log('家人id：', memberId);
         Protocol.getRelativesInfo({memberId}).then((res) => {
             this.setData({
                 userInfo: res.result,
                 memberId: memberId,
-                isFollow: true
+                isFollow: true,
             });
             this.getList({});
         }).catch((res) => {
             if (res.data.code == 0) {
                 console.log('未关注');
+                this.setData({
+                    isFinish: true
+                })
             }
         });
+    },
+
+    onShow() {
+        getApp().globalData.options.query.isGetUserInfo = 1;
     },
 
     onPullDownRefresh() {
@@ -59,7 +69,8 @@ Page({
                     this.data.page = 1;
                 }
                 this.setData({
-                    logs: list
+                    logs: list,
+                    isFinish: true
                 })
             }
         }).finally(() => {
@@ -87,6 +98,11 @@ Page({
 
     toResultPage(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
-        HiNavigator.navigateToResultPageByType({type, dataId})
+        // HiNavigator.navigateToResultPageByType({type, dataId});
+        if (type == 2) {
+            wx.navigateTo({url: '/pages/pressure-result/pressure-result?dataId=' + dataId+'&isGetUserInfo=1'});
+        } else {
+            wx.navigateTo({url: '/pages/result/result?dataId=' + dataId+'&isGetUserInfo=1'});
+        }
     }
 })

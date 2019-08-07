@@ -123,12 +123,17 @@ Page({
             return;
         }
 
+        if (!/^\d+$/.test(this.data.number)) {
+            Toast.showText('手机号格式错误');
+            return;
+        }
+
         if (this.data.birthDate === '请选择出生日期' || this.data.birthDate === "") {
             Toast.showText('请选择出生日期');
             return;
         }
 
-        let dialogTitle = that.data.isNewMember?'确认添加此成员吗？':'确认修改您的信息吗？';
+        let dialogTitle = that.data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
 
         WXDialog.showDialog({
             title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {

@@ -27,6 +27,7 @@ Page({
     },
 
     onLoad(options) {
+        getApp().globalData.options.query = options;
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
         Protocol.getRoutine({id: options.dataId}).then(data => {

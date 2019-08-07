@@ -2,7 +2,7 @@ import CommonNavigator from "./../../base/heheda-navigator/navigator";
 
 export default class HiNavigator extends CommonNavigator {
     static relaunchToStart() {
-        this.reLaunch({url: '/pages/start/start'});
+        this.reLaunch({url: '/pages/start/start?onLoginSuccess=true'});
     }
 
     static relaunchToNewUserEdit() {

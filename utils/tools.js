@@ -136,6 +136,10 @@ export class MyUsed {
     static setUsed() {
         wx.setStorageSync('isUsed', true);
     }
+
+    static initUsed() {
+        wx.setStorageSync('isUsed', false);
+    }
 }
 
 

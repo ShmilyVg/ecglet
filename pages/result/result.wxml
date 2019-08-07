@@ -11,7 +11,7 @@
             <view class="result-title">{{result.title}}</view>
             <view class="result-content">{{result.subTitle}}</view>
         </view>
-        <image class="avatar" src="{{userInfo.portraitUrl}}"></image>
+        <image class="avatar" mode="aspectFill" src="{{userInfo.portraitUrl}}"></image>
     </view>
     <template is="result-top" data="{{resultColor:'#3A93EF',items}}"></template>
     <template is="result-bottom" data="{{isAbNormal:true,resultColor:'#3A93EF',resultBottomRemindColor:'rgba(180,218,255,1)'}}"></template>
