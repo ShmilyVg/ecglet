@@ -21,7 +21,7 @@
         <view class="canvasBox">
             <view class='outerCircle'></view>
             <view class='coreCircle'></view>
-            <canvas wx:if="{{showScore}}" canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
+            <canvas style="display: {{showScore?'block':'none'}};" canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
 
         </view>
         <view class="pressure-score-title">{{stress.title||''}}</view>
