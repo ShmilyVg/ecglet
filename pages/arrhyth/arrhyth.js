@@ -161,6 +161,7 @@ Page({
     },
 
     onLoad(options) {
+        clearInterval(app.globalData.countTimer);
         this.arrhythStateManager = new ArrhythStateManager(this);
         this.arrhythStateManager.guider();
         // console.log(await wx.getUserInfo())

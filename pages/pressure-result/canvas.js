@@ -11,7 +11,7 @@ export default {
     run(c, w, h) {
       let that = this;
       //Math.PI 180
-      var num = (2 * Math.PI / 100 * c) - 0.5 * Math.PI;
+      const num = (2 * Math.PI / 100 * c) - 0.5 * Math.PI,lineWidth = 9;
       that.data.ctx2.arc(w, h, w - 4, -0.5 * Math.PI, num); //每个间隔绘制的弧度
       //that.data.ctx2.setStrokeStyle("#00c6bc");
       //颜色渐变 XY
@@ -20,7 +20,7 @@ export default {
       gradient.addColorStop("0.6", "#00C6BC");
       gradient.addColorStop("0.99", "#AFEAE7");
       that.data.ctx2.strokeStyle = gradient;
-      that.data.ctx2.setLineWidth(9);
+      that.data.ctx2.lineWidth = lineWidth;
       //线头圆形
       that.data.ctx2.setLineCap("round");
       that.data.ctx2.stroke();
@@ -77,7 +77,8 @@ export default {
               wx.createSelectorQuery().select('#' + id).boundingClientRect(function (rect) { //监听canvas的宽高
                   var w = parseInt(rect.width / 2); //获取canvas宽的的一半
                   var h = parseInt(rect.height / 2); //获取canvas高的一半，
-                  that.canvasTap(0, that.data.percentage, time, w, h)
+                console.log('canvas score的信息',rect);
+                that.canvasTap(0, that.data.percentage, time, w, h)
               }).exec();
           }, 100);
 
