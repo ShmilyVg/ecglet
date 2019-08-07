@@ -10,7 +10,8 @@ Page({
     data: {
         ...Canvas.data,
         time: '',
-        pdfUrl: ''
+        pdfUrl: '',
+        showScore: true
     },
 
     lookDetail() {
@@ -94,10 +95,17 @@ Page({
     },
     lookReasonDialog() {
         const remindDialog = this.selectComponent('#myDialog');
+        this.setData({
+            showScore: false
+        });
         remindDialog.show({
             title: '心脏压力指数', content: '1、压力指数反映了您最近的压力状况，分数越高，压力越大；\n' +
                 '2、仅表示当前时间段内的心脏负荷情况，可能是因为工作、生活中遇到了问题导致神经紧张所致，也许是进行了剧烈运动、服药、熬夜导致的生理性异常\n' +
-                '3、仅针对个人不同时间段比较，不同人的压力指数不能作为比较的指标哦~', confirmText: '我知道了'
+                '3、仅针对个人不同时间段比较，不同人的压力指数不能作为比较的指标哦~', confirmText: '我知道了', confirmEvent: () => {
+                this.setData({
+                    showScore: true
+                });
+            }
         });
     },
 });
