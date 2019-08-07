@@ -10,7 +10,7 @@ Page({
     },
 
     lookDetail() {
-        const pdfUrl = this.data.result.pdfUrl;
+        const pdfUrl = this.data.pdfUrl;
         if (pdfUrl) {
             HiNavigator.navigateToReport({reportUrl: pdfUrl});
         }
@@ -32,12 +32,18 @@ Page({
         this.dataId = options.dataId;
         Protocol.getRoutine({id: options.dataId}).then(data => {
             console.log(data);
-            const {dataList,userInfo} = data;
+            const {dataList, userInfo} = data;
             dataList.time = this.getTime(parseInt(dataList.time));
             this.setData({result: dataList, userInfo});
             this.resultTop.showItems({items: dataList.report});
-        });
 
+            Protocol.getPdfUrl({id: options.dataId}).then(res => {
+                const {pdfUrl} = res.data.result;
+                this.setData({
+                    pdfUrl: pdfUrl
+                })
+            })
+        });
 
 
         // const result = getApp().globalData.tempGatherResult;
@@ -54,6 +60,7 @@ Page({
         // });
     },
     onUnload() {
+        reLoginWithoutLogin();
     },
     onShareAppMessage() {
         return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=1&dataId=' + this.dataId};

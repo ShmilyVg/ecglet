@@ -142,7 +142,6 @@ export class MyUsed {
     }
 }
 
-
 export function reLoginWithoutLogin() {
     const app = getApp();
     const {query} = app.globalData.options;
