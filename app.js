@@ -10,6 +10,7 @@ import {initAnalysisOnApp} from "./analysis/mta";
 App({
     onLaunch(options) {
         this.globalData.options = options;
+        console.log('App.js onLaunch options', options);
         // 展示本地存储能力
         initAnalysisOnApp();
         wx.onNetworkStatusChange((res) => {
@@ -23,10 +24,14 @@ App({
             }
             // }
         });
-        console.log('App.js options', options);
         if (!this.globalData.options.query.withoutLogin) {
             this.doLogin();
         }
+    },
+
+    onShow(options) {
+        this.globalData.options = options;
+        console.log('App.js onShow options', options);
     },
 
     doLogin() {
