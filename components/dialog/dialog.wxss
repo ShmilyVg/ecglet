@@ -19,3 +19,8 @@
 .justify-center{
     justify-content: center;
 }
+
+.dialog-content{
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
