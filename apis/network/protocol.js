@@ -279,6 +279,16 @@ export default class Protocol {
         });
     }
 
+    static getPdfUrl({id}) {
+        return Network.request({url: 'gather/getPdfUrl', data: {id}, requestWithoutLogin: true}).then(data => {
+            return Promise.resolve({data});
+        });
+    }
+
+    static getRelativesInfo({memberId}) {
+        return Network.request({url: 'relatives/info', data: {memberId}})
+    }
+
     static getPhoneNum({encryptedData, iv}) {
         return new Promise((resolve, reject) =>
             this.wxLogin().then(res => {

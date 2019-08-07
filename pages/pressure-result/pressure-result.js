@@ -70,12 +70,12 @@ Page({
 
     onReady() {
         Protocol.getCardiac({id: this.dataId}).then(data => {
-            const {dataList: {list: items, stress, emotion, tired, time, pdfUrl, isAbNormal}, userInfo} = data;
+            const {dataList: {list: items, stress, emotion, tired, time, isAbNormal}, userInfo} = data;
 
             this.setData({
                 userInfo,
                 isAbNormal,
-                time: this.getTime(parseInt(time)), pdfUrl, stress, tired: {
+                time: this.getTime(parseInt(time)), stress, tired: {
                     ...tired,
                     position: this.getImagePosition(tired.level)
                 }, emotion: {
@@ -85,6 +85,13 @@ Page({
             });
             this.resultTop.showItems({items});
             this.draw('runCanvas', stress.score, 100);
+
+            Protocol.getPdfUrl({id: this.dataId}).then(res => {
+                const {pdfUrl} = res.data.result;
+                this.setData({
+                    pdfUrl: pdfUrl
+                })
+            })
         });
     },
     onShareAppMessage() {
