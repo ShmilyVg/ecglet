@@ -57,3 +57,4 @@
     <template is="result-bottom" data="{{isAbNormal:true,resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
 
 </view>
+<dialog id="myDialog"></dialog>
