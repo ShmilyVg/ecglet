@@ -2,6 +2,7 @@ import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
 import Protocol from "../../apis/network/protocol";
 import {reLoginWithoutLogin} from "../../utils/tools";
+import Toast from "../../utils/toast";
 
 Page({
     data: {
@@ -10,10 +11,17 @@ Page({
     },
 
     lookDetail() {
-        const pdfUrl = this.data.pdfUrl;
-        if (pdfUrl) {
-            HiNavigator.navigateToReport({reportUrl: pdfUrl});
-        }
+        Toast.showLoading();
+        Protocol.getPdfUrl({id: this.dataId}).then(res => {
+            const {pdfUrl} = res.data.result;
+            if (pdfUrl) {
+                HiNavigator.navigateToReport({reportUrl: pdfUrl});
+            } else {
+                Toast.showText('正在生成，请稍后');
+            }
+        }).catch(res => {
+            Toast.showText('服务异常，请稍后重试');
+        }).finally(Toast.hiddenLoading);
     },
 
     getTime(timestamp) {
@@ -36,13 +44,6 @@ Page({
             dataList.time = this.getTime(parseInt(dataList.time));
             this.setData({result: dataList, userInfo});
             this.resultTop.showItems({items: dataList.report});
-
-            Protocol.getPdfUrl({id: options.dataId}).then(res => {
-                const {pdfUrl} = res.data.result;
-                this.setData({
-                    pdfUrl: pdfUrl
-                })
-            })
         });
 
 
