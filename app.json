@@ -17,7 +17,8 @@
     "pages/knowledge/knowledge",
     "pages/share/share",
     "pages/pressure-result/pressure-result",
-    "pages/ill-history/ill-history"
+    "pages/ill-history/ill-history",
+    "pages/AvgHR/AvgHR"
   ],
   "window": {
     "backgroundTextStyle": "light",
