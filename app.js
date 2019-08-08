@@ -6,6 +6,7 @@ import Login from "./apis/network/network/libs/login";
 import UserInfo from "./apis/network/network/libs/userInfo";
 import HiNavigator from "./components/navigator/hi-navigator";
 import {initAnalysisOnApp} from "./analysis/mta";
+import Toast from "./utils/toast";
 
 App({
     onLaunch(options) {
@@ -36,6 +37,7 @@ App({
 
     doLogin() {
         console.log('doLogin');
+        Toast.showLoading();
         Login.doLogin().then((data) => {
             return UserInfo.get();
         }).then((res) => {
@@ -59,7 +61,7 @@ App({
             if (res && res.data && res.data.code === 2) {
                 HiNavigator.relaunchToWelcome();
             }
-        });
+        }).finally(Toast.hiddenLoading);
     },
 
     globalData: {
