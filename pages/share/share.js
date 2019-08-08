@@ -93,14 +93,14 @@ Page({
     },
 
     onHide() {
-        this.isRelogin = false;
+        this.isNeedRelogin = false;
     },
     onShow() {
-        this.isRelogin = true;
+        this.isNeedRelogin = true;
         getApp().globalData.options.query.isGetUserInfo = 1;
     },
     onUnload() {
-        if (this.isRelogin) {
+        if (this.isNeedRelogin) {
             reLoginWithoutLogin();
         }
     },

@@ -53,13 +53,13 @@ Page({
     },
 
     onHide() {
-        this.isRelogin = false;
+        this.isNeedRelogin = false;
     },
     onShow() {
-        this.isRelogin = true;
+        this.isNeedRelogin = true;
     },
     onUnload() {
-        if (this.isRelogin) {
+        if (this.isNeedRelogin) {
             reLoginWithoutLogin();
         }
     },
