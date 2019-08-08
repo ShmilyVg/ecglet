@@ -28,6 +28,7 @@ Page({
     },
 
     onShow() {
+        clearInterval(app.globalData.countTimer);
         Protocol.checkHaveNetwork().then(() => {
             this.setData({isConnected: true});
         }).catch(() => {

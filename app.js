@@ -71,8 +71,24 @@ App({
         isConnected: true,
         currentMember: {},
         editMember: {},
+        countTimer: []
     },
 
+    addNewArrhythTimer(timer) {
+        this.globalData.countTimer.push(timer);
+    },
+
+    clearAllArrhythTimer() {
+        const {countTimer} = this.globalData;
+        console.log('开始清除计时器，总计时器个数', countTimer.length);
+        if (countTimer) {
+            let item;
+            while (!!(item = countTimer.pop())) {
+                console.log('清除计时器，计时器timer=', item);
+                clearInterval(item);
+            }
+        }
+    },
     onLoginSuccess: null,
 
 });
