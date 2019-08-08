@@ -25,7 +25,6 @@ Page({
             tip.random();
             this.setData({isFirstUsed: false, tip: tip.getRemindData()});
         }
-        app.doLogin();
     },
 
     onShow() {
