@@ -1,0 +1,21 @@
+<!--pages/ill-history/ill-history.wxml-->
+<view style="padding: 80rpx 50rpx">
+    <view class="ill-his-title">是否有以下病史</view>
+    <view class="ill-his-content"><text>我们还需知晓您的病史\n便于我们计算出符合您实际情况的具体结论</text></view>
+
+    <view class="flex-row" style="flex-wrap: wrap;justify-content: space-around">
+        <view wx:for="{{illItem}}" class="ill-his-item" style="background-color: {{item.isChose?'#8C81EC':'#F6F7F7'}}" bindtap="clickItem" data-index="{{index}}">
+            <image wx:if="{{item.isChose}}" src="../../images/ill-his/item-chose.png" class="ill-his-item-chose-item"></image>
+            <view class="flex-column align-items-center">
+                <image class="ill-his-item-image" src="../../images/ill-his/{{item.isChose?item.image.chose:item.image.nor}}.png"></image>
+                <view class="ill-his-item-text" style="color:{{item.isChose?'white':'#60778B'}}">{{item.text}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="ill-his-bottom-view flex-column">
+        <view class="button-radius" bindtap="save">保存资料</view>
+        <view class="button-after-small-text">上一步</view>
+    </view>
+</view>
+

@@ -16,7 +16,8 @@
     "pages/share-code/share-code",
     "pages/knowledge/knowledge",
     "pages/share/share",
-    "pages/pressure-result/pressure-result"
+    "pages/pressure-result/pressure-result",
+    "pages/ill-history/ill-history"
   ],
   "window": {
     "backgroundTextStyle": "light",

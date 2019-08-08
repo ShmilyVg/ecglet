@@ -66,10 +66,19 @@ button::after{
   align-items: center;
   width:608rpx;
   height:100rpx;
-  background:rgba(54,148,239,1);
+  background:#7265E3;
   border-radius:50rpx;
   font-size:30rpx;
   font-family:PingFang-SC-Medium;
   font-weight:500;
   color: white;
+}
+
+.button-after-small-text{
+  font-size:28rpx;
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(96,119,139,1);
+  line-height:37rpx;
+  margin-top: 35rpx;
 }
