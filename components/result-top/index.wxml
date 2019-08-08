@@ -1,22 +1,21 @@
 <template name="result-top">
-    <image src="../../images/result/logo.png" class="logo" style="background-color: {{resultColor}};border-color: {{resultColor}}"></image>
-    <view class="flex-column box-sizing-border-box table">
+    <view class="flex-column fill-width box-sizing-border-box table">
         <block wx:for="{{items}}" wx:key="index">
             <view class="flex-row box-sizing-border-box space-between cell" bindtap="onShowDetail" data-index="{{index}}" data-item="{{item}}">
                 <view class="flex-row align-items-center">
-                    <view class="flex-row align-items-center justify-center outer-circle box-sizing-border-box" style="position: relative;padding: 8rpx;">
-                        <view class="absolute outer-circle" style="background-color: {{item.color}};opacity: 0.2;"></view>
-                        <view class="point-comm" style="background-color: {{item.color}}"></view>
-                    </view>
                     <view class="flex-column align-items-center" style="align-items: flex-start">
-                        <view class="cell-title">{{item.name}}</view>
-                        <view wx:if="{{isGreen}}" class="cell-green-state">{{item.des}}</view>
-                        <view wx:else class="cell-state" style="color: {{item.color}};">{{item.des}}</view>
+                        <view class="flex-row align-items-center" style="margin-bottom: 27rpx;">
+                            <view class="cell-title">{{item.name}}</view>
+                            <image src="" style="width: 32rpx;height: 32rpx;background-color: red;margin-left: 17rpx;"></image>
+
+                        </view>
+                        <!--                        <view wx:if="{{isGreen}}" class="cell-green-state">{{item.des}}</view>-->
+                        <view class="cell-state">{{item.des}}</view>
                     </view>
                 </view>
                 <view class="flex-row align-items-center">
                     <view class="flex-column align-items-center" style="align-items: flex-end">
-                        <view class="cell-num" style="color: {{item.color}};font-size: {{item.fontSize}}rpx;line-height: {{item.fontSize}}rpx;">{{item.rightContent||''}}</view>
+                        <view class="cell-num" style="font-size: {{item.fontSize}}rpx;line-height: {{item.fontSize}}rpx;">{{item.rightContent||''}}</view>
                         <view class="cell-eng">{{item.unit}}</view>
                     </view>
                     <view class="flex-row align-items-center justify-center result-item-extra">

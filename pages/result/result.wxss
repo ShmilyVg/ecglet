@@ -1,8 +1,26 @@
 @import "../../components/result-top/index.wxss";
 @import "../../components/result-bottom/index.wxss";
 page {
-  background-color: #3A93EF
+  background-color: transparent;
 
+}
+
+.result-top-layout{
+  height: 500rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-top-layout::after {
+  content: '';
+  width: 180%;
+  height: 500rpx;
+  position: absolute;
+  z-index: -1;
+  left: -40%;
+  top: 0;
+  border-radius: 0 0 50% 50%;
+  background-color: #3A93EF;
 }
 
 .result-top-image-bg{
@@ -28,6 +46,17 @@ page {
   color:rgba(255,255,255,1);
   margin-top: 14rpx;
 }
+
+.logo {
+  width: 110rpx;
+  height: 110rpx;
+  position: relative;
+  margin-top: -75rpx;
+  border-radius: 50%;
+  border-width: 15rpx;
+  border-style: solid;
+}
+
 .share{
   position: absolute;
   top: 40rpx;
@@ -50,17 +79,17 @@ page {
 }
 
 .title {
-  font-size:38rpx;
+  font-size:40rpx;
   font-weight:500;
   color:rgba(255,255,255,1);
-  line-height:53rpx;
-  margin-top: 20rpx;
+  line-height:28rpx;
+  margin-top: 82rpx;
 }
 
 .content {
   font-size:24rpx;
   font-weight:400;
   color:rgba(255,255,255,1);
-  line-height:33rpx;
-  margin-top: 10rpx;
+  line-height:28rpx;
+  margin-top: 22rpx;
 }

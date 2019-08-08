@@ -82,3 +82,9 @@ button::after{
   line-height:37rpx;
   margin-top: 35rpx;
 }
+
+.divide-line-large{
+  width:100%;
+  height:20rpx;
+  background:rgba(246,247,249,1);
+}

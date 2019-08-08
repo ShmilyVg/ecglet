@@ -3,16 +3,24 @@
 <view class="flex-column align-items-center" style="padding-bottom: 50rpx;">
 <!--    <view class="share">分享给亲友</view>-->
 
-
-    <view class="title">常规心电检测分析报告</view>
-    <view class="content">{{result.time}}</view>
-    <view class="flex-row fill-width align-items-center space-between box-sizing-border-box result-top-image-bg">
-        <view class="flex-column">
-            <view class="result-title">{{result.title}}</view>
-            <view class="result-content">{{result.subTitle}}</view>
+    <view class="flex-column align-items-center fill-width result-top-layout">
+        <view class="title">常规心电检测分析报告</view>
+        <view class="content">{{result.time}}</view>
+        <view class="flex-row fill-width align-items-center space-between box-sizing-border-box result-top-image-bg">
+            <view class="flex-column">
+                <view class="result-title">{{result.title}}</view>
+                <view class="result-content">{{result.subTitle}}</view>
+            </view>
+            <image class="avatar" mode="aspectFill" src="{{userInfo.portraitUrl}}"></image>
         </view>
-        <image class="avatar" mode="aspectFill" src="{{userInfo.portraitUrl}}"></image>
+
     </view>
+    <image src="../../images/result/logo.png" class="logo" style="background-color: #3A93EF;border-color: #3A93EF;"></image>
+
+
+
+
+
     <template is="result-top" data="{{resultColor:'#3A93EF',items}}"></template>
     <template is="result-bottom" data="{{isAbNormal:true,resultColor:'#3A93EF',resultBottomRemindColor:'rgba(180,218,255,1)'}}"></template>
 </view>
