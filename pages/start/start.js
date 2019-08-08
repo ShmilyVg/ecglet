@@ -28,7 +28,7 @@ Page({
     },
 
     onShow() {
-        clearInterval(app.globalData.countTimer);
+        app.clearAllArrhythTimer();
         Protocol.checkHaveNetwork().then(() => {
             this.setData({isConnected: true});
         }).catch(() => {

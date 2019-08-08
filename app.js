@@ -81,12 +81,14 @@ App({
     clearAllArrhythTimer() {
         const {countTimer} = this.globalData;
         console.log('开始清除计时器，总计时器个数', countTimer.length);
-        if (countTimer) {
+        if (countTimer && !!countTimer.length) {
             let item;
             while (!!(item = countTimer.pop())) {
                 console.log('清除计时器，计时器timer=', item);
                 clearInterval(item);
             }
+        } else {
+            console.log('没有要清除的计时器');
         }
     },
     onLoginSuccess: null,
