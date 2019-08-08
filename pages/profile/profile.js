@@ -9,14 +9,11 @@ Page({
 
     isRegister: false,
     onLoad(options) {
-        getApp().doLogin({
-            success: () => {
-                UserInfo.get().then(res => {
-                    this.setData({userInfo: res.userInfo});
-                });
-            }
-        });
-
+        getApp().onLoginSuccess = () => {
+            UserInfo.get().then(res => {
+                this.setData({userInfo: res.userInfo});
+            });
+        };
     },
 
     onShow() {

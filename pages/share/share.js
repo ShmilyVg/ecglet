@@ -1,7 +1,7 @@
 // pages/share/share.js
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
-import {createDateAndTime} from "../../utils/tools";
+import {createDateAndTime, reLoginWithoutLogin} from "../../utils/tools";
 import WXDialog from "../../base/heheda-common-view/dialog";
 
 Page({
@@ -34,9 +34,6 @@ Page({
         });
     },
 
-    onShow() {
-        getApp().globalData.options.query.isGetUserInfo = 1;
-    },
 
     onPullDownRefresh() {
         this.setData({
@@ -71,6 +68,10 @@ Page({
                     logs: list,
                     isFinish: true
                 })
+            } else {
+                this.setData({
+                    isFinish: true
+                })
             }
         }).finally(() => {
             Toast.hiddenLoading();
@@ -91,16 +92,26 @@ Page({
         });
     },
 
+    onHide() {
+        this.isRelogin = false;
+    },
+    onShow() {
+        this.isRelogin = true;
+        getApp().globalData.options.query.isGetUserInfo = 1;
+    },
     onUnload() {
+        if (this.isRelogin) {
+            reLoginWithoutLogin();
+        }
     },
 
     toResultPage(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
         // HiNavigator.navigateToResultPageByType({type, dataId});
         if (type == 2) {
-            wx.navigateTo({url: '/pages/pressure-result/pressure-result?dataId=' + dataId+'&isGetUserInfo=1'});
+            wx.navigateTo({url: '/pages/pressure-result/pressure-result?dataId=' + dataId + '&isGetUserInfo=1'});
         } else {
-            wx.navigateTo({url: '/pages/result/result?dataId=' + dataId+'&isGetUserInfo=1'});
+            wx.navigateTo({url: '/pages/result/result?dataId=' + dataId + '&isGetUserInfo=1'});
         }
     }
 })

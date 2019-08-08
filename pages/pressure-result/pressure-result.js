@@ -3,6 +3,7 @@ import ResultTop from "../../components/result-top/index.js";
 import Canvas from './canvas.js';
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
+import {reLoginWithoutLogin} from "../../utils/tools";
 
 
 Page({
@@ -51,9 +52,17 @@ Page({
         }
     },
 
-    onUnload() {
+    onHide() {
+        this.isRelogin = false;
     },
-
+    onShow() {
+        this.isRelogin = true;
+    },
+    onUnload() {
+        if (this.isRelogin) {
+            reLoginWithoutLogin();
+        }
+    },
     onLoad(options) {
         getApp().globalData.options.query = options;
         //等级 1——7.5%；2——31%； 3——56%；4——80%；

@@ -34,44 +34,32 @@ App({
         console.log('App.js onShow options', options);
     },
 
-    doLogin({success} = {}) {
-        const {loginData} = this.globalData;
-        console.log('doLogin', loginData);
-        if (loginData.isLogin) {
-            success && success();
-        } else if (!loginData.isWait) {//如果没登录成功，并且已经收到了等级结果
-            loginData.isWait = true;
-            Login.doLogin().then((data) => {
-                loginData.isLogin = true;
-                loginData.isWait = false;
-                return UserInfo.get();
-            }).then((res) => {
-                console.log('app getUserInfo', res);
-                wx.setStorageSync('isRegister', true);
-                const {phone, birthday} = res.userInfo;
-                if (!wx.getStorageSync('phoneNumber')) {
-                    wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
-                }
+    doLogin() {
+        console.log('doLogin');
+        Login.doLogin().then((data) => {
+            return UserInfo.get();
+        }).then((res) => {
+            console.log('app getUserInfo', res);
+            wx.setStorageSync('isRegister', true);
+            const {phone, birthday} = res.userInfo;
+            if (!wx.getStorageSync('phoneNumber')) {
+                wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
+            }
 
-                const {query} = this.globalData.options;
-                if (!!query.isGetUserInfo) {
-                    success && success();
-                } else if (!phone || !birthday) {
-                    HiNavigator.relaunchToWelcome();
-                } else {
-                    success && success();
-                }
-            }).catch((res) => {
-                console.log('app.js login fail', res);
-                if (res && res.data && res.data.code === 2) {
-                    HiNavigator.relaunchToWelcome();
-                } else {
-                    loginData.isLogin = false;
-                    loginData.isWait = false;
-                }
-            });
-        }
-
+            const {query} = this.globalData.options;
+            if (!!query.isGetUserInfo) {
+                this.onLoginSuccess && this.onLoginSuccess();
+            } else if (!phone || !birthday) {
+                HiNavigator.relaunchToWelcome();
+            } else {
+                this.onLoginSuccess && this.onLoginSuccess();
+            }
+        }).catch((res) => {
+            console.log('app.js login fail', res);
+            if (res && res.data && res.data.code === 2) {
+                HiNavigator.relaunchToWelcome();
+            }
+        });
     },
 
     globalData: {
@@ -81,7 +69,6 @@ App({
         isConnected: true,
         currentMember: {},
         editMember: {},
-        loginData: {isLogin: false, isWait: false}
     },
 
     onLoginSuccess: null,

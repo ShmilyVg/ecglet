@@ -60,8 +60,16 @@ Page({
         //     }
         // });
     },
+    onHide() {
+        this.isRelogin = false;
+    },
+    onShow() {
+        this.isRelogin = true;
+    },
     onUnload() {
-        reLoginWithoutLogin();
+        if (this.isRelogin) {
+            reLoginWithoutLogin();
+        }
     },
     onShareAppMessage() {
         return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=1&dataId=' + this.dataId};

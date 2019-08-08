@@ -26,39 +26,34 @@ Page({
     onShow() {
         let userInfo = app.globalData.currentMember;
         console.log('切换成员：', userInfo);
-        app.doLogin({
-            success: () => {
-                Protocol.getRelativesGetToolTip({}).then((res) => {
-                    this.setData({
-                        bottomViewIsHidden: !res.result.isShow
-                    })
-                });
-
-                if (userInfo.thirdpartyUId === null) {
-                    this.setData({
-                        userInfo: userInfo,
-                        isNormalMember: false,
-                        rightChoseIsLeft: true,
-                        trendRightChoseIsLeft: true,
-                        name: Tools.HandleShortName(userInfo.nickName)
-                    });
-                    this.getMainList({page: 1, recorded: true});
-                } else {
-                    UserInfo.get().then((res) => {
-                        let name = Tools.HandleShortName(res.userInfo.nickName);
-                        this.setData({
-                            userInfo: res.userInfo,
-                            isNormalMember: true,
-                            rightChoseIsLeft: true,
-                            trendRightChoseIsLeft: true,
-                            name: name
-                        });
-                        this.getMainList({page: 1, recorded: true});
-                    })
-                }
-            }
+        Protocol.getRelativesGetToolTip({}).then((res) => {
+            this.setData({
+                bottomViewIsHidden: !res.result.isShow
+            })
         });
 
+        if (userInfo.thirdpartyUId === null) {
+            this.setData({
+                userInfo: userInfo,
+                isNormalMember: false,
+                rightChoseIsLeft: true,
+                trendRightChoseIsLeft: true,
+                name: Tools.HandleShortName(userInfo.nickName)
+            });
+            this.getMainList({page: 1, recorded: true});
+        } else {
+            UserInfo.get().then((res) => {
+                let name = Tools.HandleShortName(res.userInfo.nickName);
+                this.setData({
+                    userInfo: res.userInfo,
+                    isNormalMember: true,
+                    rightChoseIsLeft: true,
+                    trendRightChoseIsLeft: true,
+                    name: name
+                });
+                this.getMainList({page: 1, recorded: true});
+            })
+        }
     },
 
     getMainList({page = 1, recorded = false}) {
