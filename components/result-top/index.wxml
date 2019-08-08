@@ -6,7 +6,7 @@
                     <view class="flex-column align-items-center" style="align-items: flex-start">
                         <view class="flex-row align-items-center" style="margin-bottom: 27rpx;">
                             <view class="cell-title">{{item.name}}</view>
-                            <image src="" style="width: 32rpx;height: 32rpx;background-color: red;margin-left: 17rpx;"></image>
+                            <image src="../../images/result/abnormal.png" wx:if="{{item.isAbNormal}}" style="width: 32rpx;height: 32rpx;background-color: red;margin-left: 17rpx;"></image>
 
                         </view>
                         <!--                        <view wx:if="{{isGreen}}" class="cell-green-state">{{item.des}}</view>-->
