@@ -38,7 +38,6 @@ Page({
         testType: 0,
         count: 0,
         maxCount: 15,
-        countTimer: undefined,
         ecgPannel: undefined,
         connected: false,
         completed: false,
@@ -59,9 +58,7 @@ Page({
 
     reset() {
         let that = this
-
-        clearInterval(that.data.countTimer);
-        clearInterval(app.globalData.countTimer);
+        app.clearAllArrhythTimer();
         that.data.count = 0;
 
         if (that.data.progressCircle) {
@@ -161,7 +158,7 @@ Page({
     },
 
     onLoad(options) {
-        clearInterval(app.globalData.countTimer);
+        app.clearAllArrhythTimer();
         this.arrhythStateManager = new ArrhythStateManager(this);
         this.arrhythStateManager.guider();
         // console.log(await wx.getUserInfo())
@@ -357,8 +354,7 @@ Page({
 
     onUnload() {
         let that = this
-        console.warn('onUnload...', that.data.countTimer);
-        clearInterval(app.globalData.countTimer);
+        console.warn('onUnload...');
         try {
             // await wx.hideLoading()
             // that.hideLoading()
@@ -407,8 +403,9 @@ Page({
     startCount() {
         console.log('startCount...')
         let that = this
-        that.data.countTimer = setInterval(function f() {
-            that.data.count++
+
+        app.addNewArrhythTimer(setInterval(function f() {
+            that.data.count++;
             if (that.data.count <= 2 * that.data.maxCount) {
                 console.log('count: ' + that.data.count, that.data.maxCount);
                 let circle = that.data.progressCircle;
@@ -416,19 +413,15 @@ Page({
                 if (that.data.count >= 2 * that.data.maxCount) {
                     that.data.count = 0
                     // that.setData({ txt: '0' })
-                    clearInterval(that.data.countTimer);
-
+                    app.clearAllArrhythTimer();
                     that.data.completed = true
                     that.closeBluetooth().then(() => {
                         console.log('prepare to upload data...')
                         that.uploadData()
                     })
-
-
                 }
             }
-        }, 1000);
-        app.globalData.countTimer = that.data.countTimer;
+        }, 1000));
     },
     onShow() {
         console.log('onShow... isStartBLEDevices', this.isStartBLEDevices)
