@@ -71,7 +71,7 @@
 }
 
 .tag-chose{
-    background-color: #3A93EF;
+    background-color: var(--primaryColor);
     color: white;
 }
 
@@ -103,7 +103,7 @@
 .btn{
     width:750rpx;
     height:110rpx;
-    background:rgba(57,147,238,1);
+    background:var(--primaryColor);
     font-size:38rpx;
     font-weight:500;
     color:rgba(255,255,255,1);
