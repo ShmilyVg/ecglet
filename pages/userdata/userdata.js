@@ -19,7 +19,8 @@ Page({
         weight: '',
         number: '',
         portraitUrl: '',
-        isNewMember: false
+        isNewMember: false,
+        memberId: 0
     },
 
     onLoad(options) {
@@ -231,10 +232,9 @@ Page({
         });
     },
 
-    naviToIllHisPage(){
-        wx.navigateTo({
-            url:`../ill-history/ill-history?isNewMember=${this.data.isNewMember}&isNormalMember=${this.data.isNormalMember}`
-        })
+    naviToIllHisPage() {
+        const {isNormalMember, isNewMember, memberId} = this.data;
+        HiNavigator.navigateToIllHistory({isNormalMember, isNewMember, memberId});
     },
 
     chooseImage() {

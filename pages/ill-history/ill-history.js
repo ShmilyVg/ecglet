@@ -1,4 +1,6 @@
 // pages/ill-history/ill-history.js
+import HiNavigator from "../../components/navigator/hi-navigator";
+
 Page({
     data: {
         illItem: [
@@ -34,10 +36,11 @@ Page({
     },
 
     onLoad(options) {
-        const {isNormalMember, isNewMember} = options;
+        const {isNormalMember, isNewMember, memberId} = options;
         this.setData({
             isNormalMember: isNormalMember,
-            isNewMember: isNewMember
+            isNewMember: isNewMember,
+            memberId: memberId
         })
     },
 
@@ -75,7 +78,7 @@ Page({
     },
 
     back() {
-        wx.navigateBack({
+        HiNavigator.navigateBack({
             delta: 1
         })
     }
