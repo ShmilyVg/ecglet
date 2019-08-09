@@ -63,7 +63,7 @@ Page({
 
         if (that.data.progressCircle) {
             let circle = that.data.progressCircle
-            circle.drawCircle('circle_draw1', getCircleRadius(), -1);
+            circle.drawCircle(-1);
             that.setData({txt: this.getOriginTxt()});
         }
 
@@ -409,7 +409,7 @@ Page({
             if (that.data.count <= 2 * that.data.maxCount) {
                 console.log('count: ' + that.data.count, that.data.maxCount);
                 let circle = that.data.progressCircle;
-                circle.drawCircle('circle_draw1', getCircleRadius(), that.data.count);
+                circle.drawCircle(that.data.count);
                 if (that.data.count >= 2 * that.data.maxCount) {
                     that.data.count = 0
                     // that.setData({ txt: '0' })
