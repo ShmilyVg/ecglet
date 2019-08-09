@@ -1,5 +1,3 @@
-import login from "../../apis/network/network/libs/login";
-
 Component({
     /**
      * 组件的属性列表
@@ -78,21 +76,24 @@ Component({
 
         drawCircle(step) {
             const {data, data: {radius, wholeDegree, circleX, circleY, maxCount, roundWidth}} = this,
-                ctx = this.canvasContext, largeFontSize = 43, halfLargeFontSize = largeFontSize / 2;
+                ctx = this.canvasContext;
             ctx.strokeStyle = 'rgb(255,255,255)';
             ctx.beginPath();
             ctx.arc(circleX, circleY, radius, -1.5 * Math.PI, 0, false);
             ctx.stroke();
-
+            const currentNum = maxCount * 2 - step;
+            let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = 45;
+            if (currentNum > 100) {
+                largeFontSize = 43;
+                halfLargeFontSize = Math.floor(largeFontSize / 2.3);
+            }
             ctx.font = `${largeFontSize}px sans-serif`;
             ctx.setTextAlign('center');
             ctx.setTextBaseline('normal');
-            const currentNum = maxCount * 2 - step;
             ctx.fillStyle = 'white';
             ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize);
-            ctx.font= '12px sans-serif';
-            ctx.fillText('S', radius + (currentNum < 100 ? 35 : 45), radius + halfLargeFontSize);
-
+            ctx.font = '12px sans-serif';
+            ctx.fillText('S', radius + sX, radius + halfLargeFontSize);
 
             ctx.draw();
 
