@@ -148,7 +148,7 @@ Component({
         },
 
         setCanvasDefaultOptions(ctx) {
-            ctx.strokeStyle = "#7265E3";
+            ctx.strokeStyle = "black";
             ctx.setLineJoin("round");
             ctx.lineWidth = 1.2;
         },
