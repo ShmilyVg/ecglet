@@ -4,7 +4,7 @@
   注意：文件为空，编译时不会生成新文件
 */
 page{
-  background-color: #3a93ef;
+  background-color: #7265E3;
 }
 swiper{
   width: 100%;
@@ -19,7 +19,7 @@ swiper{
   font-size:36rpx;
   font-family:PingFang-SC-Bold;
   font-weight:bold;
-  color:rgba(180,218,255,1);
+  color:#C5BFFB;
 }
 /*圆环进度条文字*/
 .container{
@@ -93,7 +93,7 @@ swiper{
   font-weight:500;
   line-height: 30rpx;
   height: 30rpx;
-  color:rgba(153,204,255,1);
+  color:#C5BFFB;
 }
 .arrhyth-connected-confirm-size{
   width: 149rpx;
@@ -123,7 +123,7 @@ swiper{
   font-size:26rpx;
   font-family:PingFang-SC-Medium;
   font-weight:500;
-  color:rgba(132,193,255,1);
+  color:#C5BFFB;
 }
 
 .remind-text-bottom{
@@ -150,6 +150,6 @@ swiper{
   line-height: 30rpx;
   font-family:PingFang-SC-Medium;
   font-weight:500;
-  color:rgba(193,224,255,1);
+  color:#C5BFFB;
   margin-top: 20rpx;
 }

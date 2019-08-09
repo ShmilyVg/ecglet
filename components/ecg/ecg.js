@@ -116,7 +116,7 @@ Component({
                     }
                 }
 
-                ctx.fillStyle = '#3a93ef';
+                ctx.fillStyle = '#7265E3';
                 ctx.beginPath();
                 ctx.moveTo(0, r);
                 ctx.lineTo(0, 0);
@@ -148,7 +148,7 @@ Component({
         },
 
         setCanvasDefaultOptions(ctx) {
-            ctx.strokeStyle = "#3993EE";
+            ctx.strokeStyle = "#7265E3";
             ctx.setLineJoin("round");
             ctx.lineWidth = 1.2;
         },
