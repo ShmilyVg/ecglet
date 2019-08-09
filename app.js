@@ -43,7 +43,7 @@ App({
         }).then((res) => {
             console.log('app getUserInfo', res);
             wx.setStorageSync('isRegister', true);
-            const {phone, birthday} = res.userInfo;
+            const {phone, birthday, height, weight} = res.userInfo;
             if (!wx.getStorageSync('phoneNumber')) {
                 wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
             }
@@ -51,7 +51,7 @@ App({
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
                 this.onLoginSuccess && this.onLoginSuccess();
-            } else if (!phone || !birthday) {
+            } else if (!phone || !birthday || !weight || !height) {
                 HiNavigator.relaunchToWelcome();
             } else {
                 this.onLoginSuccess && this.onLoginSuccess();
