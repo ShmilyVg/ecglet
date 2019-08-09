@@ -2,7 +2,7 @@
 .top-image {
   height: 383rpx;
   width: 100%;
-  background-color: #3a93ef;
+  background-color: var(--primaryColor);
 }
 
 .top-cell {
@@ -81,19 +81,6 @@
   background:rgba(255,255,255,1);
   border-radius:40rpx;
   margin-top: 30rpx;
-}
-
-.btn {
-  width:605rpx;
-  height:100rpx;
-  background:rgba(57,147,238,1);
-  border-radius:50rpx;
-  font-size: 30rpx;
-  line-height: 100rpx;
-  text-align: center;
-  color: white;
-  position: absolute;
-  bottom: 65rpx;
 }
 
 .shouquan {

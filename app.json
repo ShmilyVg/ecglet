@@ -22,9 +22,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#3a93ef",
+    "navigationBarBackgroundColor": "white",
     "navigationBarTitleText": "HiPee心电管家",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#7D7D7D",
