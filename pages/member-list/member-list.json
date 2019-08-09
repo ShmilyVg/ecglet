@@ -1,5 +1,5 @@
 {
-  "navigationBarBackgroundColor": "#3993EE",
-  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "white",
+  "navigationBarTextStyle": "black",
   "navigationBarTitleText": "成员管理"
 }

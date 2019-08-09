@@ -53,7 +53,7 @@
     align-items: center;
     width:750rpx;
     height:110rpx;
-    background:rgba(57,147,238,1);
+    background:var(--primaryColor);
     font-size:38rpx;
     font-family:PingFang-SC-Medium;
     font-weight:500;
