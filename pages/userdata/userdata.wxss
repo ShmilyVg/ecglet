@@ -15,7 +15,7 @@
 .top-image{
   height: 281rpx;
   width: 100%;
-  background-color: #3a93ef;
+  background-color: var(--primaryColor);
 }
 
 .avatar-view {
@@ -40,7 +40,7 @@
 .finish {
   width:605rpx;
   height:100rpx;
-  background:rgba(57,147,238,1);
+  background: var(--primaryColor);
   border-radius:50rpx;
   font-size: 30rpx;
   line-height: 100rpx;
@@ -71,8 +71,6 @@
   min-height: 2.58823529em;
   line-height: 2.58823529em;
 }
-
-
 
 page {
   background-color: white;

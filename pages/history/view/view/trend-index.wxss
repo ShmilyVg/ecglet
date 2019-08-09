@@ -6,20 +6,20 @@
     color: white;
     padding: 20rpx 0;
     border-radius: 50rpx;
-    background-color: #3A93EF;
+    background-color: var(--primaryColor);
     margin-left: 20rpx;
-    border: 1rpx solid #3A93EF;
+    border: 1rpx solid var(--primaryColor);
 }
 .trend-index-not-select-style{
     font-size: 27rpx;
     width: 182rpx;
     line-height:27rpx;
     text-align: center;
-    color: #3A93EF;
+    color: var(--primaryColor);
     padding: 20rpx 0;
     border-radius: 50rpx;
     background-color: white;
-    border: 1rpx solid #3A93EF;
+    border: 1rpx solid var(--primaryColor);
     margin-left: 20rpx;
 }
 
@@ -27,6 +27,6 @@
     width: 0;
     height: 0;
     border: 15rpx solid transparent;
-    border-top-color: #3A93EF;
+    border-top-color: var(--primaryColor);
     margin-left: 20rpx;
 }

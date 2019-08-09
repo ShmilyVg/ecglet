@@ -64,6 +64,6 @@
         </view>
     </view>
 
-    <view class="finish" bindtap="onSubmit">完成</view>
+    <view class="finish" bindtap="onSubmit">下一步</view>
 </view>
 

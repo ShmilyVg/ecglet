@@ -51,4 +51,5 @@
     align-items: center;
     position: fixed;
     bottom: 80rpx;
+    width: 650rpx;
 }

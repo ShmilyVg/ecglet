@@ -19,7 +19,8 @@ Page({
         weight: '',
         number: '',
         portraitUrl: '',
-        isNewMember: false
+        isNewMember: false,
+        memberId: 0
     },
 
     onLoad(options) {
@@ -161,9 +162,7 @@ Page({
                     console.log('保存信息：', data);
                     if (that.data.isNewMember) {
                         Protocol.accountCreate(data).then((res) => {
-                            HiNavigator.navigateBack({
-                                delta: 1
-                            });
+                            this.naviToIllHisPage();
                         }).catch((res) => {
                             if (res.data.code == 2000) {
                                 console.log('手机号重复');
@@ -183,7 +182,7 @@ Page({
                             return UserInfo.set({...res.userInfo, ...data});
                         }).then(() => {
                             getApp().globalData.editMember = {};
-                            wx.navigateBack({delta: 1});
+                            this.naviToIllHisPage();
                         }).catch((res) => {
                             switch (res.data.code) {
                                 case 2000:
@@ -210,7 +209,7 @@ Page({
                         };
                         console.log('保存信息：', data);
                         Protocol.memberRelevanceUpdate(data).then((res) => {
-                            wx.navigateBack({delta: 1});
+                            this.naviToIllHisPage();
                         }).catch((res) => {
                             switch (res.data.code) {
                                 case 2000:
@@ -231,6 +230,11 @@ Page({
                 }
             }
         });
+    },
+
+    naviToIllHisPage() {
+        const {isNormalMember, isNewMember, memberId} = this.data;
+        HiNavigator.navigateToIllHistory({isNormalMember, isNewMember, memberId});
     },
 
     chooseImage() {
