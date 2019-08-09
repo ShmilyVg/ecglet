@@ -2,13 +2,13 @@
 .top-text{
     font-size:30rpx;
     font-weight:500;
-    color:rgba(58,147,239,1);
+    color:var(--primaryColor);
     line-height:28rpx;
 }
 
 .line {
     height:4rpx;
-    background:rgba(58,147,239,1);
+    background:var(--primaryColor);
     border-radius:2rpx;
 }
 
