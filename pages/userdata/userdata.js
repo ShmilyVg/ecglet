@@ -132,7 +132,14 @@ Page({
             Toast.showText('请选择出生日期');
             return;
         }
-
+        if (!this.data.height.trim()) {
+            Toast.showText('请填写身高');
+            return;
+        }
+        if (!this.data.weight.trim()) {
+            Toast.showText('请填写体重');
+            return;
+        }
         let dialogTitle = that.data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
 
         WXDialog.showDialog({

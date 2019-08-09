@@ -1,6 +1,6 @@
 import {NetworkConfig} from "../apis/network/network/index";
 
-const Release = true;
+const Release = false;
 
 const SoftwareVersion = `${Release?'':'Ecglet_Stage'} 0.1.1`;
 

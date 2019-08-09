@@ -129,6 +129,14 @@ Page({
             Toast.showText('请选择出生日期');
             return;
         }
+        if (!this.data.height.trim()) {
+            Toast.showText('请填写身高');
+            return;
+        }
+        if (!this.data.weight.trim()) {
+            Toast.showText('请填写体重');
+            return;
+        }
         let birthTime = this.data.birthDate || '';
         console.log(`birth time: ${birthTime}`);
         try {
