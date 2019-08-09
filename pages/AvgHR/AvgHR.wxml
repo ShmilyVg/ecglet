@@ -18,3 +18,14 @@
 </view>
 
 <view class="decipher-line-height-1"></view>
+
+<block wx:for="{{3}}">
+    <view wx:if="{{index}}" class="decipher-line-height-20"></view>
+    <view class="decipher-content-view flex-column">
+        <view class="flex-row align-items-center">
+            <view style="width: 36rpx;height: 36rpx;background-color: lightblue"></view>
+            <view class="decipher-content-title">检测结果</view>
+        </view>
+        <view class="decipher-content-text">一次的心率过快或过慢只能反映当前检测期间的数值未在正常区间内，也可能是其他行为导致的异常；建议长期检测，反复多测查看趋势再做判断。</view>
+    </view>
+</block>

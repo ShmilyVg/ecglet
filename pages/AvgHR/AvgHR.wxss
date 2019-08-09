@@ -58,10 +58,38 @@
     margin-right: 10rpx;
 }
 
-.decipher-line-height-1{
+.decipher-line-height-1 {
     width: 100%;
     height: 1rpx;
     border-style: dotted none none none;
     border-color: #9C9C9C;
-    margin: 70rpx 0;
+    margin: 70rpx 0 0;
+}
+
+.decipher-content-view {
+    padding: 75rpx 55rpx 85rpx;
+}
+
+.decipher-content-title{
+    font-size:32rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(51,68,78,1);
+    line-height:42rpx;
+    margin-left: 13rpx;
+}
+
+.decipher-content-text{
+    font-size:28rpx;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(91,91,91,1);
+    line-height:46rpx;
+    margin-top: 40rpx;
+}
+
+.decipher-line-height-20 {
+    width: 100%;
+    height: 20rpx;
+    background-color: #F6F7F9;
 }
