@@ -66,7 +66,7 @@ button::after{
   align-items: center;
   width:608rpx;
   height:100rpx;
-  background:#7265E3;
+  background:var(--primaryColor);
   border-radius:50rpx;
   font-size:30rpx;
   font-family:PingFang-SC-Medium;
