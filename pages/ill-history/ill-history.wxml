@@ -15,7 +15,7 @@
 
     <view class="ill-his-bottom-view flex-column">
         <view class="button-radius" bindtap="save">保存资料</view>
-        <view class="button-after-small-text">上一步</view>
+        <view class="button-after-small-text" bindtap="back">上一步</view>
     </view>
 </view>
 

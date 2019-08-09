@@ -10,7 +10,11 @@ Page({
     },
 
     onLoad(options) {
-
+        const {isNormalMember, isNewMember} = options;
+        this.setData({
+            isNormalMember: isNormalMember,
+            isNewMember: isNewMember
+        })
     },
 
     clickItem(e) {
@@ -37,5 +41,11 @@ Page({
 
     save() {
 
+    },
+
+    back() {
+        wx.navigateBack({
+            delta: 1
+        })
     }
 })
