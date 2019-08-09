@@ -20,7 +20,7 @@ var config = {
     columePadding: 3,
     fontSize: 13,
     dataPointShape: ['diamond', 'circle', 'triangle', 'rect'],
-    colors: ['#8CD6FF', 'white', 'white', 'white', 'white', 'white'],
+    colors: ['#7265E3', 'white', 'white', 'white', 'white', 'white'],
     pieChartLinePadding: 25,
     pieChartTextPadding: 15,
     xAxisTextPadding: 3,
@@ -327,7 +327,7 @@ function getSeriesDataItem(series, index) {
         if (item.data[index] !== null && typeof item.data[index] !== 'undefined') {
             var seriesItem = {};
             // 方块颜色
-            seriesItem.color = '#64C4FB';
+            seriesItem.color = '#7265E3';
             seriesItem.name = item.name;
             seriesItem.data = item.format ? item.format(item.data[index]) : item.data[index];
             data.push(seriesItem);
@@ -982,7 +982,7 @@ function drawToolTipSplitLine(offsetX, opts, config, context) {
     var startY = config.padding;
     var endY = opts.height - config.padding - config.xAxisHeight - config.legendHeight;
     context.beginPath();
-    context.setStrokeStyle('#8CD6FF'); //Tip线颜色
+    context.setStrokeStyle('#7265E3'); //Tip线颜色
     context.setLineWidth(1);
     context.moveTo(offsetX, startY);
     context.lineTo(offsetX, endY);
@@ -1178,7 +1178,7 @@ function drawAreaDataPoints(series, opts, config, context) {
             // var grad = context.createLinearGradient(0, 0, 0, 100);
             // grad.addColorStop(0, '#64C4FB');
             // grad.addColorStop(1, '#EEF9FF');
-            context.setFillStyle('#CEEDFF');
+            context.setFillStyle('#7265E3');
             context.setGlobalAlpha(0.7);
 
             context.setLineWidth(2);
