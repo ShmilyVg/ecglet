@@ -50,7 +50,7 @@ Component({
             data.circleX = data.radius + halfRoundWidth;
             data.circleY = data.radius + halfRoundWidth;
             data.startDegree = 1.5 * Math.PI;
-            data.degreePreFPS = data.wholeDegree / (data.maxCount * 1000 / data.period);
+            data.degreePreFPS = data.wholeDegree / ((data.maxCount >= 120 ? data.maxCount + 4 : data.maxCount + 1) * 1000 / data.period);
         },
 
         getPeriod() {
@@ -95,7 +95,7 @@ Component({
             //绘制文字
             const currentNum = maxCount - step;
             let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = 45;
-            if (currentNum > 100) {
+            if (currentNum >= 100) {
                 largeFontSize = 43;
                 halfLargeFontSize = Math.floor(largeFontSize / 2.3);
             }
@@ -109,8 +109,8 @@ Component({
             ctx.draw();
         },
         _drawCircle({circleX, circleY, startDegree, radius, ctx}) {
-            // data.degreePreFPS = data.wholeDegree / this.data.maxCount / 33
             let {degreePreFPS, roundWidth} = this.data;
+            // const currentDegree = startDegree + degreePreFPS * (725);
             const currentDegree = startDegree + degreePreFPS * (this.data.degreeStep++);
             ctx.lineWidth = roundWidth;
             ctx.lineCap = 'round';

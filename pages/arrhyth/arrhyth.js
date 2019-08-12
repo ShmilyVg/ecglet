@@ -405,19 +405,19 @@ Page({
             tempCount += 40;
             if (tempCount % 1000 === 0) {
                 that.data.count++;
-                console.log('count: ' + count, maxCount);
+                // console.log('count: ' + count, maxCount);
             }
             if (count <= maxCount) {
                 circle.drawCircle(count);
-                if (count >= maxCount) {
-                    that.data.count = 0;
-                    app.clearAllArrhythTimer();
-                    that.data.completed = true
-                    that.closeBluetooth().then(() => {
-                        console.log('prepare to upload data...')
-                        that.uploadData();
-                    });
-                }
+
+            } else if (count > maxCount) {
+                that.data.count = 0;
+                app.clearAllArrhythTimer();
+                that.data.completed = true
+                that.closeBluetooth().then(() => {
+                    console.log('prepare to upload data...')
+                    that.uploadData();
+                });
             }
 
         }, circle.getPeriod()));
@@ -460,20 +460,20 @@ Page({
     },
 
     onReady() {
-        // TODO 将来删掉
-        let that = this;
-        setTimeout(() => {
-            that.hideLoading()
-
-            // 每次重新连接，采集数据缓存清空一次
-            that.waveData = undefined
-
-            // 计时开始
-                this.arrhythStateManager.prepare();
-                // setTimeout(() => {
-                //     that.startCount();
-                // });
-        }, 1000);
+        // // TODO 将来删掉
+        // let that = this;
+        // setTimeout(() => {
+        //     that.hideLoading()
+        //
+        //     // 每次重新连接，采集数据缓存清空一次
+        //     that.waveData = undefined
+        //
+        //     // 计时开始
+        //     this.arrhythStateManager.prepare();
+        //     // setTimeout(() => {
+        //     //     that.startCount();
+        //     // });
+        // }, 1000);
     },
 
     closeBluetooth() {

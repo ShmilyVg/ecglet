@@ -96,8 +96,8 @@ swiper{
   color:#C5BFFB;
 }
 .arrhyth-connected-confirm-size{
-  width: 150rpx;
-  height: 122rpx;
+  width: 104rpx;
+  height: 84rpx;
 }
 
 .connect-failed-button{
