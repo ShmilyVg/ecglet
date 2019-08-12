@@ -60,10 +60,10 @@ Page({
         app.clearAllArrhythTimer();
         that.data.count = 0;
 
-        if (that.data.progressCircle) {
-            let circle = that.data.progressCircle
-            circle.drawCircle(0);
-        }
+        // if (that.data.progressCircle) {
+        //     let circle = that.data.progressCircle
+        //     circle.drawCircle(0);
+        // }
 
         if (that.data.ecgPannel) {
             let ecg = that.data.ecgPannel

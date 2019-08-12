@@ -167,6 +167,8 @@ Component({
         attached() {
             console.log('circle 链接到页面');
             this.intervalIndex = -1;
+            this.data.isStart = false;
+            this.data.degreeStep = 0;
             this.canvasTimeTextContext = wx.createCanvasContext('circle_draw1', this);
             this.canvasTimeCircleContext = wx.createCanvasContext('circle_time', this);
             this.canvasBgContext = wx.createCanvasContext('circle_bg1', this);
@@ -177,6 +179,8 @@ Component({
         },
         detached() {
             console.log('circle 移除节点');
+            this.data.isStart = false;
+            this.data.degreeStep = 0;
             if (this.intervalIndex) {
                 console.log('detached 清除倒计时');
                 clearInterval(this.intervalIndex);
