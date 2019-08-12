@@ -34,10 +34,9 @@ Page({
         lastDeviceId: '',
         connectingDeviceId: '',
         progressCircle: undefined,
-        txt: '',
         testType: 0,
         count: 0,
-        maxCount: 15,
+        maxCount: 30,
         ecgPannel: undefined,
         connected: false,
         completed: false,
@@ -63,8 +62,7 @@ Page({
 
         if (that.data.progressCircle) {
             let circle = that.data.progressCircle
-            circle.drawCircle(-1);
-            that.setData({txt: this.getOriginTxt()});
+            circle.drawCircle(0);
         }
 
         if (that.data.ecgPannel) {
@@ -179,11 +177,9 @@ Page({
         that.data.testType = parseInt(options.type) || 0;
         wx.setNavigationBarTitle({title: that.data.testType === 2 ? '心脏负荷评估' : '常规心电检测'});
         that.setData({
-                maxCount: parseInt(this.getOriginTxt()) / 2,
+                maxCount: parseInt(this.getOriginTxt()),
                 testType: that.data.testType,
                 windowHeight: wx.getSystemInfoSync().windowHeight,
-                txt: this.getOriginTxt(),
-
             }
         );
         console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
@@ -405,14 +401,12 @@ Page({
         let that = this
 
         app.addNewArrhythTimer(setInterval(function f() {
-            that.data.count++;
-            if (that.data.count <= 2 * that.data.maxCount) {
+            if (that.data.count <= that.data.maxCount) {
                 console.log('count: ' + that.data.count, that.data.maxCount);
                 let circle = that.data.progressCircle;
                 circle.drawCircle(that.data.count);
-                if (that.data.count >= 2 * that.data.maxCount) {
+                if (that.data.count >= that.data.maxCount) {
                     that.data.count = 0
-                    // that.setData({ txt: '0' })
                     app.clearAllArrhythTimer();
                     that.data.completed = true
                     that.closeBluetooth().then(() => {
@@ -421,6 +415,7 @@ Page({
                     })
                 }
             }
+            that.data.count++;
         }, 1000));
     },
     onShow() {

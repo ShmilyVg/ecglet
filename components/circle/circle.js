@@ -13,7 +13,7 @@ Component({
         },
         maxCount: {
             type: Number,
-            value: 15,
+            value: 30,
         }
     },
 
@@ -21,16 +21,18 @@ Component({
      * 组件的初始数据
      */
     data: {
+        hz: 40,
         size: 0,
-        step: 1,
         num: 100,
         rpx: 1,
-        maxPointNum: 15,
         ctx: {},
-        textWidth: 0,
         roundWidth: 10,
         circleX: 0,
-        circleY: 0
+        circleY: 0,
+        startDegree: 1.5 * Math.PI,
+        endDegree: 3.5 * Math.PI,
+        degreeStep: 0,
+        isStart: false
     },
 
     options: {
@@ -47,7 +49,8 @@ Component({
             data.wholeDegree = 2 * Math.PI;//360度
             data.circleX = data.radius + halfRoundWidth;
             data.circleY = data.radius + halfRoundWidth;
-
+            data.startDegree = 1.5 * Math.PI;
+            data.degreePreFPS = data.wholeDegree / (data.maxCount * 1000 / data.hz);
         },
 
         drawCircleBg() {
@@ -63,39 +66,24 @@ Component({
             ctx.beginPath();
             ctx.lineWidth = smallWidth;
             ctx.strokeStyle = 'white';
-            ctx.arc(circleX, circleY, radius + halfRoundWidth - 1, 0, wholeDegree, false);
+            ctx.arc(circleX, circleY, radius + halfRoundWidth, 0, wholeDegree, false);
             ctx.stroke();
 
             ctx.beginPath();
             ctx.lineWidth = smallWidth;
             ctx.strokeStyle = 'white';
-            ctx.arc(circleX, circleY, radius - halfRoundWidth - 1, 0, wholeDegree, false);
+            ctx.arc(circleX, circleY, radius - halfRoundWidth, 0, wholeDegree, false);
             ctx.stroke();
             ctx.draw();
         },
 
         drawCircle(step) {
-            const {data, data: {radius, wholeDegree, circleX, circleY, maxCount, roundWidth}} = this,
-                ctx = this.canvasContext;
-            ctx.strokeStyle = 'rgb(255,255,255)';
-            ctx.beginPath();
-            ctx.arc(circleX, circleY, radius, -1.5 * Math.PI, 0, false);
-            ctx.stroke();
-            const currentNum = maxCount * 2 - step;
-            let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = 45;
-            if (currentNum > 100) {
-                largeFontSize = 43;
-                halfLargeFontSize = Math.floor(largeFontSize / 2.3);
+            const {data: {radius, circleX, circleY, maxCount, startDegree, isStart}, canvasTimeTextContext: timeTextCtx, canvasTimeCircleContext: timeCircleCtx} = this;
+            if (!isStart) {
+                this.data.isStart = true;
+                this._drawCircle({circleX, circleY, startDegree, radius, step, ctx: timeCircleCtx});
             }
-            ctx.font = `${largeFontSize}px sans-serif`;
-            ctx.setTextAlign('center');
-            ctx.setTextBaseline('normal');
-            ctx.fillStyle = 'white';
-            ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize);
-            ctx.font = '12px sans-serif';
-            ctx.fillText('S', radius + sX, radius + halfLargeFontSize);
-
-            ctx.draw();
+            this._drawText({maxCount, step, radius, ctx: timeTextCtx});
 
 
             // const x1 = r, maxPointNum = that.data.maxPointNum,maxCount = that.data.maxCount,
@@ -127,7 +115,43 @@ Component({
             // ctx.draw();
 
         },
+        _drawText({maxCount, radius, step, ctx}) {
+            //绘制文字
+            const currentNum = maxCount - step;
+            let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = 45;
+            if (currentNum > 100) {
+                largeFontSize = 43;
+                halfLargeFontSize = Math.floor(largeFontSize / 2.3);
+            }
+            ctx.font = `${largeFontSize}px sans-serif`;
+            ctx.setTextAlign('center');
+            ctx.setTextBaseline('normal');
+            ctx.fillStyle = 'white';
+            ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize);
+            ctx.font = '12px sans-serif';
+            ctx.fillText('S', radius + sX, radius + halfLargeFontSize);
+            ctx.draw();
+        },
+        _drawCircle({circleX, circleY, startDegree, radius, ctx}) {
+            const intervalIndex = setInterval(() => {
+                // data.degreePreFPS = data.wholeDegree / this.data.maxCount / 33
+                let {degreePreFPS, endDegree, roundWidth} = this.data;
+                const currentDegree = startDegree + degreePreFPS * (this.data.degreeStep++);
+                ctx.lineWidth = roundWidth;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = 'rgb(255,255,255)';
+                ctx.beginPath();
+                ctx.arc(circleX, circleY, radius, startDegree, currentDegree, false);
+                ctx.stroke();
+                ctx.draw();
 
+                if (currentDegree > endDegree) {
+                    console.log('清除倒计时');
+                    clearInterval(intervalIndex);
+                }
+            }, this.data.hz);
+
+        },
         _runEvent() {
             this.triggerEvent('runEvent', {}, {})
         },
@@ -137,16 +161,18 @@ Component({
         created() {
             let that = this
             that.data.rpx = wx.getSystemInfoSync().windowWidth / 375;
-            that.data.textWidth = parseFloat((that.data.rpx / 1.4).toFixed(2));
 
-            console.log('像素比', that.data.rpx, that.data.textWidth);
+            console.log('像素比', that.data.rpx);
         },
         attached() {
             console.log('circle 链接到页面');
-            this.canvasContext = wx.createCanvasContext('circle_draw1', this);
+            this.canvasTimeTextContext = wx.createCanvasContext('circle_draw1', this);
+            this.canvasTimeCircleContext = wx.createCanvasContext('circle_time', this);
             this.canvasBgContext = wx.createCanvasContext('circle_bg1', this);
-            this.canvasContext.lineWidth = this.data.roundWidth;
-            this.canvasContext.lineCap = 'round';
+            this.canvasTimeCircleContext.lineWidth = this.data.roundWidth;
+            this.canvasTimeCircleContext.lineCap = 'round';
+            // this.canvasTimeTextContext.lineWidth = this.data.roundWidth;
+            // this.canvasTimeTextContext.lineCap = 'round';
         },
         detached() {
             console.log('circle 移除节点');
