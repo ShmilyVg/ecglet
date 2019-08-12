@@ -1,5 +1,6 @@
 // pages/ill-history/ill-history.js
 import HiNavigator from "../../components/navigator/hi-navigator";
+import Protocol from "../../apis/network/protocol";
 
 Page({
     data: {
@@ -32,15 +33,33 @@ Page({
                 isNorItem: false,
             }
         ],
+        haveHistoryIll: false,
         result: {}
     },
 
     onLoad(options) {
-        const {isNormalMember, isNewMember, memberId} = options;
+        const {isNormalMember, isNewMember, relevanceId} = options;
         this.setData({
             isNormalMember: isNormalMember,
             isNewMember: isNewMember,
-            memberId: memberId
+            relevanceId: relevanceId
+        });
+
+        Protocol.memberDiseaseGetMemberHistory({relevanceId}).then(res => {
+            if (res.result.data) {
+                this.data.illItem[0].isChose = res.result.data.hypertension;
+                this.data.illItem[1].isChose = res.result.data.cardiopathy;
+                this.data.illItem[2].isChose = res.result.data.diabetes;
+                this.setData({
+                    illItem: this.data.illItem,
+                    illId: res.result.data.id,
+                    haveHistoryIll: true
+                })
+            } else {
+                this.setData({
+                    haveHistoryIll: false
+                })
+            }
         })
     },
 
@@ -67,13 +86,31 @@ Page({
     },
 
     save() {
+        let result = {};
         this.data.illItem.map(value => {
             if (value.en) {
-                this.data.result[value.en] = value.isChose ? 1 : 0;
+                result[value.en] = value.isChose ? 1 : 0;
             }
         });
-        this.setData({
-            result: this.data.result
+
+        if (!this.data.isNormalMember) {
+            result.relevanceId = this.data.relevanceId;
+        }
+        if (this.data.haveHistoryIll) {
+            result.id = this.data.illId;
+            Protocol.memberDiseaseUpdate({data: result}).then(_ => {
+                this.editFinish();
+            })
+        } else {
+            Protocol.memberDiseaseCreate({data: result}).then(_ => {
+                this.editFinish();
+            })
+        }
+    },
+
+    editFinish() {
+        HiNavigator.navigateBack({
+            delta: 2
         })
     },
 
