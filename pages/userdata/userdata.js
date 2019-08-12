@@ -20,7 +20,7 @@ Page({
         number: '',
         portraitUrl: '',
         isNewMember: false,
-        memberId: 0
+        relevanceId: 0
     },
 
     onLoad(options) {
@@ -209,6 +209,7 @@ Page({
                         };
                         console.log('保存信息：', data);
                         Protocol.memberRelevanceUpdate(data).then((res) => {
+                            this.data.relevanceId = res.result.relevanceId;
                             this.naviToIllHisPage();
                         }).catch((res) => {
                             switch (res.data.code) {
@@ -233,8 +234,8 @@ Page({
     },
 
     naviToIllHisPage() {
-        const {isNormalMember, isNewMember, memberId} = this.data;
-        HiNavigator.navigateToIllHistory({isNormalMember, isNewMember, memberId});
+        const {isNormalMember, isNewMember, relevanceId} = this.data;
+        HiNavigator.navigateToIllHistory({isNormalMember, isNewMember, relevanceId});
     },
 
     chooseImage() {

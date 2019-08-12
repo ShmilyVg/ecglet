@@ -203,6 +203,37 @@ export default class Protocol {
         return Network.request({url: 'account/update', data: arguments[0]});
     }
 
+
+    // 4。0新增协议
+    static memberDiseaseGetMemberHistory({relevanceId}) {
+        if (relevanceId == 0) {
+            console.log('主成员');
+            return Network.request({
+                url: 'member/disease/getMemberHistory',
+            })
+        } else {
+            console.log('非主成员');
+            return Network.request({
+                url: 'member/disease/getMemberHistory',
+                data: {relevanceId}
+            })
+        }
+    }
+
+    static memberDiseaseCreate({data}) {
+        return Network.request({
+            url: 'member/disease/create',
+            data: data
+        })
+    }
+
+    static memberDiseaseUpdate({data}) {
+        return Network.request({
+            url: 'member/disease/update',
+            data: data
+        })
+    }
+
     /**
      * 获取常规心电记录详细信息
      * @param id
