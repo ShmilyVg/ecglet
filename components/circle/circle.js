@@ -21,7 +21,7 @@ Component({
      * 组件的初始数据
      */
     data: {
-        period: 40,
+        period: 50,
         size: 0,
         num: 100,
         rpx: 1,

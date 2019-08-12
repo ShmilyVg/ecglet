@@ -399,10 +399,10 @@ Page({
     startCount() {
         console.log('startCount...')
         let that = this
-        let circle = that.data.progressCircle, tempCount = 0;
+        let circle = that.data.progressCircle, tempCount = 0, period = circle.getPeriod();
         app.addNewArrhythTimer(setInterval(function f() {
             let {count, maxCount} = that.data;
-            tempCount += 40;
+            tempCount += period;
             if (tempCount % 1000 === 0) {
                 that.data.count++;
                 // console.log('count: ' + count, maxCount);
@@ -420,7 +420,7 @@ Page({
                 });
             }
 
-        }, circle.getPeriod()));
+        }, period));
     },
     onShow() {
         console.log('onShow... isStartBLEDevices', this.isStartBLEDevices)
