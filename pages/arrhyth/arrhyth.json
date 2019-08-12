@@ -6,5 +6,6 @@
     "dialog": "../../components/dialog/dialog"
   },
   "backgroundColor": "#7265E3",
-  "navigationBarBackgroundColor": "#7265E3"
+  "navigationBarBackgroundColor": "#7265E3",
+  "navigationBarTextStyle": "white"
 }
