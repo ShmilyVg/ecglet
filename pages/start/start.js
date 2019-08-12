@@ -82,8 +82,10 @@ Page({
         }).catch((res) => {
             console.log(res);
         });
-    }
+    },
 
+    toHeartHealthPage() {
 
+    },
 });
 

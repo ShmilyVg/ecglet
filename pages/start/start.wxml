@@ -1,11 +1,11 @@
-<view class="flex-column box-sizing-border-box" style="padding: 80rpx 50rpx;">
+<view class="flex-column box-sizing-border-box" style="padding: 60rpx 50rpx;">
     <view class="flex-row align-items-center">
         <image wx:if="{{userInfo.portraitUrl}}" mode="aspectFill" class="user-head" src="{{userInfo.portraitUrl}}"></image>
         <image wx:else class="user-head" mode="aspectFill" src="../../images/user.png"></image>
         <view class="user-name">{{name}}</view>
     </view>
 
-    <view class="title" style="margin-top: 100rpx;">{{isFirstUsed?'欢迎使用':'你知道吗？'}}</view>
+    <view class="title" style="margin-top: 70rpx;">{{isFirstUsed?'欢迎使用':'你知道吗？'}}</view>
     <view wx:if="{{isFirstUsed}}" class="title">HiPee智能心电仪</view>
     <view wx:else class="start-tip">{{tip}}</view>
     <view class="line-little"></view>
@@ -20,22 +20,6 @@
             </view>
         </button>
 
-<!--        <button wx:elif="{{isConnected}}" class="flex-column box-sizing-border-box start-btn" hover-class="none" open-type="getUserInfo" bindgetuserinfo="onGotUserInfoNormalTest">-->
-<!--            <view class="item-title">常规心电检测</view>-->
-<!--            <view class="flex-row align-items-center space-between icon-margin-top">-->
-<!--                <image class="start-icon" src="../../images/start/normal.png"></image>-->
-<!--                <image class="start-arrow-icon" src="../../images/start/arrow.png"></image>-->
-<!--            </view>-->
-<!--        </button>-->
-<!--        <button wx:else class="flex-column box-sizing-border-box start-btn" hover-class="none" bindtap="onNoNetworkConnected">-->
-<!--            <view class="item-title">常规心电检测</view>-->
-<!--            <view class="flex-row align-items-center space-between icon-margin-top">-->
-<!--                <image class="start-icon" src="../../images/start/normal.png"></image>-->
-<!--                <image class="start-arrow-icon" src="../../images/start/arrow.png"></image>-->
-<!--            </view>-->
-<!--        </button>-->
-
-
         <button class="flex-column box-sizing-border-box start-btn-02" bindtap="to02TestPage" hover-class="none">
             <view class="item-title">心脏负荷评估</view>
             <view class="flex-row align-items-center space-between icon-margin-top">
@@ -44,23 +28,14 @@
             </view>
         </button>
 
-<!--        <button wx:elif="{{isConnected}}" class="flex-column box-sizing-border-box start-btn-02" hover-class="none" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo02Test">-->
-<!--            <view class="item-title">心脏负荷评估</view>-->
-<!--            <view class="flex-row align-items-center space-between icon-margin-top">-->
-<!--                <image class="start-icon" src="../../images/start/normal_02.png"></image>-->
-<!--                <image class="start-arrow-icon" src="../../images/start/arrow.png"></image>-->
-<!--            </view>-->
-<!--        </button>-->
-<!--        <button wx:else class="flex-column box-sizing-border-box start-btn-02" hover-class="none" bindtap="onNoNetworkConnected">-->
-<!--            <view class="item-title">心脏负荷评估</view>-->
-<!--            <view class="flex-row align-items-center space-between icon-margin-top">-->
-<!--                <image class="start-icon" src="../../images/start/normal_02.png"></image>-->
-<!--                <image class="start-arrow-icon" src="../../images/start/arrow.png"></image>-->
-<!--            </view>-->
-<!--        </button>-->
-
-
     </view>
 
+    <view class="flex-row align-items-center space-between box-sizing-border-box heart-health-layout" bindtap="toHeartHealthPage">
+        <view class="flex-row align-items-center">
+            <image style="width: 28rpx;height: 28rpx;margin-right: 12rpx" src="../../images/start/health_icon.png"></image>
+            <view class="heart-health-title">心脏健康评估（10年内）</view>
+        </view>
+        <image style="width: 14rpx;height: 22rpx;" src="../../images/start/health_arrow.png"></image>
+    </view>
 
 </view>

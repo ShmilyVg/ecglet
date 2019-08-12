@@ -399,24 +399,28 @@ Page({
     startCount() {
         console.log('startCount...')
         let that = this
-
+        let circle = that.data.progressCircle, tempCount = 0;
         app.addNewArrhythTimer(setInterval(function f() {
-            if (that.data.count <= that.data.maxCount) {
-                console.log('count: ' + that.data.count, that.data.maxCount);
-                let circle = that.data.progressCircle;
-                circle.drawCircle(that.data.count);
-                if (that.data.count >= that.data.maxCount) {
-                    that.data.count = 0
+            let {count, maxCount} = that.data;
+            tempCount += 40;
+            if (tempCount % 1000 === 0) {
+                that.data.count++;
+                console.log('count: ' + count, maxCount);
+            }
+            if (count <= maxCount) {
+                circle.drawCircle(count);
+                if (count >= maxCount) {
+                    that.data.count = 0;
                     app.clearAllArrhythTimer();
                     that.data.completed = true
                     that.closeBluetooth().then(() => {
                         console.log('prepare to upload data...')
-                        that.uploadData()
-                    })
+                        that.uploadData();
+                    });
                 }
             }
-            that.data.count++;
-        }, 1000));
+
+        }, circle.getPeriod()));
     },
     onShow() {
         console.log('onShow... isStartBLEDevices', this.isStartBLEDevices)
@@ -456,20 +460,20 @@ Page({
     },
 
     onReady() {
-        // // TODO 将来删掉
-        // let that = this;
-        // setTimeout(() => {
-        //     that.hideLoading()
-        //
-        //     // 每次重新连接，采集数据缓存清空一次
-        //     that.waveData = undefined
-        //
-        //     // 计时开始
-        //         this.arrhythStateManager.prepare();
-        //         // setTimeout(() => {
-        //         //     that.startCount();
-        //         // });
-        // }, 1000);
+        // TODO 将来删掉
+        let that = this;
+        setTimeout(() => {
+            that.hideLoading()
+
+            // 每次重新连接，采集数据缓存清空一次
+            that.waveData = undefined
+
+            // 计时开始
+                this.arrhythStateManager.prepare();
+                // setTimeout(() => {
+                //     that.startCount();
+                // });
+        }, 1000);
     },
 
     closeBluetooth() {

@@ -69,8 +69,8 @@ page{
 
 .start-btn-02{
   width: 300rpx;
-  background:rgba(0,198,188,1);
-  box-shadow:-10rpx 10rpx 13rpx 0px rgba(0,198,188,0.3);
+  background:rgba(252,122,96,1);
+  box-shadow:-6rpx 8rpx 20rpx 0 rgba(252,122,96,0.4);
   border-radius:40rpx 0px 40rpx 40rpx;
   padding: 45rpx 56rpx 45rpx 40rpx;
   margin: 0;
@@ -95,4 +95,21 @@ page{
   border-radius:3rpx;
   margin-top: 12rpx;
   margin-bottom: 20rpx;
+}
+.heart-health-layout{
+  width:649rpx;
+  height:105rpx;
+  background:rgba(243,241,255,1);
+  border-radius:40rpx;
+  margin-top: 50rpx;
+  margin-bottom: 100rpx;
+  padding: 38rpx 42rpx 38rpx 46rpx;
+}
+
+.heart-health-title{
+  font-size:30rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(114,101,227,1);
+  line-height:64rpx;
 }
