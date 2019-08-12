@@ -30,5 +30,12 @@
 
     </view>
 
+    <view class="flex-row align-items-center space-between box-sizing-border-box heart-health-layout" bindtap="toHeartHealthPage">
+        <view class="flex-row align-items-center">
+            <image style="width: 28rpx;height: 28rpx;margin-right: 12rpx" src="../../images/start/health_icon.png"></image>
+            <view class="heart-health-title">心脏健康评估（10年内）</view>
+        </view>
+        <image style="width: 14rpx;height: 22rpx;" src="../../images/start/health_arrow.png"></image>
+    </view>
 
 </view>
