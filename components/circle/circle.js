@@ -21,7 +21,7 @@ Component({
      * 组件的初始数据
      */
     data: {
-        hz: 40,
+        period: 40,
         size: 0,
         num: 100,
         rpx: 1,
@@ -50,7 +50,11 @@ Component({
             data.circleX = data.radius + halfRoundWidth;
             data.circleY = data.radius + halfRoundWidth;
             data.startDegree = 1.5 * Math.PI;
-            data.degreePreFPS = data.wholeDegree / (data.maxCount * 1000 / data.hz);
+            data.degreePreFPS = data.wholeDegree / (data.maxCount * 1000 / data.period);
+        },
+
+        getPeriod() {
+            return this.data.period;
         },
 
         drawCircleBg() {
@@ -66,54 +70,26 @@ Component({
             ctx.beginPath();
             ctx.lineWidth = smallWidth;
             ctx.strokeStyle = 'white';
-            ctx.arc(circleX, circleY, radius + halfRoundWidth, 0, wholeDegree, false);
+            ctx.arc(circleX, circleY, radius + halfRoundWidth - 1, 0, wholeDegree, false);
             ctx.stroke();
 
             ctx.beginPath();
             ctx.lineWidth = smallWidth;
             ctx.strokeStyle = 'white';
-            ctx.arc(circleX, circleY, radius - halfRoundWidth, 0, wholeDegree, false);
+            ctx.arc(circleX, circleY, radius - halfRoundWidth - 1, 0, wholeDegree, false);
             ctx.stroke();
             ctx.draw();
         },
 
         drawCircle(step) {
-            const {data: {radius, circleX, circleY, maxCount, startDegree, isStart}, canvasTimeTextContext: timeTextCtx, canvasTimeCircleContext: timeCircleCtx} = this;
-            if (!isStart) {
-                this.data.isStart = true;
-                this._drawCircle({circleX, circleY, startDegree, radius, step, ctx: timeCircleCtx});
+            const {data: {radius, circleX, circleY, startDegree}, canvasTimeCircleContext: timeCircleCtx} = this;
+            this._drawCircle({circleX, circleY, startDegree, radius, ctx: timeCircleCtx});
+
+            if (this.data.step !== step) {
+                this.data.step = step;
+                const {data: {maxCount}, canvasTimeTextContext: timeTextCtx} = this;
+                this._drawText({maxCount, step, radius, ctx: timeTextCtx});
             }
-            this._drawText({maxCount, step, radius, ctx: timeTextCtx});
-
-
-            // const x1 = r, maxPointNum = that.data.maxPointNum,maxCount = that.data.maxCount,
-            //     smallRadius = r / 12, y1 = smallRadius,
-            //     a = 2 * Math.PI / maxPointNum, circleRadius = r - smallRadius,
-            //     currentStep = Math.floor(step / (maxCount * 2 / maxPointNum));
-            // console.log('currentStep', currentStep);
-            //
-            // let x = x1, y = y1;
-            // for (let i = 1; i <= maxPointNum; i++) {
-            //     ctx.beginPath();
-            //     ctx.setFillStyle(currentStep >= i ? 'white' : '#257AD1');
-            //     ctx.arc(x, y, smallRadius, 0, wholeDegree, false);
-            //     ctx.fill();
-            //     const degree = a * i;
-            //     x = x1 + circleRadius * Math.sin(degree);
-            //     y = y1 + circleRadius - circleRadius * Math.cos(degree);
-            // }
-            // if (step !== -1) {
-            //     ctx.setFontSize(43);
-            //     ctx.setTextAlign('center');
-            //     const currentNum = maxCount * 2 - step,
-            //         maxWidthText1 = 90;
-            //     ctx.setFillStyle('white');
-            //     ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), r, r + 10, maxWidthText1);
-            //     ctx.setFontSize(12);
-            //     ctx.fillText('SECOND', r, r + 30, maxWidthText1);
-            // }
-            // ctx.draw();
-
         },
         _drawText({maxCount, radius, step, ctx}) {
             //绘制文字
@@ -133,23 +109,16 @@ Component({
             ctx.draw();
         },
         _drawCircle({circleX, circleY, startDegree, radius, ctx}) {
-            this.intervalIndex = setInterval(() => {
-                // data.degreePreFPS = data.wholeDegree / this.data.maxCount / 33
-                let {degreePreFPS, endDegree, roundWidth} = this.data;
-                const currentDegree = startDegree + degreePreFPS * (this.data.degreeStep++);
-                ctx.lineWidth = roundWidth;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = 'rgb(255,255,255)';
-                ctx.beginPath();
-                ctx.arc(circleX, circleY, radius, startDegree, currentDegree, false);
-                ctx.stroke();
-                ctx.draw();
-
-                if (currentDegree > endDegree) {
-                    console.log('计时结束，清除倒计时');
-                    clearInterval(this.intervalIndex);
-                }
-            }, this.data.hz);
+            // data.degreePreFPS = data.wholeDegree / this.data.maxCount / 33
+            let {degreePreFPS, roundWidth} = this.data;
+            const currentDegree = startDegree + degreePreFPS * (this.data.degreeStep++);
+            ctx.lineWidth = roundWidth;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = 'rgb(255,255,255)';
+            ctx.beginPath();
+            ctx.arc(circleX, circleY, radius - 1, startDegree, currentDegree, false);
+            ctx.stroke();
+            ctx.draw();
 
         },
         _runEvent() {
@@ -166,8 +135,6 @@ Component({
         },
         attached() {
             console.log('circle 链接到页面');
-            this.intervalIndex = -1;
-            this.data.isStart = false;
             this.data.degreeStep = 0;
             this.canvasTimeTextContext = wx.createCanvasContext('circle_draw1', this);
             this.canvasTimeCircleContext = wx.createCanvasContext('circle_time', this);
@@ -181,10 +148,6 @@ Component({
             console.log('circle 移除节点');
             this.data.isStart = false;
             this.data.degreeStep = 0;
-            if (this.intervalIndex) {
-                console.log('detached 清除倒计时');
-                clearInterval(this.intervalIndex);
-            }
         }
     },
 
