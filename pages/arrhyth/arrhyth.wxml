@@ -10,14 +10,15 @@
     <circle id='circle1' class="circle_pannel" bg='circle_bg1' draw='circle_draw1' max-count="{{maxCount}}"
             bind:runEvent="_runEvent">
       <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
-      <view class="circle_info">
-        <image wx:if="{{isFilterArrhythData}}" src="./../../images/arrhyth/cg.png"
+      <view class="circle_info" wx:if="{{isFilterArrhythData}}">
+        <image src="./../../images/arrhyth/cg.png"
                class="arrhyth-connected-confirm-size"></image>
+        <view class="content-layout-success-title">连接成功</view>
+
       </view>
     </circle>
     <view class="fill-width flex-column align-items-center justify-center content-layout">
       <block wx:if="{{isFilterArrhythData}}">
-        <view class="content-layout-success-title">连接成功</view>
         <view class="content-layout-success-content">请保持当前姿势不要移动</view>
       </block>
       <opacity-text wx:else class="flex-row align-items-center justify-center"></opacity-text>
