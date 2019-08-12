@@ -1,7 +1,7 @@
 @import "../../components/result-top/index.wxss";
 @import "../../components/result-bottom/index.wxss";
 page {
-    background-color: #00beb4;
+    background-color: transparent;
 }
 
 .title {
