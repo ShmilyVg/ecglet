@@ -12,8 +12,8 @@ swiper{
 }
 
 .arrhyth-guider-image{
-  width: 512rpx;
-  height: 334rpx;
+  width: 510rpx;
+  height: 332rpx;
 }
 .arrhyth-guider-title{
   font-size:36rpx;
@@ -96,8 +96,8 @@ swiper{
   color:#C5BFFB;
 }
 .arrhyth-connected-confirm-size{
-  width: 149rpx;
-  height: 149rpx;
+  width: 150rpx;
+  height: 122rpx;
 }
 
 .connect-failed-button{

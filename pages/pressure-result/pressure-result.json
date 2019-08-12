@@ -2,5 +2,6 @@
   "usingComponents": {
     "dialog": "../../components/dialog/dialog"
   },
-  "navigationBarBackgroundColor": "#00beb4"
+  "navigationBarBackgroundColor": "#00beb4",
+  "navigationBarTextStyle": "white"
 }
