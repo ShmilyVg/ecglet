@@ -1,60 +1,42 @@
-<import src="../../components/result-top/index.wxml"></import>
 <import src="../../components/result-bottom/index.wxml"></import>
-<view class="flex-column align-items-center" style="padding-bottom: 50rpx;">
-    <view class="fill-width flex-column align-items-center pressure-result-top-layout">
-        <view class="fill-width flex-column align-items-center pressure-result-title-bg">
-            <view class="title">心脏负荷检测结果报告</view>
-            <view class="content">{{time}}</view>
-        </view>
-        <template is="result-top" data="{{resultColor:'#00beb4',items,isGreen:true}}"></template>
-    </view>
 
 
-    <view class="fill-width flex-row box-sizing-border-box pressure-result-title align-items-center">
-        <view class="">心脏压力指数</view>
-        <view style="padding: 20rpx 20rpx;" bindtap="lookReasonDialog" class="flex-row align-items-center">
-            <image style="width: 36rpx;height: 36rpx;" src="../../images/pressure-result/question.png"></image>
-        </view>
-    </view>
-
-    <view class='flex-column align-items-center table-02 table-02-bg'>
-        <view class="canvasBox">
-<!--            <view class='outerCircle'></view>-->
-<!--            <view class='coreCircle'></view>-->
-            <canvas style="display: {{showScore?'block':'none'}};" canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
-
-        </view>
-        <view class="pressure-score-title">{{stress.title||''}}</view>
-
-        <view wx:for="{{stress.content}}" wx:key="index" class="pressure-score-content">{{item}}</view>
-    </view>
-    <view class="fill-width flex-column box-sizing-border-box pressure-result-title">
-        <view>疲劳程度</view>
-        <view class="pressure-result-subtitle">与人的压力和能量储备相关，反映了您当前身体的疲劳程度</view>
-    </view>
-
-    <view class='flex-column align-items-center table-02 table-02-bg'>
-        <view class="flex-row align-items-center" style="position: relative;height: 96rpx;">
-            <image class="level-image" src="../../images/pressure-result/pl.png"></image>
-            <image class="level-status-image absolute" src="../../images/pressure-result/pl0{{tired.level}}.png" style="left: {{tired.position}}%;"></image>
-        </view>
-        <view class="pressure-score-content">{{tired.content}}</view>
-    </view>
-
-    <view class="fill-width flex-column box-sizing-border-box pressure-result-title">
-        <view>兴奋指数</view>
-        <view class="pressure-result-subtitle">反映您的整体健康状况和精神状态，数值越小表示神经越放松，越大表示神经越兴奋</view>
-    </view>
-
-    <view class='flex-column align-items-center table-02 table-02-bg'>
-        <view class="flex-row align-items-center" style="position: relative;height: 96rpx;">
-            <image class="level-image" src="../../images/pressure-result/qx.png"></image>
-            <image class="level-status-image absolute" src="../../images/pressure-result/qx0{{emotion.level}}.png" style="left: {{emotion.position}}%;"></image>
-        </view>
-        <view class="pressure-score-content">{{emotion.content}}</view>
-    </view>
-
-    <template is="result-bottom" data="{{isAbNormal:true,resultColor:'#00beb4', resultBottomRemindColor:'rgba(192,238,236,1)'}}"></template>
-
+<view class="fill-width flex-column align-items-center result-top-layout">
+    <view class="title">心脏负荷检测结果报告</view>
+    <view class="content">{{time}}</view>
 </view>
+
+<view wx:for="{{6}}" class="flex-column">
+    <view class="line-1" wx:if="{{index}}"></view>
+    <view class="flex-column cell align-items-center">
+        <view class="flex-row" style="width: 100%;justify-content: space-between">
+            <view class="flex-column">
+                <view class="flex-row">
+                    <view class="cell-title">平均心率</view>
+                    <view class="cell-title-tip">[1,2,3]</view>
+                    <!--<image style="width: 32rpx;height: 32rpx;margin-left: 14rpx" src="../../images/pressure-result/warn.png"></image>-->
+                </view>
+                <view class="cell-content">平均心率</view>
+            </view>
+            <view class="flex-row align-items-center">
+                <view class="flex-column" style="align-items: end;width: 100rpx">
+                    <view class="cell-num">28</view>
+                    <view class="cell-utils">feb</view>
+                </view>
+                <image style="width: 14rpx;height: 24rpx;margin-left: 50rpx" src="../../images/arr.png"></image>
+            </view>
+        </view>
+        <view style="height: 96rpx;position: relative">
+            <image style="height: 50rpx;width: 660rpx;margin-top: 25rpx" src="../../images/pressure-result/line.png"></image>
+            <view style="height: 96rpx;width: 84rpx;position: absolute;top: 0;left:25%;background-color: red"></view>
+        </view>
+    </view>
+</view>
+
+<view style="height: 20rpx;background-color: #F6F7F9;width: 100%"></view>
+
+<view style="padding: 50rpx;">
+    <view>参考文献</view>
+</view>
+<template is="result-bottom" data="{{isAbNormal:false,btnColor:'#FC7055'}}"></template>
 <dialog id="myDialog"></dialog>

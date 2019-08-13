@@ -20,7 +20,7 @@
         <view class="result-bottom-remind">注：心电图代表当前时刻下的心脏电传导情况，心脏病发都具有“一过性”和“即时性”，当前状态下的心电图正常并不代表最终结果。</view>
         <image src="../../images/result/logo-ch.png" style="width: 114rpx;height: 67rpx;"></image>
         <view class="bottom-text"><text>上海交通大学医学院附属仁济医院\n远程心电诊断中心</text></view>
-        <view class="cell-bottom-view" style="background-color: #3A93EF;color: white;" bindtap="lookDetail">查看专业分析报告</view>
+        <view class="cell-bottom-view" style="background-color: {{btnColor}};color: white;" bindtap="lookDetail">查看专业分析报告</view>
     </view>
 
 </template>
