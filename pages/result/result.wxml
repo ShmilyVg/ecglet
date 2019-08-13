@@ -22,5 +22,5 @@
 
 
     <template is="result-top" data="{{resultColor:'#3A93EF',items}}"></template>
-    <template is="result-bottom" data="{{isAbNormal:true,resultColor:'#3A93EF',resultBottomRemindColor:'rgba(180,218,255,1)'}}"></template>
+    <template is="result-bottom" data="{{isAbNormal:true,btnColor:'#3A93EF'}}"></template>
 </view>

@@ -1,18 +1,15 @@
 import HiNavigator from "../../components/navigator/hi-navigator";
 import ResultTop from "../../components/result-top/index.js";
-import Canvas from './canvas.js';
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
 import {reLoginWithoutLogin} from "../../utils/tools";
 
 
 Page({
-    ...Canvas.options,
     data: {
-        ...Canvas.data,
         time: '',
         pdfUrl: '',
-        showScore: true
+        showScore: true,
     },
 
     lookDetail() {
@@ -68,20 +65,6 @@ Page({
         //等级 1——7.5%；2——31%； 3——56%；4——80%；
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
-
-
-        // const result = getApp().globalData.tempGatherResult;
-        //
-        // console.log('接收到的结果', result);
-        // // // const result = this.data.result;
-        // result.time = this.getTime(parseInt(result.time));
-        // this.setData({result});
-        // wx.setNavigationBarColor({
-        //     backgroundColor: this.data.isGreen ? '#00C6BC' : '#3A93EF', frontColor: '#ffffff', animation: {
-        //         duration: 400,
-        //         timingFunc: 'easeIn'
-        //     }
-        // });
     },
 
     onReady() {
@@ -100,7 +83,6 @@ Page({
                 }
             });
             this.resultTop.showItems({items});
-            this.draw('runCanvas', stress.score, 100);
         });
     },
     onShareAppMessage() {
