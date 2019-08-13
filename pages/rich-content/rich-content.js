@@ -75,6 +75,17 @@ Page({
             });
         }
     },
+    onUnload() {
+        wx.setKeepScreenOn({
+            keepScreenOn: false, success: (res) => {
+                console.log('可以息屏成功', res);
+                wx.setKeepScreenOn({keepScreenOn: false});
+            }, fail: res => {
+                console.error('可以息屏失败', res);
+                wx.setKeepScreenOn({keepScreenOn: false});
+            }
+        });
+    },
     switchMember() {
         wx.navigateTo({url: '/pages/member-list/member-list?state=1'});
     },

@@ -356,16 +356,6 @@ Page({
             // that.hideLoading()
             that.isStartBLEDevices = false;
             that.reset();
-            wx.setKeepScreenOn({
-                keepScreenOn: false, success: (res) => {
-                    console.log('可以息屏成功', res);
-                    wx.setKeepScreenOn({keepScreenOn: false});
-                }, fail: res => {
-                    console.error('可以息屏失败', res);
-                    wx.setKeepScreenOn({keepScreenOn: false});
-                }
-            });
-
             closeBluetoothAdapter().then(res => {
                 console.log('关闭蓝牙适配: %o', res)
             }).catch(error => {
