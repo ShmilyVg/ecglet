@@ -30,9 +30,7 @@ Component({
         circleX: 0,
         circleY: 0,
         startDegree: 1.5 * Math.PI,
-        endDegree: 3.5 * Math.PI,
         degreeStep: 0,
-        isStart: false
     },
 
     options: {
@@ -146,7 +144,6 @@ Component({
         },
         detached() {
             console.log('circle 移除节点');
-            this.data.isStart = false;
             this.data.degreeStep = 0;
         }
     },
