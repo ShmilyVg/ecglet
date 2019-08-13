@@ -18,7 +18,9 @@
     "pages/share/share",
     "pages/pressure-result/pressure-result",
     "pages/ill-history/ill-history",
-    "pages/avg-hr/avg-hr"
+    "pages/avg-hr/avg-hr",
+    "pages/sdnn-detail/sdnn-detail",
+    "pages/press-detail/press-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
