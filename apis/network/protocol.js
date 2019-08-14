@@ -285,6 +285,10 @@ export default class Protocol {
         )
     }
 
+    static getCopywritingChecking() {
+        return Network.request({url: 'copywriting/checking'});
+    }
+
     static wxReLogin(resolve, reject) {
         wx.login({
             success: resolve, fail: res => {

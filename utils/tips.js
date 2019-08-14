@@ -1,3 +1,6 @@
+import Protocol from "../apis/network/protocol";
+import Storage from "./storage";
+
 export class RandomRemindData {
     constructor() {
         this.tempRemindDataList = [];
@@ -48,8 +51,14 @@ export class RandomRemindData {
             {content: '不抽烟不喝酒，是为了自己也是为了子女'},
             // {content: ''},
         ];
+        if (Storage.isUpdateLocalStorage()) {
+            Protocol.getCopywritingChecking().then(data => {
+                Storage.setTips({tips: (this.remindData = data.result.contents)});
+            });
+        } else {
+            this.remindData = Storage.getTipsSync();
+        }
     }
-
 
     random() {
         const array = [...this.remindData], len = array.length;
