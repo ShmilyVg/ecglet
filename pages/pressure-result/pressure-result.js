@@ -3,13 +3,60 @@ import ResultTop from "../../components/result-top/index.js";
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
 import {reLoginWithoutLogin} from "../../utils/tools";
+import * as Tools from "../../utils/tools";
 
 
 Page({
     data: {
-        time: '',
         pdfUrl: '',
-        showScore: true,
+        isPush: false,
+    },
+
+    onLoad(options) {
+        getApp().globalData.options.query = options;
+        this.dataId = options.dataId;
+        Protocol.getCardiac({id: this.dataId}).then(res => {
+            let {data: {result: {data: {hipeeSuggest, list, time}, userInfo}}} = res;
+            let date = Tools.createDateAndTime(time);
+            let topDate = date.date + ' ' + date.time;
+            list.map(value => {
+                if (value.target) {
+                    value.point = 47 + 161 * (value.level - 1);
+                    if (value.target === 6) {
+                        value.image = `../../images/pressure-result/xf${value.level}.png`
+                    } else if (value.target === 7) {
+                        value.image = `../../images/pressure-result/pl${value.level}.png`
+                    }
+                }
+            });
+            this.setData({
+                date: topDate,
+                dataList: list,
+                suggest: hipeeSuggest,
+                userInfo
+            })
+        })
+    },
+
+    onShow() {
+        this.isNeedRelogin = true;
+    },
+
+    onHide() {
+        this.isNeedRelogin = false;
+    },
+
+
+    onUnload() {
+        if (this.isNeedRelogin) {
+            reLoginWithoutLogin();
+        }
+    },
+
+    clickPush() {
+        this.setData({
+            isPush: true
+        })
     },
 
     lookDetail() {
@@ -26,87 +73,11 @@ Page({
         }).finally(Toast.hiddenLoading);
     },
 
-    getTime(timestamp) {
-        const date = new Date(timestamp || Date.now());
-        console.log(timestamp, date);
-        return `${date.getFullYear()}/${this.getTimeWithZero(date.getMonth() + 1)}/${this.getTimeWithZero(date.getDate())} ${this.getTimeWithZero(date.getHours())}:${this.getTimeWithZero(date.getMinutes())}`;
-    },
-
-    getTimeWithZero(num) {
-        return ('0' + num).slice(-2);
-    },
-
-    getImagePosition(level) {
-        switch (level) {
-            case '1':
-                return '7.5';
-            case '2':
-                return '31';
-            case '3':
-                return '56';
-            case '4':
-                return '80';
-        }
-    },
-
-    onHide() {
-        this.isNeedRelogin = false;
-    },
-    onShow() {
-        this.isNeedRelogin = true;
-    },
-    onUnload() {
-        if (this.isNeedRelogin) {
-            reLoginWithoutLogin();
-        }
-    },
-    onLoad(options) {
-        getApp().globalData.options.query = options;
-        //等级 1——7.5%；2——31%； 3——56%；4——80%；
-        this.resultTop = new ResultTop(this);
-        this.dataId = options.dataId;
-    },
-
-    onReady() {
-        Protocol.getCardiac({id: this.dataId}).then(data => {
-            const {dataList: {list: items, stress, emotion, tired, time, isAbNormal}, userInfo} = data;
-
-            this.setData({
-                userInfo,
-                isAbNormal,
-                time: this.getTime(parseInt(time)), stress, tired: {
-                    ...tired,
-                    position: this.getImagePosition(tired.level)
-                }, emotion: {
-                    ...emotion,
-                    position: this.getImagePosition(emotion.level)
-                }
-            });
-            this.resultTop.showItems({items});
-        });
-    },
     onShareAppMessage() {
         return {
             title: '',
             imageUrl: '',
             path: '/pages/pressure-result/pressure-result?withoutLogin=1&dataId=' + this.dataId
         };
-    },
-    lookReasonDialog() {
-        const remindDialog = this.selectComponent('#myDialog');
-        this.setData({
-            showScore: false
-        });
-        const that = this;
-        remindDialog.show({
-            title: '心脏压力指数', content: '1、压力指数反映了您最近的压力状况，分数越高，压力越大；\n' +
-                '2、仅表示当前时间段内的心脏负荷情况，可能是因为工作、生活中遇到了问题导致神经紧张所致，也许是进行了剧烈运动、服药、熬夜导致的生理性异常\n' +
-                '3、仅针对个人不同时间段比较，不同人的压力指数不能作为比较的指标哦~', confirmText: '我知道了', confirmEvent: () => {
-                console.warn('展示信息', that);
-                that.setData({
-                    showScore: true
-                });
-            }
-        });
     },
 });

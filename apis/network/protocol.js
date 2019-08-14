@@ -284,29 +284,7 @@ export default class Protocol {
      */
     static getCardiac({id}) {
         return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true}).then(data => {
-            let isAbNormal = false;
-            const {result: {dataList, userInfo}} = data;
-            dataList.list.forEach(item => {
-                if (!isAbNormal) {
-                    isAbNormal = parseInt(item.status) === 0;
-                }
-                item.rightContent = item.frequency || item.conclusion;
-                createFontSize(item);
-                switch (item.target) {
-                    case 'HR': {
-                        item.description = '心率是指正常人安静状态下每分钟心跳的次数，成人正常心率为60～100次/分钟，如果心率低于40次/分钟，应考虑有病态窦房结综合征、房室传导阻滞等情况；如果出现胸闷、乏力、头晕等不适症状，应立即到医院进一步检查。';
-                        if (item.status === '0') {
-                            item.description += '\n一次的心率过快或过慢只能反映当前检测期间的数值未在正常区间内，也可能是其他行为导致的异常；建议长期检测，反复多测查看趋势再做判断；';
-                        }
-                    }
-                        break;
-                    case 'SDNN': {
-                        item.description = '心率变异性(HRV)是指两次心跳时间间隔的微小变化。心率变异性为评估自主神经功能的有效指标，能够预测心脏性猝死，对高血压、心衰、心脏移植、甲亢等疾病的临床应用都有潜在价值。';
-                    }
-                }
-            });
-            dataList.isAbNormal = isAbNormal;
-            return Promise.resolve({dataList, userInfo});
+            return Promise.resolve({data});
         });
     }
 

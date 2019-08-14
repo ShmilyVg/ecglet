@@ -3,32 +3,32 @@
 
 <view class="fill-width flex-column align-items-center result-top-layout">
     <view class="title">心脏负荷检测结果报告</view>
-    <view class="content">{{time}}</view>
+    <view class="content">{{date}}</view>
 </view>
 
-<view wx:for="{{6}}" class="flex-column">
+<view wx:for="{{dataList}}" class="flex-column">
     <view class="line-1" wx:if="{{index}}"></view>
     <view class="flex-column cell align-items-center">
         <view class="flex-row" style="width: 100%;justify-content: space-between">
             <view class="flex-column">
                 <view class="flex-row">
-                    <view class="cell-title">平均心率</view>
-                    <view class="cell-title-tip">[1,2,3]</view>
+                    <view class="cell-title">{{item.title}}</view>
+                    <view class="cell-title-tip">{{item.pointer}}</view>
                     <!--<image style="width: 32rpx;height: 32rpx;margin-left: 14rpx" src="../../images/pressure-result/warn.png"></image>-->
                 </view>
-                <view class="cell-content">平均心率</view>
+                <view class="cell-content">{{item.content}}</view>
             </view>
             <view class="flex-row align-items-center">
-                <view class="flex-column" style="align-items: end;width: 100rpx">
-                    <view class="cell-num">28</view>
-                    <view class="cell-utils">feb</view>
+                <view class="flex-column" style="align-items: end;width: 100rpx;">
+                    <view class="cell-num" style="color: {{item.color}}">{{item.frequency}}</view>
+                    <view class="cell-unit" style="color: {{item.color}}">{{item.unit}}</view>
                 </view>
                 <image style="width: 14rpx;height: 24rpx;margin-left: 50rpx" src="../../images/arr.png"></image>
             </view>
         </view>
-        <view style="height: 96rpx;position: relative">
+        <view wx:if="{{item.type==2}}" style="height: 96rpx;position: relative">
             <image style="height: 50rpx;width: 660rpx;margin-top: 25rpx" src="../../images/pressure-result/line.png"></image>
-            <view style="height: 96rpx;width: 84rpx;position: absolute;top: 0;left:25%;background-color: red"></view>
+            <image src="{{item.image}}" style="height: 96rpx;width: 84rpx;position: absolute;top: 0;left:{{item.point}}rpx"></image>
         </view>
     </view>
 </view>
@@ -37,6 +37,25 @@
 
 <view style="padding: 50rpx;">
     <view>参考文献</view>
+    <view wx:for="{{suggest}}" class="flex-column">
+        <block wx:if="{{isPush}}">
+            <view class="flex-row" style="margin-top: 40rpx">
+                <view class="tip-point"></view>
+                <view class="tip-text">{{item.content}}</view>
+            </view>
+        </block>
+        <block wx:else>
+            <block wx:if="{{index<2}}">
+                <view class="flex-row" style="margin-top: 40rpx">
+                    <view class="tip-point"></view>
+                    <view class="tip-text">{{item.content}}</view>
+                </view>
+            </block>
+        </block>
+    </view>
+    <view class="align-items-center flex-column" style="width:650rpx;">
+        <view wx:if="{{!isPush}}" class="tip-push" bindtap="clickPush">展开</view>
+    </view>
 </view>
 <template is="result-bottom" data="{{isAbNormal:false,btnColor:'#FC7055'}}"></template>
 <dialog id="myDialog"></dialog>
