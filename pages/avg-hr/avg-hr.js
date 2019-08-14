@@ -1,4 +1,6 @@
 // pages/AvgHR/AvgHR.js
+import Protocol from "../../apis/network/protocol";
+
 Page({
 
     data: {
@@ -11,7 +13,38 @@ Page({
         ],
         lineNum: [50, 60, 90, 100]
     },
-    onLoad(res) {
+    onLoad(options) {
+        console.log(options);
+        this.dataId = options.dataId;
+        Protocol.getHrInterval({id: this.dataId}).then(data => {
+            const {result, result: {frequency}} = data;
+            let fre = parseInt(frequency) || 0, titleColor = '', position = 0,iconWidth=2;//iconWidth=2 是2%的意思
+            const {lineNum, lineColor} = this.data;
+            if (fre <= lineNum[0]) {
+                position = (0.2 / lineNum[0] * fre * 100 - iconWidth).toFixed(3) + '%';
+                titleColor = lineColor[0].color;
+            } else if (fre <= lineNum[1]) {
+                position = (20 + 0.2 / (lineNum[1] - lineNum[0]) * (fre - lineNum[0]) * 100 - iconWidth).toFixed(3) + '%';
+                titleColor = lineColor[1].color;
+            } else if (fre <= lineNum[2]) {
+                position = (40 + 0.2 / (lineNum[2] - lineNum[1]) * (fre - lineNum[1]) * 100 - iconWidth).toFixed(3) + '%';
+                titleColor = lineColor[2].color;
+            } else if (fre <= lineNum[3]) {
+                position = (60 + 0.2 / (lineNum[3] - lineNum[2]) * (fre - lineNum[2]) * 100 - iconWidth).toFixed(3) + '%';
+                titleColor = lineColor[3].color;
+            } else {
+                position = (80 + 0.2 / (200 - lineNum[3]) * (fre - lineNum[3]) * 100 - iconWidth);
+                position = position <= (100 - iconWidth) ? position : 100 - iconWidth;
+                position = position.toFixed(3) + '%';
+                titleColor = lineColor[4].color;
+            }
 
-    }
+            this.setData({
+                position,
+                titleColor,
+                result
+            });
+        });
+    },
+
 })

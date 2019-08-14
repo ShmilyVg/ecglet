@@ -1,10 +1,14 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
-    <view class="decipher-title">平均心率</view>
-    <view class="decipher-num">58<mark class="decipher-unit">bpm</mark></view>
-    <view class="decipher-line flex-row">
-        <view wx:for="{{lineColor}}" style="width: 20%;height:100%;background-color: {{item.color}}"></view>
+    <view class="decipher-title">{{result.title}}</view>
+    <view class="decipher-num" style="color: {{titleColor}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
+    <view style="position: relative;">
+        <view class="decipher-line flex-row">
+            <view wx:for="{{lineColor}}" style="width: 20%;height:100%;background-color: {{item.color}}"></view>
+        </view>
+        <image src="../../images/index-detail/index.png" style="width: 26rpx;height: 66rpx;top: 37rpx;left: {{position}};" class="absolute"></image>
     </view>
+
     <view class="flex-row space-between decipher-width">
         <view class="avg-hr-empty-view"></view>
         <view wx:for="{{lineNum}}" class="flex-sub decipher-text-view-text">{{item}}</view>
@@ -22,13 +26,32 @@
 
 <view class="decipher-line-height-1"></view>
 
-<block wx:for="{{3}}">
-    <view wx:if="{{index}}" class="decipher-line-height-20"></view>
-    <view class="decipher-content-view flex-column">
-        <view class="flex-row align-items-center">
-            <view style="width: 36rpx;height: 36rpx;background-color: lightblue"></view>
-            <view class="decipher-content-title">检测结果</view>
-        </view>
-        <view class="decipher-content-text">一次的心率过快或过慢只能反映当前检测期间的数值未在正常区间内，也可能是其他行为导致的异常；建议长期检测，反复多测查看趋势再做判断。</view>
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/check_result.png"></image>
+        <view class="decipher-content-title">检测结果</view>
     </view>
-</block>
+    <view class="decipher-check-result-title">{{result.conclusion.title}}</view>
+    <view class="decipher-content-text">{{result.conclusion.content}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
+        <view class="decipher-content-title">改善建议</view>
+    </view>
+    <view class="decipher-content-text">{{result.hipeeSuggest}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/read.png"></image>
+        <view class="decipher-content-title">指标解读</view>
+    </view>
+    <view class="flex-row" style="margin-top: 20rpx;">
+        <view class="decipher-content-text" style="width: auto;">{{result.Interpretation}}</view>
+    </view>
+</view>
+
