@@ -5,25 +5,24 @@
                 <view class="flex-row align-items-center">
                     <view class="flex-column align-items-center" style="align-items: flex-start">
                         <view class="flex-row align-items-center" style="margin-bottom: 27rpx;">
-                            <view class="cell-title">{{item.name}}</view>
+                            <view class="cell-title">{{item.title}}</view>
                             <image src="../../images/result/abnormal.png" wx:if="{{item.isAbNormal}}" style="width: 32rpx;height: 32rpx;background-color: red;margin-left: 17rpx;"></image>
 
                         </view>
-                        <!--                        <view wx:if="{{isGreen}}" class="cell-green-state">{{item.des}}</view>-->
-                        <view class="cell-state">{{item.des}}</view>
+                        <view class="cell-state">{{item.conclusion}}</view>
                     </view>
                 </view>
                 <view class="flex-row align-items-center">
                     <view class="flex-column align-items-center" style="align-items: flex-end">
-                        <view class="cell-num" style="font-size: {{item.fontSize}}rpx;line-height: {{item.fontSize}}rpx;">{{item.rightContent||''}}</view>
-                        <view class="cell-eng">{{item.unit}}</view>
+                        <view class="cell-num" style="color:{{item.color}}">{{item.frequency||''}}</view>
+                        <view class="cell-eng" style="color:{{item.color}}">{{item.unit}}</view>
                     </view>
                     <view class="flex-row align-items-center justify-center result-item-extra">
                         <image src="../../images/result/arrow_{{item.showDetail?'up':'down'}}.png" class="result-item-arrow"></image>
                     </view>
                 </view>
             </view>
-            <text class="result-item-detail {{item.showDetail?'display':'hidden'}}">{{item.description}}</text>
+            <text class="result-item-detail {{item.showDetail?'display':'hidden'}}">{{item.content}}</text>
             <view class="result-item-line" wx:if="{{index!==items.length-1}}"></view>
         </block>
     </view>
