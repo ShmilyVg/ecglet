@@ -7,16 +7,13 @@ Component({
         //     type: Number,
         //     value: 0
         // },
-        score: {
-            type: Number,
-            value: 100
-        }
     },
 
     /**
      * 组件的初始数据
      */
     data: {
+        score: 0,
         outRadius: 90,
         radius: 0,
         rpx: 1,
@@ -54,8 +51,8 @@ Component({
 
         },
 
-        drawCircle() {
-            const {data: {radius, circleX, circleY, startDegree, score}, canvasCircleContext} = this;
+        drawCircle({score}) {
+            const {data: {radius, circleX, circleY, startDegree}, canvasCircleContext} = this;
             const grd = canvasCircleContext.createLinearGradient(0, 1.5 * radius, radius + radius * Math.cos(Math.PI / 4), radius + radius * Math.sin(Math.PI / 4));
             grd.addColorStop(0.15, '#54D1F0');
             grd.addColorStop(0.4, '#8689FA');
@@ -125,14 +122,14 @@ Component({
             console.log('像素比', that.data.rpx);
         },
         attached() {
-            console.log('circle 链接到页面');
+            console.log('circle 链接到页面', this.data.score);
             this.setData({
                 size: 2 * this.data.outRadius
             });
             this.data.degreeStep = 0;
             this.canvasCircleContext = wx.createCanvasContext('circle_draw', this);
             setTimeout(() => {
-                this.drawCircle(0);
+                this.drawCircle();
             });
         },
         detached() {

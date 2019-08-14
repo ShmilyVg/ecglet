@@ -1,20 +1,50 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
     <view class="decipher-title">心脏压力指数</view>
-    <circle score="{{score}}"></circle>
+    <circle id="press-detail-circle"></circle>
 
 
 </view>
 
 <view class="decipher-line-height-1"></view>
 
-<block wx:for="{{3}}">
-    <view wx:if="{{index}}" class="decipher-line-height-20"></view>
-    <view class="decipher-content-view flex-column">
-        <view class="flex-row align-items-center">
-            <view style="width: 36rpx;height: 36rpx;background-color: lightblue"></view>
-            <view class="decipher-content-title">检测结果</view>
-        </view>
-        <view class="decipher-content-text">一次的心率过快或过慢只能反映当前检测期间的数值未在正常区间内，也可能是其他行为导致的异常；建议长期检测，反复多测查看趋势再做判断。</view>
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/check_result.png"></image>
+        <view class="decipher-content-title">检测结果</view>
     </view>
-</block>
+    <view class="decipher-check-result-title">{{result.conclusion.title}}</view>
+    <view class="decipher-content-text">{{result.conclusion.content}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/vs.png"></image>
+        <view class="decipher-content-title">相比上次测量结果</view>
+    </view>
+    <view class="decipher-check-result-title">{{result.compared.title}}</view>
+    <view class="decipher-content-text">{{result.compared.content}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
+        <view class="decipher-content-title">改善建议</view>
+    </view>
+    <view class="decipher-content-text">{{result.hipeeSuggest}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/read.png"></image>
+        <view class="decipher-content-title">指标解读</view>
+    </view>
+    <view class="flex-row" wx:for="{{result.Interpretation}}" wx:key="*this" style="margin-top: 20rpx;">
+        <view class="flex-row align-items-center justify-center decipher-interpretation-index">{{index+1}}</view>
+        <view class="decipher-content-text">{{item.content}}</view>
+    </view>
+</view>
