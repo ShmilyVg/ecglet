@@ -55,8 +55,17 @@ Page({
     /**
      * 查看指标详情
      */
-    toDetailPage() {
-
+    toIndexDetailPage(e) {
+        const {currentTarget: {dataset: {item}}} = e;
+        const dataId = this.dataId;
+        console.log(item);
+        switch (item.target) {
+            case 5://心脏压力
+                HiNavigator.navigateToHeartPressureDetail({dataId});
+                break;
+            default:
+                break;
+        }
     },
     clickPush() {
         this.setData({

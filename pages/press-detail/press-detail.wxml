@@ -1,7 +1,7 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
     <view class="decipher-title">心脏压力指数</view>
-    <circle ></circle>
+    <circle score="{{score}}"></circle>
 
 
 </view>
