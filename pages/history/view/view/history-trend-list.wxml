@@ -1,6 +1,5 @@
 <template name="history-trend-list" class="flex-column">
-    <view style="height: 30rpx"></view>
-    <view wx:if="{{itemList.length}}" class="flex-column">
+    <view wx:if="{{itemList.length}}" class="flex-column" style="background-color: white">
         <view class="flex-row align-items-center space-between box-sizing-border-box history-item" wx:for="{{itemList}}" wx:key="{{item.pdfUrl}}" data-item="{{item}}">
             <view class="flex-row align-items-center">
                 <!--<view class="circle" style="background-color:{{item.color}}"></view>-->
@@ -10,7 +9,7 @@
                         <view style="width: 20rpx"></view>
                         <view class="item-name-and-time">{{item.titleDate}}</view>
                     </view>
-                    <view wx:if="{{item.des}}" class="state-text" style="justify-items: left;margin-left: 0">{{item.des}}</view>
+                    <view wx:if="{{item.des}}" class="state-text" style="justify-items: left;margin-left: 0" >{{item.des}}</view>
                 </view>
             </view>
             <view class="flex-row" style="align-items: center">

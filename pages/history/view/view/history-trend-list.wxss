@@ -19,7 +19,7 @@
 
 .history-item{
     width:95%;
-    background:rgba(255,255,255,1);
+    background-color:#F8F9F9;
     border-radius:30rpx;
     align-self: center;
     margin-bottom: 20rpx;
