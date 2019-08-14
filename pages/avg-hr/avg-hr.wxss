@@ -36,9 +36,8 @@
     overflow: hidden;
 }
 
-.decipher-text-view {
+.decipher-width {
     width: 646rpx;
-    justify-content: space-between;
 }
 
 .decipher-text-view-text{
@@ -47,6 +46,7 @@
     font-weight:500;
     line-height:17rpx;
     color: #ABBBC2;
+    text-align: center;
     margin-top: 22rpx;
 }
 
@@ -54,15 +54,13 @@
     width: 10rpx;
     height: 10rpx;
     border-radius: 50%;
-    margin-left: 74rpx;
     margin-right: 10rpx;
 }
 
 .decipher-line-height-1 {
     width: 100%;
-    height: 1rpx;
-    border-style: dotted none none none;
-    border-color: #9C9C9C;
+    height:1rpx;
+    background-color: rgba(156,156,156,1);
     margin: 70rpx 0 0;
 }
 
@@ -92,4 +90,8 @@
     width: 100%;
     height: 20rpx;
     background-color: #F6F7F9;
+}
+
+.avg-hr-empty-view{
+    width: 10%;
 }

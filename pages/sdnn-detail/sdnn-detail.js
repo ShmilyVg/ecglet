@@ -14,4 +14,4 @@ Page({
     onLoad(res) {
 
     }
-})
+});
