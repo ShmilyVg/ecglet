@@ -79,6 +79,7 @@ Page({
                 });
                 break;
             case 2:
+                this.showSheet(index);
                 break;
             case 3:
                 this.toTabbarHistory(index);

@@ -63,7 +63,7 @@
     font-size:28rpx;
     font-family:PingFang-SC-Regular;
     font-weight:400;
-    color:rgba(51,68,78,1);
+    color:#5B5B5B;
     line-height:42rpx;
     margin: 20rpx 0 30rpx;
 }
