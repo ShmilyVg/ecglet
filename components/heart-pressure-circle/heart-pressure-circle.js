@@ -55,24 +55,23 @@ Component({
         },
 
         drawCircle() {
-            const {data: {radius, circleX, circleY, startDegree, score}, canvasCircleContext} = this;
-            this._drawCircle({step: 0, score, circleX, circleY, startDegree, radius, ctx: canvasCircleContext});
+            const {data: {radius, circleX, circleY, startDegree, score,size}, canvasCircleContext} = this;
+            const grd = canvasCircleContext.createLinearGradient(0, 1.5 * radius, radius + radius * Math.cos(Math.PI / 4), radius + radius * Math.sin(Math.PI / 4));
+            grd.addColorStop(0.15, '#54D1F0');
+            grd.addColorStop(0.4, '#8689FA');
+            grd.addColorStop(0.9, '#CE7AC8');
+            grd.addColorStop(1, '#f05e77');
 
+            this._drawCircle({step: 0, score, circleX, circleY, startDegree, radius, grd, ctx: canvasCircleContext});
 
         },
 
-        _drawCircle({step, score, circleX, circleY, startDegree, radius, ctx}) {
+        _drawCircle({step, score, circleX, circleY, startDegree, radius, grd, ctx}) {
             const currentNum = step;
             if (step > score) {
                 return;
             }
             let {degreePreScore, roundWidth, size} = this.data;
-            const grd = ctx.createLinearGradient(0, radius, radius + radius * Math.sin(0.25 * Math.PI), radius + radius * Math.cos(0.25 * Math.PI));
-
-            grd.addColorStop(0, '#54D1F0');
-            grd.addColorStop(0.8, '#8689FA');
-            grd.addColorStop(0.9, '#CE7AC8');
-            grd.addColorStop(1, '#EC4A66');
 
             const currentDegree = startDegree + degreePreScore * (step);
             ctx.lineWidth = roundWidth;
@@ -83,7 +82,7 @@ Component({
             ctx.stroke();
 
             //绘制文字
-            let largeFontSize = 50, halfLargeFontSize = largeFontSize / 1.7, sX = 40;
+            let largeFontSize = 50, halfLargeFontSize = largeFontSize / 1.7, sX = 40, bottomScoreMargin = 5;
             if (currentNum >= 100) {
                 largeFontSize = 43;
                 halfLargeFontSize = Math.floor(largeFontSize / 1.7);
@@ -95,10 +94,17 @@ Component({
             ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize);
             ctx.font = '12px sans-serif';
             ctx.fillText('分', radius + sX, radius + halfLargeFontSize);
+            ctx.font = '11px sans-serif';
+            ctx.fillStyle = '#ABBBC2';
+            ctx.fillText('0', radius - (radius - roundWidth) * Math.sin(0.25 * Math.PI), size - bottomScoreMargin);
+            ctx.fillText('100', radius + (radius) * Math.sin(0.25 * Math.PI), size - bottomScoreMargin);
+
+
+
             ctx.draw();
             setTimeout(() => {
                 this._drawCircle({...arguments[0], step: currentNum + 1});
-            }, 10);
+            }, 20);
         },
         _runEvent() {
             this.triggerEvent('runEvent', {}, {})
@@ -124,8 +130,9 @@ Component({
             });
             this.data.degreeStep = 0;
             this.canvasCircleContext = wx.createCanvasContext('circle_draw', this);
-            this.canvasBgContext = wx.createCanvasContext('circle_bg', this);
-            this.drawCircle(0);
+            setTimeout(() => {
+                this.drawCircle(0);
+            });
         },
         detached() {
             console.log('circle 移除节点');
