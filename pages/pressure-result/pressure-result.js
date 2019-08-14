@@ -52,14 +52,19 @@ Page({
             reLoginWithoutLogin();
         }
     },
+    /**
+     * 查看指标详情
+     */
+    toDetailPage() {
 
+    },
     clickPush() {
         this.setData({
             isPush: true
         })
     },
 
-    lookDetail() {
+    toReportDetail() {
         Toast.showLoading();
         Protocol.getPdfUrl({id: this.dataId}).then(res => {
             const {pdfUrl} = res.data.result;
