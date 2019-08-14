@@ -33,7 +33,6 @@
     color:rgba(239,58,89,1);
 }
 
-
 .cell-num {
     font-size:70rpx;
     font-family:DINCondensed-Bold;
@@ -73,7 +72,7 @@
 }
 
 .result-item-line{
-    width:calc(100%-2rpx);
+    width: 748rpx;
     border: 1rpx solid #F6F7F7;
 }
 

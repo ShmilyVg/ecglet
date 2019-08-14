@@ -127,3 +127,15 @@ page {
     text-align: center;
     margin-top: 24rpx;
 }
+
+.logo {
+    width: 110rpx;
+    height: 110rpx;
+    position: relative;
+    margin-top: -75rpx;
+    border-radius: 50%;
+    border-width: 15rpx;
+    border-style: solid;
+    background-color: #FF7049;
+    border-color: #FF7049;
+}
