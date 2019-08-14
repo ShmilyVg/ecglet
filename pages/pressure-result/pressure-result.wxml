@@ -10,7 +10,7 @@
     <image src="../../images/result/logo.png" class="logo"></image>
 </view>
 
-<view wx:for="{{dataList}}" class="flex-column">
+<view wx:for="{{dataList}}" class="flex-column" bindtap="toIndexDetailPage" wx:key="title" data-item="{{item}}">
     <view class="line-1" wx:if="{{index}}"></view>
     <view class="flex-column cell align-items-center">
         <view class="flex-row" style="width: 100%;justify-content: space-between">

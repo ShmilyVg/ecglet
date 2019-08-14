@@ -289,6 +289,10 @@ export default class Protocol {
         return Network.request({url: 'copywriting/checking'});
     }
 
+    static getPsilnterval({id}) {
+        return Network.request({url: 'copywriting/getPsiInterval', data: arguments[0]});
+    }
+
     static wxReLogin(resolve, reject) {
         wx.login({
             success: resolve, fail: res => {

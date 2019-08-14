@@ -55,7 +55,7 @@ Component({
         },
 
         drawCircle() {
-            const {data: {radius, circleX, circleY, startDegree, score,size}, canvasCircleContext} = this;
+            const {data: {radius, circleX, circleY, startDegree, score}, canvasCircleContext} = this;
             const grd = canvasCircleContext.createLinearGradient(0, 1.5 * radius, radius + radius * Math.cos(Math.PI / 4), radius + radius * Math.sin(Math.PI / 4));
             grd.addColorStop(0.15, '#54D1F0');
             grd.addColorStop(0.4, '#8689FA');
@@ -72,14 +72,15 @@ Component({
                 return;
             }
             let {degreePreScore, roundWidth, size} = this.data;
-
-            const currentDegree = startDegree + degreePreScore * (step);
-            ctx.lineWidth = roundWidth;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = grd;
-            ctx.beginPath();
-            ctx.arc(circleX, circleY, radius - 1, startDegree, currentDegree, false);
-            ctx.stroke();
+            if (score > 0) {
+                const currentDegree = startDegree + degreePreScore * (step);
+                ctx.lineWidth = roundWidth;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = grd;
+                ctx.beginPath();
+                ctx.arc(circleX, circleY, radius - 1, startDegree, currentDegree, false);
+                ctx.stroke();
+            }
 
             //绘制文字
             let largeFontSize = 50, halfLargeFontSize = largeFontSize / 1.7, sX = 40, bottomScoreMargin = 5;

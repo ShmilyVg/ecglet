@@ -10,7 +10,7 @@ Page({
         pdfUrl: ''
     },
 
-    lookDetail() {
+    toReportDetail() {
         Toast.showLoading();
         Protocol.getPdfUrl({id: this.dataId}).then(res => {
             const {pdfUrl} = res.data.result;

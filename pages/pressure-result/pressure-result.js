@@ -52,14 +52,28 @@ Page({
             reLoginWithoutLogin();
         }
     },
-
+    /**
+     * 查看指标详情
+     */
+    toIndexDetailPage(e) {
+        const {currentTarget: {dataset: {item}}} = e;
+        const dataId = this.dataId;
+        console.log(item);
+        switch (item.target) {
+            case 5://心脏压力
+                HiNavigator.navigateToHeartPressureDetail({dataId});
+                break;
+            default:
+                break;
+        }
+    },
     clickPush() {
         this.setData({
             isPush: true
         })
     },
 
-    lookDetail() {
+    toReportDetail() {
         Toast.showLoading();
         Protocol.getPdfUrl({id: this.dataId}).then(res => {
             const {pdfUrl} = res.data.result;
