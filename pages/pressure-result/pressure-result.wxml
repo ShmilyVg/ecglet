@@ -6,6 +6,10 @@
     <view class="content">{{date}}</view>
 </view>
 
+<view class="flex-column align-items-center">
+    <image src="../../images/result/logo.png" class="logo"></image>
+</view>
+
 <view wx:for="{{dataList}}" class="flex-column">
     <view class="line-1" wx:if="{{index}}"></view>
     <view class="flex-column cell align-items-center">

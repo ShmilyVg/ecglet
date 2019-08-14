@@ -9,9 +9,10 @@
     font-size:36rpx;
     font-family:PingFang-SC-Bold;
     font-weight:bold;
-    color:rgba(51,68,78,1);
+    color: #33444E;
     line-height:28rpx;
 }
+
 .cell-green-state{
     width:246rpx;
     font-size:24rpx;
@@ -32,13 +33,12 @@
     color:rgba(239,58,89,1);
 }
 
-
 .cell-num {
-    /*font-size:70rpx;*/
+    font-size:70rpx;
     font-family:DINCondensed-Bold;
     font-weight:bold;
     color:rgba(97,118,131,1);
-    /*line-height:84rpx;*/
+    line-height:84rpx;
 }
 
 .cell-eng {
@@ -47,6 +47,7 @@
     font-weight:400;
     color:rgba(97,118,131,1);
     line-height:32rpx;
+    margin-top: -15rpx;
 }
 
 .result-item-extra{
@@ -71,7 +72,7 @@
 }
 
 .result-item-line{
-    width:calc(100%-2rpx);
+    width: 748rpx;
     border: 1rpx solid #F6F7F7;
 }
 

@@ -1,8 +1,6 @@
 <import src="../../components/result-top/index.wxml"></import>
 <import src="../../components/result-bottom/index.wxml"></import>
 <view class="flex-column align-items-center" style="padding-bottom: 50rpx;">
-<!--    <view class="share">分享给亲友</view>-->
-
     <view class="flex-column align-items-center fill-width result-top-layout">
         <view class="title">常规心电检测分析报告</view>
         <view class="content">{{result.time}}</view>
@@ -17,10 +15,6 @@
     </view>
     <image src="../../images/result/logo.png" class="logo" style="background-color: #3A93EF;border-color: #3A93EF;"></image>
 
-
-
-
-
     <template is="result-top" data="{{resultColor:'#3A93EF',items}}"></template>
-    <template is="result-bottom" data="{{isAbNormal:true,btnColor:'#3A93EF'}}"></template>
+    <template is="result-bottom" data="{{suggest:result.hipeeSuggest.contents,isAbNormal:true,btnColor:'#3A93EF'}}"></template>
 </view>

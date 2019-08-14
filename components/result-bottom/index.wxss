@@ -16,17 +16,14 @@
     font-weight:bold;
     color:rgba(51,68,78,1);
     line-height:28rpx;
-    margin: 59rpx 0 41rpx 50rpx;
     align-self: flex-start;
+    margin-bottom: 50rpx;
 }
 .icon-common{
     width: 44rpx;
     height: 44rpx;
     margin-left: 11rpx;
 }
-
-
-
 
 .cell-bottom-view{
     position: fixed;
@@ -60,12 +57,27 @@
     font-weight:500;
     color:rgba(51,68,78,1);
     line-height:42rpx;
+    margin-left: 12rpx;
 }
 
 .advice-item-content{
     font-size:28rpx;
     font-family:PingFang-SC-Regular;
     font-weight:400;
-    color:rgba(91,91,91,1);
+    color:rgba(51,68,78,1);
     line-height:42rpx;
+    margin: 20rpx 0 30rpx;
+}
+
+.icon-num{
+    width:50rpx;
+    height:26rpx;
+    background:rgba(152,166,176,1);
+    border-radius:13rpx;
+    line-height: 26rpx;
+    text-align: center;
+    font-size:22rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
 }

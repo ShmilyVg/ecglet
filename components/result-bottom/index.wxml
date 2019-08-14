@@ -1,18 +1,26 @@
 <template name="result-bottom">
     <view class="divide-line-large"></view>
     <block wx:if="{{isAbNormal}}">
-        <view class="flex-column fill-width box-sizing-border-box" style="padding: 0;">
+        <view class="flex-column fill-width box-sizing-border-box" style="padding: 65rpx 50rpx 100rpx">
             <view class="result-advice">HiPee建议您</view>
-            <view class="flex-column">
-                <view class="flex-row align-items-center">
-                    <image src="" class="icon-common"></image>
-                    <view class="advice-item-title"></view>
+            <view wx:for="{{suggest}}" class="flex-column">
+                <view class="flex-row align-items-center" style="margin-top: 30rpx">
+                    <image src="{{item.img}}" class="icon-common"></image>
+                    <view class="advice-item-title">{{item.title}}</view>
                 </view>
-                <view class="advice-item-content"></view>
+                <view wx:if="{{item.isArray}}">
+                    <view style="height: 40rpx"></view>
+                    <block wx:for="{{item.content}}">
+                        <view class="flex-row align-items-center">
+                            <view class="icon-num">{{index+1}}</view>
+                            <view class="advice-item-title" style="color: #5B5B5B;">{{item.title}}</view>
+                        </view>
+                        <view class="advice-item-content">{{item.content}}</view>
+                    </block>
+                </view>
+                <view wx:else class="advice-item-content">{{item.content}}</view>
             </view>
-
         </view>
-
     </block>
 
 
