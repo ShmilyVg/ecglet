@@ -1,6 +1,6 @@
 <view class="fill-width flex-column">
     <swiper indicator-dots="{{true}}" bindchange="onWelcomeItemChanged"
-            autoplay="{{true}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(54,148,239,1)" indicator-color="rgba(215,234,252,1)">
+            autoplay="{{true}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(163,143,236,1)" indicator-color="rgba(230,227,255,1)">
         <block wx:for="{{items}}" wx:key="path">
             <swiper-item class="flex-column align-items-center" style="margin-top: 92rpx;">
                 <view class="welcome-title">{{item.title}}</view>
