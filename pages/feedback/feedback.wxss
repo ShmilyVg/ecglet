@@ -35,7 +35,7 @@
   width: 605rpx;
   height: 100rpx;
   color: rgba(255,255,255,0.9);
-  background: rgba(57, 147, 238, 1);
+  background: var(--primaryColor);
   border-radius: 50rpx;
   margin: 0 auto 50rpx;
   display: flex;
