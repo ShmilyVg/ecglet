@@ -309,6 +309,7 @@ export default class Protocol {
         return Network.request({url: 'copywriting/getMoodInterval', data: arguments[0]});
     }
 
+
     static wxReLogin(resolve, reject) {
         wx.login({
             success: resolve, fail: res => {

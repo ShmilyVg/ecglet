@@ -7,6 +7,8 @@ import UserInfo from "./apis/network/network/libs/userInfo";
 import HiNavigator from "./components/navigator/hi-navigator";
 import {initAnalysisOnApp} from "./analysis/mta";
 import Toast from "./utils/toast";
+import CommonProtocol from "./apis/network/network/libs/protocol";
+import {SoftwareVersion} from "./utils/config";
 
 App({
     onLaunch(options) {
@@ -27,6 +29,15 @@ App({
         });
         if (!this.globalData.options.query.withoutLogin) {
             this.doLogin();
+            wx.getSystemInfo({
+                success: res => {
+                    CommonProtocol.postSystemInfo({
+                        systemInfo: res,
+                        hiSoftwareVersion: SoftwareVersion
+                    });
+                }
+            });
+
         }
     },
 
