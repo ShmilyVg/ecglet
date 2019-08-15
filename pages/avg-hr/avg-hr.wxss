@@ -132,7 +132,7 @@
     margin-top: 10rpx;
 }
 .avg-hr-empty-view{
-    width: 10%;
+    width: 12.5%;
 }
 
 .decipher-contents-item-index{
