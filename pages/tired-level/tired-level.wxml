@@ -1,2 +1,56 @@
-<!--pages/tired-level/tired-level.wxml-->
-<text>pages/tired-level/tired-level.wxml</text>
+<!--pages/AvgHR/AvgHR.wxml-->
+<view class="flex-column align-items-center">
+    <view class="decipher-title">疲劳程度</view>
+    <view style="position: relative;">
+        <view class="decipher-line flex-row">
+            <view wx:for="{{lineColor}}" wx:key="index" style="width: 25%;height:100%;background-color: {{item.color}}"></view>
+        </view>
+        <image wx:if="{{icon}}" src="../../images/index-detail/{{icon}}.png" style="width: 84rpx;height: 96rpx;top: 20rpx;left: {{position}};" class="absolute"></image>
+    </view>
+
+    <view class="flex-row space-between decipher-width">
+        <view class="avg-hr-empty-view"></view>
+        <view wx:for="{{lineNum}}" wx:key="index" class="flex-sub decipher-text-view-text">{{item}}</view>
+        <view class="avg-hr-empty-view"></view>
+
+    </view>
+
+    <view class="flex-row decipher-width" style="flex-wrap: wrap;margin-top: 30rpx">
+        <view class="flex-row align-items-center" style="margin-top: 22rpx;margin-left: 24rpx;margin-right: 50rpx;" wx:for="{{lineColor}}">
+            <view class="decipher-point" style="background-color: {{item.color}};"></view>
+            <view style="color: #5B5B5B;font-size: 22rpx">{{item.text}}</view>
+        </view>
+    </view>
+</view>
+
+<view class="decipher-line-height-1"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/check_result.png"></image>
+        <view class="decipher-content-title">检测结果</view>
+    </view>
+    <view class="decipher-check-result-title">{{result.conclusion.title}}</view>
+    <view class="decipher-content-text">{{result.conclusion.content}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
+        <view class="decipher-content-title">改善建议</view>
+    </view>
+    <view class="decipher-content-text">{{result.hipeeSuggest}}</view>
+</view>
+<view class="decipher-line-height-20"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/read.png"></image>
+        <view class="decipher-content-title">指标解读</view>
+    </view>
+    <view class="flex-row" style="margin-top: 20rpx;">
+        <view class="decipher-content-text" style="width: auto;">{{result.Interpretation}}</view>
+    </view>
+</view>
+

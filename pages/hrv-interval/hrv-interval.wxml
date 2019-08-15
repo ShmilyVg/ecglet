@@ -4,14 +4,14 @@
     <view class="decipher-num" style="color: {{result.color}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
     <view style="position: relative;">
         <view class="decipher-line flex-row">
-            <view wx:for="{{lineColor}}" style="width: 25%;height:100%;background-color: {{item.color}}"></view>
+            <view wx:for="{{lineColor}}" wx:key="index" style="width: 25%;height:100%;background-color: {{item.color}}"></view>
         </view>
         <image src="../../images/index-detail/index.png" style="width: 26rpx;height: 66rpx;top: 37rpx;left: {{position}};" class="absolute"></image>
     </view>
 
     <view class="flex-row space-between decipher-width">
         <view class="avg-hr-empty-view"></view>
-        <view wx:for="{{lineNum}}" class="flex-sub decipher-text-view-text">{{item}}</view>
+        <view wx:for="{{lineNum}}" wx:key="index" class="flex-sub decipher-text-view-text">{{item}}</view>
         <view class="avg-hr-empty-view"></view>
 
     </view>

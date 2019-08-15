@@ -301,6 +301,14 @@ export default class Protocol {
         return Network.request({url: 'copywriting/getHrvInterval', data: arguments[0]});
     }
 
+    static getRmssdInterval({id}) {
+        return Network.request({url: 'copywriting/getRmssdInterval', data: arguments[0]});
+    }
+
+    static getMoodInterval({id}) {
+        return Network.request({url: 'copywriting/getMoodInterval', data: arguments[0]});
+    }
+
     static wxReLogin(resolve, reject) {
         wx.login({
             success: resolve, fail: res => {
