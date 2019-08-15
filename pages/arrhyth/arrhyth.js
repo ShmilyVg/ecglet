@@ -320,12 +320,7 @@ Page({
 
                         that.reset()
                         this.setData({bleStatus: 'not_init'});
-                        wx.showModal({
-                            title: "提醒",
-                            content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！",
-                            showCancel: false,
-                            confirmColor: "#0d69b1"
-                        })
+                        WXDialog.showDialog({title: '提醒', content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！"});
                     }
                 } catch (error) {
                     console.log("bluetooth error: %o", error)
@@ -379,13 +374,7 @@ Page({
                     console.log(`wx.openBluetoothAdapter error: ${err.errMsg}`)
                     // that.showToast('蓝牙没有打开，请在快捷面板或设置中打开蓝牙！')
                     this.setData({bleStatus: 'not_init'});
-                    wx.showModal({
-                        title: "提醒",
-                        content: "蓝牙没有打开，请在快捷面板或设置中打开蓝牙！",
-                        showCancel: false,
-                        confirmColor: "#0d69b1"
-                    })
-
+                    WXDialog.showDialog({title: '提醒', content: '蓝牙没有打开，请在快捷面板或设置中打开蓝牙！'});
                 }
             })
 
