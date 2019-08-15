@@ -1,5 +1,5 @@
 <!--pages/rich-content/rich-content.wxml-->
-<view class="flex-column" style="align-items: center">
+<view class="flex-column align-items-center">
     <view class="title">这是谁的检测结果？</view>
     <switch-member id="switchMemberView"></switch-member>
     <view class="line"></view>

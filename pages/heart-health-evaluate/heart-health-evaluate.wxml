@@ -1,1 +1,52 @@
-<switch-member bindswitchMember="switchMember"></switch-member>
+<view class="flex-column align-items-center">
+    <switch-member id="switchMemberView"></switch-member>
+    <view class="health-evaluate-line"></view>
+
+    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
+        <view class="flex-row align-items-center justify-center health-evaluate-index">1</view>
+        <view class="flex-column">
+            <view class="health-evaluate-title">请输入您的收缩压(高压)值</view>
+            <view class="health-evaluate-content">收缩压(Systolic pressure)(高压)：是当心脏收缩时，从心室射入的血液对血管壁产生的侧压力，这时血压最大；此时内壁的压力称为收缩压，亦称高压。</view>
+            <view class="flex-row align-items-center space-between" style="margin-top: 60rpx;">
+                <input placeholder-class="heart-health-placeholder" placeholder="请输入收缩压(高压)值" />
+                <view class="heart-health-unit">mmHg</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
+        <view class="flex-row align-items-center justify-center health-evaluate-index">2</view>
+        <view class="flex-column">
+            <view class="health-evaluate-title">您是否常年吸烟？</view>
+            <view class="flex-row align-items-center" style="margin-top: 43rpx;">
+                <view bindtap="onSelectedSmoke" data-smoke="1" class="health-evaluate-radio-button {{evaluation.smoke===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
+                <view bindtap="onSelectedSmoke" data-smoke="0" class="health-evaluate-radio-button {{evaluation.smoke===0?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">否</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
+        <view class="flex-row align-items-center justify-center health-evaluate-index">3</view>
+        <view class="flex-column">
+            <view class="health-evaluate-title">您现在是否还有高血压？</view>
+            <text class="health-evaluate-content">如果已经治愈请选择否; \n成人收缩压≥140mmHg（21.3kPa）时即可确诊为高血压。收缩压≤130mmHg（18.6kPa）称为正常血压。</text>
+            <view class="flex-row align-items-center" style="margin-top: 43rpx;">
+                <view bindtap="onSelectedPress" data-press="1" class="health-evaluate-radio-button {{evaluation.press===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
+                <view bindtap="onSelectedPress" data-press="0" class="health-evaluate-radio-button {{evaluation.press===0?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">否</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item" style="margin-bottom: 150rpx;">
+        <view class="flex-row align-items-center justify-center health-evaluate-index">4</view>
+        <view class="flex-column">
+            <view class="health-evaluate-title">您是否有糖尿病？</view>
+            <view class="flex-row align-items-center" style="margin-top: 43rpx;">
+                <view bindtap="onSelectedSugar" data-sugar="1" class="health-evaluate-radio-button {{evaluation.sugar===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
+                <view bindtap="onSelectedSugar" data-sugar="0" class="health-evaluate-radio-button {{evaluation.sugar===0?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">否</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="flex-row align-items-center justify-center button-bottom-view">开始评测</view>
+</view>

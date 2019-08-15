@@ -28,7 +28,7 @@
         <view class="result-bottom-remind">注：心电图代表当前时刻下的心脏电传导情况，心脏病发都具有“一过性”和“即时性”，当前状态下的心电图正常并不代表没有心脏病，相应的，心电图不正常也不一定就是心脏病，也可能是生理情况影响，是一直不断变化的。</view>
         <image src="../../images/result/logo-ch.png" style="width: 114rpx;height: 67rpx;"></image>
         <view class="bottom-text"><text>上海交通大学医学院附属仁济医院\n远程心电诊断中心</text></view>
-        <view class="flex-row align-items-center justify-center cell-bottom-view" style="background-color: {{btnColor}};" bindtap="toReportDetail">查看专业分析报告</view>
+        <view class="flex-row align-items-center justify-center button-bottom-view" style="background-color: {{btnColor}};" bindtap="toReportDetail">查看专业分析报告</view>
     </view>
 
 </template>

@@ -1,10 +1,7 @@
 // pages/rich-content/rich-content.js
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
-import UserInfo from "../../apis/network/network/libs/userInfo";
-import {jsGetAge} from "../../utils/tools";
 import Toast from "../../utils/toast";
-import * as Tools from "../../utils/tools";
 
 const app = getApp();
 Page({
@@ -52,7 +49,6 @@ Page({
                 value: false, text: '刚进行过剧烈活动'
             }
         ],
-        userInfo: {},
         count: 0,
         text: ''
     },
