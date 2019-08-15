@@ -1,2 +1,81 @@
-<!--pages/hrv-interval/hrv-interval.wxml-->
-<text>pages/hrv-interval/hrv-interval.wxml</text>
+<!--pages/AvgHR/AvgHR.wxml-->
+<view class="flex-column align-items-center">
+    <view class="decipher-title">{{result.title}}</view>
+    <view class="decipher-num" style="color: {{titleColor}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
+    <view style="position: relative;">
+        <view class="decipher-line flex-row">
+            <view wx:for="{{lineColor}}" style="width: 25%;height:100%;background-color: {{item.color}}"></view>
+        </view>
+        <image src="../../images/index-detail/index.png" style="width: 26rpx;height: 66rpx;top: 37rpx;left: {{position}};" class="absolute"></image>
+    </view>
+
+    <view class="flex-row space-between decipher-width">
+        <view class="avg-hr-empty-view"></view>
+        <view wx:for="{{lineNum}}" class="flex-sub decipher-text-view-text">{{item}}</view>
+        <view class="avg-hr-empty-view"></view>
+
+    </view>
+
+    <view class="flex-row decipher-width" style="flex-wrap: wrap;margin-top: 30rpx">
+        <view class="flex-row align-items-center" style="margin-top: 22rpx;margin-left: 24rpx;margin-right: 50rpx;" wx:for="{{lineColor}}">
+            <view class="decipher-point" style="background-color: {{item.color}};"></view>
+            <view style="color: #5B5B5B;font-size: 22rpx">{{item.text}}</view>
+        </view>
+    </view>
+</view>
+
+<view class="decipher-line-height-1"></view>
+
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/check_result.png"></image>
+        <view class="decipher-content-title">检测结果</view>
+    </view>
+    <view wx:if="{{result.conclusion.title}}" class="decipher-check-result-title">{{result.conclusion.title}}</view>
+    <view class="decipher-content-text">{{result.conclusion.content}}</view>
+</view>
+
+<block wx:if="{{result.compared}}">
+    <view class="decipher-line-height-20"></view>
+
+    <view class="decipher-content-view flex-column">
+        <view class="flex-row align-items-center">
+            <image class="decipher-item-icon" src="../../images/index-detail/vs.png"></image>
+            <view class="decipher-content-title">相比上次测量结果</view>
+        </view>
+        <view wx:if="{{result.compared.title}}" class="decipher-check-result-title">{{result.compared.title}}</view>
+        <view wx:if="{{result.compared.content}}" class="decipher-content-text">{{result.compared.content}}</view>
+    </view>
+</block>
+
+<block wx:if="{{result.hipeeSuggest}}">
+    <view class="decipher-line-height-20"></view>
+    <view class="decipher-content-view flex-column">
+        <view class="flex-row align-items-center">
+            <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
+            <view class="decipher-content-title">改善建议</view>
+        </view>
+        <block wx:for="{{result.hipeeSuggest.contents}}" wx:key="*this">
+            <view class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: -5rpx;">
+                <image src="{{item.img}}" style="width: 44rpx;height: 44rpx;margin-right: 18rpx;"></image>
+                <view class="decipher-suggest-item-title">{{item.title}}</view>
+            </view>
+            <view wx:if="{{item.content}}" class="decipher-content-text" style="margin-top: 28rpx;margin-bottom: 35rpx;">{{item.content}}</view>
+        </block>
+
+
+    </view>
+</block>
+
+<view class="decipher-line-height-20"></view>
+<view class="decipher-content-view flex-column">
+    <view class="flex-row align-items-center">
+        <image class="decipher-item-icon" src="../../images/index-detail/read.png"></image>
+        <view class="decipher-content-title">指标解读</view>
+    </view>
+    <view class="flex-row" style="margin-top: 20rpx;">
+
+        <view class="decipher-content-text" style="width: auto;">{{result.Interpretation}}</view>
+    </view>
+</view>
+

@@ -18,7 +18,7 @@ Page({
         this.dataId = options.dataId;
         Protocol.getHrInterval({id: this.dataId}).then(data => {
             const {result, result: {frequency}} = data;
-            let fre = parseInt(frequency) || 0, titleColor = '', position = 0,iconWidth=2;//iconWidth=2 是2%的意思
+            let fre = parseInt(frequency) || 0, titleColor = '', position = 0, maxNum = 200, iconWidth = 2;//iconWidth=2 是2%的意思
             const {lineNum, lineColor} = this.data;
             if (fre <= lineNum[0]) {
                 position = (0.2 / lineNum[0] * fre * 100 - iconWidth).toFixed(3) + '%';
@@ -33,7 +33,7 @@ Page({
                 position = (60 + 0.2 / (lineNum[3] - lineNum[2]) * (fre - lineNum[2]) * 100 - iconWidth).toFixed(3) + '%';
                 titleColor = lineColor[3].color;
             } else {
-                position = (80 + 0.2 / (200 - lineNum[3]) * (fre - lineNum[3]) * 100 - iconWidth);
+                position = (80 + 0.2 / (maxNum - lineNum[3]) * (fre - lineNum[3]) * 100 - iconWidth);
                 position = position <= (100 - iconWidth) ? position : 100 - iconWidth;
                 position = position.toFixed(3) + '%';
                 titleColor = lineColor[4].color;

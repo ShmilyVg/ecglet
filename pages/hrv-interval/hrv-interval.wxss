@@ -1,1 +1,1 @@
-/* pages/hrv-interval/hrv-interval.wxss */
+@import "../avg-hr/avg-hr.wxss";

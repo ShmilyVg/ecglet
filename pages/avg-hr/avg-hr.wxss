@@ -94,6 +94,15 @@
     line-height:46rpx;
     margin-top: 40rpx;
 }
+
+.decipher-suggest-item-title{
+    font-size:28rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(51,68,78,1);
+    line-height:42rpx;
+}
+
 .flex-row .decipher-content-text{
     margin-top: 0rpx;
     width: 560rpx;
