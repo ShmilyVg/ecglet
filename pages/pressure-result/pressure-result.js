@@ -59,8 +59,20 @@ Page({
         const dataId = this.dataId;
         console.log(item);
         switch (item.target) {
+            case 1://平均心率
+                HiNavigator.navigateToAvgHrDetail({dataId});
+                break;
+            case 4://心率变异性
+                HiNavigator.navigateToHrvIntervalDetail({dataId});
+                break;
             case 5://心脏压力
                 HiNavigator.navigateToHeartPressureDetail({dataId});
+                break;
+            case 6://疲劳指数
+                HiNavigator.navigateToTiredLevelDetail({dataId});
+                break;
+            case 7://情绪指数
+                HiNavigator.navigateToExcitingLevelDetail({dataId});
                 break;
             default:
                 break;

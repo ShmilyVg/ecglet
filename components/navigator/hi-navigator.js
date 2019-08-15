@@ -88,4 +88,20 @@ export default class HiNavigator extends CommonNavigator {
     static navigateToHeartPressureDetail({dataId}) {
         this.navigateTo({url: `/pages/press-detail/press-detail?dataId=${dataId}`});
     }
+
+    static navigateToAvgHrDetail({dataId}) {
+        this.navigateTo({url: `/pages/avg-hr/avg-hr?dataId=${dataId}`});
+    }
+
+    static navigateToHrvIntervalDetail({dataId}) {
+        this.navigateTo({url: `/pages/hrv-interval/hrv-interval?dataId=${dataId}`});
+    }
+
+    static navigateToTiredLevelDetail({dataId}) {
+        this.navigateTo({url: `/pages/tired-level/tired-level?dataId=${dataId}`});
+    }
+
+    static navigateToExcitingLevelDetail({dataId}) {
+        this.navigateTo({url: `/pages/exciting-level/exciting-level?dataId=${dataId}`});
+    }
 }
