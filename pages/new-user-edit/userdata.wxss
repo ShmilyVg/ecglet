@@ -22,7 +22,7 @@
 
 .new-user-edit-top-layout{
   padding: 47rpx 40rpx 144rpx 52rpx;
-  background-color: #3a93ef;
+  background-color: var(--primaryColor);
 }
 
 .avatar{
@@ -36,7 +36,7 @@
 .finish {
   width:605rpx;
   height:100rpx;
-  background:rgba(57,147,238,1);
+  background:var(--primaryColor);
   border-radius:50rpx;
   font-size: 30rpx;
   line-height: 100rpx;
