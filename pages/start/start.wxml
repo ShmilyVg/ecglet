@@ -14,6 +14,7 @@
     <view class="flex-row align-items-center space-between">
         <button class="flex-column box-sizing-border-box start-btn" bindtap="toNormalTestPage" hover-class="none">
             <view class="item-title">常规心电检测</view>
+            <view class="item-subtitle" style="color:rgba(194,224,255,1);">30s速测</view>
             <view class="flex-row align-items-center space-between icon-margin-top">
                 <image class="start-icon" src="../../images/start/normal.png"></image>
                 <image class="start-arrow-icon" src="../../images/start/arrow.png"></image>
@@ -22,6 +23,7 @@
 
         <button class="flex-column box-sizing-border-box start-btn-02" bindtap="to02TestPage" hover-class="none">
             <view class="item-title">心脏负荷评估</view>
+            <view class="item-subtitle">5分钟全面检测</view>
             <view class="flex-row align-items-center space-between icon-margin-top">
                 <image class="start-icon" src="../../images/start/normal_02.png"></image>
                 <image class="start-arrow-icon" src="../../images/start/arrow.png"></image>

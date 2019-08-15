@@ -56,8 +56,16 @@ page{
   font-size:34rpx;
   font-weight:400;
   color:rgba(255,255,255,1);
+  line-height:44rpx;
 }
-
+.item-subtitle{
+  font-size:24rpx;
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(255,222,216,1);
+  line-height:44rpx;
+  align-self: flex-start;
+}
 .start-btn{
   width: 300rpx;
   background:rgba(58,147,239,1);
@@ -85,7 +93,7 @@ page{
 }
 
 .icon-margin-top{
-  margin-top: 117rpx;
+  margin-top: 75rpx;
 }
 
 .line-little{
