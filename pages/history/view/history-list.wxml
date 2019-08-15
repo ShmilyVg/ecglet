@@ -9,7 +9,7 @@
                         <view class="item-title">{{item.type_des}}</view>
                         <view wx:if="{{item.status}}" class="list-item-status">异常</view>
                     </view>
-                    <view class="item-name-and-time">{{item.dateStr}} {{item.timeStr}}</view>
+                    <view class="item-list-date">{{item.dateStr}} {{item.timeStr}}</view>
                 </view>
             </view>
             <view class="flex-column" style="align-items: flex-end">

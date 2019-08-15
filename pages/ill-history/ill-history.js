@@ -38,12 +38,8 @@ Page({
     },
 
     onLoad(options) {
-        const {isNormalMember, isNewMember, relevanceId} = options;
-        this.setData({
-            isNormalMember: isNormalMember,
-            isNewMember: isNewMember,
-            relevanceId: relevanceId
-        });
+        const {isNormalMember, isNewMember, relevanceId, isFirstInto} = options;
+        this.setData({isNormalMember, isNewMember, relevanceId, isFirstInto});
 
         Protocol.memberDiseaseGetMemberHistory({relevanceId}).then(res => {
             if (res.result.data) {
@@ -108,10 +104,16 @@ Page({
         }
     },
 
+
+
     editFinish() {
-        HiNavigator.navigateBack({
-            delta: 2
-        })
+        if (this.data.isFirstInto){
+            HiNavigator.relaunchToStart();
+        } else {
+            HiNavigator.navigateBack({
+                delta: 2
+            })
+        }
     },
 
     back() {
