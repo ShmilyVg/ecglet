@@ -22,16 +22,8 @@ page {
 
 .cell{
     width: 650rpx;
-    padding: 60rpx 50rpx;
+    padding: 40rpx 50rpx;
     justify-content: space-between;
-}
-
-.cell-title{
-    font-size:36rpx;
-    font-family:PingFang-SC-Bold;
-    font-weight:bold;
-    color:rgba(51,68,78,1);
-    line-height:28rpx;
 }
 
 .cell-title-tip{
