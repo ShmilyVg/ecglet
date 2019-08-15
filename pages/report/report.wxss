@@ -2,7 +2,7 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    background-color: rgba(57,147,238,1);
+    background-color: var(--primaryColor);
     padding: 25rpx;
     font-size:30rpx;
     font-family:PingFang-SC-Medium;

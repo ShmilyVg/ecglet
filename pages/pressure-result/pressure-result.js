@@ -46,7 +46,6 @@ Page({
         this.isNeedRelogin = false;
     },
 
-
     onUnload() {
         if (this.isNeedRelogin) {
             reLoginWithoutLogin();

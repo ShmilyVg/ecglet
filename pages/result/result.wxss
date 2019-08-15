@@ -48,13 +48,15 @@ page {
 }
 
 .logo {
-  width: 110rpx;
-  height: 110rpx;
+  width: 95rpx;
+  height: 95rpx;
   position: relative;
   margin-top: -75rpx;
   border-radius: 50%;
   border-width: 15rpx;
   border-style: solid;
+  background-color: #3A93EF;
+  border-color: #3A93EF;
 }
 
 .share{
