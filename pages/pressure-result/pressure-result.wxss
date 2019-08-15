@@ -129,8 +129,8 @@ page {
 }
 
 .logo {
-    width: 110rpx;
-    height: 110rpx;
+    width: 95rpx;
+    height: 95rpx;
     position: relative;
     margin-top: -75rpx;
     border-radius: 50%;
