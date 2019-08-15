@@ -4,7 +4,7 @@
     line-height:27rpx;
     text-align: center;
     color: white;
-    padding: 20rpx 0;
+    padding: 15rpx 0;
     border-radius: 50rpx;
     background-color: var(--primaryColor);
     margin-left: 20rpx;
@@ -16,7 +16,7 @@
     line-height:27rpx;
     text-align: center;
     color: var(--primaryColor);
-    padding: 20rpx 0;
+    padding: 15rpx 0;
     border-radius: 50rpx;
     background-color: white;
     border: 1rpx solid var(--primaryColor);
