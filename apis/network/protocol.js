@@ -292,8 +292,13 @@ export default class Protocol {
     static getPsilnterval({id}) {
         return Network.request({url: 'copywriting/getPsiInterval', data: arguments[0]});
     }
+
     static getHrInterval({id}) {
         return Network.request({url: 'copywriting/getHrInterval', data: arguments[0]});
+    }
+
+    static getHrvInterval({id}) {
+        return Network.request({url: 'copywriting/getHrvInterval', data: arguments[0]});
     }
 
     static wxReLogin(resolve, reject) {
