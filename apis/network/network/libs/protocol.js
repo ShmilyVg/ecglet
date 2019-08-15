@@ -26,4 +26,6 @@ export default class CommonProtocol {
         // return Promise.resolve();
         return Network.request({url: 'account/systeminfo', data: {systemInfo: {...systemInfo, hiSoftwareVersion}}});
     }
+
+
 }

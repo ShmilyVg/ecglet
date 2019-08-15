@@ -10,42 +10,8 @@
     padding-left: 40rpx;
 }
 
-.avatar {
-    width:100rpx;
-    height:100rpx;
-    border-radius:50%;
-    border:10rpx solid #F6F7F7;
-}
 
-.name{
-    font-size:32rpx;
-    font-weight:500;
-    color:rgba(91,91,91,1);
-}
 
-.sex{
-    width: 28rpx;
-    height: 28rpx;
-}
-
-.age {
-    font-size:24rpx;
-    font-weight:500;
-    color:rgba(156,156,156,1);
-    margin-left: 20rpx;
-}
-
-.qiehuantaren{
-    font-size:24rpx;
-    font-weight:500;
-    color:rgba(170,170,170,1);
-}
-
-.arr {
-    height: 24rpx;
-    width: 14rpx;
-    margin-left: 20rpx;
-}
 
 .line{
     width:750rpx;

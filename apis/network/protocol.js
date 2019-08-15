@@ -309,6 +309,10 @@ export default class Protocol {
         return Network.request({url: 'copywriting/getMoodInterval', data: arguments[0]});
     }
 
+    static sendBluetoothInfo({mac, electricity}) {
+        return Network.request({url: 'account/bluetooth', data: arguments[0]});
+    }
+
 
     static wxReLogin(resolve, reject) {
         wx.login({

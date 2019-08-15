@@ -73,7 +73,7 @@
 
 .result-item-line{
     width: 748rpx;
-    border: 1rpx solid #F6F7F7;
+    border-bottom: 1rpx solid #F6F7F7;
 }
 
 .display{

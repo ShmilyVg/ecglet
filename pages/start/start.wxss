@@ -65,6 +65,7 @@ page{
   color:rgba(255,222,216,1);
   line-height:44rpx;
   align-self: flex-start;
+  margin-left: 5rpx;
 }
 .start-btn{
   width: 300rpx;

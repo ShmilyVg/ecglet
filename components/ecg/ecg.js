@@ -164,7 +164,6 @@ Component({
 
 
             let buffer = new Uint16Array(data);
-
             const speed = ecgData.px1sec / ecgData.sampleHz;
             const yunit = ecgData.px1mv / ecgData.adGain;
             // const scanBarWidth = 30
@@ -179,6 +178,7 @@ Component({
             const len = buffer.length;
             let reserve = true, isOverWidth = false;
             buffer.forEach((gain, index) => {
+                // console.log('获取到的数据',gain);
                 px += speed;
                 py += ((gain - ogn) * yunit);
                 // ctx.clearRect(px, 0, scanBarWidth, h)
@@ -193,7 +193,7 @@ Component({
                 ogn = gain;
 
                 if (px > ecgData.width) {
-                    console.log('已经越界', buffer);
+                    // console.log('已经越界', buffer);
                     ctx.closePath();
                     ctx.draw(false);
                     // ctx.clearRect(0, 0, that.data.width + 20, that.data.height);

@@ -63,17 +63,7 @@ Page({
         this.arrhythType = options.type;
     },
     onShow() {
-        const currentMember = app.globalData.currentMember;
-        if (currentMember && currentMember.memberId) {
-            currentMember.shortName = Tools.HandleShortName(currentMember.nickName);
-            this.setData({userInfo: currentMember});
-        } else {
-            UserInfo.get().then(res => {
-                console.log(res);
-                res.userInfo.shortName = Tools.HandleShortName(res.userInfo.nickName);
-                this.setData({userInfo: {...res.userInfo}});
-            });
-        }
+
     },
     onUnload() {
         wx.setKeepScreenOn({
@@ -86,9 +76,7 @@ Page({
             }
         });
     },
-    switchMember() {
-        wx.navigateTo({url: '/pages/member-list/member-list?state=1'});
-    },
+
     textContent(e) {
         let {detail: {cursor, value}} = e;
         this.setData({
@@ -126,7 +114,7 @@ Page({
             } else {
                 promise = Protocol.uploadGatherRoutineFile;
             }
-            const {userInfo} = this.data;
+            const userInfo = this.selectComponent('#switchMemberView').getUserInfo();
             promise({
                 filePath: this.filePath,
                 symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
