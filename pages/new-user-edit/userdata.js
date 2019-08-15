@@ -158,7 +158,7 @@ Page({
             }).then(res => {
                 return UserInfo.set({...res.userInfo, ...data});
             }).then(() => {
-                HiNavigator.relaunchToStart();
+                HiNavigator.navigateToIllHistory({isNormalMember: true, isFirstInto: true})
             }).catch((res) => {
                 switch (res.data.code) {
                     case 2000:
