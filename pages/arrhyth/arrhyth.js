@@ -15,7 +15,7 @@ import {
     stopBluetoothDevicesDiscovery
 } from "../../apis/ble/manager";
 import HiNavigator from "../../components/navigator/hi-navigator";
-import {ArrhythStateManager, getCircleRadius} from "./state";
+import {ArrhythStateManager} from "./state";
 
 ArrayBuffer.prototype.concat = function (b2) {
     let tmp = new Uint8Array(this.byteLength + b2.byteLength);
@@ -183,7 +183,7 @@ Page({
             }
         );
         console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
-
+        let selectDeviceId;
         try {
             // 设置设备发现监听回调
             wx.onBluetoothDeviceFound(res => {
@@ -208,8 +208,8 @@ Page({
                 })
 
                 // 优先连接原设备
-                let selectDeviceId = matches.length === 0 ? res.devices[0].deviceId : matches[0].deviceId,
-                    matchServices = [];
+                selectDeviceId = matches.length === 0 ? res.devices[0].deviceId : matches[0].deviceId;
+                let matchServices = [], tempServices = [];
 
                 // 先判断设备是否已经被接通
                 createBLEConnection({deviceId: selectDeviceId}).then(ret => {
@@ -222,11 +222,13 @@ Page({
 
                 }).then(services => {
                     console.log('getBLEDeviceServices result: ' + services.errMsg)
-                    services.services.forEach(v => {
+                    tempServices = services.services;
+
+                    tempServices.forEach(v => {
                         console.log('service: ' + v.uuid + ' isPrimary: ' + v.isPrimary)
                     })
 
-                    matchServices = services.services.filter(v => {
+                    matchServices = tempServices.filter(v => {
                         return v.uuid.includes('0000FFB1')
                     })
                     if (matchServices.length > 0) {
@@ -245,10 +247,10 @@ Page({
 
                     characteristics.characteristics.forEach(v => {
                         console.log('characteristic: ' + v.uuid + ', properties: ' + v.properties)
-                    })
+                    });
                     let matchCharacteristics = characteristics.characteristics.filter(v => {
                         return v.uuid.includes('FFB2')
-                    })
+                    });
                     if (matchCharacteristics.length > 0) {
                         return notifyBLECharacteristicValueChange({
                             deviceId: selectDeviceId,
@@ -262,9 +264,39 @@ Page({
                     }
                 }).then(res => {
                     console.log('notifyBLECharacteristicValueChange result: ' + res.errMsg)
-                }).catch(error => {
-                    console.log('error: %o', error)
+                    matchServices = tempServices.filter(v => {
+                        return v.uuid.includes('0000180F');
+                    });
+                    if (matchServices.length > 0) {
+
+                        return getBLEDeviceCharacteristics({
+                            deviceId: selectDeviceId,
+                            serviceId: matchServices[0].uuid
+                        });
+                    }
                 })
+                    .then(characteristics => {
+                        console.log('电量 getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
+
+                        characteristics.characteristics.forEach(v => {
+                            console.log('电量 characteristic: ' + v.uuid + ', properties: ' + v.properties)
+                        });
+                        let matchCharacteristics = characteristics.characteristics.filter(v => {
+                            return v.uuid.includes('2A19');
+                        });
+                        if (matchCharacteristics.length > 0) {
+                            return notifyBLECharacteristicValueChange({
+                                deviceId: selectDeviceId,
+                                serviceId: matchServices[0].uuid,
+                                characteristicId: matchCharacteristics[0].uuid,
+                                state: true
+                            })
+
+                        }
+                    })
+                    .catch(error => {
+                        console.log('error: %o', error)
+                    })
 
             })
 
@@ -301,9 +333,25 @@ Page({
             })
 
             wx.onBLECharacteristicValueChange(res => {
-                if (res.serviceId.includes('FFB1')) {
-                    if (res.characteristicId.includes('FFB2')) {
+                const {serviceId, characteristicId} = res;
+                console.log('服务id和特征值id', serviceId, characteristicId);
+                if (serviceId.includes('FFB1')) {
+                    if (characteristicId.includes('FFB2')) {
                         that.onFirstChannelChange(res.value)
+                    }
+                } else if (serviceId.includes('180F')) {
+                    if (characteristicId.includes('2A19')) {
+                        console.log('获取电量开始', res.value);
+                        let buffer = new Uint8Array(res.value);
+                        const battery = buffer[0];
+                        console.log('获取到电量 battery=', battery);
+                        console.log('获取电量结束');
+
+                        Protocol.sendBluetoothInfo({mac: selectDeviceId, electricity: battery}).then(data => {
+                            console.log('同步电量成功', data);
+                        }).catch(res => {
+                            console.log('同步电量失败', res);
+                        });
                     }
                 }
             })
