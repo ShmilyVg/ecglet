@@ -1,7 +1,7 @@
 <!--pages/rich-content/rich-content.wxml-->
 <view class="flex-column" style="align-items: center">
     <view class="title">这是谁的检测结果？</view>
-    <switch-member user-info="{{userInfo}}" bindswitchMember="switchMember"></switch-member>
+    <switch-member id="switchMemberView"></switch-member>
     <view class="line"></view>
     <view class="title">症状记录<mark style="font-size: 24rpx">（可多选)</mark></view>
     <view class="tag-view flex-row">
