@@ -23,9 +23,9 @@ Page({
                 if (value.target) {
                     value.point = 47 + 161 * (value.level - 1);
                     if (value.target === 6) {
-                        value.image = `../../images/pressure-result/xf${value.level}.png`
-                    } else if (value.target === 7) {
                         value.image = `../../images/pressure-result/pl${value.level}.png`
+                    } else if (value.target === 7) {
+                        value.image = `../../images/pressure-result/xf${value.level}.png`
                     }
                 }
             });
