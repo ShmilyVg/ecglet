@@ -21,7 +21,9 @@
     "pages/avg-hr/avg-hr",
     "pages/sdnn-detail/sdnn-detail",
     "pages/press-detail/press-detail",
-    "pages/hrv-interval/hrv-interval"
+    "pages/hrv-interval/hrv-interval",
+    "pages/tired-level/tired-level",
+    "pages/exciting-level/exciting-level"
   ],
   "window": {
     "backgroundTextStyle": "light",

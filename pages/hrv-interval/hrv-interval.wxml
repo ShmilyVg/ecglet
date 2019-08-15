@@ -1,7 +1,7 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
     <view class="decipher-title">{{result.title}}</view>
-    <view class="decipher-num" style="color: {{titleColor}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
+    <view class="decipher-num" style="color: {{result.color}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
     <view style="position: relative;">
         <view class="decipher-line flex-row">
             <view wx:for="{{lineColor}}" style="width: 25%;height:100%;background-color: {{item.color}}"></view>
@@ -60,7 +60,14 @@
                 <image src="{{item.img}}" style="width: 44rpx;height: 44rpx;margin-right: 18rpx;"></image>
                 <view class="decipher-suggest-item-title">{{item.title}}</view>
             </view>
-            <view wx:if="{{item.content}}" class="decipher-content-text" style="margin-top: 28rpx;margin-bottom: 35rpx;">{{item.content}}</view>
+            <view wx:if="{{item.subtitle}}" class="decipher-content-text" style="margin-top: 28rpx;margin-bottom: 35rpx;">{{item.subtitle}}</view>
+            <view wx:for="{{item.content}}" wx:key="*this" class="flex-column" style="margin-top: 6rpx;">
+                <view class="flex-row align-items-center">
+                    <view class="flex-row align-items-center justify-center decipher-contents-item-index">{{index+1}}</view>
+                    <view class="decipher-contents-item-title">{{item.title}}</view>
+                </view>
+                <view class="decipher-contents-item-content">{{item.content}}</view>
+            </view>
         </block>
 
 

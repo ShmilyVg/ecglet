@@ -1,7 +1,7 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
     <view class="decipher-title">{{result.title}}</view>
-    <view class="decipher-num" style="color: {{titleColor}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
+    <view class="decipher-num" style="color: {{result.color}};">{{result.frequency}}<mark class="decipher-unit">{{result.unit}}</mark></view>
     <view style="position: relative;">
         <view class="decipher-line flex-row">
             <view wx:for="{{lineColor}}" style="width: 20%;height:100%;background-color: {{item.color}}"></view>

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "circle": "../../components/heart-pressure-circle/heart-pressure-circle"
-  }
+  },
+  "navigationBarTitleText": "压力指数"
 }
