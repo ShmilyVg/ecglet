@@ -29,13 +29,13 @@
     left: 0;
     bottom: 0;
     z-index: 10;
-    height: 120rpx;
+    height: 100rpx;
     width: 100%;
-    line-height: 120rpx;
-    text-align: center;
-    font-size:38rpx;
+    font-size:32rpx;
     font-family:PingFang-SC-Medium;
     font-weight:500;
+    color:rgba(254,254,254,1);
+    line-height:50rpx;
 }
 
 
