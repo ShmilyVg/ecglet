@@ -17,7 +17,7 @@ Page({
         console.log(options);
         this.dataId = options.dataId;
         Protocol.getHrInterval({id: this.dataId}).then(data => {
-            const {result, result: {frequency}} = data;
+            const {result, result: {frequency,title}} = data;
             let fre = parseInt(frequency) || 0, titleColor = '', position = 0, maxNum = 200, iconWidth = 2;//iconWidth=2 是2%的意思
             const {lineNum} = this.data;
 
@@ -39,15 +39,8 @@ Page({
                 position,
                 result
             });
+            wx.setNavigationBarTitle({title});
         });
-
-
-        let obj = {
-            "img": "",
-            "title": "",
-            "subTitle": "",
-            "content": [{"title": "", "content": ""}]
-        }
     },
 
 })

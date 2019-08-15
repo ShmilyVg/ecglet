@@ -1,6 +1,6 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
-    <view class="decipher-title">疲劳程度</view>
+    <view class="decipher-title">{{result.title}}</view>
     <view style="position: relative;">
         <view class="decipher-line flex-row">
             <view wx:for="{{lineColor}}" wx:key="index" style="width: 25%;height:100%;background-color: {{item.color}}"></view>

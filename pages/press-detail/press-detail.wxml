@@ -1,6 +1,6 @@
 <!--pages/AvgHR/AvgHR.wxml-->
 <view class="flex-column align-items-center">
-    <view class="decipher-title">心脏压力指数</view>
+    <view class="decipher-title">{{result.title}}</view>
     <circle id="press-detail-circle"></circle>
 
 

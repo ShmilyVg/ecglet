@@ -17,6 +17,7 @@ Page({
             }, () => {
                 this.selectComponent('#press-detail-circle').drawCircle({score: parseInt(data.result.frequency)});
             });
+            wx.setNavigationBarTitle({title: result.title});
         });
     }
 });
