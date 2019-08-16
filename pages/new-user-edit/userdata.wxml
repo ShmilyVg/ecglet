@@ -1,9 +1,8 @@
 <view class="flex-column fill-width fill-height">
     <view class="fill-width flex-row align-items-center space-between box-sizing-border-box new-user-edit-top-layout">
         <view class="flex-column">
-            <view class="new-user-edit-remind">首先，</view>
-            <view class="new-user-edit-remind">为了测出准确合理的检测结果</view>
-            <view class="new-user-edit-remind">请您完善基本信息</view>
+            <view class="new-user-edit-remind-big">请先完善资料</view>
+            <view class="new-user-edit-remind"><text>为了测出准确合理的检测结果\n请您完善基本信息</text></view>
         </view>
         <image mode="aspectFill" src="{{portraitUrl}}" class="avatar" bindtap="chooseImage"></image>
 
@@ -69,7 +68,7 @@
             </view>
         </view>
         <view class="fill-width flex-row justify-center" style="margin-top: 30rpx;">
-            <view class="finish" bindtap="onSubmit">完成</view>
+            <view class="finish" bindtap="onSubmit">下一步</view>
         </view>
 
     </view>

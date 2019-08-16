@@ -1,6 +1,10 @@
 // pages/ill-history/ill-history.js
 import HiNavigator from "../../components/navigator/hi-navigator";
 import Protocol from "../../apis/network/protocol";
+import WXDialog from "../../utils/dialog";
+import Toast from "../../base/heheda-common-view/toast";
+import UserInfo from "../../apis/network/network/libs/userInfo";
+import * as tools from "../../utils/tools";
 
 Page({
     data: {
@@ -34,29 +38,35 @@ Page({
             }
         ],
         haveHistoryIll: false,
-        result: {}
+        result: {},
+        isFirstInto: false
     },
 
-    onLoad(options) {
-        const {isNormalMember, isNewMember, relevanceId, isFirstInto} = options;
-        this.setData({isNormalMember, isNewMember, relevanceId, isFirstInto});
+    onLoad(option) {
+        let userInfo = getApp().globalData.editMember;
+        console.log(userInfo);
+        if (option.isFirstInto != 'false') {
+            this.setData({
+                isFirstInto: option.isFirstInto
+            });
+        }
 
-        Protocol.memberDiseaseGetMemberHistory({relevanceId}).then(res => {
-            if (res.result.data) {
-                this.data.illItem[0].isChose = res.result.data.hypertension;
-                this.data.illItem[1].isChose = res.result.data.cardiopathy;
-                this.data.illItem[2].isChose = res.result.data.diabetes;
-                this.setData({
-                    illItem: this.data.illItem,
-                    illId: res.result.data.id,
-                    haveHistoryIll: true
-                })
-            } else {
-                this.setData({
-                    haveHistoryIll: false
-                })
+        if (userInfo.isNewMember) {
+            return;
+        }
+
+        if (!userInfo.diseaseNull) {
+            let illItem = this.data.illItem;
+            illItem[0].isChose = userInfo.hypertension;
+            illItem[1].isChose = userInfo.cardiopathy;
+            illItem[2].isChose = userInfo.diabetes;
+            if (!userInfo.hypertension && !userInfo.cardiopathy && !userInfo.diabetes) {
+                illItem[3].isChose = true;
             }
-        })
+            this.setData({
+                illItem: illItem
+            });
+        }
     },
 
     clickItem(e) {
@@ -87,33 +97,96 @@ Page({
             if (value.en) {
                 result[value.en] = value.isChose ? 1 : 0;
             }
+            if (value.isChose && !this.data.haveHistoryIll) {
+                this.setData({
+                    haveHistoryIll: true
+                })
+            }
         });
-
-        if (!this.data.isNormalMember) {
-            result.relevanceId = this.data.relevanceId;
-        }
         if (this.data.haveHistoryIll) {
-            result.id = this.data.illId;
-            Protocol.memberDiseaseUpdate({data: result}).then(_ => {
-                this.editFinish();
-            })
+            this.saveUserInfo({ill: result})
         } else {
-            Protocol.memberDiseaseCreate({data: result}).then(_ => {
-                this.editFinish();
-            })
+            Toast.showText('请选择是否有病史');
         }
     },
 
-
-
     editFinish() {
-        if (this.data.isFirstInto){
+        if (this.data.isFirstInto) {
             HiNavigator.relaunchToStart();
         } else {
             HiNavigator.navigateBack({
                 delta: 2
             })
         }
+    },
+
+    saveUserInfo({ill}) {
+        let data = getApp().globalData.editMember;
+        let dialogTitle = data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
+        WXDialog.showDialog({
+            title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
+                try {
+                    Toast.showLoading();
+                    console.log('保存信息：', data);
+                    if (data.isNewMember) {
+                        Protocol.accountCreate({...data, ...ill}).then((res) => {
+                            this.editFinish();
+                        }).catch((res) => {
+                            if (res.data.code == 2000) {
+                                console.log('手机号重复');
+                                Toast.showText('同一手机\n不能绑定两个账号')
+                            } else {
+                                Toast.showText('保存失败');
+                            }
+                        }).finally(() => {
+                            Toast.hiddenLoading();
+                        });
+                    } else if (data.isNormalMember) {
+                        Protocol.accountUpdate({...data, ...ill}).then((res) => {
+                            return UserInfo.get();
+                        }).then((res) => {
+                            data.age = tools.jsGetAge(data.birthday);
+                            return UserInfo.set({...res.userInfo, ...data, ...ill, diseaseNull: 0});
+                        }).then(() => {
+                            getApp().globalData.editMember = {};
+                            this.editFinish();
+                        }).catch((res) => {
+                            switch (res.data.code) {
+                                case 2000:
+                                    Toast.showText('同一手机\n不能绑定两个账号');
+                                    break;
+                                case 3000:
+                                    Toast.showText('暂不支持表情');
+                                    break;
+                                default:
+                                    Toast.showText('修改失败');
+                                    break;
+                            }
+                        });
+                    } else {
+                        console.log('保存信息：', data);
+                        Protocol.memberRelevanceUpdate({...data, ...ill}).then((res) => {
+                            this.editFinish();
+                        }).catch((res) => {
+                            switch (res.data.code) {
+                                case 2000:
+                                    Toast.showText('同一手机\n不能绑定两个账号');
+                                    break;
+                                case 3000:
+                                    Toast.showText('暂不支持表情');
+                                    break;
+                                default:
+                                    Toast.showText('修改失败');
+                                    break;
+                            }
+                        });
+                    }
+                } catch (err) {
+                    console.log("onSubmit error: %o", err);
+                    Toast.showText('提交失败')
+                }
+            }
+        });
     },
 
     back() {

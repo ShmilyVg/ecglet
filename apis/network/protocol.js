@@ -169,15 +169,15 @@ export default class Protocol {
         return Network.request({url: 'relatives/delToolTip'})
     }
 
-    static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl}) {
+    static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl,hypertension,cardiopathy,diabetes}) {
         return Network.request({
             url: 'member/relevance/create',
-            data: {nickName, sex, phone, birthday, height, weight, portraitUrl}
+            data: {nickName, sex, phone, birthday, height, weight, portraitUrl,hypertension,cardiopathy,diabetes}
         })
     }
 
-    static memberRelevanceDel({id}) {
-        return Network.request({url: 'member/relevance/del', data: {id}})
+    static memberRelevanceDel({relevanceId}) {
+        return Network.request({url: 'member/relevance/del', data: {relevanceId}})
     }
 
     static memberRelevanceList({}) {
@@ -194,10 +194,10 @@ export default class Protocol {
         return Network.request({url: 'relatives/delRelatives ', data: {memberId}})
     }
 
-    static memberRelevanceUpdate({id, phone, nickName, portraitUrl, birthday, height, weight, sex}) {
+    static memberRelevanceUpdate({relevanceId, phone, nickName, portraitUrl, birthday, height, weight, sex,hypertension,cardiopathy,diabetes}) {
         return Network.request({
             url: 'member/relevance/update',
-            data: {id, phone, nickName, portraitUrl, birthday, height, weight, sex}
+            data: {relevanceId, phone, nickName, portraitUrl, birthday, height, weight, sex,hypertension,cardiopathy,diabetes}
         })
     }
 

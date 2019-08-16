@@ -79,10 +79,8 @@ export default class HiNavigator extends CommonNavigator {
         wx.redirectTo({url: '/pages/pressure-result/pressure-result?dataId=' + dataId});
     }
 
-    static navigateToIllHistory({isNormalMember, isNewMember, relevanceId,  isFirstInto=false}) {
-        wx.navigateTo({
-            url: `/pages/ill-history/ill-history?isNewMember=${isNewMember}&isNormalMember=${isNormalMember}&relevanceId=${relevanceId}&isFirstInto=${isFirstInto}`
-        })
+    static navigateToIllHistory({isFirstInto=false}) {
+        wx.navigateTo({url: `/pages/ill-history/ill-history?isFirstInto=${isFirstInto}`})
     }
 
     static navigateToHeartPressureDetail({dataId}) {

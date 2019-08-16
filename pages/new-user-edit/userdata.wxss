@@ -1,9 +1,20 @@
+
+.new-user-edit-remind-big{
+  font-size:44rpx;
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(91,91,91,1);
+  line-height:37rpx;
+  margin-top: 60rpx;
+}
+
 .new-user-edit-remind{
-  font-size:30rpx;
-  font-family:PingFang-SC-Medium;
-  font-weight:500;
-  color:rgba(255,255,255,1);
-  opacity: 0.8;
+  font-size:24rpx;
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(161,161,161,1);
+  line-height:36rpx;
+  margin-top: 38rpx;
 }
 
 .cell-hpe{
@@ -22,15 +33,15 @@
 
 .new-user-edit-top-layout{
   padding: 47rpx 40rpx 144rpx 52rpx;
-  background-color: var(--primaryColor);
 }
 
 .avatar{
   width:116rpx;
   height:116rpx;
   border-radius: 50%;
-  border: 12rpx solid rgba(255,255,255,0.2);
+  border: 12rpx solid #f6f7f7;
   margin-left: 21rpx;
+  margin-top: 60rpx;
 }
 
 .finish {
@@ -66,10 +77,4 @@
   height: 2.58823529em;
   min-height: 2.58823529em;
   line-height: 2.58823529em;
-}
-
-
-
-page {
-  background-color: white;
 }

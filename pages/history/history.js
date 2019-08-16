@@ -32,7 +32,7 @@ Page({
             })
         });
 
-        if (userInfo.thirdpartyUId === null) {
+        if (userInfo.relevanceId) {
             this.setData({
                 userInfo: userInfo,
                 isNormalMember: false,
@@ -60,7 +60,7 @@ Page({
         Toast.showLoading();
         let data = {data: {page}};
         if (!this.data.isNormalMember) {
-            data = {data: {page, relevanceId: this.data.userInfo.id}}
+            data = {data: {page, relevanceId: this.data.userInfo.relevanceId}}
         }
         Protocol.getHistoryList({data}).then((data) => {
             let list = data.result.dataList;
@@ -159,7 +159,7 @@ Page({
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
         let data = {type, target: this.data.tagChose};
         if (!this.data.isNormalMember) {
-            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id};
+            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.relevanceId};
         }
         Protocol.getLinearGraph({data}).then(data => {
             const {result: {xTitle, yTitle}} = data;
@@ -192,7 +192,7 @@ Page({
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
         let data = {type, target: this.data.tagChose, page: this.data.itemPage};
         if (!this.data.isNormalMember) {
-            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.id, page: this.data.itemPage}
+            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.relevanceId, page: this.data.itemPage}
         }
         Protocol.getLinearGraphList({data}).then(data => {
             let {result: {dataList: list}} = data;

@@ -140,45 +140,19 @@ Page({
         }
         let birthTime = this.data.birthDate || '';
         console.log(`birth time: ${birthTime}`);
-        try {
-            Toast.showLoading();
-            let data = {
-                nickName: this.data.name,
-                phone: this.data.number,
-                sex: this.data.sexIndex,
-                birthday: birthTime,
-                height: this.data.height,
-                weight: this.data.weight,
-                portraitUrl: this.data.portraitUrl
-            };
-            console.log('保存信息：', data);
-            Protocol.accountUpdate(data).then((res) => {
-                UserInfo.clear();
-                return UserInfo.get();
-            }).then(res => {
-                return UserInfo.set({...res.userInfo, ...data});
-            }).then(() => {
-                HiNavigator.navigateToIllHistory({isNormalMember: true, isFirstInto: true})
-            }).catch((res) => {
-                switch (res.data.code) {
-                    case 2000:
-                        Toast.showText('同一手机\n不能绑定两个账号');
-                        break;
-                    case 3000:
-                        Toast.showText('暂不支持表情');
-                        break;
-                    default:
-                        Toast.showText('修改失败');
-                        break;
-                }
-            }).finally(() => {
-                Toast.hiddenLoading();
-            });
-        } catch (err) {
-            console.log("onSubmit error: %o", err);
-            Toast.showText('提交失败');
-            Toast.hiddenLoading();
-        }
+
+        let editMember = {
+            nickName: this.data.name,
+            phone: this.data.number,
+            sex: this.data.sexIndex,
+            birthday: birthTime,
+            height: this.data.height,
+            weight: this.data.weight,
+            portraitUrl: this.data.portraitUrl,
+            isNormalMember: true
+        };
+        getApp().globalData.editMember = editMember;
+        HiNavigator.navigateToIllHistory({isFirstInto:true});
     },
 
     chooseImage() {
