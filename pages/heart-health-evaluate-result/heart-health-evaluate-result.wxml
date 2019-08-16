@@ -1,5 +1,5 @@
 <view class="flex-column align-items-center">
-    <switch-member id="switchMemberView" bindonGetMemberDisease="onGetMemberDisease"></switch-member>
+    <switch-member id="switchMemberView"></switch-member>
     <view class="health-evaluate-line"></view>
 
     <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">

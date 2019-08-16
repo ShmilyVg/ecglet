@@ -85,7 +85,7 @@ Page({
     },
 
     toHeartHealthPage() {
-
+        HiNavigator.navigateToHeartHealthEvaluation();
     },
 });
 

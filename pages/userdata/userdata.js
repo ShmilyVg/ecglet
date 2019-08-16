@@ -117,6 +117,7 @@ Page({
     },
 
     onSubmit() {
+        let that = this;
         if (this.data.name.length == 0) {
             Toast.showText('请填写完整信息');
             return;
