@@ -42,9 +42,12 @@ Page({
         isFirstInto: false
     },
 
-    onLoad() {
+    onLoad(option) {
         let userInfo = getApp().globalData.editMember;
         console.log(userInfo);
+        this.setData({
+            isFirstInfo: option.isFirstInfo
+        });
 
         if (userInfo.isNewMember) {
             return;

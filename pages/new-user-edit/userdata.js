@@ -152,7 +152,7 @@ Page({
             isNormalMember: true
         };
         getApp().globalData.editMember = editMember;
-        HiNavigator.navigateToIllHistory({});
+        HiNavigator.navigateToIllHistory({isFirstInto:true});
     },
 
     chooseImage() {
