@@ -45,9 +45,13 @@ Page({
     onLoad(option) {
         let userInfo = getApp().globalData.editMember;
         console.log(userInfo);
-        this.setData({
-            isFirstInto: option.isFirstInto
-        });
+        if (option.isFirstInto == 'false'){
+
+        } else {
+            this.setData({
+                isFirstInto: option.isFirstInto
+            });
+        }
 
         if (userInfo.isNewMember) {
             return;
@@ -119,10 +123,10 @@ Page({
     },
 
     saveUserInfo({ill}) {
-        let dialogTitle = this.data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
+        let data = getApp().globalData.editMember;
+        let dialogTitle = data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
         WXDialog.showDialog({
             title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
-                let data = getApp().globalData.editMember;
                 try {
                     Toast.showLoading();
                     console.log('保存信息：', data);

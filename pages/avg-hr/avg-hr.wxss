@@ -78,7 +78,7 @@
 }
 
 .decipher-check-result-title{
-    font-size:60rpx;
+    font-size:50rpx;
     font-family:PingFang-SC-Bold;
     font-weight:bold;
     color:rgba(97,118,131,1);

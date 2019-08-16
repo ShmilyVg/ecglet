@@ -5,10 +5,10 @@ Page({
 
     data: {
         lineColor: [
-            {color: '#FC7648', text: '非常低'},
-            {color: '#FDC400', text: '低'},
-            {color: '#5ACD4E', text: '正常偏低'},
-            {color: '#4BABEA', text: '正常'},
+            {color: '#EF3A59', text: '非常低'},
+            {color: '#FC7648', text: '低'},
+            {color: '#FDC400', text: '正常偏低'},
+            {color: '#5ACD4E', text: '正常'},
         ],
         lineNum: [20, 35, 50]
     },
