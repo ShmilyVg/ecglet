@@ -64,7 +64,7 @@ Page({
     handleNameShow(members) {
         members.map(item => {
             item.shortName = Tools.HandleShortName(item.nickName);
-        })
+        });
         return members;
     },
 
@@ -130,9 +130,9 @@ Page({
             success(res) {
                 if (res.confirm) {
                     let members = that.data.members;
-                    let id = members[index].id;
-                    Protocol.memberRelevanceDel({id}).then(() => {
-                        if (id == getApp().globalData.currentMember.id) {
+                    let relevanceId = members[index].relevanceId;
+                    Protocol.memberRelevanceDel({relevanceId}).then(() => {
+                        if (relevanceId == getApp().globalData.currentMember.relevanceId) {
                             getApp().globalData.currentMember = {};
                         }
                         members.splice(index, 1);

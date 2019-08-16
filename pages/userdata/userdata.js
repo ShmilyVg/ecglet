@@ -55,6 +55,10 @@ Page({
                 height: userInfo.height,
                 weight: userInfo.weight,
                 portraitUrl: userInfo.portraitUrl,
+                cardiopathy:userInfo.cardiopathy,
+                diabetes:userInfo.diabetes,
+                diseaseNull:userInfo.diseaseNull,
+                hypertension:userInfo.hypertension,
                 isNormalMember: isNormalMember
             })
         } else {
@@ -66,7 +70,11 @@ Page({
                 height: userInfo.height,
                 weight: userInfo.weight,
                 portraitUrl: userInfo.portraitUrl,
-                id: userInfo.id,
+                relevanceId: userInfo.relevanceId,
+                cardiopathy:userInfo.cardiopathy,
+                diabetes:userInfo.diabetes,
+                diseaseNull:userInfo.diseaseNull,
+                hypertension:userInfo.hypertension,
                 isNormalMember: isNormalMember
             })
         }
@@ -109,7 +117,6 @@ Page({
     },
 
     onSubmit() {
-        let that = this;
         if (this.data.name.length == 0) {
             Toast.showText('请填写完整信息');
             return;
@@ -142,95 +149,27 @@ Page({
             Toast.showText('请填写体重');
             return;
         }
-        let dialogTitle = that.data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
+        let birthTime = this.data.birthDate || '';
+        console.log(`birth time: ${birthTime}`);
 
-        WXDialog.showDialog({
-            title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
-                Toast.showLoading();
-                let birthTime = this.data.birthDate || '';
-                console.log(`birth time: ${birthTime}`);
-                try {
-                    let data = {
-                        nickName: this.data.name,
-                        phone: this.data.number,
-                        sex: this.data.sexIndex,
-                        birthday: birthTime,
-                        height: this.data.height,
-                        weight: this.data.weight,
-                        portraitUrl: this.data.portraitUrl
-                    };
-                    console.log('保存信息：', data);
-                    if (that.data.isNewMember) {
-                        Protocol.accountCreate(data).then((res) => {
-                            this.naviToIllHisPage();
-                        }).catch((res) => {
-                            if (res.data.code == 2000) {
-                                console.log('手机号重复');
-                                Toast.showText('同一手机\n不能绑定两个账号')
-                            } else {
-                                Toast.showText('保存失败');
-                            }
-                        }).finally(() => {
-                            Toast.hiddenLoading();
-                        });
-                    } else if (that.data.isNormalMember) {
-                        Protocol.accountUpdate(data).then((res) => {
-                            return UserInfo.get();
-                        }).then((res) => {
-                            Toast.success('修改成功');
-                            data.age = tools.jsGetAge(data.birthday);
-                            return UserInfo.set({...res.userInfo, ...data});
-                        }).then(() => {
-                            getApp().globalData.editMember = {};
-                            this.naviToIllHisPage();
-                        }).catch((res) => {
-                            switch (res.data.code) {
-                                case 2000:
-                                    Toast.showText('同一手机\n不能绑定两个账号');
-                                    break;
-                                case 3000:
-                                    Toast.showText('暂不支持表情');
-                                    break;
-                                default:
-                                    Toast.showText('修改失败');
-                                    break;
-                            }
-                        });
-                    } else {
-                        let data = {
-                            nickName: this.data.name,
-                            phone: this.data.number,
-                            sex: this.data.sexIndex,
-                            birthday: birthTime,
-                            height: this.data.height,
-                            weight: this.data.weight,
-                            portraitUrl: this.data.portraitUrl,
-                            id: this.data.id
-                        };
-                        console.log('保存信息：', data);
-                        Protocol.memberRelevanceUpdate(data).then((res) => {
-                            this.data.relevanceId = res.result.relevanceId;
-                            this.naviToIllHisPage();
-                        }).catch((res) => {
-                            switch (res.data.code) {
-                                case 2000:
-                                    Toast.showText('同一手机\n不能绑定两个账号');
-                                    break;
-                                case 3000:
-                                    Toast.showText('暂不支持表情');
-                                    break;
-                                default:
-                                    Toast.showText('修改失败');
-                                    break;
-                            }
-                        });
-                    }
-                } catch (err) {
-                    console.log("onSubmit error: %o", err);
-                    Toast.showText('提交失败')
-                }
-            }
-        });
+        const editMember = {
+            nickName: this.data.name,
+            phone: this.data.number,
+            sex: this.data.sexIndex,
+            birthday: birthTime,
+            height: this.data.height,
+            weight: this.data.weight,
+            portraitUrl: this.data.portraitUrl,
+            isNewMember: this.data.isNewMember,
+            relevanceId: this.data.relevanceId,
+            cardiopathy: this.data.cardiopathy,
+            diabetes: this.data.diabetes,
+            diseaseNull: this.data.diseaseNull,
+            hypertension: this.data.hypertension,
+            isNormalMember: this.data.isNormalMember,
+        };
+        getApp().globalData.editMember = editMember;
+        this.naviToIllHisPage();
     },
 
     naviToIllHisPage() {
