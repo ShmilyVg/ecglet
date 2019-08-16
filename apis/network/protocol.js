@@ -157,10 +157,6 @@ export default class Protocol {
         return Network.request({url: 'shared/getRelatedQRCode'})
     }
 
-    static getRelativesInfo({memberId}) {
-        return Network.request({url: 'relatives/info', data: {memberId}})
-    }
-
     static getRelativesList({memberId, page = 1}) {
         return Network.request({url: 'relatives/list', data: {memberId, page}})
     }
@@ -185,7 +181,13 @@ export default class Protocol {
     }
 
     static memberRelevanceList({}) {
-        return Network.request({url: 'member/relevance/list', data: {}})
+        return Network.request({url: 'member/relevance/list', data: {}}).then(data => {
+
+            data.result.dataList && data.result.dataList.forEach(item => {
+                item.relevanceId = item.memberId;
+            });
+            return Promise.resolve(data);
+        });
     }
 
     static shareRelativesDelRelatives({memberId}) {

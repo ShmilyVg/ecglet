@@ -104,4 +104,13 @@ export default class HiNavigator extends CommonNavigator {
     static navigateToExcitingLevelDetail({dataId}) {
         this.navigateTo({url: `/pages/exciting-level/exciting-level?dataId=${dataId}`});
     }
+
+    static navigateToHeartHealthEvaluation() {
+        this.navigateTo({url: `/pages/heart-health-evaluate/heart-health-evaluate`});
+    }
+
+
+    static navigateToHeartHealthEvaluationResult({resultId}) {
+        this.navigateTo({url: `/pages/heart-health-evaluate-result/heart-health-evaluate-result?resultId=${resultId}`});
+    }
 }
