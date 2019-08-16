@@ -45,11 +45,14 @@ Page({
     },
 
     toNormalTestPage() {
+        console.log('按钮toNormalTestPage点击了');
         Protocol.checkHaveNetwork().then(() => {
+            console.log('将要进入采集页面');
             HiNavigator.navigateToArrhyth();
-        }).catch(() => {
+        }).catch((res) => {
+            console.log('进入采集页面失败', res);
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
-        })
+        });
     },
     to02TestPage() {
         Protocol.checkHaveNetwork().then(() => {
