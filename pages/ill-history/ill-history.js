@@ -45,9 +45,7 @@ Page({
     onLoad(option) {
         let userInfo = getApp().globalData.editMember;
         console.log(userInfo);
-        if (option.isFirstInto == 'false'){
-
-        } else {
+        if (option.isFirstInto != 'false') {
             this.setData({
                 isFirstInto: option.isFirstInto
             });
