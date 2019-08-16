@@ -195,7 +195,7 @@ Page({
                                     Toast.showText('修改失败');
                                     break;
                             }
-                        });
+                        }).finally(Toast.hiddenLoading);
                     } else {
                         let data = {
                             nickName: this.data.name,
@@ -223,11 +223,12 @@ Page({
                                     Toast.showText('修改失败');
                                     break;
                             }
-                        });
+                        }).finally(Toast.hiddenLoading);
                     }
                 } catch (err) {
                     console.log("onSubmit error: %o", err);
-                    Toast.showText('提交失败')
+                    Toast.showText('提交失败');
+                    Toast.hiddenLoading();
                 }
             }
         });
