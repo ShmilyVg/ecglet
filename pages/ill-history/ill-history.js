@@ -46,7 +46,7 @@ Page({
         let userInfo = getApp().globalData.editMember;
         console.log(userInfo);
         this.setData({
-            isFirstInfo: option.isFirstInfo
+            isFirstInto: option.isFirstInto
         });
 
         if (userInfo.isNewMember) {
@@ -124,6 +124,7 @@ Page({
             title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
                 let data = getApp().globalData.editMember;
                 try {
+                    Toast.showLoading();
                     console.log('保存信息：', data);
                     if (data.isNewMember) {
                         Protocol.accountCreate({...data, ...ill}).then((res) => {
