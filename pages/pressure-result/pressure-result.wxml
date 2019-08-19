@@ -58,7 +58,7 @@
         </block>
     </view>
     <view class="align-items-center flex-column" style="width:650rpx;">
-        <view wx:if="{{!isPush}}" class="tip-push" bindtap="clickPush">展开</view>
+        <view wx:if="{{!isPush}}" class="tip-push" bindtap="clickPush">展开<image style="width: 10rpx;height: 12rpx;margin-left: 6rpx" src="../../images/result/push.png"></image></view>
     </view>
 </view>
 <template is="result-bottom" data="{{isAbNormal:false,btnColor:'#FC7055'}}"></template>
