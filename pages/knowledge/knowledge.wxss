@@ -22,7 +22,7 @@
     background:#8B80EB;
     border-radius:50%;
     border: 7rpx solid #e8e6fb;
-    font-size:32rpx;
+    font-size:28rpx;
     line-height:37rpx;
     font-family:MIUIEX-Normal;
     font-weight:400;
