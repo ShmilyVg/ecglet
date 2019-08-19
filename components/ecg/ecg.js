@@ -176,7 +176,7 @@ Component({
             ctx.moveTo(opx, opy);
             // console.log('传入的数据',buffer);
             const len = buffer.length;
-            let reserve = true, isOverWidth = false;
+            let reserve = true;
             buffer.forEach((gain, index) => {
                 // console.log('获取到的数据',gain);
                 px += speed;
