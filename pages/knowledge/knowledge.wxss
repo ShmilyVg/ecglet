@@ -19,9 +19,9 @@
 .knowledge-content-index{
     width:40rpx;
     height:40rpx;
-    background:rgba(76,159,242,1);
+    background:#8B80EB;
     border-radius:50%;
-    border: 7rpx solid rgba(229,242,255,1);
+    border: 7rpx solid #e8e6fb;
     font-size:32rpx;
     line-height:37rpx;
     font-family:MIUIEX-Normal;
