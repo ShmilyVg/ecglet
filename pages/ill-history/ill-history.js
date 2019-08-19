@@ -163,7 +163,7 @@ Page({
         }
     },
 
-    editErr(code){
+    editErr(code) {
         switch (code) {
             case 2000:
                 Toast.showText('同一手机\n不能绑定两个账号');

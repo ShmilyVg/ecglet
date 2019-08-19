@@ -3,6 +3,7 @@ import ResultTop from "../../components/result-top/index.js";
 import Protocol from "../../apis/network/protocol";
 import {reLoginWithoutLogin} from "../../utils/tools";
 import Toast from "../../utils/toast";
+import * as Tools from "../../utils/tools";
 
 Page({
     data: {
@@ -25,13 +26,8 @@ Page({
     },
 
     getTime(timestamp) {
-        const date = new Date(timestamp);
-        console.log(timestamp, date);
-        return `${date.getFullYear()}/${this.getTimeWithZero(date.getMonth() + 1)}/${this.getTimeWithZero(date.getDate())} ${this.getTimeWithZero(date.getHours())}:${this.getTimeWithZero(date.getMinutes())}`;
-    },
-
-    getTimeWithZero(num) {
-        return ('0' + num).slice(-2);
+        let date = Tools.createDateAndTime(timestamp);
+        return date.date + ' ' + date.time;
     },
 
     onLoad(options) {
@@ -45,33 +41,23 @@ Page({
             this.setData({result: dataList, userInfo});
             this.resultTop.showItems({items: dataList.report});
         });
-
-
-        // const result = getApp().globalData.tempGatherResult;
-        //
-        // console.log('接收到的结果', result);
-        // // // const result = this.data.result;
-        // result.time = this.getTime(parseInt(result.time));
-        // this.setData({result});
-        // wx.setNavigationBarColor({
-        //     backgroundColor: this.data.isGreen ? '#00C6BC' : '#3A93EF', frontColor: '#ffffff', animation: {
-        //         duration: 400,
-        //         timingFunc: 'easeIn'
-        //     }
-        // });
     },
+
     onHide() {
         this.isNeedRelogin = false;
     },
+
     onShow() {
         this.isNeedRelogin = true;
     },
+
     onUnload() {
         if (this.isNeedRelogin) {
             reLoginWithoutLogin();
         }
     },
+
     onShareAppMessage() {
         return {title: '', imageUrl: '', path: '/pages/result/result?withoutLogin=1&dataId=' + this.dataId};
     },
-})
+});
