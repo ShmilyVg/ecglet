@@ -14,13 +14,15 @@
     <view class="line-1" wx:if="{{index}}"></view>
     <view class="flex-column cell align-items-center">
         <view class="flex-row" style="width: 100%;justify-content: space-between">
-            <view class="flex-column">
+            <view class="flex-row align-items-center" style="height: 90rpx">
+                <view class="flex-column">
                 <view class="flex-row">
                     <view class="cell-title">{{item.title}}</view>
                     <view class="cell-title-tip">{{item.pointer}}</view>
                     <!--<image style="width: 32rpx;height: 32rpx;margin-left: 14rpx" src="../../images/pressure-result/warn.png"></image>-->
                 </view>
-                <view class="cell-content">{{item.content}}</view>
+                <view wx:if="{{item.content}}" class="cell-content">{{item.content}}</view>
+                </view>
             </view>
             <view class="flex-row align-items-center">
                 <view class="flex-column" style="align-items: end;width: 100rpx;">
