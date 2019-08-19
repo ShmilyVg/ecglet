@@ -44,7 +44,6 @@ Page({
 
     onLoad(option) {
         let userInfo = getApp().globalData.editMember;
-        console.log(userInfo);
         if (option.isFirstInto != 'false') {
             this.setData({
                 isFirstInto: option.isFirstInto
@@ -110,16 +109,6 @@ Page({
         }
     },
 
-    editFinish() {
-        if (this.data.isFirstInto) {
-            HiNavigator.relaunchToStart();
-        } else {
-            HiNavigator.navigateBack({
-                delta: 2
-            })
-        }
-    },
-
     saveUserInfo({ill}) {
         let data = getApp().globalData.editMember;
         let dialogTitle = data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
@@ -132,12 +121,7 @@ Page({
                         Protocol.accountCreate({...data, ...ill}).then((res) => {
                             this.editFinish();
                         }).catch((res) => {
-                            if (res.data.code == 2000) {
-                                console.log('手机号重复');
-                                Toast.showText('同一手机\n不能绑定两个账号')
-                            } else {
-                                Toast.showText('保存失败');
-                            }
+                            this.editErr(res.data.code);
                         }).finally(() => {
                             Toast.hiddenLoading();
                         });
@@ -151,34 +135,14 @@ Page({
                             getApp().globalData.editMember = {};
                             this.editFinish();
                         }).catch((res) => {
-                            switch (res.data.code) {
-                                case 2000:
-                                    Toast.showText('同一手机\n不能绑定两个账号');
-                                    break;
-                                case 3000:
-                                    Toast.showText('暂不支持表情');
-                                    break;
-                                default:
-                                    Toast.showText('修改失败');
-                                    break;
-                            }
+                            this.editErr(res.data.code);
                         });
                     } else {
                         console.log('保存信息：', data);
                         Protocol.memberRelevanceUpdate({...data, ...ill}).then((res) => {
                             this.editFinish();
                         }).catch((res) => {
-                            switch (res.data.code) {
-                                case 2000:
-                                    Toast.showText('同一手机\n不能绑定两个账号');
-                                    break;
-                                case 3000:
-                                    Toast.showText('暂不支持表情');
-                                    break;
-                                default:
-                                    Toast.showText('修改失败');
-                                    break;
-                            }
+                            this.editErr(res.data.code);
                         });
                     }
                 } catch (err) {
@@ -187,6 +151,30 @@ Page({
                 }
             }
         });
+    },
+
+    editFinish() {
+        if (this.data.isFirstInto) {
+            HiNavigator.relaunchToStart();
+        } else {
+            HiNavigator.navigateBack({
+                delta: 2
+            })
+        }
+    },
+
+    editErr(code) {
+        switch (code) {
+            case 2000:
+                Toast.showText('同一手机\n不能绑定两个账号');
+                break;
+            case 3000:
+                Toast.showText('暂不支持表情');
+                break;
+            default:
+                Toast.showText('修改失败');
+                break;
+        }
     },
 
     back() {
