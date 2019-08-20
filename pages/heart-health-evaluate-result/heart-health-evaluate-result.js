@@ -50,17 +50,21 @@ Page({
         level: [{
             name: '极低',
             selected: false,
-            primaryColor:  '#7B6EEA'
-        },{
+            primaryColor: '#7B6EEA',
+            levelIconPosition: '14%'
+        }, {
             name: '较高',
-            selected:true,
-            primaryColor:  '#FF9732'
-        },{
+            selected: false,
+            primaryColor: '#FF9732',
+            levelIconPosition: '48%'
+        }, {
             name: '很高',
-            selected:false,
-            primaryColor:  '#F8695A'
-        },]
+            selected: true,
+            primaryColor: '#F8695A',
+            levelIconPosition: '82%'
 
+        },],
+        levelIconPosition: ''
     },
 
     /**
@@ -69,6 +73,12 @@ Page({
     onLoad(options) {
         this.resultId = options.resultId;
         wx.setNavigationBarTitle({title: '心脏健康评估'});
+        const currentLevelObj = this.data.level.filter(item => item.selected).pop();
+        if (currentLevelObj) {
+            this.setData({
+                levelIconPosition: currentLevelObj.levelIconPosition
+            })
+        }
 
     },
 
