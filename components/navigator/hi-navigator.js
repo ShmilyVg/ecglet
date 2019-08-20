@@ -108,7 +108,12 @@ export default class HiNavigator extends CommonNavigator {
     }
 
 
-    static navigateToHeartHealthEvaluationResult({resultId}) {
-        this.navigateTo({url: `/pages/heart-health-evaluate-result/heart-health-evaluate-result?resultId=${resultId}`});
+    static navigateToHeartHealthEvaluationResult({result}) {
+        getApp().globalData.tempHeartHealthEvaluationResult = result;
+        this.navigateTo({url: `/pages/heart-health-evaluate-result/heart-health-evaluate-result`});
+    }
+
+    static getHeartHealthEvaluationResult() {
+        return getApp().globalData.tempHeartHealthEvaluationResult;
     }
 }

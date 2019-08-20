@@ -8,7 +8,7 @@
             <view class="health-evaluate-title">请输入您的收缩压(高压)值</view>
             <view class="health-evaluate-content">收缩压(Systolic pressure)(高压)：是当心脏收缩时，从心室射入的血液对血管壁产生的侧压力，这时血压最大；此时内壁的压力称为收缩压，亦称高压。</view>
             <view class="flex-row align-items-center space-between" style="margin-top: 60rpx;">
-                <input class="heart-health-input" placeholder-class="heart-health-placeholder" placeholder="请输入收缩压(高压)值" type="number" maxlength="3" />
+                <input bindinput="onInputEvent" class="heart-health-input" placeholder-class="heart-health-placeholder" placeholder="请输入收缩压(高压)值" type="number" maxlength="3" />
                 <view class="heart-health-unit">mmHg</view>
             </view>
         </view>
@@ -48,5 +48,5 @@
         </view>
     </view>
 
-    <view class="flex-row align-items-center justify-center button-radius" style="margin: 80rpx 0;">开始评测</view>
+    <view class="flex-row align-items-center justify-center button-radius" style="margin: 80rpx 0;" bindtap="HeartHealthEvaluationConfirm">开始评测</view>
 </view>

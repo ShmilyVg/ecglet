@@ -6,7 +6,7 @@
     </view>
 
     <view class="flex-row align-items-center relative">
-        <view wx:for="{{level}}" wx:key="*this" class="flex-row align-items-center justify-center box-sizing-border-box heart-health-evaluate-result-level-item" style="color: {{item.selected?'white':item.primaryColor}};background-color: {{item.selected?item.primaryColor:'white'}};border-color: {{item.primaryColor}}">{{item.name}}</view>
+        <view wx:for="{{levels}}" wx:key="*this" class="flex-row align-items-center justify-center box-sizing-border-box heart-health-evaluate-result-level-item" style="color: {{item.selected?'white':item.primaryColor}};background-color: {{item.selected?item.primaryColor:'white'}};border-color: {{item.primaryColor}}">{{item.name}}</view>
         <image class="absolute" style="width: 26rpx;height: 14rpx;bottom: -14rpx;left: {{levelIconPosition}};" src="../../images/heart-health-evaluate-result/arrow.png"></image>
     </view>
 

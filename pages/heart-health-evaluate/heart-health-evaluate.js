@@ -1,6 +1,7 @@
 // pages/heart-health-evaluate/heart-health-evaluate.js
 import Toast from "../../utils/toast";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import Protocol from "../../apis/network/protocol";
 
 Page({
 
@@ -8,7 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        evaluation: {smoke: -1, press: -1, sugar: -1}
+        evaluation: {smoke: -1, press: -1, sugar: -1, systolic: ''}
     },
 
     /**
@@ -39,15 +40,25 @@ Page({
         obj['evaluation.sugar'] = diabetes ? 1 : 0;//糖尿病
         this.setData(obj);
     },
+    onInputEvent(e) {
+        const {detail: {value}} = e;
+        this.data.evaluation.systolic = value.trim();
+    },
     HeartHealthEvaluationConfirm() {
-        const {evaluation: {smoke, press, sugar}} = this.data;
-        if (smoke === -1 || press === -1 || sugar === -1) {
+        const {evaluation: {smoke, press, sugar, systolic}} = this.data;
+        if (smoke === -1 || press === -1 || sugar === -1 || !systolic) {
             Toast.showText('请完善表单各项内容');
             return;
         }
+        const userInfo = this.selectComponent('#switchMemberView').getUserInfo();
 
-        Toast.showText('评估中，请稍候');
-        HiNavigator.navigateToHeartHealthEvaluationResult({resultId: '12'});
+        Toast.showLoading('评估中，请稍候');
+        Protocol.getHeartHealthEvaluationResult().then(data => {
+            HiNavigator.navigateToHeartHealthEvaluationResult({result: data.result});
+        }).catch(res => {
+            console.error(res);
+            Toast.showText('评估失败，请重试');
+        }).finally(Toast.hiddenLoading);
     }
 
 

@@ -1,5 +1,5 @@
 // pages/heart-health-evaluate/heart-health-evaluate.js
-import Protocol from "../../apis/network/protocol";
+import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
 
@@ -8,17 +8,20 @@ Page({
      */
     data: {
         result: {},
-        level: [{
+        levels: [{
+            level: 1,
             name: '极低',
             selected: false,
             primaryColor: '#7B6EEA',
             levelIconPosition: '14%'
         }, {
+            level: 2,
             name: '较高',
             selected: false,
             primaryColor: '#FF9732',
             levelIconPosition: '48%'
         }, {
+            level: 3,
             name: '很高',
             selected: true,
             primaryColor: '#F8695A',
@@ -34,16 +37,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        this.resultId = options.resultId;
         wx.setNavigationBarTitle({title: '心脏健康评估'});
-
-        Protocol.getHeartHealthEvaluationResult().then(data => {
-            const currentLevelObj = this.data.level.filter(item => item.selected).pop();
-            console.log(data);
-            this.setData({
-                result: data.result,
-                levelIconPosition: currentLevelObj ? currentLevelObj.levelIconPosition : '0'
-            })
+        const result = HiNavigator.getHeartHealthEvaluationResult(), level = parseInt(result.risk.level),
+            levels = this.data.levels.map(item => {
+                return {...item, selected: level === item.level}
+            }),
+            currentLevelObj = levels.filter(item => item.selected).pop();
+        this.setData({
+            result,
+            levelIconPosition: currentLevelObj ? currentLevelObj.levelIconPosition : '0'
         });
     },
 
