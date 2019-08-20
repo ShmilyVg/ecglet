@@ -18,7 +18,7 @@
     <view class="flex-row decipher-width" style="flex-wrap: wrap;margin-top: 30rpx">
         <view class="flex-row align-items-center" style="margin-top: 22rpx;margin-left: 24rpx;margin-right: 50rpx;" wx:for="{{lineColor}}">
             <view class="decipher-point" style="background-color: {{item.color}};"></view>
-            <view style="color: #5B5B5B;font-size: 22rpx">{{item.text}}</view>
+            <view style="color: #5B5B5B;font-size: 25rpx">{{item.text}}</view>
         </view>
     </view>
 </view>
@@ -31,7 +31,7 @@
         <view class="decipher-content-title">检测结果</view>
     </view>
     <view class="decipher-check-result-title">{{result.conclusion.title}}</view>
-    <view class="decipher-content-text">{{result.conclusion.content}}</view>
+    <view class="decipher-content-text" style="margin-top: 25rpx">{{result.conclusion.content}}</view>
 </view>
 <view class="decipher-line-height-20"></view>
 

@@ -41,7 +41,7 @@
 }
 
 .decipher-text-view-text{
-    font-size:22rpx;
+    font-size:25rpx;
     font-family:PingFang-SC-Medium;
     font-weight:500;
     line-height:17rpx;
