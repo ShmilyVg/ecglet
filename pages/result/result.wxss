@@ -14,7 +14,7 @@ page {
 .result-top-layout::after {
   content: '';
   width: 180%;
-  height: 500rpx;
+  height: 420rpx;
   position: absolute;
   z-index: -1;
   left: -40%;
@@ -29,7 +29,7 @@ page {
   background-size: contain;
   background-repeat: no-repeat;
   padding: 0 40rpx 0 59rpx;
-  margin-top: 64rpx;
+  margin-top: 50rpx;
 }
 
 .result-title{
@@ -51,7 +51,7 @@ page {
   width: 95rpx;
   height: 95rpx;
   position: relative;
-  margin-top: -75rpx;
+  margin-top: -150rpx;
   border-radius: 50%;
   border-width: 15rpx;
   border-style: solid;
@@ -85,7 +85,7 @@ page {
   font-weight:500;
   color:rgba(255,255,255,1);
   line-height:28rpx;
-  margin-top: 82rpx;
+  margin-top: 60rpx;
 }
 
 .content {

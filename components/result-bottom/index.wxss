@@ -1,11 +1,9 @@
 
 .bottom-text{
-    font-family:PingFang-SC-Medium;
-    font-weight:500;
     color:rgba(51,68,78,1);
     font-size:28rpx;
     line-height:40rpx;
-    margin-bottom: 200rpx;
+    margin-bottom: 150rpx;
     margin-top: 43rpx;
     text-align: center;
 }
@@ -17,7 +15,7 @@
     color:rgba(51,68,78,1);
     line-height:28rpx;
     align-self: flex-start;
-    margin-bottom: 50rpx;
+    margin-bottom: 30rpx;
 }
 .icon-common{
     width: 44rpx;
