@@ -329,7 +329,7 @@ Page({
 
             wx.onBLECharacteristicValueChange(res => {
                 const {serviceId, characteristicId} = res;
-                console.log('服务id和特征值id', serviceId, characteristicId);
+                // console.log('服务id和特征值id', serviceId, characteristicId);
                 if (serviceId.includes('FFB1')) {
                     if (characteristicId.includes('FFB2')) {
                         that.onFirstChannelChange(res.value)

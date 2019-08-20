@@ -29,7 +29,6 @@ Component({
                 setTimeout(() => {
                     hiddenFun();
                     setTimeout(() => {
-                        console.log('开始重复', this);
                         // !!this.data.countTimer && this.remindAnimationAlways({showFun, hiddenFun});
                         this.isCircly && this.remindAnimationAlways({showFun, hiddenFun});
                     }, this.hiddenOptions.delay + this.hiddenOptions.duration);

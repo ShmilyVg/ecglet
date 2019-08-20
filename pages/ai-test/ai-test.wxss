@@ -1,0 +1,6 @@
+/* pages/ai-test/ai-test.wxss */
+
+.ecg_pannel {
+    width: 100%;
+    height: 500rpx;
+}
