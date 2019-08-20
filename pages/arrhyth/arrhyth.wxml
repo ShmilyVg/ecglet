@@ -21,7 +21,7 @@
       <block wx:if="{{isFilterArrhythData}}">
         <view class="content-layout-success-content">请保持当前姿势不要移动</view>
       </block>
-      <opacity-text wx:else class="flex-row align-items-center justify-center"></opacity-text>
+      <opacity-text wx:else type="{{testType}}" class="flex-row align-items-center justify-center"></opacity-text>
     </view>
     <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
   </view>

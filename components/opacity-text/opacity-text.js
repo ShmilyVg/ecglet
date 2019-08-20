@@ -1,7 +1,12 @@
 import {RandomRemindData} from "../../utils/tips";
 
 Component({
-
+    properties: {
+        type:{
+            type:Number,
+            value: 1
+        }
+    },
     data: {
         tip: '',
         opacity: 1
@@ -53,10 +58,10 @@ Component({
             };
         },
         attached() {
-            console.log('opacity-text 链接到页面');
+            console.log('opacity-text 链接到页面', this.data);
 
             this.isCircly = true;
-            this.randomRemindData.random();
+            this.randomRemindData.random({type: this.data.type});
             this.remindAnimation();
         },
         detached() {

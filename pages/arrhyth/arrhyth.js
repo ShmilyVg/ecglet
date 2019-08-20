@@ -174,7 +174,7 @@ Page({
         this.isNetworkNotConnected = false;
 
         let that = this;
-        that.data.testType = parseInt(options.type) || 0;
+        that.data.testType = parseInt(options.type) || 1;
         wx.setNavigationBarTitle({title: that.data.testType === 2 ? '心脏负荷评估' : '常规心电检测'});
         that.setData({
                 maxCount: parseInt(this.getOriginTxt()),

@@ -56,14 +56,24 @@ export class RandomRemindData {
             this.remindData = data;
         }
         Protocol.getCopywritingChecking().then(data => {
-            Storage.setTips({tips: (this.remindData = data.result.contents)});
+            const {result: {contents, routine, cardiac}} = data;
+            Storage.setTips({tips: (this.remindData = contents)});
+            Storage.setCardiac({tips: cardiac});
+            Storage.setRoutine({tips: routine});
         });
     }
 
-    random() {
+    random({type} = {}) {
         const array = [...this.remindData], len = array.length;
         this.currentIndex = 0;
-        this.tempRemindDataList.splice(0, this.tempRemindDataList.length);
+        let insertItem = [];
+        if (type === 1) {
+            insertItem = Storage.getRoutineSync();
+        }else if (type === 2) {
+            insertItem = Storage.getCardiacSync();
+        }
+        this.tempRemindDataList.splice(0, this.tempRemindDataList.length, ...insertItem);
+        console.log('本地数据', this.tempRemindDataList, insertItem);
         for (let i = 0; i < len; i++) {
             let index = Math.floor(Math.random() * (array.length - 1));
             this.tempRemindDataList.push(...array.splice(index, 1));

@@ -48,4 +48,18 @@ export default class Storage extends BaseStorage {
     static getTipsSync() {
         return this.getSync('hi_checking_tips');
     }
+
+    static setCardiac({tips}) {
+        return this.set({key: 'hi_checking_cardiac_tips', data: tips});
+    }
+    static getCardiacSync() {
+        return this.getSync('hi_checking_cardiac_tips');
+    }
+    static setRoutine({tips}) {
+        return this.set({key: 'hi_checking_routine_tips', data: tips});
+    }
+    static getRoutineSync() {
+        return this.getSync('hi_checking_routine_tips');
+    }
+
 }
