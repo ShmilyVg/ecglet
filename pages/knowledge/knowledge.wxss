@@ -19,23 +19,26 @@
 .knowledge-content-index{
     width:40rpx;
     height:40rpx;
-    background:rgba(76,159,242,1);
+    background:#8B80EB;
     border-radius:50%;
-    border: 7rpx solid rgba(229,242,255,1);
-    font-size:32rpx;
+    border: 7rpx solid #e8e6fb;
+    font-size:28rpx;
     line-height:37rpx;
     font-family:MIUIEX-Normal;
     font-weight:400;
     color:rgba(255,255,255,1);
 }
+
 .knowledge-content-layout{
     margin-top: 51rpx;
     padding-left: 49rpx;
     padding-right: 50rpx;
 }
+
 .knowledge-content-title-layout{
     margin-bottom: 23rpx;
 }
+
 .knowledge-content-title{
     font-size:32rpx;
     font-family:PingFang-SC-Medium;

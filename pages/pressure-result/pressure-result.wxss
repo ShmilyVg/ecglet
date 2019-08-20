@@ -32,7 +32,7 @@ page {
     font-weight:500;
     color:rgba(51,68,78,1);
     line-height:28rpx;
-    margin-top: -7rpx;
+    margin-top: 10rpx;
     margin-left: 10rpx;
 }
 
@@ -59,7 +59,7 @@ page {
     font-family:PingFang-SC-Regular;
     font-weight:400;
     line-height:32rpx;
-    margin-top: -10rpx;
+    margin-top: -14rpx;
     width: 100%;
     text-align: right;
 }

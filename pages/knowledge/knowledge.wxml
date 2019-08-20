@@ -10,6 +10,6 @@
             <view class="flex-row align-items-center justify-center knowledge-content-index">{{index+1}}</view>
             <view class="knowledge-content-title">{{item.title}}</view>
         </view>
-        <view class="knowledge-content-text">{{item.content}}<span style="color: #4C9FF2;">{{item.content1}}</span>{{item.content2}}<span style="color: #4C9FF2;">{{item.content3}}</span>。</view>
+        <view class="knowledge-content-text">{{item.content}}<span style="color: #7165E3;">{{item.content1}}</span>{{item.content2}}<span style="color: #7165E3;">{{item.content3}}</span>。</view>
     </view>
 </view>
