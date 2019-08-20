@@ -14,7 +14,7 @@
         <view class="decipher-content-title">检测结果</view>
     </view>
     <view class="decipher-check-result-title">{{result.conclusion.title}}</view>
-    <view class="decipher-content-text">{{result.conclusion.content}}</view>
+    <view class="decipher-content-text" style="margin-top: 25rpx">{{result.conclusion.content}}</view>
 </view>
 <view class="decipher-line-height-20"></view>
 
