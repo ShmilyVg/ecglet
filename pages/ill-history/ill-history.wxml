@@ -8,7 +8,7 @@
             <image wx:if="{{item.isChose}}" src="../../images/ill-his/item-chose.png" class="ill-his-item-chose-item"></image>
             <view class="flex-column align-items-center">
                 <image class="ill-his-item-image" src="../../images/ill-his/{{item.isChose?item.image.chose:item.image.nor}}.png"></image>
-                <view class="ill-his-item-text" style="color:{{item.isChose?'white':'#60778B'}}">{{item.text}}</view>
+                <view class="ill-his-item-text" style="color:{{item.isChose?'white':'#5B5B5B'}}">{{item.text}}</view>
             </view>
         </view>
     </view>
