@@ -1,52 +1,61 @@
-<view class="flex-column align-items-center">
-    <switch-member id="switchMemberView"></switch-member>
-    <view class="health-evaluate-line"></view>
+<view class="fill-width flex-column align-items-center" >
+    <view class="heart-health-evaluate-result-title" style="margin-top: 83rpx;">您的心血管疾病风险为</view>
+    <view class="flex-row" style="align-items: baseline;margin-bottom: 46rpx;">
+        <view class="heart-health-evaluate-result-level">2</view>
+        <view class="heart-health-evaluate-result-level-sub">级</view>
+    </view>
 
-    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
-        <view class="flex-row align-items-center justify-center health-evaluate-index">1</view>
-        <view class="flex-column">
-            <view class="health-evaluate-title">请输入您的收缩压(高压)值</view>
-            <view class="health-evaluate-content">收缩压(Systolic pressure)(高压)：是当心脏收缩时，从心室射入的血液对血管壁产生的侧压力，这时血压最大；此时内壁的压力称为收缩压，亦称高压。</view>
-            <view class="flex-row align-items-center space-between" style="margin-top: 60rpx;">
-                <input class="heart-health-input" placeholder-class="heart-health-placeholder" placeholder="请输入收缩压(高压)值" type="number" maxlength="3" />
-                <view class="heart-health-unit">mmHg</view>
-            </view>
+    <view class="flex-row align-items-center">
+        <view wx:for="{{3}}" wx:key="*this" class="flex-row align-items-center justify-center box-sizing-border-box heart-health-evaluate-result-level-item">极低</view>
+    </view>
+
+    <text class="heart-health-evaluate-result-level-description box-sizing-border-box">您当前患心血管疾病风险较高，\n请有意识地戒烟及时服用调节高血压的药物，及时测量三高，勤加锻炼，调整日常生活状态。</text>
+
+    <view class="heart-health-evaluate-result-line"></view>
+
+    <view class="heart-health-evaluate-result-title">您的心脏年龄为</view>
+    <view class="flex-row" style="align-items: baseline;">
+        <view class="heart-health-evaluate-result-level">30</view>
+        <view class="heart-health-evaluate-result-level-sub">岁</view>
+    </view>
+
+    <view class="heart-health-evaluate-result-dotted-line"></view>
+
+
+    <view class="flex-row align-items-center box-sizing-border-box" style="padding: 0 96rpx;">
+        <image src="../../images/heart-health-evaluate-result/left.png" style="width: 27rpx;height: 24rpx;"></image>
+        <text class="heart-health-evaluate-result-final">最浪漫的是\n心脏能随年龄一起慢慢变老</text>
+        <image src="../../images/heart-health-evaluate-result/right.png" style="width: 27rpx;height: 24rpx;"></image>
+    </view>
+
+    <view class="heart-health-evaluate-result-final-compare">结果好于90%的用户</view>
+    <view class="heart-health-evaluate-result-content" style="width: 610rpx;text-align: center;margin-bottom: 4rpx;">您的心脏年龄比实际年龄小6岁，就像一台动力十足的发电机！</view>
+    <view class="heart-health-evaluate-result-line"></view>
+
+    <view class="flex-row align-items-center" style="align-self: flex-start;margin-left: 52rpx;">
+        <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
+        <view class="decipher-content-title">改善建议</view>
+    </view>
+
+    <view class="flex-column" wx:for="{{contents}}" wx:key="*this">
+        <view class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: -5rpx;">
+            <image src="{{item.img}}" style="width: 44rpx;height: 44rpx;margin-right: 18rpx;"></image>
+            <view class="decipher-suggest-item-title">{{item.title}}</view>
+        </view>
+        <view wx:for="{{item.content}}" wx:key="*this" class="flex-column box-sizing-border-box" style="margin-top: 6rpx;padding: 0 53rpx;">
+            <view class="decipher-contents-item-content">{{item.content}}</view>
         </view>
     </view>
 
-    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
-        <view class="flex-row align-items-center justify-center health-evaluate-index">2</view>
-        <view class="flex-column">
-            <view class="health-evaluate-title">您是否常年吸烟？</view>
-            <view class="flex-row align-items-center" style="margin-top: 43rpx;">
-                <view bindtap="onSelectedSmoke" data-smoke="1" class="health-evaluate-radio-button {{evaluation.smoke===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
-                <view bindtap="onSelectedSmoke" data-smoke="0" class="health-evaluate-radio-button {{evaluation.smoke===0?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">否</view>
-            </view>
-        </view>
+
+
+
+    <view class="heart-health-evaluate-result-line"></view>
+
+    <view class="flex-row align-items-center" style="align-self: flex-start;margin-left: 52rpx;">
+        <image class="decipher-item-icon" src="../../images/index-detail/read.png"></image>
+        <view class="decipher-content-title">名词解释</view>
     </view>
 
-    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
-        <view class="flex-row align-items-center justify-center health-evaluate-index">3</view>
-        <view class="flex-column">
-            <view class="health-evaluate-title">您现在是否还有高血压？</view>
-            <text class="health-evaluate-content">如果已经治愈请选择否; \n成人收缩压≥140mmHg（21.3kPa）时即可确诊为高血压。收缩压≤130mmHg（18.6kPa）称为正常血压。</text>
-            <view class="flex-row align-items-center" style="margin-top: 43rpx;">
-                <view bindtap="onSelectedPress" data-press="1" class="health-evaluate-radio-button {{evaluation.press===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
-                <view bindtap="onSelectedPress" data-press="0" class="health-evaluate-radio-button {{evaluation.press===0?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">否</view>
-            </view>
-        </view>
-    </view>
-
-    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item" style="margin-bottom: 150rpx;">
-        <view class="flex-row align-items-center justify-center health-evaluate-index">4</view>
-        <view class="flex-column">
-            <view class="health-evaluate-title">您是否有糖尿病？</view>
-            <view class="flex-row align-items-center" style="margin-top: 43rpx;">
-                <view bindtap="onSelectedSugar" data-sugar="1" class="health-evaluate-radio-button {{evaluation.sugar===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
-                <view bindtap="onSelectedSugar" data-sugar="0" class="health-evaluate-radio-button {{evaluation.sugar===0?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">否</view>
-            </view>
-        </view>
-    </view>
-
-    <view class="flex-row align-items-center justify-center button-bottom-view">开始评测</view>
+    <view class="heart-health-evaluate-result-content" style="margin-bottom: 107rpx;margin-top: 42rpx;">“心脏健康指数”是根据美国国家心肺血液研究所（NHLBI）的费雷鸣汉心脏研究计算得到，可完整、定量地评估心血管健康状况，可判断未来十年患心血管疾病的概率，包括冠状动脉死亡，心肌梗死，冠状动脉功能不全，心绞痛，缺血性中风，出血性中风，短暂性脑缺血发作，外周动脉疾病，心力衰竭等。用于检测初级保健的一般心血管风险概况。</view>
 </view>
