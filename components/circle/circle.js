@@ -67,14 +67,14 @@ Component({
 
             ctx.beginPath();
             ctx.lineWidth = smallWidth;
-            ctx.strokeStyle = 'white';
+            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
             ctx.arc(circleX, circleY, radius + halfRoundWidth - 1, 0, wholeDegree, false);
             ctx.stroke();
 
             ctx.beginPath();
             ctx.lineWidth = smallWidth;
-            ctx.strokeStyle = 'white';
-            ctx.arc(circleX, circleY, radius - halfRoundWidth - 1, 0, wholeDegree, false);
+            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+            ctx.arc(circleX, circleY, radius - halfRoundWidth, 0, wholeDegree, false);
             ctx.stroke();
             ctx.draw();
         },
@@ -101,9 +101,9 @@ Component({
             ctx.setTextAlign('center');
             ctx.setTextBaseline('normal');
             ctx.fillStyle = 'white';
-            ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize);
+            ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize + 1);
             ctx.font = '12px sans-serif';
-            ctx.fillText('S', radius + sX, radius + halfLargeFontSize);
+            ctx.fillText('S', radius + sX, radius + halfLargeFontSize - 1);
             ctx.draw();
         },
         _drawCircle({circleX, circleY, startDegree, radius, ctx}) {
