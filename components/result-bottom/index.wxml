@@ -1,7 +1,7 @@
 <template name="result-bottom">
     <view class="divide-line-large"></view>
     <block wx:if="{{isAbNormal}}">
-        <view class="flex-column fill-width box-sizing-border-box" style="padding: 65rpx 50rpx 100rpx">
+        <view class="flex-column fill-width box-sizing-border-box" style="padding: 65rpx 50rpx">
             <view class="result-advice">HiPee建议您</view>
             <view wx:for="{{suggest}}" class="flex-column">
                 <view class="flex-row align-items-center" style="margin-top: 30rpx">

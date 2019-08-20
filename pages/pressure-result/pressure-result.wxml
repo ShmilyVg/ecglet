@@ -32,7 +32,7 @@
                 <image style="width: 14rpx;height: 24rpx;margin-left: 50rpx" src="../../images/arr.png"></image>
             </view>
         </view>
-        <view wx:if="{{item.type==2}}" style="height: 96rpx;position: relative">
+        <view wx:if="{{item.type==2}}" style="height: 96rpx;position: relative;margin-top: 20rpx">
             <image style="height: 50rpx;width: 660rpx;margin-top: 25rpx" src="../../images/pressure-result/line.png"></image>
             <image src="{{item.image}}" style="height: 96rpx;width: 84rpx;position: absolute;top: 0;left:{{item.point}}rpx"></image>
         </view>
