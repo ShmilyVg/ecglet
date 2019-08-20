@@ -1,10 +1,12 @@
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import * as tools from "../../utils/tools";
+import {SoftwareVersion} from "../../utils/config";
 
 Page({
     data: {
-        userInfo: {}
+        userInfo: {},
+        SoftwareVersion
     },
 
     isRegister: false,

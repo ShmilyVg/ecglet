@@ -58,5 +58,7 @@
                 <image src="../../images/mine/arr.png" class="arr-02"></image>
             </view>
         </view>
+
+        <view style="font-size: 28rpx;color: rgb(167,167,167);margin-top: 20rpx;">{{SoftwareVersion}}</view>
     </view>
 <!--</block>-->
