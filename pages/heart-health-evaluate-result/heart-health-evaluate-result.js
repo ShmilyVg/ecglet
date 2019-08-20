@@ -44,7 +44,23 @@ Page({
             "content": [{"title": "", "content": "应鼓励所有超重或肥胖者，提供膳食建议结合运动降低体重;"}]
         }],
         "subtitle": [{"content": "根据世卫组织估计，2012年有1750多万人死于心脏病发作或中风等心血管疾病。"}, {"content": "然而，好消息是80％的过早心脏病发作和中风是可以预防的。健康饮食，经常锻练身体状语从句：不使用烟草制品的英文预防的关键。检查并控制心脏病和中风的危险因素，如高血压，高胆固醇和高血糖或糖尿病，也非常重要。"}],
-        "title": "改善建议"
+        "title": "改善建议",
+
+
+        level: [{
+            name: '极低',
+            selected: false,
+            primaryColor:  '#7B6EEA'
+        },{
+            name: '较高',
+            selected:true,
+            primaryColor:  '#FF9732'
+        },{
+            name: '很高',
+            selected:false,
+            primaryColor:  '#F8695A'
+        },]
+
     },
 
     /**
