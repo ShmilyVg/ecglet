@@ -1,7 +1,7 @@
 <view class="fill-width flex-column align-items-center" >
     <view class="heart-health-evaluate-result-title" style="margin-top: 83rpx;">您的心血管疾病风险为</view>
     <view class="flex-row" style="align-items: baseline;margin-bottom: 46rpx;">
-        <view class="heart-health-evaluate-result-level">2</view>
+        <view class="heart-health-evaluate-result-level">{{result.risk.level}}</view>
         <view class="heart-health-evaluate-result-level-sub">级</view>
     </view>
 
@@ -10,13 +10,13 @@
         <image class="absolute" style="width: 26rpx;height: 14rpx;bottom: -14rpx;left: {{levelIconPosition}};" src="../../images/heart-health-evaluate-result/arrow.png"></image>
     </view>
 
-    <text class="heart-health-evaluate-result-level-description box-sizing-border-box">您当前患心血管疾病风险较高，\n请有意识地戒烟及时服用调节高血压的药物，及时测量三高，勤加锻炼，调整日常生活状态。</text>
+    <text class="heart-health-evaluate-result-level-description box-sizing-border-box">{{result.risk.content}}</text>
 
     <view class="heart-health-evaluate-result-line"></view>
 
     <view class="heart-health-evaluate-result-title">您的心脏年龄为</view>
     <view class="flex-row" style="align-items: baseline;">
-        <view class="heart-health-evaluate-result-level">30</view>
+        <view class="heart-health-evaluate-result-level">{{result.healthAge.age}}</view>
         <view class="heart-health-evaluate-result-level-sub">岁</view>
     </view>
 
@@ -25,20 +25,21 @@
 
     <view class="flex-row align-items-center box-sizing-border-box" style="padding: 0 96rpx;">
         <image src="../../images/heart-health-evaluate-result/left.png" style="width: 27rpx;height: 24rpx;"></image>
-        <text class="heart-health-evaluate-result-final">最浪漫的是\n心脏能随年龄一起慢慢变老</text>
+        <text class="heart-health-evaluate-result-final">{{result.healthAge.title}}</text>
         <image src="../../images/heart-health-evaluate-result/right.png" style="width: 27rpx;height: 24rpx;"></image>
     </view>
 
-    <view class="heart-health-evaluate-result-final-compare">结果好于90%的用户</view>
-    <view class="heart-health-evaluate-result-content" style="width: 610rpx;text-align: center;margin-bottom: 4rpx;">您的心脏年龄比实际年龄小6岁，就像一台动力十足的发电机！</view>
+    <view class="heart-health-evaluate-result-final-compare">{{result.healthAge.compare}}</view>
+    <view class="heart-health-evaluate-result-content" style="width: 610rpx;text-align: center;margin-bottom: 4rpx;">{{result.healthAge.content}}</view>
     <view class="heart-health-evaluate-result-line"></view>
 
     <view class="flex-row align-items-center" style="align-self: flex-start;margin-left: 52rpx;">
         <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
         <view class="decipher-content-title">改善建议</view>
     </view>
+    <rich-text nodes="{{result.hipeeSuggest.subtitle}}" class="heart-health-evaluate-result-rich-text"></rich-text>
 
-    <view class="flex-column" wx:for="{{contents}}" wx:key="*this">
+    <view class="flex-column" wx:for="{{result.hipeeSuggest.contents}}" wx:key="*this">
         <view class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: -5rpx;">
             <image src="{{item.img}}" style="width: 44rpx;height: 44rpx;margin-right: 18rpx;"></image>
             <view class="decipher-suggest-item-title">{{item.title}}</view>
@@ -58,5 +59,5 @@
         <view class="decipher-content-title">名词解释</view>
     </view>
 
-    <view class="heart-health-evaluate-result-content" style="margin-bottom: 107rpx;margin-top: 42rpx;">“心脏健康指数”是根据美国国家心肺血液研究所（NHLBI）的费雷鸣汉心脏研究计算得到，可完整、定量地评估心血管健康状况，可判断未来十年患心血管疾病的概率，包括冠状动脉死亡，心肌梗死，冠状动脉功能不全，心绞痛，缺血性中风，出血性中风，短暂性脑缺血发作，外周动脉疾病，心力衰竭等。用于检测初级保健的一般心血管风险概况。</view>
+    <view class="heart-health-evaluate-result-content" style="margin-bottom: 107rpx;margin-top: 42rpx;">{{result.Interpretation}}</view>
 </view>
