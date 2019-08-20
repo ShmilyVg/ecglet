@@ -74,9 +74,6 @@
     color:rgba(255,255,255,1);
 }
 
-.button-bottom-view{
-    background-color: var(--primaryColor);
-}
 .heart-health-input{
     color:rgba(51,68,78,1);
 }

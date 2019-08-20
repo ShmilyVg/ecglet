@@ -37,7 +37,7 @@
         </view>
     </view>
 
-    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item" style="margin-bottom: 150rpx;">
+    <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
         <view class="flex-row align-items-center justify-center health-evaluate-index">4</view>
         <view class="flex-column">
             <view class="health-evaluate-title">您是否有糖尿病？</view>
@@ -48,5 +48,5 @@
         </view>
     </view>
 
-    <view class="flex-row align-items-center justify-center button-bottom-view">开始评测</view>
+    <view class="flex-row align-items-center justify-center button-radius" style="margin: 80rpx 0;">开始评测</view>
 </view>
