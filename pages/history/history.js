@@ -190,6 +190,9 @@ Page({
 
     getItemListData({page = 1, recorded = false}) {
         let type = this.data.trendRightChoseIsLeft ? 1 : 2;
+        if (recorded) {
+            this.data.itemPage = 1
+        }
         let data = {type, target: this.data.tagChose, page: this.data.itemPage};
         if (!this.data.isNormalMember) {
             data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.relevanceId, page: this.data.itemPage}
