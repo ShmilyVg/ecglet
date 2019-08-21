@@ -17,10 +17,10 @@ Page({
         console.log(options);
         this.dataId = options.dataId;
         Protocol.getHrInterval({id: this.dataId}).then(data => {
-            const {result, result: {frequency,title}} = data;
-            let fre = parseInt(frequency) || 0, titleColor = '', position = 0, maxNum = 200, iconWidth = 2;//iconWidth=2 是2%的意思
+            const {result, result: {frequency, title}} = data;
+            let fre = parseInt(frequency) || 0, titleColor = '', position = 0, maxNum = 200, iconWidth = 2,
+                maxPosition = 96;//iconWidth=2 是2%的意思
             const {lineNum} = this.data;
-
             if (fre <= lineNum[0]) {
                 position = (0.2 / lineNum[0] * fre * 100 - iconWidth).toFixed(3) + '%';
             } else if (fre <= lineNum[1]) {
@@ -31,7 +31,10 @@ Page({
                 position = (60 + 0.2 / (lineNum[3] - lineNum[2]) * (fre - lineNum[2]) * 100 - iconWidth).toFixed(3) + '%';
             } else {
                 position = (80 + 0.2 / (maxNum - lineNum[3]) * (fre - lineNum[3]) * 100 - iconWidth);
-                position = position <= (100 - iconWidth) ? position : 100 - iconWidth;
+                console.log('位置1', position);
+                position = position <= maxPosition ? position : maxPosition;
+                console.log('位置2', position);
+
                 position = position.toFixed(3) + '%';
             }
 
