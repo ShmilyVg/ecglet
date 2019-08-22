@@ -102,55 +102,61 @@ Page({
                 })
             }
         });
-        if (this.data.haveHistoryIll) {
-            this.saveUserInfo({ill: result})
+        if (this.data.isFirstInto) {
+            this.saveUserInfo({ill: result});
+        } else if (this.data.haveHistoryIll) {
+            this.saveUserInfoDialog({ill: result})
         } else {
             Toast.showText('请选择是否有病史');
         }
     },
 
-    saveUserInfo({ill}) {
-        let data = getApp().globalData.editMember;
-        let dialogTitle = data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
+    saveUserInfoDialog({ill}) {
+        let dialogTitle = getApp().globalData.editMember.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
         WXDialog.showDialog({
             title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
-                try {
-                    Toast.showLoading();
-                    console.log('保存信息：', data);
-                    if (data.isNewMember) {
-                        Protocol.accountCreate({...data, ...ill}).then((res) => {
-                            this.editFinish();
-                        }).catch((res) => {
-                            this.editErr(res.data.code);
-                        }).finally(() => {
-                            Toast.hiddenLoading();
-                        });
-                    } else if (data.isNormalMember) {
-                        Protocol.accountUpdate({...data, ...ill}).then((res) => {
-                            return UserInfo.get();
-                        }).then((res) => {
-                            data.age = tools.jsGetAge(data.birthday);
-                            return UserInfo.set({...res.userInfo, ...data, ...ill, diseaseNull: 0});
-                        }).then(() => {
-                            getApp().globalData.editMember = {};
-                            this.editFinish();
-                        }).catch((res) => {
-                            this.editErr(res.data.code);
-                        });
-                    } else {
-                        console.log('保存信息：', data);
-                        Protocol.memberRelevanceUpdate({...data, ...ill}).then((res) => {
-                            this.editFinish();
-                        }).catch((res) => {
-                            this.editErr(res.data.code);
-                        });
-                    }
-                } catch (err) {
-                    console.log("onSubmit error: %o", err);
-                    Toast.showText('提交失败')
-                }
+                this.saveUserInfo({ill});
             }
         });
+    },
+
+    saveUserInfo({ill}) {
+        let data = getApp().globalData.editMember;
+        try {
+            Toast.showLoading();
+            console.log('保存信息：', data);
+            if (data.isNewMember) {
+                Protocol.accountCreate({...data, ...ill}).then((res) => {
+                    this.editFinish();
+                }).catch((res) => {
+                    this.editErr(res.data.code);
+                }).finally(() => {
+                    Toast.hiddenLoading();
+                });
+            } else if (data.isNormalMember) {
+                Protocol.accountUpdate({...data, ...ill}).then((res) => {
+                    return UserInfo.get();
+                }).then((res) => {
+                    data.age = tools.jsGetAge(data.birthday);
+                    return UserInfo.set({...res.userInfo, ...data, ...ill, diseaseNull: 0});
+                }).then(() => {
+                    getApp().globalData.editMember = {};
+                    this.editFinish();
+                }).catch((res) => {
+                    this.editErr(res.data.code);
+                });
+            } else {
+                console.log('保存信息：', data);
+                Protocol.memberRelevanceUpdate({...data, ...ill}).then((res) => {
+                    this.editFinish();
+                }).catch((res) => {
+                    this.editErr(res.data.code);
+                });
+            }
+        } catch (err) {
+            console.log("onSubmit error: %o", err);
+            Toast.showText('提交失败')
+        }
     },
 
     editFinish() {
