@@ -7,36 +7,27 @@ Page({
     data: {
         sexies: ['女', '男'],
         isNewMember: false,
+        isNormalMember: false
     },
 
     onLoad(options) {
-        let isNormalMember = options.isNormalMember === 'true';
-        console.log('是否为基本成员：', isNormalMember);
         let {year, month, day} = getFormatDate(Date.now());
-        this.setData({
-            birthEndDate: year + '-' + month + '-' + day
-        });
+        let birthEndDate = year + '-' + month + '-' + day;
 
+        let isNormalMember = options.isNormalMember === 'true';
         let userInfo = getApp().globalData.editMember;
-        console.log('用户信息:', userInfo);
 
         if (JSON.stringify(userInfo) === "{}") {
-            this.setData({
-                isNewMember: true
-            });
-            return;
-        }
-        if (userInfo.sex == null) {
-            userInfo.sex = 1;
+            this.setData({isNewMember: true, sex: 1, birthEndDate});
         } else {
-            userInfo.sex = userInfo.sex === -1 ? 0 : userInfo.sex;
+            if (userInfo.sex !== 1 || userInfo.sex !== 2) {
+                userInfo.sex = 1;
+            }
+            if (!userInfo.phone) {
+                userInfo.phone = wx.getStorageSync('phoneNumber');
+            }
+            this.setData({...this.data, ...userInfo, isNormalMember, birthEndDate});
         }
-
-        if (!userInfo.phone) {
-            userInfo.phone = wx.getStorageSync('phoneNumber');
-        }
-
-        this.setData({...this.data, ...userInfo});
     },
 
     onNameChange(e) {
@@ -100,10 +91,10 @@ Page({
     },
 
     chooseImage() {
-        ChooseImage.chose().then(image=>{
+        ChooseImage.chose().then(image => {
             this.setData({
                 portraitUrl: image
             })
         });
     }
-})
+});
