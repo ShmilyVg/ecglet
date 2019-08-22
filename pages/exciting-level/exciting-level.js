@@ -10,7 +10,7 @@ Page({
             {color: '#FDC400', text: '神经比较兴奋'},
             {color: '#FC7648', text: '神经特别兴奋'},
         ],
-        lineNum: [1, 5, 10]
+        lineNum: [1, 3, 6]
     },
     onLoad(options) {
         console.log(options);
