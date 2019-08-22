@@ -332,7 +332,7 @@ Page({
                     }
                 } else if (serviceId.includes('180F')) {
                     if (characteristicId.includes('2A19')) {
-                        console.log('获取电量开始', res.value);
+                        console.log('获取电量开始', Date.now() - this.data.tempTimestamp, res.value);
                         let buffer = new Uint8Array(res.value);
                         const battery = buffer[0];
                         console.log('获取到电量 battery=', battery);
@@ -422,7 +422,8 @@ Page({
     startCount() {
         console.log('startCount...')
         let that = this
-        let circle = that.data.progressCircle, tempCount = 0, period = circle.getPeriod();
+        let circle = that.data.progressCircle, tempCount = 0, period = circle.getPeriod(),
+            finalBatteryCount = that.data.maxCount - 13;
         app.addNewArrhythTimer(setInterval(function f() {
             let {count, maxCount} = that.data;
             tempCount += period;
@@ -432,13 +433,14 @@ Page({
             }
             if (count <= maxCount) {
                 circle.drawCircle(count);
-                if (count > maxCount - 4) {
+                if (count > finalBatteryCount) {
                     const {isUpdating} = that.batteryServiceObj;
                     if (!isUpdating) {
                         const {batteryCharacteristics, selectDeviceId, matchServices} = that.batteryServiceObj;
                         that.batteryServiceObj.isUpdating = true;
                         if (batteryCharacteristics.length > 0) {
-                            return notifyBLECharacteristicValueChange({
+                            that.data.tempTimestamp = Date.now();
+                            notifyBLECharacteristicValueChange({
                                 deviceId: selectDeviceId,
                                 serviceId: matchServices[0].uuid,
                                 characteristicId: batteryCharacteristics[0].uuid,
