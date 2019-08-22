@@ -21,7 +21,7 @@
                     <view class="cell-title-tip">{{item.pointer}}</view>
                     <!--<image style="width: 32rpx;height: 32rpx;margin-left: 14rpx" src="../../images/pressure-result/warn.png"></image>-->
                 </view>
-                <view wx:if="{{item.content}}" class="cell-content">{{item.content}}</view>
+                <text wx:if="{{item.content}}" class="cell-content">{{item.content}}</text>
                 </view>
             </view>
             <view class="flex-row align-items-center">
