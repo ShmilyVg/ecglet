@@ -129,3 +129,14 @@ page {
     background-color: #FF7049;
     border-color: #FF7049;
 }
+
+.line-text {
+    width: 340rpx;
+    font-size:22rpx;
+    font-family:PingFang SC;
+    font-weight:500;
+    color:rgba(171,187,194,1);
+    line-height:17rpx;
+    justify-content: space-between;
+    margin-left: 160rpx;
+}
