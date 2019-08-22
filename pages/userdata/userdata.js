@@ -1,23 +1,19 @@
 import Toast from "../../utils/toast";
-import WXDialog from "../../utils/dialog";
 import {getFormatDate} from "../../utils/tools";
-import UserInfo from "../../apis/network/network/libs/userInfo";
-import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
-import * as tools from "../../utils/tools";
 
 Page({
     data: {
         sexies: ['女', '男'],
-        sexIndex: 1,
+        sex: 1,
         birthEndDate: '',
-        birthDate: '',
+        birthday: '',
         submitOpacity: 0.4,
         submitDisabled: true,
-        name: '',
+        nickName: '',
         height: '',
         weight: '',
-        number: '',
+        phone: '',
         portraitUrl: '',
         isNewMember: false,
         relevanceId: 0
@@ -40,67 +36,40 @@ Page({
             });
             return;
         }
-        let sexIndex = 1;
         if (userInfo.sex == null) {
+            userInfo.sex = 1;
+        } else {
+            userInfo.sex = userInfo.sex === -1 ? 0 : userInfo.sex;
+        }
 
-        } else {
-            sexIndex = userInfo.sex === -1 ? 0 : userInfo.sex;
+        if (!userInfo.phone) {
+            userInfo.phone = wx.getStorageSync('phoneNumber');
         }
-        if (isNormalMember) {
-            this.setData({
-                name: userInfo.nickName,
-                number: userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: sexIndex,
-                birthDate: userInfo.birthday || '',
-                height: userInfo.height,
-                weight: userInfo.weight,
-                portraitUrl: userInfo.portraitUrl,
-                cardiopathy:userInfo.cardiopathy,
-                diabetes:userInfo.diabetes,
-                diseaseNull:userInfo.diseaseNull,
-                hypertension:userInfo.hypertension,
-                isNormalMember: isNormalMember
-            })
-        } else {
-            this.setData({
-                name: userInfo.nickName,
-                number: userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: sexIndex,
-                birthDate: userInfo.birthday || '请选择出生日期',
-                height: userInfo.height,
-                weight: userInfo.weight,
-                portraitUrl: userInfo.portraitUrl,
-                relevanceId: userInfo.relevanceId,
-                cardiopathy:userInfo.cardiopathy,
-                diabetes:userInfo.diabetes,
-                diseaseNull:userInfo.diseaseNull,
-                hypertension:userInfo.hypertension,
-                isNormalMember: isNormalMember
-            })
-        }
+
+        this.setData({...this.data, ...userInfo});
     },
 
     onNameChange(e) {
         this.setData({
-            name: e.detail.value
+            nickName: e.detail.value
         })
     },
 
     onNumberChange(e) {
         this.setData({
-            number: e.detail.value
+            phone: e.detail.value
         })
     },
 
     onBirthChange(e) {
         this.setData({
-            birthDate: e.detail.value || ''
+            birthday: e.detail.value || ''
         })
     },
 
     onSexChange(e) {
         this.setData({
-            sexIndex: parseInt(e.detail.value)
+            sex: parseInt(e.detail.value)
         })
     },
 
@@ -117,60 +86,27 @@ Page({
     },
 
     onSubmit() {
-        let that = this;
-        if (this.data.name.length == 0) {
+        const {nickName, phone, birthday, height, weight} = this.data;
+        if (nickName.length === 0) {
             Toast.showText('请填写完整信息');
-            return;
-        }
-
-        if (this.data.number.length != 11) {
-            if (this.data.number.length > 0) {
+        } else if (phone.length !== 11) {
+            if (phone.length > 0) {
                 Toast.showText('手机号格式错误');
-            } else if (this.data.number.length == 0) {
+            } else if (phone.length === 0) {
                 Toast.showText('请填写手机号');
             }
-            return;
-        }
-
-        if (!/^\d+$/.test(this.data.number)) {
+        } else if (!/^\d+$/.test(phone)) {
             Toast.showText('手机号格式错误');
-            return;
-        }
-
-        if (this.data.birthDate === '请选择出生日期' || this.data.birthDate === "") {
+        } else if (birthday === '请选择出生日期' || birthday === "") {
             Toast.showText('请选择出生日期');
-            return;
-        }
-        const {height, weight} = this.data;
-        if (!height || !height.trim()) {
+        } else if (!height || !height.trim()) {
             Toast.showText('请填写身高');
-            return;
-        }
-        if (!weight || !weight.trim()) {
+        } else if (!weight || !weight.trim()) {
             Toast.showText('请填写体重');
-            return;
+        } else {
+            getApp().globalData.editMember = this.data;
+            this.naviToIllHisPage();
         }
-        let birthTime = this.data.birthDate || '';
-        console.log(`birth time: ${birthTime}`);
-
-        const editMember = {
-            nickName: this.data.name,
-            phone: this.data.number,
-            sex: this.data.sexIndex,
-            birthday: birthTime,
-            height: this.data.height,
-            weight: this.data.weight,
-            portraitUrl: this.data.portraitUrl,
-            isNewMember: this.data.isNewMember,
-            relevanceId: this.data.relevanceId,
-            cardiopathy: this.data.cardiopathy,
-            diabetes: this.data.diabetes,
-            diseaseNull: this.data.diseaseNull,
-            hypertension: this.data.hypertension,
-            isNormalMember: this.data.isNormalMember,
-        };
-        getApp().globalData.editMember = editMember;
-        this.naviToIllHisPage();
     },
 
     naviToIllHisPage() {
