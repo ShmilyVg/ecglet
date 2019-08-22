@@ -18,7 +18,7 @@ Page({
             }, () => {
                 this.selectComponent('#press-detail-circle').drawCircle({score: parseInt(result.frequency)});
             });
-            wx.setNavigationBarTitle({title: result.title});
+            wx.setNavigationBarTitle({title: '心脏负荷评估'});
         });
     }
 });

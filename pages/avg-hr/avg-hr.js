@@ -42,7 +42,7 @@ Page({
                 position,
                 result
             });
-            wx.setNavigationBarTitle({title});
+            wx.setNavigationBarTitle({title: '心脏负荷评估'});
         });
     },
 
