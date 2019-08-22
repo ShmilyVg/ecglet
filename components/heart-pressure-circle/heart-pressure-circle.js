@@ -51,7 +51,7 @@ Component({
 
         },
 
-        drawCircle({score}) {
+        drawCircle({score = 0} = {}) {
             const {data: {radius, circleX, circleY, startDegree}, canvasCircleContext} = this;
             const grd = canvasCircleContext.createLinearGradient(0, 1.5 * radius, radius + radius * Math.cos(Math.PI / 4), radius + radius * Math.sin(Math.PI / 4));
             grd.addColorStop(0.15, '#54D1F0');
