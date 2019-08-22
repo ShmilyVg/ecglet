@@ -28,7 +28,7 @@ Page({
         console.log('切换成员：', userInfo);
         Protocol.getRelativesGetToolTip({}).then((res) => {
             this.setData({
-                bottomViewIsHidden: !res.result.isShow
+                bottomViewIsHidden: !res.result.isShow,
             })
         });
 
@@ -38,7 +38,8 @@ Page({
                 isNormalMember: false,
                 rightChoseIsLeft: true,
                 trendRightChoseIsLeft: true,
-                name: Tools.HandleShortName(userInfo.nickName)
+                name: Tools.HandleShortName(userInfo.nickName),
+                logs: []
             });
             this.getMainList({page: 1, recorded: true});
         } else {
@@ -49,7 +50,8 @@ Page({
                     isNormalMember: true,
                     rightChoseIsLeft: true,
                     trendRightChoseIsLeft: true,
-                    name: name
+                    name: name,
+                    logs: []
                 });
                 this.getMainList({page: 1, recorded: true});
             })
@@ -195,7 +197,12 @@ Page({
         }
         let data = {type, target: this.data.tagChose, page: this.data.itemPage};
         if (!this.data.isNormalMember) {
-            data = {type, target: this.data.tagChose, relevanceId: this.data.userInfo.relevanceId, page: this.data.itemPage}
+            data = {
+                type,
+                target: this.data.tagChose,
+                relevanceId: this.data.userInfo.relevanceId,
+                page: this.data.itemPage
+            }
         }
         Protocol.getLinearGraphList({data}).then(data => {
             let {result: {dataList: list}} = data;

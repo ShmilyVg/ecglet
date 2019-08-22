@@ -1,52 +1,33 @@
 import Toast from "../../utils/toast";
 import {getFormatDate} from "../../utils/tools";
 import HiNavigator from "../../components/navigator/hi-navigator";
+import ChooseImage from "../../components/choose-image/chooseImage";
 
 Page({
     data: {
         sexies: ['女', '男'],
-        sex: 1,
-        birthEndDate: '',
-        birthday: '',
-        submitOpacity: 0.4,
-        submitDisabled: true,
-        nickName: '',
-        height: '',
-        weight: '',
-        phone: '',
-        portraitUrl: '',
         isNewMember: false,
-        relevanceId: 0
+        isNormalMember: false
     },
 
     onLoad(options) {
-        let isNormalMember = options.isNormalMember === 'true';
-        console.log('是否为基本成员：', isNormalMember);
         let {year, month, day} = getFormatDate(Date.now());
-        this.setData({
-            birthEndDate: year + '-' + month + '-' + day
-        });
+        let birthEndDate = year + '-' + month + '-' + day;
 
+        let isNormalMember = options.isNormalMember === 'true';
         let userInfo = getApp().globalData.editMember;
-        console.log('用户信息:', userInfo);
 
         if (JSON.stringify(userInfo) === "{}") {
-            this.setData({
-                isNewMember: true
-            });
-            return;
-        }
-        if (userInfo.sex == null) {
-            userInfo.sex = 1;
+            this.setData({isNewMember: true, sex: 1, birthEndDate});
         } else {
-            userInfo.sex = userInfo.sex === -1 ? 0 : userInfo.sex;
+            if (userInfo.sex !== 1 || userInfo.sex !== 2) {
+                userInfo.sex = 1;
+            }
+            if (!userInfo.phone) {
+                userInfo.phone = wx.getStorageSync('phoneNumber');
+            }
+            this.setData({...this.data, ...userInfo, isNormalMember, birthEndDate});
         }
-
-        if (!userInfo.phone) {
-            userInfo.phone = wx.getStorageSync('phoneNumber');
-        }
-
-        this.setData({...this.data, ...userInfo});
     },
 
     onNameChange(e) {
@@ -105,41 +86,15 @@ Page({
             Toast.showText('请填写体重');
         } else {
             getApp().globalData.editMember = this.data;
-            this.naviToIllHisPage();
+            HiNavigator.navigateToIllHistory({});
         }
     },
 
-    naviToIllHisPage() {
-        const {isNormalMember, isNewMember, relevanceId} = this.data;
-        HiNavigator.navigateToIllHistory({isNormalMember, isNewMember, relevanceId});
-    },
-
     chooseImage() {
-        let that = this;
-        console.log('chooseImage');
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['compressed'],
-            sourceType: ['album', 'camera'],
-            success: (res) => {
-                Toast.showLoading();
-                let path = res.tempFilePaths[0];
-                wx.uploadFile({
-                    url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
-                    filePath: path,
-                    name: path,
-                    success(res) {
-                        console.log(res);
-                        Toast.hiddenLoading();
-                        let data = res.data;
-                        let image = JSON.parse(data).result.img_url;
-                        console.log('图片：', image);
-                        that.setData({
-                            portraitUrl: image
-                        })
-                    }
-                })
-            }
-        })
+        ChooseImage.chose().then(image => {
+            this.setData({
+                portraitUrl: image
+            })
+        });
     }
-})
+});
