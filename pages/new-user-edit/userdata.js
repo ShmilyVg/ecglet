@@ -39,7 +39,11 @@ Page({
                 height: res.userInfo.height,
                 weight: res.userInfo.weight,
                 portraitUrl: res.userInfo.portraitUrl,
-                isPhoneNotAuth: !res.userInfo.phone
+                isPhoneNotAuth: !res.userInfo.phone,
+                cardiopathy: res.userInfo.cardiopathy,
+                diabetes: res.userInfo.diabetes,
+                diseaseNull: res.userInfo.diseaseNull,
+                hypertension: res.userInfo.hypertension,
             })
         })
     },
@@ -149,10 +153,15 @@ Page({
             height: this.data.height,
             weight: this.data.weight,
             portraitUrl: this.data.portraitUrl,
-            isNormalMember: true
+            isNormalMember: true,
+            cardiopathy: this.data.cardiopathy,
+            diabetes: this.data.diabetes,
+            diseaseNull: this.data.diseaseNull,
+            hypertension: this.data.hypertension,
+
         };
         getApp().globalData.editMember = editMember;
-        HiNavigator.navigateToIllHistory({isFirstInto:true});
+        HiNavigator.navigateToIllHistory({isFirstInto: true});
     },
 
     chooseImage() {

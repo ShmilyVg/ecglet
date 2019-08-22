@@ -26,9 +26,10 @@
 }
 
 .cell-line-hpe {
-  width: 100%;
+  width: 650rpx;
+  margin-left: 50rpx;
   height: 2rpx;
-  background-color: #E6E6E6;
+  background-color: #F6F6F6;
 }
 
 .new-user-edit-top-layout{
