@@ -80,14 +80,9 @@ Component({
         },
 
         drawCircle(step) {
-            const {data: {radius, circleX, circleY, startDegree, step: mStep}, canvasTimeCircleContext: timeCircleCtx} = this;
-            if (mStep === step) {
-                this._drawCircle({circleX, circleY, startDegree, radius, ctx: timeCircleCtx});
-            } else {
-                this.data.step = step;
-                const {data: {maxCount}, canvasTimeTextContext: timeTextCtx} = this;
-                this._drawText({maxCount, step, radius, ctx: timeTextCtx});
-            }
+            const {data: {radius, circleX, circleY, startDegree, maxCount}, canvasTimeCircleContext: timeCircleCtx} = this;
+            this._drawCircle({circleX, circleY, startDegree, radius, ctx: timeCircleCtx});
+            this._drawText({maxCount, step, radius, ctx: timeCircleCtx});
         },
         _drawText({maxCount, radius, step, ctx}) {
             //绘制文字
@@ -116,7 +111,7 @@ Component({
             ctx.beginPath();
             ctx.arc(circleX, circleY, radius - 1, startDegree, currentDegree, false);
             ctx.stroke();
-            ctx.draw();
+            // ctx.draw();
 
         },
         _runEvent() {
@@ -134,13 +129,8 @@ Component({
         attached() {
             console.log('circle 链接到页面');
             this.data.degreeStep = 0;
-            this.canvasTimeTextContext = wx.createCanvasContext('circle_draw1', this);
             this.canvasTimeCircleContext = wx.createCanvasContext('circle_time', this);
             this.canvasBgContext = wx.createCanvasContext('circle_bg1', this);
-            this.canvasTimeCircleContext.lineWidth = this.data.roundWidth;
-            this.canvasTimeCircleContext.lineCap = 'round';
-            // this.canvasTimeTextContext.lineWidth = this.data.roundWidth;
-            // this.canvasTimeTextContext.lineCap = 'round';
         },
         detached() {
             console.log('circle 移除节点');
