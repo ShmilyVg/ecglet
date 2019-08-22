@@ -12,10 +12,11 @@ Page({
 
     onReady() {
         Protocol.getPsilnterval({id: this.dataId}).then(data => {
+            const {result} = data;
             this.setData({
-                result: data.result
+                result
             }, () => {
-                this.selectComponent('#press-detail-circle').drawCircle({score: parseInt(data.result.frequency)});
+                this.selectComponent('#press-detail-circle').drawCircle({score: parseInt(result.frequency)});
             });
             wx.setNavigationBarTitle({title: result.title});
         });
