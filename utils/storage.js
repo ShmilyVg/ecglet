@@ -39,6 +39,7 @@ class BaseStorage {
     // }
 }
 
+// @testable
 export default class Storage extends BaseStorage {
 
     static setTips({tips}) {
@@ -62,4 +63,8 @@ export default class Storage extends BaseStorage {
         return this.getSync('hi_checking_routine_tips');
     }
 
+}
+
+function testable(target) {
+    target.isAlive = true;
 }

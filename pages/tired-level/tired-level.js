@@ -16,21 +16,20 @@ Page({
         console.log(options);
         this.dataId = options.dataId;
         Protocol.getRmssdInterval({id: this.dataId}).then(data => {
-            const {result, result: {frequency, title}} = data;
-            let fre = parseInt(frequency) || 0, icon = '', position = 0;//iconWidth=2 是2%的意思
-            const {lineNum} = this.data;
-            if (fre <= lineNum[0]) {
+            const {result, result: {level, title}} = data;
+            let fre = parseInt(level) || 1, icon = '', position = 0;//iconWidth=2 是2%的意思
+            if (fre === 1) {
                 position = '6.5%';
-                icon = 't1';
-            } else if (fre <= lineNum[1]) {
+                icon = 'pl1';
+            } else if (fre === 2) {
                 position = '30.5%';
-                icon = 't2';
-            } else if (fre <= lineNum[2]) {
+                icon = 'pl2';
+            } else if (fre === 3) {
                 position = '56.5%';
-                icon = 't3';
+                icon = 'pl3';
             } else {
                 position = '81.5%';
-                icon = 't4';
+                icon = 'pl4';
             }
 
             this.setData({
