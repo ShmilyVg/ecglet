@@ -59,6 +59,6 @@
             </view>
         </view>
 
-        <view style="font-size: 28rpx;color: rgb(167,167,167);margin-top: 20rpx;">{{SoftwareVersion}}</view>
+        <view style="font-size: 28rpx;color: #7265E3;margin-top: 20rpx;">{{SoftwareVersion}}</view>
     </view>
 <!--</block>-->
