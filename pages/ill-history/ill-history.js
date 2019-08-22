@@ -126,7 +126,7 @@ Page({
             Toast.showLoading();
             console.log('保存信息：', data);
             if (data.isNewMember) {
-                Protocol.accountCreate({...data, ...ill}).then((res) => {
+                Protocol.accountCreate({...data, ...ill}).then(() => {
                     this.editFinish();
                 }).catch((res) => {
                     this.editErr(res.data.code);
@@ -134,7 +134,7 @@ Page({
                     Toast.hiddenLoading();
                 });
             } else if (data.isNormalMember) {
-                Protocol.accountUpdate({...data, ...ill}).then((res) => {
+                Protocol.accountUpdate({...data, ...ill}).then(() => {
                     return UserInfo.get();
                 }).then((res) => {
                     data.age = tools.jsGetAge(data.birthday);
@@ -147,7 +147,10 @@ Page({
                 });
             } else {
                 console.log('保存信息：', data);
-                Protocol.memberRelevanceUpdate({...data, ...ill}).then((res) => {
+                Protocol.memberRelevanceUpdate({...data, ...ill}).then(() => {
+                    if (getApp().globalData.currentMember.memberId === data.memberId) {
+                        getApp().globalData.currentMember = data
+                    }
                     this.editFinish();
                 }).catch((res) => {
                     this.editErr(res.data.code);
