@@ -292,23 +292,23 @@ export default class Protocol {
     }
 
     static getPsilnterval({id}) {
-        return Network.request({url: 'copywriting/getPsiInterval', data: arguments[0]});
+        return Network.request({url: 'copywriting/getPsiInterval', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getHrInterval({id}) {
-        return Network.request({url: 'copywriting/getHrInterval', data: arguments[0]});
+        return Network.request({url: 'copywriting/getHrInterval', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getHrvInterval({id}) {
-        return Network.request({url: 'copywriting/getHrvInterval', data: arguments[0]});
+        return Network.request({url: 'copywriting/getHrvInterval', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getRmssdInterval({id}) {
-        return Network.request({url: 'copywriting/getRmssdInterval', data: arguments[0]});
+        return Network.request({url: 'copywriting/getRmssdInterval', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getMoodInterval({id}) {
-        return Network.request({url: 'copywriting/getMoodInterval', data: arguments[0]});
+        return Network.request({url: 'copywriting/getMoodInterval', data: arguments[0], requestWithoutLogin: true});
     }
 
     static sendBluetoothInfo({mac, electricity}) {
