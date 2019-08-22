@@ -21,16 +21,16 @@ Page({
             const {lineNum} = this.data;
             if (fre <= lineNum[0]) {
                 position = '6.5%';
-                icon = 't1';
+                icon = 'pl1';
             } else if (fre <= lineNum[1]) {
                 position = '30.5%';
-                icon = 't2';
+                icon = 'pl2';
             } else if (fre <= lineNum[2]) {
                 position = '56.5%';
-                icon = 't3';
+                icon = 'pl3';
             } else {
                 position = '81.5%';
-                icon = 't4';
+                icon = 'pl4';
             }
 
             this.setData({

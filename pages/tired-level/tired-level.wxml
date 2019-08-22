@@ -5,7 +5,7 @@
         <view class="decipher-line flex-row">
             <view wx:for="{{lineColor}}" wx:key="index" style="width: 25%;height:100%;background-color: {{item.color}}"></view>
         </view>
-        <image wx:if="{{icon}}" src="../../images/index-detail/{{icon}}.png" style="width: 84rpx;height: 96rpx;top: 20rpx;left: {{position}};" class="absolute"></image>
+        <image wx:if="{{icon}}" src="../../images/pressure-result/{{icon}}.png" style="width: 84rpx;height: 96rpx;top: 20rpx;left: {{position}};" class="absolute"></image>
     </view>
 
     <view class="flex-row space-between decipher-width">

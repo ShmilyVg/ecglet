@@ -36,6 +36,42 @@ Page({
 //         genObj.next('b')
 // 2. b
 
+
+        //   async function getFun1() {
+        //       await new Promise(resolve => {
+        //           setTimeout(() => {
+        //               console.log('getFun1执行');
+        //               resolve({data:'getFun1的data'});
+        //           }, 1000);
+        //       })
+        //   }
+        //
+        //   async function getFun2() {
+        //       await new Promise(resolve => {
+        //           setTimeout(() => {
+        //               console.log('getFun2执行');
+        //               resolve({data:'getFun2的data'});
+        //           }, 1500);
+        //       });
+        //   }
+        //
+        //   console.log('Promise', Promise.prototype);
+        //   Promise.race([Promise.try(()=>{
+        //     return new Promise(resolve => {
+        //         setTimeout(() => {
+        //             console.log('getFun1执行');
+        //             resolve({data: 'getFun1的data'});
+        //         }, 1000);
+        //     });
+        // }), new Promise(resolve => {
+        //     setTimeout(() => {
+        //         console.log('getFun2执行');
+        //         resolve({data:'getFun2的data'});
+        //     }, 1500);
+        // })]).then(res=>{
+        //       console.log('结果',res);
+        //   });
+        //   // console.log('这是结果',promise);
     },
     onTap() {
         //无需关心
