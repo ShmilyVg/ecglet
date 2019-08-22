@@ -17,7 +17,8 @@ Page({
         this.dataId = options.dataId;
         Protocol.getHrvInterval({id: this.dataId}).then(data => {
             const {result, result: {frequency, title}} = data;
-            let fre = parseInt(frequency) || 0, titleColor = '', position = 0, maxNum = 150, iconWidth = 2;//iconWidth=2 是2%的意思
+            let fre = parseInt(frequency) || 0, titleColor = '', position = 0, maxNum = 150, iconWidth = 2,
+                maxPosition = 96;//iconWidth=2 是2%的意思
             const {lineNum} = this.data;
             if (fre <= lineNum[0]) {
                 position = (0.25 / lineNum[0] * fre * 100 - iconWidth).toFixed(3) + '%';
@@ -27,7 +28,7 @@ Page({
                 position = (50 + 0.25 / (lineNum[2] - lineNum[1]) * (fre - lineNum[1]) * 100 - iconWidth).toFixed(3) + '%';
             } else {
                 position = (75 + 0.25 / (maxNum - lineNum[2]) * (fre - lineNum[2]) * 100 - iconWidth);
-                position = position <= (100 - iconWidth) ? position : 100 - iconWidth;
+                position = position <= maxPosition ? position : maxPosition;
                 position = position.toFixed(3) + '%';
             }
 

@@ -59,7 +59,7 @@ Page({
         let that = this
         app.clearAllArrhythTimer();
         that.data.count = 0;
-
+        that.batteryServiceObj = {};
         // if (that.data.progressCircle) {
         //     let circle = that.data.progressCircle
         //     circle.drawCircle(0);
@@ -281,18 +281,14 @@ Page({
                         characteristics.characteristics.forEach(v => {
                             console.log('电量 characteristic: ' + v.uuid + ', properties: ' + v.properties)
                         });
-                        let matchCharacteristics = characteristics.characteristics.filter(v => {
-                            return v.uuid.includes('2A19');
-                        });
-                        if (matchCharacteristics.length > 0) {
-                            return notifyBLECharacteristicValueChange({
-                                deviceId: selectDeviceId,
-                                serviceId: matchServices[0].uuid,
-                                characteristicId: matchCharacteristics[0].uuid,
-                                state: true
-                            })
-
-                        }
+                        this.batteryServiceObj = {
+                            isUpdating: false,
+                            batteryCharacteristics: characteristics.characteristics.filter(v => {
+                                return v.uuid.includes('2A19');
+                            }),
+                            selectDeviceId,
+                            matchServices: matchServices
+                        };
                     })
                     .catch(error => {
                         console.log('error: %o', error)
@@ -436,7 +432,22 @@ Page({
             }
             if (count <= maxCount) {
                 circle.drawCircle(count);
+                if (count > maxCount - 4) {
+                    const {isUpdating} = that.batteryServiceObj;
+                    if (!isUpdating) {
+                        const {batteryCharacteristics, selectDeviceId, matchServices} = that.batteryServiceObj;
+                        that.batteryServiceObj.isUpdating = true;
+                        if (batteryCharacteristics.length > 0) {
+                            return notifyBLECharacteristicValueChange({
+                                deviceId: selectDeviceId,
+                                serviceId: matchServices[0].uuid,
+                                characteristicId: batteryCharacteristics[0].uuid,
+                                state: true
+                            })
+                        }
+                    }
 
+                }
             } else if (count > maxCount) {
                 that.data.count = 0;
                 app.clearAllArrhythTimer();
