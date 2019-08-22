@@ -80,10 +80,10 @@ Component({
         },
 
         drawCircle(step) {
-            const {data: {radius, circleX, circleY, startDegree}, canvasTimeCircleContext: timeCircleCtx} = this;
-            this._drawCircle({circleX, circleY, startDegree, radius, ctx: timeCircleCtx});
-
-            if (this.data.step !== step) {
+            const {data: {radius, circleX, circleY, startDegree, step: mStep}, canvasTimeCircleContext: timeCircleCtx} = this;
+            if (mStep === step) {
+                this._drawCircle({circleX, circleY, startDegree, radius, ctx: timeCircleCtx});
+            } else {
                 this.data.step = step;
                 const {data: {maxCount}, canvasTimeTextContext: timeTextCtx} = this;
                 this._drawText({maxCount, step, radius, ctx: timeTextCtx});
