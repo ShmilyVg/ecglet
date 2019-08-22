@@ -315,86 +315,17 @@ export default class Protocol {
         return Network.request({url: 'account/bluetooth', data: arguments[0]});
     }
 
-    static getHeartHealthEvaluationResult() {
-        return Promise.resolve({
-            "result": {
-                "risk": {
-                    "level": 1,
-                    "content": "太棒啦！您当前患心血管疾病风险极低！你有一颗生命力如夏花一样的心脏，请好好珍惜。可能您一直重视健康生活，也可能最近才开始注意调整生活状态，这个结果都说明您的选择值得坚持~"
-                },
-                "Interpretation": "心脏健康指数” 是根据美国国家心肺血液研究所（NHLBI）的费雷鸣汉心脏研究计算得到，可完整，定量地评估心血管健康状况，可判断未来十年患心血管疾病的概率，包括冠状动脉死亡，心肌梗死，冠状动脉功能不全，心绞痛，缺血性中风，出血性中风，短暂性脑缺血发作，外周动脉疾病，心力衰竭等。用于检测初级保健的一般心血管风险概况。",
-                "healthAge": {
-                    "title": "人未老心先衰",
-                    "content": "您的心脏年龄比实际年龄大6岁，就像一枚生锈的齿轮亟待修补！"
-                },
-                "hipeeSuggest": {
-                    "img": "",
-                    "contents": [
-                        {
-                            "img": "",
-                            "subtitle": "",
-                            "title": "健康饮食",
-                            "content": [
-                                {
-                                    "title": "",
-                                    "content": "健康饮食：总脂肪量摄入量应降至约占总热量的30％;饱和脂肪，即我们平时吃的肉类，鸡，鸭，鱼等各种脂肪，摄入量应降至占总热量的10％以下，尽量减少甚至停止反式脂肪酸的摄入，如人造黄油，人造奶油，咖啡伴侣，西式糕点，薯片，炸薯条，珍珠奶茶等。"
-                                },
-                                {
-                                    "title": "",
-                                    "content": "鼓励所有人减少日常盐摄入量三分之一以上，如有可能，应限制在每日<5克或<90mmol。"
-                                }
-                            ]
-                        },
-                        {
-                            "img": "",
-                            "subtitle": "",
-                            "title": "经常锻练身体",
-                            "content": [
-                                {
-                                    "title": "",
-                                    "content": "鼓励所有人每天至少有30分钟的中度身体活动（如，快步走）"
-                                }
-                            ]
-                        },
-                        {
-                            "img": "",
-                            "subtitle": "",
-                            "title": "戒烟",
-                            "content": [
-                                {
-                                    "title": "",
-                                    "content": "强烈建议所有吸烟者戒烟，建议所有不吸烟者不要开始吸烟。\n                尽可能避免被动吸烟。\n                如果戒烟无果可以尝试尼古丁替代疗法，但需要在医师指导下进行，对尼古丁过敏者，心肌梗死，心绞痛，严重心律失常，急性卒中者禁用。"
-                                }
-                            ]
-                        },
-                        {
-                            "img": "",
-                            "subtitle": "",
-                            "title": "减少酒精摄入",
-                            "content": [
-                                {
-                                    "title": "",
-                                    "content": "建议每日饮酒量超过3单位饮酒量者减少酒精摄入。注：1单位饮酒量=半品脱的啤酒/淡味啤酒（含5％酒精），100毫升葡萄酒（含10％酒精）或25毫升烈性酒（含40％酒精）"
-                                }
-                            ]
-                        },
-                        {
-                            "img": "",
-                            "subtitle": "",
-                            "title": "控制体重",
-                            "content": [
-                                {
-                                    "title": "",
-                                    "content": "应鼓励所有超重或肥胖者，提供膳食建议结合运动降低体重;"
-                                }
-                            ]
-                        }
-                    ],
-                    "subtitle": "<p>根据世卫组织估计，2012年有1750多万人死于心脏病发作或中风等心血管疾病。</p>\n<p style=\"margin-top: 12px;\">然而，好消息是80%的过早心脏病发作和中风是可以预防的。\n<span style=\"color: #7265E3;\">健康饮食</span>、\n<span style=\"color: #7265E3;\">经常锻炼身体</span>\n和<span style=\"color: #7265E3;\">不使用烟草制品</span>\n是预防的关键。检查并控制心脏病和中风的危险因素，如高血压、高胆固醇和高血糖或糖尿病，也非常重要。</p>",
-                    "title": "改善建议"
-                }
-            }
-        });
+    /**
+     *
+     * @param relevanceId
+     * @param sbp
+     * @param smoke 是否吸烟 1 是 0 否
+     * @param trtbp 是否有高血压病史 1 是 0 否
+     * @param diabetes 是否有糖尿病 1 是 0 否
+     * @returns {*|Promise|Promise<any>|never}
+     */
+    static getHeartHealthEvaluationResult({relevanceId, sbp, smoke, trtbp, diabetes}) {
+        return Network.request({url: 'cardiac/health/getEvaluate', data: arguments[0]});
     }
 
     static wxReLogin(resolve, reject) {
