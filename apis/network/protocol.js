@@ -254,15 +254,11 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getCardiac({id}) {
-        return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true}).then(data => {
-            return Promise.resolve({data});
-        });
+        return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getPdfUrl({id}) {
-        return Network.request({url: 'gather/getPdfUrl', data: {id}, requestWithoutLogin: true}).then(data => {
-            return Promise.resolve({data});
-        });
+        return Network.request({url: 'gather/getPdfUrl', data: {id}, requestWithoutLogin: true});
     }
 
     static getRelativesInfo({memberId}) {

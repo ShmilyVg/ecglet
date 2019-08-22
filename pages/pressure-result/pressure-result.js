@@ -1,9 +1,8 @@
 import HiNavigator from "../../components/navigator/hi-navigator";
-import ResultTop from "../../components/result-top/index.js";
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
-import {reLoginWithoutLogin} from "../../utils/tools";
 import * as Tools from "../../utils/tools";
+import {reLoginWithoutLogin} from "../../utils/tools";
 
 
 Page({
@@ -12,30 +11,29 @@ Page({
         isPush: false,
     },
 
-    onLoad(options) {
+    async onLoad(options) {
         getApp().globalData.options.query = options;
         this.dataId = options.dataId;
-        Protocol.getCardiac({id: this.dataId}).then(res => {
-            let {data: {result: {data: {hipeeSuggest, list, time}, userInfo}}} = res;
-            let date = Tools.createDateAndTime(time);
-            let topDate = date.date + ' ' + date.time;
-            list.map(value => {
-                if (value.target) {
-                    value.point = 47 + 161 * (value.level - 1);
-                    if (value.target === 6) {
-                        value.image = `../../images/pressure-result/pl${value.level}.png`
-                    } else if (value.target === 7) {
-                        value.image = `../../images/pressure-result/xf${value.level}.png`
-                    }
+        const data = await Protocol.getCardiac({id: this.dataId});
+        let {result: {data: {hipeeSuggest, list, time}, userInfo}} = data;
+        let date = Tools.createDateAndTime(time);
+        let topDate = date.date + ' ' + date.time;
+        list.map(value => {
+            if (value.target) {
+                value.point = 47 + 161 * (value.level - 1);
+                if (value.target === 6) {
+                    value.image = `../../images/pressure-result/pl${value.level}.png`
+                } else if (value.target === 7) {
+                    value.image = `../../images/pressure-result/xf${value.level}.png`
                 }
-            });
-            this.setData({
-                date: topDate,
-                dataList: list,
-                suggest: hipeeSuggest,
-                userInfo
-            })
-        })
+            }
+        });
+        this.setData({
+            date: topDate,
+            dataList: list,
+            suggest: hipeeSuggest,
+            userInfo
+        });
     },
 
     onShow() {
@@ -84,18 +82,23 @@ Page({
         })
     },
 
-    toReportDetail() {
+    async toReportDetail() {
         Toast.showLoading();
-        Protocol.getPdfUrl({id: this.dataId}).then(res => {
-            const {pdfUrl} = res.data.result;
+        try {
+            const data = await Protocol.getPdfUrl({id: this.dataId})
+            const {pdfUrl} = data.result;
             if (pdfUrl) {
                 HiNavigator.navigateToReport({reportUrl: pdfUrl});
             } else {
                 Toast.showText('正在生成，请稍后');
             }
-        }).catch(res => {
+        } catch (e) {
+            console.error(e);
             Toast.showText('服务异常，请稍后重试');
-        }).finally(Toast.hiddenLoading);
+        } finally {
+            Toast.hiddenLoading();
+        }
+
     },
 
     onShareAppMessage() {
