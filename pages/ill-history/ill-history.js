@@ -103,25 +103,24 @@ Page({
             }
         });
         if (this.data.isFirstInto) {
-            this.saveUserInfoProtocol({ill: result});
-        } else  if (this.data.haveHistoryIll) {
-            this.saveUserInfo({ill: result})
+            this.saveUserInfo({ill: result});
+        } else if (this.data.haveHistoryIll) {
+            this.saveUserInfoDialog({ill: result})
         } else {
             Toast.showText('请选择是否有病史');
         }
     },
 
-    saveUserInfo({ill}) {
-        let data = getApp().globalData.editMember;
-        let dialogTitle = data.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
+    saveUserInfoDialog({ill}) {
+        let dialogTitle = getApp().globalData.editMember.isNewMember ? '确认添加此成员吗？' : '确认修改您的信息吗？';
         WXDialog.showDialog({
             title: '提示', content: dialogTitle, showCancel: true, confirmEvent: () => {
-                this.saveUserInfoProtocol({ill});
+                this.saveUserInfo({ill});
             }
         });
     },
 
-    saveUserInfoProtocol({ill}) {
+    saveUserInfo({ill}) {
         let data = getApp().globalData.editMember;
         try {
             Toast.showLoading();
