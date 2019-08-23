@@ -42,7 +42,9 @@ Page({
     },
     onInputEvent(e) {
         const {detail: {value}} = e;
-        this.data.evaluation.systolic = value.trim();
+        const tempValue = parseInt(value.trim());
+        this.data.evaluation.systolic = tempValue ? tempValue.toString() : '';
+        return this.data.evaluation.systolic;
     },
     async HeartHealthEvaluationConfirm() {
         const {evaluation: {smoke, press, sugar, systolic}} = this.data;
