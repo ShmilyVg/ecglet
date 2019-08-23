@@ -20,7 +20,7 @@ Page({
         if (JSON.stringify(userInfo) === "{}") {
             this.setData({isNewMember: true, sex: 1, birthEndDate});
         } else {
-            if (userInfo.sex !== 1 || userInfo.sex !== 2) {
+            if (userInfo.sex !== 0 && userInfo.sex !== 1) {
                 userInfo.sex = 1;
             }
             if (!userInfo.phone) {
