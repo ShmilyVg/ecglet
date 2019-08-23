@@ -20,7 +20,7 @@ Page({
         if (JSON.stringify(userInfo) === "{}") {
             this.setData({isNewMember: true, sex: 1, birthEndDate});
         } else {
-            if (userInfo.sex !== 1 || userInfo.sex !== 2) {
+            if (userInfo.sex !== 0 && userInfo.sex !== 1) {
                 userInfo.sex = 1;
             }
             if (!userInfo.phone) {
@@ -68,9 +68,9 @@ Page({
 
     onSubmit() {
         const {nickName, phone, birthday, height, weight} = this.data;
-        if (nickName.length === 0) {
+        if (!nickName || nickName.length === 0) {
             Toast.showText('请填写完整信息');
-        } else if (phone.length !== 11) {
+        } else if (!phone || phone.length !== 11) {
             if (phone.length > 0) {
                 Toast.showText('手机号格式错误');
             } else if (phone.length === 0) {
@@ -78,7 +78,7 @@ Page({
             }
         } else if (!/^\d+$/.test(phone)) {
             Toast.showText('手机号格式错误');
-        } else if (birthday === '请选择出生日期' || birthday === "") {
+        } else if (!birthday || birthday === '请选择出生日期' || birthday === "") {
             Toast.showText('请选择出生日期');
         } else if (!height || !height.trim()) {
             Toast.showText('请填写身高');
