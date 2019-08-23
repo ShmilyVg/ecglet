@@ -9,8 +9,7 @@ Page({
         SoftwareVersion
     },
 
-    isRegister: false,
-    onLoad(options) {
+    onLoad() {
         getApp().onLoginSuccess = () => {
             UserInfo.get().then(res => {
                 this.setData({userInfo: res.userInfo});
@@ -23,7 +22,7 @@ Page({
             let name = tools.HandleShortName(res.userInfo.nickName);
             this.setData({
                 userInfo: res.userInfo,
-                name:name
+                name: name
             })
         })
     },
@@ -39,7 +38,7 @@ Page({
     },
 
     toMemeberListPage(e) {
-        wx.navigateTo({url: '../member-list/member-list?state=2'});
+        HiNavigator.navigateToMemberList({state: 2});
     },
 
     clickCell2() {

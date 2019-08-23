@@ -4,6 +4,7 @@ import {getFormatDate} from "../../utils/tools";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import UserInfo from "../../apis/network/network/libs/userInfo";
+import ChoseImage from "../../components/choose-image/chooseImage";
 
 Page({
     data: {
@@ -21,7 +22,7 @@ Page({
         isPhoneNotAuth: true
     },
 
-    onLoad(options) {
+    onLoad() {
         let {year, month, day} = getFormatDate(Date.now());
         this.setData({
             birthEndDate: year + '-' + month + '-' + day
@@ -165,31 +166,10 @@ Page({
     },
 
     chooseImage() {
-        let that = this;
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['compressed'],
-            sourceType: ['album', 'camera'],
-            success: (res) => {
-                Toast.showLoading();
-                let path = res.tempFilePaths[0];
-                wx.uploadFile({
-                    url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
-                    filePath: path,
-                    name: path,
-                    success(res) {
-                        console.log(res);
-                        Toast.hiddenLoading();
-                        let data = res.data;
-                        let image = JSON.parse(data).result.img_url;
-                        console.log('图片：', image);
-                        that.setData({
-                            portraitUrl: image
-                        })
-                    }
-
-                })
-            }
+        ChoseImage.chose().then(image => {
+            this.setData({
+                portraitUrl: image
+            })
         })
     }
 })

@@ -237,9 +237,7 @@ Page({
     },
 
     switchMember() {
-        wx.navigateTo({
-            url: '../member-list/member-list?state=3'
-        })
+        HiNavigator.navigateToMemberList({state: 3});
     },
 
     toFamily() {

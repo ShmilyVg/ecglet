@@ -29,6 +29,10 @@ export default class HiNavigator extends CommonNavigator {
         wx.navigateTo({url: '/pages/knowledge/knowledge'});
     }
 
+    static navigateToMemberList({state}) {
+        wx.navigateTo({url: '/pages/member-list/member-list?state=' + state});
+    }
+
     static redirectToRichContent({tempFileUrl, type}) {
         const pages = getCurrentPages();
         if (pages && pages.length) {
@@ -79,7 +83,7 @@ export default class HiNavigator extends CommonNavigator {
         wx.redirectTo({url: '/pages/pressure-result/pressure-result?dataId=' + dataId});
     }
 
-    static navigateToIllHistory({isFirstInto=false}) {
+    static navigateToIllHistory({isFirstInto = false}) {
         wx.navigateTo({url: `/pages/ill-history/ill-history?isFirstInto=${isFirstInto}`})
     }
 
