@@ -15,7 +15,7 @@ export function createDateAndTime(timeStamp) {
     return {date: dateT, time: time, day: day, month: month};
 }
 
-/*根据出生日期算出年龄*/
+// 根据出生日期算出年龄
 export function jsGetAge(strBirthday) {
     let returnAge;
     let strBirthdayArr = strBirthday.split("-");
@@ -28,13 +28,12 @@ export function jsGetAge(strBirthday) {
     let nowMonth = d.getMonth() + 1;
     let nowDay = d.getDate();
 
-    if (nowYear == birthYear) {
+    if (nowYear === birthYear) {
         returnAge = 0;//同年 则为0岁
-    }
-    else {
+    } else {
         let ageDiff = nowYear - birthYear; //年之差
         if (ageDiff > 0) {
-            if (nowMonth == birthMonth) {
+            if (nowMonth === birthMonth) {
                 let dayDiff = nowDay - birthDay;//日之差
                 if (dayDiff < 0) {
                     returnAge = ageDiff - 1;
@@ -42,8 +41,7 @@ export function jsGetAge(strBirthday) {
                 else {
                     returnAge = ageDiff;
                 }
-            }
-            else {
+            } else {
                 let monthDiff = nowMonth - birthMonth;//月之差
                 if (monthDiff < 0) {
                     returnAge = ageDiff - 1;
@@ -52,12 +50,10 @@ export function jsGetAge(strBirthday) {
                     returnAge = ageDiff;
                 }
             }
-        }
-        else {
+        } else {
             returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
         }
     }
-
     return returnAge;//返回周岁年龄
 }
 

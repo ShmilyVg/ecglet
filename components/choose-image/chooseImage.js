@@ -1,4 +1,5 @@
 import Toast from "../../base/heheda-common-view/toast";
+import * as config from "../../utils/config";
 
 export default class ChoseImage {
     static chose() {
@@ -12,7 +13,7 @@ export default class ChoseImage {
                     Toast.showLoading();
                     let path = res.tempFilePaths[0];
                     wx.uploadFile({
-                        url: 'https://backend.hipee.cn/hipee-upload/hibox/mp/upload/image.do',
+                        url: config.UploadUrl,
                         filePath: path,
                         name: path,
                         success(res) {
@@ -20,7 +21,7 @@ export default class ChoseImage {
                             Toast.hiddenLoading();
                             let data = res.data;
                             let image = JSON.parse(data).result.img_url;
-                            console.log('图片：', image);
+                            console.log('上传图片：', image);
                             resolve(image);
                         }
                     })

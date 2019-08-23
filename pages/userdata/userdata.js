@@ -67,14 +67,22 @@ Page({
     },
 
     onSubmit() {
+        if (this.submitHandleErr()) {
+            getApp().globalData.editMember = this.data;
+            HiNavigator.navigateToIllHistory({});
+        }
+    },
+
+    submitHandleErr() {
         const {nickName, phone, birthday, height, weight} = this.data;
+        let res = false;
         if (!nickName || nickName.length === 0) {
             Toast.showText('请填写完整信息');
         } else if (!phone || phone.length !== 11) {
-            if (phone.length > 0) {
-                Toast.showText('手机号格式错误');
-            } else if (phone.length === 0) {
+            if (!phone || phone.length === 0) {
                 Toast.showText('请填写手机号');
+            } else if (!phone || phone.length > 0){
+                Toast.showText('手机号格式错误');
             }
         } else if (!/^\d+$/.test(phone)) {
             Toast.showText('手机号格式错误');
@@ -85,9 +93,9 @@ Page({
         } else if (!weight || !weight.trim()) {
             Toast.showText('请填写体重');
         } else {
-            getApp().globalData.editMember = this.data;
-            HiNavigator.navigateToIllHistory({});
+            res = true
         }
+        return res;
     },
 
     chooseImage() {
