@@ -321,7 +321,11 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getHeartHealthEvaluationResult({relevanceId, sbp, smoke, trtbp, diabetes}) {
-        return Network.request({url: 'cardiac/health/getEvaluate', data: arguments[0]});
+        const args = arguments[0];
+        if (!relevanceId) {
+            delete args.relevanceId;
+        }
+        return Network.request({url: 'cardiac/health/getEvaluate', data: args});
     }
 
     static wxReLogin(resolve, reject) {

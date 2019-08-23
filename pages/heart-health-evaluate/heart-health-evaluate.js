@@ -51,7 +51,6 @@ Page({
             return;
         }
         const userInfo = this.selectComponent('#switchMemberView').getUserInfo();
-        console.warn('获取到的用户信息',userInfo);
         Toast.showLoading('评估中，请稍候');
         try {
             const {result} = await Protocol.getHeartHealthEvaluationResult({
