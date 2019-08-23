@@ -63,13 +63,13 @@
 
 .heart-health-evaluate-result-dotted-line{
     width:612rpx;
-    border: 1px dotted rgba(156,156,156,1);
+    border-bottom: 0.5px dashed rgba(156,156,156,1);
     margin-top: 44rpx;
     margin-bottom: 51rpx;
 }
 
 .heart-health-evaluate-result-final{
-    width: 460rpx;
+    max-width: 460rpx;
     font-size:38rpx;
     font-family:PingFang SC;
     font-weight:500;

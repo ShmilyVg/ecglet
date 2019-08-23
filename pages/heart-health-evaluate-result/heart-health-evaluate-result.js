@@ -23,7 +23,7 @@ Page({
         }, {
             level: 3,
             name: '很高',
-            selected: true,
+            selected: false,
             primaryColor: '#F8695A',
             levelIconPosition: '82%'
 
@@ -44,6 +44,7 @@ Page({
             }),
             currentLevelObj = levels.filter(item => item.selected).pop();
         this.setData({
+            levels,
             result,
             levelIconPosition: currentLevelObj ? currentLevelObj.levelIconPosition : '0'
         });
