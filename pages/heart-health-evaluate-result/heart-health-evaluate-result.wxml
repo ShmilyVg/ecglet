@@ -6,7 +6,7 @@
     </view>
 
     <view class="flex-row align-items-center relative">
-        <view wx:for="{{levels}}" wx:key="*this" class="flex-row align-items-center justify-center box-sizing-border-box heart-health-evaluate-result-level-item" style="color: {{item.selected?'white':item.primaryColor}};background-color: {{item.selected?item.primaryColor:'white'}};border-color: {{item.primaryColor}}">{{item.name}}</view>
+        <view wx:for="{{levels}}" wx:key="level" class="flex-row align-items-center justify-center box-sizing-border-box heart-health-evaluate-result-level-item" style="color: {{item.selected?'white':item.primaryColor}};background-color: {{item.selected?item.primaryColor:'white'}};border-color: {{item.primaryColor}}">{{item.name}}</view>
         <image class="absolute" style="width: 26rpx;height: 14rpx;bottom: -14rpx;left: {{levelIconPosition}};" src="../../images/heart-health-evaluate-result/arrow.png"></image>
     </view>
 
@@ -39,12 +39,12 @@
     </view>
     <rich-text nodes="{{result.hipeeSuggest.subtitle}}" class="heart-health-evaluate-result-rich-text"></rich-text>
 
-    <view class="flex-column" wx:for="{{result.hipeeSuggest.contents}}" wx:key="*this">
-        <view class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: -5rpx;">
+    <view class="flex-column" wx:for="{{result.hipeeSuggest.contents}}" wx:key="index">
+        <view class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: 48rpx;">
             <image src="{{item.img}}" style="width: 44rpx;height: 44rpx;margin-right: 18rpx;"></image>
             <view class="decipher-suggest-item-title">{{item.title}}</view>
         </view>
-        <view wx:for="{{item.content}}" wx:key="*this" class="flex-column box-sizing-border-box" style="margin-top: 6rpx;padding: 0 53rpx;">
+        <view wx:for="{{item.content}}" wx:key="index" class="flex-column box-sizing-border-box" style="margin-top: 6rpx;padding: 0 53rpx;">
             <view class="decipher-contents-item-content">{{item.content}}</view>
         </view>
     </view>
