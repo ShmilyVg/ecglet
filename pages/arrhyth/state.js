@@ -9,16 +9,15 @@ export class ArrhythStateManager {
         };
         this._page.onConnectedFailedReason = () => {
             const remindDialog = this._page.selectComponent('#myDialog');
-            remindDialog.show({title:'连接不上?',content:
+            remindDialog.show({
+                title: '连接不上?', content:
                     '1、请检查网络状态和蓝牙是否开启；\n' +
                     '2、确认心电仪的蓝色指示灯是否亮起；\n' +
                     '3、将手机尽可能靠近心电仪；\n' +
-                    '4、清理小程序后台进程，再进一遍看看是否能够重连；'})
+                    '4、清理小程序后台进程，再进一遍看看是否能够重连；'
+            })
 
         };
-        this.connectedStateIndex = -1;
-        this.remindIntervalIndex = -1;
-        // this.prepareStateIndex = -1;
     }
 
 
@@ -27,20 +26,21 @@ export class ArrhythStateManager {
     }
 
     guider() {
+        const app = getApp();
+        app.clearAllArrhythTimer();
         this._page.setData({
             isGuider: true,//是否是引导页
             isConnectedTimeout: false,//；连接失败页面
             isFilterArrhythData: true//是否5s内过滤数据
         }, () => {
-            this.connectedStateIndex = setTimeout(() => {
+            app.addNewConnectedFailedTimer(setTimeout(() => {
                 this.connectedFailed();
-            }, 60000);
+            }, 60000));
         });
     }
 
     prepare() {
-        clearTimeout(this.connectedStateIndex);
-        clearInterval(this.remindIntervalIndex);
+        getApp().clearAllArrhythTimer();
         this._page.setData({
             isGuider: false,
             isConnectedTimeout: false,
@@ -65,8 +65,7 @@ export class ArrhythStateManager {
     }
 
     connectedFailed() {
-        clearTimeout(this.connectedStateIndex);
-        clearInterval(this.remindIntervalIndex);
+        getApp().clearAllArrhythTimer();
         this._page.onConnectedFailedReason();
         this._page.setData({
             isGuider: true,
