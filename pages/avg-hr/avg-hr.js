@@ -22,7 +22,8 @@ Page({
                 maxPosition = 96;//iconWidth=2 是2%的意思
             const {lineNum} = this.data;
             if (fre <= lineNum[0]) {
-                position = (0.2 / lineNum[0] * fre * 100 - iconWidth).toFixed(3) + '%';
+                position = (0.2 / lineNum[0] * fre * 100 - iconWidth);
+                position = (position < 0 ? 0 : position).toFixed(3) + '%';
             } else if (fre <= lineNum[1]) {
                 position = (20 + 0.2 / (lineNum[1] - lineNum[0]) * (fre - lineNum[0]) * 100 - iconWidth).toFixed(3) + '%';
             } else if (fre <= lineNum[2]) {

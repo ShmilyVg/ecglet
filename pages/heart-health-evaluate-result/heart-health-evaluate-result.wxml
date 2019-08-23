@@ -1,7 +1,7 @@
 <view class="fill-width flex-column align-items-center" >
     <view class="heart-health-evaluate-result-title" style="margin-top: 83rpx;">您的心血管疾病风险为</view>
     <view class="flex-row" style="align-items: baseline;margin-bottom: 46rpx;">
-        <view class="heart-health-evaluate-result-level">{{result.risk.level}}</view>
+        <view class="heart-health-evaluate-result-level">{{result.risk.num}}</view>
         <view class="heart-health-evaluate-result-level-sub">级</view>
     </view>
 

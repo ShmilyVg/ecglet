@@ -10,7 +10,18 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad(options) {
+    async onLoad(options) {
+        async function f() {
+            return await Promise.resolve('出错了');
+        }
+
+        const result = await f().catch(res => {
+            console.error(res);
+
+        }).then(res=>{
+            console.error('12333',res);
+        })
+        console.warn(result);
 
     },
 
