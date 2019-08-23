@@ -81,7 +81,7 @@ Page({
         } else if (!phone || phone.length !== 11) {
             if (!phone || phone.length === 0) {
                 Toast.showText('请填写手机号');
-            } else if (!phone || phone.length > 0){
+            } else if (!phone || phone.length > 0) {
                 Toast.showText('手机号格式错误');
             }
         } else if (!/^\d+$/.test(phone)) {
