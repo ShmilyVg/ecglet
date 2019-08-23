@@ -208,7 +208,7 @@ export default class Protocol {
 
     // 4。0新增协议
     static memberDiseaseGetMemberHistory({relevanceId}) {
-        if (relevanceId == 0) {
+        if (!relevanceId) {
             console.log('主成员');
             return Network.request({
                 url: 'member/disease/getMemberHistory',
@@ -254,7 +254,7 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getCardiac({id}) {
-        return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true});
+       return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getPdfUrl({id}) {

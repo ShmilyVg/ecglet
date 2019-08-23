@@ -44,7 +44,7 @@ Page({
         const {detail: {value}} = e;
         this.data.evaluation.systolic = value.trim();
     },
-    HeartHealthEvaluationConfirm() {
+    async HeartHealthEvaluationConfirm() {
         const {evaluation: {smoke, press, sugar, systolic}} = this.data;
         if (smoke === -1 || press === -1 || sugar === -1 || !systolic) {
             Toast.showText('请完善表单各项内容');
@@ -53,12 +53,22 @@ Page({
         const userInfo = this.selectComponent('#switchMemberView').getUserInfo();
 
         Toast.showLoading('评估中，请稍候');
-        Protocol.getHeartHealthEvaluationResult().then(data => {
-            HiNavigator.navigateToHeartHealthEvaluationResult({result: data.result});
-        }).catch(res => {
+        try {
+            const {result} = await Protocol.getHeartHealthEvaluationResult({
+                relevanceId: userInfo.relevanceId,
+                sbp: systolic,
+                smoke,
+                trtbp: press,
+                diabetes: sugar
+            });
+            HiNavigator.navigateToHeartHealthEvaluationResult({result});
+
+        } catch (e) {
             console.error(res);
             Toast.showText('评估失败，请重试');
-        }).finally(Toast.hiddenLoading);
+        } finally {
+            Toast.hiddenLoading();
+        }
     }
 
 

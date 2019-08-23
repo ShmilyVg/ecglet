@@ -28,7 +28,7 @@
     <view class="fill-width flex-row box-sizing-border-box health-evaluate-item">
         <view class="flex-row align-items-center justify-center health-evaluate-index">3</view>
         <view class="flex-column">
-            <view class="health-evaluate-title">您现在是否还有高血压？</view>
+            <view class="health-evaluate-title">您是否曾对高血压进行调控和治疗？</view>
             <text class="health-evaluate-content">如果已经治愈请选择否; \n成人收缩压≥140mmHg（21.3kPa）时即可确诊为高血压。收缩压≤130mmHg（18.6kPa）称为正常血压。</text>
             <view class="flex-row align-items-center" style="margin-top: 43rpx;">
                 <view bindtap="onSelectedPress" data-press="1" class="health-evaluate-radio-button {{evaluation.press===1?'health-evaluate-radio-selected':'health-evaluate-radio-unselected'}}">是</view>
