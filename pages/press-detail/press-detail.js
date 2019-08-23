@@ -10,15 +10,14 @@ Page({
 
     },
 
-    onReady() {
-        Protocol.getPsilnterval({id: this.dataId}).then(data => {
-            const {result} = data;
-            this.setData({
-                result
-            }, () => {
-                this.selectComponent('#press-detail-circle').drawCircle({score: parseInt(result.frequency)});
-            });
-            wx.setNavigationBarTitle({title: '心脏负荷评估'});
+    async onReady() {
+        wx.setNavigationBarTitle({title: '心脏负荷评估'});
+        const data = await Protocol.getPsilnterval({id: this.dataId});
+        const {result} = data;
+        this.setData({
+            result
+        }, () => {
+            this.selectComponent('#press-detail-circle').drawCircle({score: parseInt(result.frequency)});
         });
     }
 });
