@@ -10,31 +10,27 @@ Page({
     },
 
     onLoad() {
-        getApp().onLoginSuccess = () => {
-            UserInfo.get().then(res => {
-                this.setData({userInfo: res.userInfo});
-            });
+        getApp().onLoginSuccess = async () => {
+            this.setData({userInfo: await UserInfo.get()});
         };
     },
 
-    onShow() {
-        UserInfo.get().then((res) => {
-            let name = tools.HandleShortName(res.userInfo.nickName);
-            this.setData({
-                userInfo: res.userInfo,
-                name: name
-            })
-        })
+    async onShow() {
+        const {userInfo, userInfo: {nickName}} = await UserInfo.get();
+        let name = tools.HandleShortName(nickName);
+        this.setData({
+            userInfo,
+            name
+        });
     },
 
-    toEditInfo() {
-        UserInfo.get().then((res) => {
-            getApp().globalData.editMember = res.userInfo;
-            wx.navigateTo({
-                    url: '../userdata/userdata?isNormalMember=true'
-                }
-            );
-        });
+    async toEditInfo() {
+        const {userInfo} = await UserInfo.get();
+        getApp().globalData.editMember = userInfo;
+        wx.navigateTo({
+                url: '../userdata/userdata?isNormalMember=true'
+            }
+        );
     },
 
     toMemeberListPage(e) {

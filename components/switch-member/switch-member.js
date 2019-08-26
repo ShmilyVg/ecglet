@@ -22,11 +22,10 @@ Component({
         },
         _whenUpdateUserInfo({userInfo}) {
             console.log('当前选择的用户信息', userInfo);
-            this.setData({userInfo}, () => {
-                Protocol.memberDiseaseGetMemberHistory({relevanceId: userInfo.relevanceId}).then(data => {
-                    const myEventDetail = {disease: {...data.result.data}};
-                    this.triggerEvent('onGetMemberDisease', myEventDetail);
-                })
+            this.setData({userInfo}, async () => {
+                const {result: {data}} = await Protocol.memberDiseaseGetMemberHistory({relevanceId: userInfo.relevanceId});
+                const myEventDetail = {disease: {...data}};
+                this.triggerEvent('onGetMemberDisease', myEventDetail);
             });
         }
 
@@ -43,17 +42,15 @@ Component({
         }
     },
     pageLifetimes: {
-        show() {
+       async show() {
             // 页面被展示
             const currentMember = app.globalData.currentMember;
             if (currentMember && currentMember.memberId) {
                 currentMember.shortName = Tools.HandleShortName(currentMember.nickName);
                 this._whenUpdateUserInfo({userInfo: currentMember});
             } else {
-                UserInfo.get().then(res => {
-                    res.userInfo.shortName = Tools.HandleShortName(res.userInfo.nickName);
-                    this._whenUpdateUserInfo({userInfo: {...res.userInfo}});
-                });
+                const {userInfo, userInfo: {nickName}} = await UserInfo.get();
+                this._whenUpdateUserInfo({userInfo: {...userInfo, shortName: Tools.HandleShortName(nickName)}});
             }
         },
         hide() {
