@@ -44,11 +44,8 @@ Page({
 
     onLoad(option) {
         let userInfo = getApp().globalData.editMember;
-        if (option.isFirstInto != 'false') {
-            this.setData({
-                isFirstInto: option.isFirstInto
-            });
-        }
+        const isFirstInto = !!parseInt(option.isFirstInto);
+        this.setData({isFirstInto});
 
         if (userInfo.isNewMember) {
             return;
