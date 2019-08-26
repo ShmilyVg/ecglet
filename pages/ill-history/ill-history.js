@@ -128,12 +128,11 @@ Page({
             if (data.isNewMember) {
                 await Protocol.accountCreate(data);
             } else if (data.isNormalMember) {
+                delete data.relevanceId;
                 await Protocol.accountUpdate(data);
                 data.age = tools.jsGetAge(data.birthday);
                 const userInfo = await UserInfo.get().userInfo;
-                let allUserInfo = {...userInfo, ...data, diseaseNull: 0};
-                delete allUserInfo.relevanceId;
-                UserInfo.set(allUserInfo);
+                UserInfo.set({...userInfo, ...data, diseaseNull: 0});
                 getApp().globalData.editMember = {};
             } else {
                 await Protocol.memberRelevanceUpdate(data);

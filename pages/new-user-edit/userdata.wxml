@@ -22,7 +22,7 @@
                 <view class="weui-label cell-title">手机号</view>
             </view>
             <view class="cell">
-                <button wx:if="{{isPhoneNotAuth}}" class="weui-input cell-content" style="color: gray;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请输入手机号</button>
+                <button wx:if="{{isPhoneNotAuth}}" class="weui-input cell-content" style="color: gray;text-align: left" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请输入手机号</button>
                 <input wx:else class="weui-input cell-content" placeholder="请输入手机号" value="{{phone}}" type="number" maxlength="11" bindinput="onNumberChange"/>
             </view>
         </view>
