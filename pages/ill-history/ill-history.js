@@ -120,45 +120,29 @@ Page({
         });
     },
 
-    saveUserInfo({ill}) {
-        let data = getApp().globalData.editMember;
+    async saveUserInfo({ill}) {
+        let data = {...getApp().globalData.editMember, ...ill};
+        Toast.showLoading();
+        console.log('保存信息：', data);
         try {
-            Toast.showLoading();
-            console.log('保存信息：', data);
             if (data.isNewMember) {
-                Protocol.accountCreate({...data, ...ill}).then(() => {
-                    this.editFinish();
-                }).catch((res) => {
-                    this.editErr(res.data.code);
-                }).finally(() => {
-                    Toast.hiddenLoading();
-                });
+                await Protocol.accountCreate(data);
             } else if (data.isNormalMember) {
-                Protocol.accountUpdate({...data, ...ill}).then(() => {
-                    return UserInfo.get();
-                }).then((res) => {
-                    data.age = tools.jsGetAge(data.birthday);
-                    return UserInfo.set({...res.userInfo, ...data, ...ill, diseaseNull: 0});
-                }).then(() => {
-                    getApp().globalData.editMember = {};
-                    this.editFinish();
-                }).catch((res) => {
-                    this.editErr(res.data.code);
-                });
+                await Protocol.accountUpdate(data);
+                data.age = tools.jsGetAge(data.birthday);
+                UserInfo.set({...UserInfo.get().userInfo, ...data, diseaseNull: 0});
+                getApp().globalData.editMember = {};
             } else {
-                console.log('保存信息：', data);
-                Protocol.memberRelevanceUpdate({...data, ...ill}).then(() => {
-                    if (getApp().globalData.currentMember.memberId === data.memberId) {
-                        getApp().globalData.currentMember = data
-                    }
-                    this.editFinish();
-                }).catch((res) => {
-                    this.editErr(res.data.code);
-                });
+                await Protocol.memberRelevanceUpdate(data);
+                if (getApp().globalData.currentMember.memberId === data.memberId) {
+                    getApp().globalData.currentMember = data
+                }
             }
-        } catch (err) {
-            console.log("onSubmit error: %o", err);
-            Toast.showText('提交失败')
+        } catch (e) {
+            this.editErr(e.data.code);
+        } finally {
+            this.editFinish();
+            Toast.hiddenLoading();
         }
     },
 
