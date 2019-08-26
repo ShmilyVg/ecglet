@@ -13,7 +13,7 @@
                 <view class="weui-label cell-title">姓名</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{name}}" maxlength="32" bindinput="onNameChange"/>
+                <input class="weui-input cell-content" placeholder="请输入用户姓名" value="{{nickName}}" maxlength="32" bindinput="onNameChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -23,7 +23,7 @@
             </view>
             <view class="weui-cell__bd">
                 <button wx:if="{{isPhoneNotAuth}}" class="weui-input cell-content" style="color: gray;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请输入手机号</button>
-                <input wx:else class="weui-input cell-content" placeholder="请输入手机号" type="number" value="{{number}}" type="number" maxlength="11" bindinput="onNumberChange"/>
+                <input wx:else class="weui-input cell-content" placeholder="请输入手机号" value="{{phone}}" type="number" maxlength="11" bindinput="onNumberChange"/>
             </view>
         </view>
         <view class="cell-line-hpe"></view>
@@ -32,8 +32,8 @@
                 <view class="weui-label cell-title">性别</view>
             </view>
             <view class="weui-cell__bd">
-                <picker bindchange="onSexChange" value="{{sexIndex}}" range="{{sexies}}">
-                    <view class="cell-content">{{sexies[sexIndex]}}</view>
+                <picker bindchange="onSexChange" value="{{sex}}" range="{{sexies}}">
+                    <view class="cell-content">{{sexies[sex]}}</view>
                 </picker>
             </view>
         </view>
@@ -43,9 +43,9 @@
                 <view class="weui-label cell-title">出生日期</view>
             </view>
             <view class="weui-cell__bd">
-                <picker mode="date" value="{{birthDate||'1980-01-01'}}" start="1900-01-01" end="{{birthEndDate}}"
+                <picker mode="date" value="{{birthday||'1980-01-01'}}" start="1900-01-01" end="{{birthEndDate}}"
                         bindchange="onBirthChange">
-                    <view class="weui-input cell-content" style="color:{{birthDate=='请选择出生日期'?'gray':'black'}}">{{birthDate||'请选择出生日期'}}</view>
+                    <view class="weui-input cell-content" style="color:{{birthDate=='请选择出生日期'?'gray':'black'}}">{{birthday||'请选择出生日期'}}</view>
                 </picker>
             </view>
         </view>

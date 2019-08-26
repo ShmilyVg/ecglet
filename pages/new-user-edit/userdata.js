@@ -1,6 +1,6 @@
 import Toast from "../../utils/toast";
 import WXDialog from "../../utils/dialog";
-import {getFormatDate} from "../../utils/tools";
+import {getFormatDate, userInfoEmptyTip} from "../../utils/tools";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import UserInfo from "../../apis/network/network/libs/userInfo";
@@ -9,69 +9,44 @@ import ChoseImage from "../../components/choose-image/chooseImage";
 Page({
     data: {
         sexies: ['女', '男'],
-        sexIndex: 1,
-        birthEndDate: '',
-        birthDate: '',
-        submitOpacity: 0.4,
-        submitDisabled: true,
-        name: '',
-        height: '',
-        weight: '',
-        number: '',
-        portraitUrl: '',
         isPhoneNotAuth: true
     },
 
-    onLoad() {
-        let {year, month, day} = getFormatDate(Date.now());
-        this.setData({
-            birthEndDate: year + '-' + month + '-' + day
-        });
-        UserInfo.get().then((res) => {
-            console.log('res:', res);
+    async onLoad() {
+        const {year, month, day} = getFormatDate(Date.now());
+        const birthEndDate = year + '-' + month + '-' + day
 
-            let name = res.userInfo.nickName;
+        let {userInfo} = await UserInfo.get();
+        console.log('用户信息:', userInfo);
+        userInfo.phone = userInfo.phone || wx.getStorageSync('phoneNumber');
 
-            this.setData({
-                name: name,
-                number: res.userInfo.phone || wx.getStorageSync('phoneNumber'),
-                sexIndex: res.userInfo.sex === -1 ? 0 : res.userInfo.sex,
-                birthDate: res.userInfo.birthday || '',
-                height: res.userInfo.height,
-                weight: res.userInfo.weight,
-                portraitUrl: res.userInfo.portraitUrl,
-                isPhoneNotAuth: !res.userInfo.phone,
-                cardiopathy: res.userInfo.cardiopathy,
-                diabetes: res.userInfo.diabetes,
-                diseaseNull: res.userInfo.diseaseNull,
-                hypertension: res.userInfo.hypertension,
-            })
-        })
+        const isPhoneNotAuth = !userInfo.phone;
+
+        this.setData({birthEndDate, ...userInfo, isPhoneNotAuth})
     },
+
     isPhoneNotAuth() {
         return !wx.getStorageSync('isNewUserPhoneAuth');
     },
-    getPhoneNumber(e) {
+
+    async getPhoneNumber(e) {
         const {detail: {encryptedData, iv, errMsg}} = e;
         if (errMsg === 'getPhoneNumber:ok') {
             Toast.showLoading();
-            Protocol.getPhoneNum({
-                encryptedData, iv
-            }).then((phoneNumber) => {
+            try {
+                let phoneNumber = await Protocol.getPhoneNum({encryptedData, iv});
                 wx.setStorageSync('phoneNumber', phoneNumber);
                 wx.setStorageSync('isNewUserPhoneAuth', true);
-            }).then((res) => {
-                    this.setData({
-                        number: wx.getStorageSync('phoneNumber'),
-                        isPhoneNotAuth: this.isPhoneNotAuth()
-                    });
-                }
-            ).catch((res) => {
+                this.setData({
+                    number: wx.getStorageSync('phoneNumber'),
+                    isPhoneNotAuth: this.isPhoneNotAuth()
+                });
+            } catch (e) {
                 console.log(res);
                 Toast.showText('授权手机号失败，请重试');
-            }).finally(() => {
+            } finally {
                 Toast.hiddenLoading();
-            });
+            }
         } else {
             WXDialog.showDialog({content: '因您拒绝授权手机号，可能对后续专业服务造成影响。您可以再次点击进行手动填写', showCancel: false});
             wx.setStorageSync('isNewUserPhoneAuth', true);
@@ -84,27 +59,25 @@ Page({
     },
     onNameChange(e) {
         this.setData({
-            name: e.detail.value
+            nickName: e.detail.value
         })
     },
 
     onNumberChange(e) {
         this.setData({
-            number: e.detail.value
-        }, () => {
-            console.log(this.data.number);
-        });
+            phone: e.detail.value
+        })
     },
 
     onBirthChange(e) {
         this.setData({
-            birthDate: e.detail.value || ''
+            birthday: e.detail.value || ''
         })
     },
 
     onSexChange(e) {
         this.setData({
-            sexIndex: parseInt(e.detail.value)
+            sex: parseInt(e.detail.value)
         })
     },
 
@@ -121,48 +94,10 @@ Page({
     },
 
     onSubmit() {
-        if (this.data.name.length == 0) {
-            Toast.showText('请填写昵称');
-            return;
+        if (userInfoEmptyTip(this.data)) {
+            getApp().globalData.editMember = this.data;
+            HiNavigator.navigateToIllHistory({isFirstInto: true});
         }
-        console.log(this.data.number);
-        if (this.data.number.length != 11) {
-            Toast.showText('请填写手机号');
-            return;
-        }
-        if (!this.data.birthDate.trim()) {
-            Toast.showText('请选择出生日期');
-            return;
-        }
-        const {height, weight} = this.data;
-        if (!height || !height.trim()) {
-            Toast.showText('请填写身高');
-            return;
-        }
-        if (!weight || !weight.trim()) {
-            Toast.showText('请填写体重');
-            return;
-        }
-        let birthTime = this.data.birthDate || '';
-        console.log(`birth time: ${birthTime}`);
-
-        let editMember = {
-            nickName: this.data.name,
-            phone: this.data.number,
-            sex: this.data.sexIndex,
-            birthday: birthTime,
-            height: this.data.height,
-            weight: this.data.weight,
-            portraitUrl: this.data.portraitUrl,
-            isNormalMember: true,
-            cardiopathy: this.data.cardiopathy,
-            diabetes: this.data.diabetes,
-            diseaseNull: this.data.diseaseNull,
-            hypertension: this.data.hypertension,
-
-        };
-        getApp().globalData.editMember = editMember;
-        HiNavigator.navigateToIllHistory({isFirstInto: true});
     },
 
     chooseImage() {
