@@ -2,7 +2,7 @@
 }
 
 .cell{
-    padding: 32rpx 0 32rpx 102rpx;
+    padding: 32rpx 0 32rpx 89rpx;
 }
 
 .cell-title {

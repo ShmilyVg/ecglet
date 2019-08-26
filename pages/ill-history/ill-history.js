@@ -130,7 +130,8 @@ Page({
             } else if (data.isNormalMember) {
                 await Protocol.accountUpdate(data);
                 data.age = tools.jsGetAge(data.birthday);
-                UserInfo.set({...UserInfo.get().userInfo, ...data, diseaseNull: 0});
+                const userInfo = await UserInfo.get().userInfo;
+                UserInfo.set({...userInfo, ...data, diseaseNull: 0});
                 getApp().globalData.editMember = {};
             } else {
                 await Protocol.memberRelevanceUpdate(data);

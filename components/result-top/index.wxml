@@ -7,7 +7,6 @@
                         <view class="flex-row align-items-center" style="margin-bottom: 27rpx;">
                             <view class="cell-title">{{item.title}}</view>
                             <image src="../../images/result/abnormal.png" wx:if="{{item.isAbNormal}}" style="width: 32rpx;height: 32rpx;background-color: red;margin-left: 17rpx;"></image>
-
                         </view>
                         <view class="cell-state">{{item.conclusion}}</view>
                     </view>
