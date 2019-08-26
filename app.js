@@ -56,7 +56,7 @@ App({
             wx.setStorageSync('isRegister', true);
             const {phone, birthday, height, weight} = userInfo;
             if (!wx.getStorageSync('phoneNumber')) {
-                wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
+                wx.setStorageSync('phoneNumber', phone || '');
             }
 
             const {query} = this.globalData.options;
