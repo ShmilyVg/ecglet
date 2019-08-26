@@ -18,7 +18,7 @@ Page({
             }, {title: '医院专业报告', content: '三甲医院信息中心，线上输出报告', path: 'item3'},]
     },
 
-    onShow (){
+    onShow() {
         MyUsed.initUsed();
     },
 
@@ -26,16 +26,18 @@ Page({
         console.log('onClick');
         Toast.showLoading();
     },
-    bindGetUserInfo(e) {
+    async bindGetUserInfo(e) {
         console.log(e);
-        dealAuthUserInfo(e).then((res) => {
-            this.setData({userInfo: res.userInfo});
+        try {
+            const {userInfo} = await dealAuthUserInfo(e)
+            this.setData({userInfo});
             HiNavigator.relaunchToNewUserEdit();
-        }).catch((res) => {
-            console.log(res);
-        }).finally(() => {
+        } catch (e) {
+            console.error(e);
+        } finally {
             Toast.hiddenLoading();
-        });
+        }
+
     },
     onWelcomeItemChanged(e) {
         const {detail: {current}} = e;
