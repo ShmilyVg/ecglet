@@ -14,7 +14,7 @@ Page({
 
     async onLoad() {
         const {year, month, day} = getFormatDate(Date.now());
-        const birthEndDate = year + '-' + month + '-' + day
+        const birthEndDate = year + '-' + month + '-' + day;
 
         let {userInfo} = await UserInfo.get();
         console.log('用户信息:', userInfo);
@@ -42,7 +42,7 @@ Page({
                     isPhoneNotAuth: this.isPhoneNotAuth()
                 });
             } catch (e) {
-                console.log(res);
+                console.log(e);
                 Toast.showText('授权手机号失败，请重试');
             } finally {
                 Toast.hiddenLoading();
@@ -100,11 +100,10 @@ Page({
         }
     },
 
-    chooseImage() {
-        ChoseImage.chose().then(image => {
-            this.setData({
-                portraitUrl: image
-            })
+    async chooseImage() {
+        const image = await ChoseImage.chose();
+        this.setData({
+            portraitUrl: image
         })
     }
 })

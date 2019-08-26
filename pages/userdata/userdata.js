@@ -73,11 +73,10 @@ Page({
         }
     },
 
-    chooseImage() {
-        ChooseImage.chose().then(image => {
-            this.setData({
-                portraitUrl: image
-            })
-        });
+    async chooseImage() {
+        const image = await ChooseImage.chose()
+        this.setData({
+            portraitUrl: image
+        })
     }
 });
