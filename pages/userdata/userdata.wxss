@@ -1,3 +1,7 @@
+.cell {
+  width: 70%;
+}
+
 .cell-hpe{
   height: 25rpx;
   padding: 50rpx 40rpx;
@@ -58,6 +62,7 @@
 .cell-content {
   font-size:30rpx;
   margin-left: -40rpx;
+  width: 100%;
 }
 
 .weui-label {
