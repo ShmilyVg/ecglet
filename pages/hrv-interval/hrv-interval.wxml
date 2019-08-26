@@ -56,7 +56,7 @@
             <view class="decipher-content-title">改善建议</view>
         </view>
         <block wx:for="{{result.hipeeSuggest.contents}}" wx:key="*this">
-            <view class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: -5rpx;">
+            <view wx:if="{{item.title}}" class="flex-row align-items-center"  style="margin-top: 34rpx;margin-left: -5rpx;">
                 <image src="{{item.img}}" style="width: 44rpx;height: 44rpx;margin-right: 18rpx;"></image>
                 <view class="decipher-suggest-item-title">{{item.title}}</view>
             </view>
