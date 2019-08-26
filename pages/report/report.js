@@ -1,17 +1,14 @@
 import Protocol from "../../apis/network/protocol";
 import Toast from "../../utils/toast";
-import WXDialog from "../../utils/dialog";
 
 Page({
     data: {
         reportUrl: '',
     },
 
-    saveFile() {
-        Protocol.downloadFile({url: this.data.reportUrl}).then(res => {
-            const tempFilePath = res.tempFilePath;
-            this.saveToLocal(tempFilePath);
-        });
+   async saveFile() {
+       const {tempFilePath} = await Protocol.downloadFile({url: this.data.reportUrl});
+       this.saveToLocal(tempFilePath);
 
     },
     imageLoadSuccess(e) {

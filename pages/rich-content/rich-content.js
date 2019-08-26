@@ -97,7 +97,7 @@ Page({
             detailed: detailed
         })
     },
-    uploadBaseInfo() {
+    async uploadBaseInfo() {
         if (this.data.count > 100) {
             Toast.showText('字符超出限制');
             return;
@@ -111,20 +111,25 @@ Page({
                 promise = Protocol.uploadGatherRoutineFile;
             }
             const userInfo = this.selectComponent('#switchMemberView').getUserInfo();
-            promise({
-                filePath: this.filePath,
-                symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
-                record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
-                relevanceId: userInfo.isMainMember ? '' : userInfo.memberId,
-            }).then(data => {
-                if (!data.result) {
-                    throw new Error();
+            try {
+                const {result} = await promise({
+                    filePath: this.filePath,
+                    symptom: this.data.ill.filter(item => item.value).map(item => item.text).join(','),
+                    record: this.data.detailed.filter(item => item.value).map(item => item.text).join(',') + (this.data.text || ''),
+                    relevanceId: userInfo.isMainMember ? '' : userInfo.memberId,
+                });
+
+                if (!result) {
+                    throw new Error('接收到的dataId是空！');
                 }
-                HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: data.result});
-            }).catch(res => {
-                console.error(res);
+                HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: result});
+            } catch (e) {
+                console.error(e);
                 Toast.showText('服务器异常，请稍后重试');
-            }).finally(Toast.hiddenLoading);
+            } finally {
+                Toast.hiddenLoading();
+            }
+
         } else {
             Toast.showText('心电数据上传异常\n请重新检测');
         }
