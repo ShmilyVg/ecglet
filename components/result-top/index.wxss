@@ -70,7 +70,6 @@
     color:rgba(91,91,91,1);
     margin-bottom: 48rpx;
     align-self: center;
-    margin-right: 50rpx;
 }
 
 .result-item-line{
