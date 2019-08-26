@@ -7,6 +7,8 @@ import * as Tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 
 const app = getApp();
+
+
 Page({
     data: {
         logs: [],
@@ -24,34 +26,23 @@ Page({
     },
 
     async onShow() {
-        let userInfo = app.globalData.currentMember;
-        console.log('切换成员：', userInfo);
         const {result: {isShow}} = await Protocol.getRelativesGetToolTip({});
-        this.setData({
-            bottomViewIsHidden: !isShow,
-        });
 
+        let userInfo = app.globalData.currentMember;
+        let isNormalMember = true;
         if (userInfo.relevanceId) {
-            this.setData({
-                userInfo: userInfo,
-                isNormalMember: false,
-                rightChoseIsLeft: true,
-                trendRightChoseIsLeft: true,
-                name: Tools.HandleShortName(userInfo.nickName),
-                logs: []
-            });
-            this.getMainList({page: 1, recorded: true});
+            isNormalMember = false
         } else {
-            const {userInfo} = await UserInfo.get();
-            const name = Tools.HandleShortName(userInfo.nickName);
-            this.setData({
-                userInfo, name, logs: [],
-                isNormalMember: true,
-                rightChoseIsLeft: true,
-                trendRightChoseIsLeft: true,
-            });
-            this.getMainList({page: 1, recorded: true});
+            const norMember = await UserInfo.get();
+            userInfo = norMember.userInfo;
         }
+        const name = Tools.HandleShortName(userInfo.nickName);
+        this.setData({
+            userInfo, name, logs: [], isNormalMember,
+            rightChoseIsLeft: true, trendRightChoseIsLeft: true,
+            bottomViewIsHidden: !isShow
+        });
+        this.getMainList({page: 1, recorded: true});
     },
 
     async getMainList({page = 1, recorded = false}) {
@@ -60,7 +51,7 @@ Page({
         if (!this.data.isNormalMember) {
             data = {data: {page, relevanceId: this.data.userInfo.relevanceId}}
         }
-        let {result: {dataList: list}} = await Protocol.getHistoryList({data})
+        let {result: {dataList: list}} = await Protocol.getHistoryList({data});
         if (list.length) {
             list.forEach((item) => {
                 const {date, time} = createDateAndTime(parseInt(item.created_timestamp));
