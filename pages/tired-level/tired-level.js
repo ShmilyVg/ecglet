@@ -12,33 +12,31 @@ Page({
         ],
         lineNum: [25, 50, 75]
     },
-    onLoad(options) {
+    async onLoad(options) {
         console.log(options);
         this.dataId = options.dataId;
-        Protocol.getRmssdInterval({id: this.dataId}).then(data => {
-            const {result, result: {level, title}} = data;
-            let fre = parseInt(level) || 1, icon = '', position = 0;//iconWidth=2 是2%的意思
-            if (fre === 1) {
-                position = '6.5%';
-                icon = 'pl1';
-            } else if (fre === 2) {
-                position = '30.5%';
-                icon = 'pl2';
-            } else if (fre === 3) {
-                position = '56.5%';
-                icon = 'pl3';
-            } else {
-                position = '81.5%';
-                icon = 'pl4';
-            }
+        const {result, result: {level, title}} = await Protocol.getRmssdInterval({id: this.dataId});
+        let fre = parseInt(level) || 1, icon = '', position = 0;//iconWidth=2 是2%的意思
+        if (fre === 1) {
+            position = '6.5%';
+            icon = 'pl1';
+        } else if (fre === 2) {
+            position = '30.5%';
+            icon = 'pl2';
+        } else if (fre === 3) {
+            position = '56.5%';
+            icon = 'pl3';
+        } else {
+            position = '81.5%';
+            icon = 'pl4';
+        }
 
-            this.setData({
-                position,
-                icon,
-                result
-            });
-            wx.setNavigationBarTitle({title: '心脏负荷评估'});
+        this.setData({
+            position,
+            icon,
+            result
         });
+        wx.setNavigationBarTitle({title: '心脏负荷评估'});
     },
 
 })

@@ -12,33 +12,32 @@ Page({
         ],
         lineNum: [1, 3, 6]
     },
-    onLoad(options) {
+    async onLoad(options) {
         console.log(options);
         this.dataId = options.dataId;
-        Protocol.getMoodInterval({id: this.dataId}).then(data => {
-            const {result, result: {level, title}} = data;
-            let fre = parseInt(level) || 0, icon = '', position = 0;//iconWidth=2 是2%的意思
-            if (fre === 1) {
-                position = '6.5%';
-                icon = 'xf1';
-            } else if (fre === 2) {
-                position = '30.5%';
-                icon = 'xf2';
-            } else if (fre === 3) {
-                position = '56.5%';
-                icon = 'xf3';
-            } else {
-                position = '81.5%';
-                icon = 'xf4';
-            }
+        const {result, result: {level, title}} = await Protocol.getMoodInterval({id: this.dataId});
+        let fre = parseInt(level) || 0, icon = '', position = 0;//iconWidth=2 是2%的意思
+        if (fre === 1) {
+            position = '6.5%';
+            icon = 'xf1';
+        } else if (fre === 2) {
+            position = '30.5%';
+            icon = 'xf2';
+        } else if (fre === 3) {
+            position = '56.5%';
+            icon = 'xf3';
+        } else {
+            position = '81.5%';
+            icon = 'xf4';
+        }
 
-            this.setData({
-                position,
-                icon,
-                result
-            });
-            wx.setNavigationBarTitle({title: '心脏负荷评估'});
+        this.setData({
+            position,
+            icon,
+            result
         });
+        wx.setNavigationBarTitle({title: '心脏负荷评估'});
+
     },
 
 })
