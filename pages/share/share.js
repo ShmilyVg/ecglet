@@ -13,25 +13,27 @@ Page({
         isFinish: false
     },
 
-    onLoad(options) {
+    async onLoad(options) {
         getApp().globalData.options.query = options;
         let memberId = options.memberId;
         console.log('家人id：', memberId);
-        Protocol.getRelativesInfo({memberId}).then((res) => {
+        try {
+            const {result} = await Protocol.getRelativesInfo({memberId});
             this.setData({
-                userInfo: res.result,
+                userInfo: result,
                 memberId: memberId,
                 isFollow: true,
             });
             this.getList({});
-        }).catch((res) => {
-            if (res.data.code == 0) {
+        } catch (e) {
+            if (e.data.code == 0) {
                 console.log('未关注');
                 this.setData({
                     isFinish: true
                 })
             }
-        });
+        }
+
     },
 
 
@@ -48,11 +50,12 @@ Page({
         this.getList({page: ++this.data.page});
     },
 
-    getList({page = 1, recorded = false}) {
+    async getList({page = 1, recorded = false}) {
         let memberId = this.data.memberId;
         Toast.showLoading();
-        Protocol.getRelativesList({memberId, page}).then((data) => {
-            let list = data.result.dataList;
+        try {
+            const {result: {dataList}} = await Protocol.getRelativesList({memberId, page});
+            let list = dataList;
             if (list.length) {
                 list.forEach((item) => {
                     const {date, time} = createDateAndTime(parseInt(item.created_timestamp));
@@ -73,10 +76,12 @@ Page({
                     isFinish: true
                 })
             }
-        }).finally(() => {
+        } catch (e) {
+            console.error(e);
+        } finally {
             Toast.hiddenLoading();
             wx.stopPullDownRefresh();
-        });
+        }
     },
 
     noFollow() {

@@ -1,10 +1,10 @@
 import UserInfo from '../../apis/network/userInfo.js';
+import * as tools from "../../utils/tools";
 import {dealAuthUserInfo, MyUsed} from "../../utils/tools";
 import WXDialog from "../../base/heheda-common-view/dialog";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {RandomRemindData} from "../../utils/tips";
-import * as tools from "../../utils/tools";
 
 const app = getApp();
 Page({
@@ -26,50 +26,53 @@ Page({
         }
     },
 
-   async onShow() {
+    async onShow() {
         app.clearAllArrhythTimer();
-        UserInfo.get().then((res) => {
-            let name = tools.HandleShortName(res.userInfo.nickName);
-            this.setData({
-                userInfo: res.userInfo,
-                name: name
-            })
+        const {userInfo, userInfo: {nickName}} = await UserInfo.get();
+        let name = tools.HandleShortName(nickName);
+        this.setData({
+            userInfo,
+            name: name
         })
     },
 
-    toNormalTestPage() {
+    async toNormalTestPage() {
         console.log('按钮toNormalTestPage点击了');
-        Protocol.checkHaveNetwork().then(() => {
+        try {
+            await Protocol.checkHaveNetwork();
             console.log('将要进入采集页面');
             HiNavigator.navigateToArrhyth();
-        }).catch((res) => {
-            console.log('进入采集页面失败', res);
+        } catch (e) {
+            console.log('进入采集页面失败', e);
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
-        });
+        }
     },
-    to02TestPage() {
-        Protocol.checkHaveNetwork().then(() => {
+    async to02TestPage() {
+        try {
+            await Protocol.checkHaveNetwork();
             HiNavigator.navigateToArrhyth({type: 2});
-        }).catch(() => {
+        } catch (e) {
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
-        })
+        }
     },
 
-    onGotUserInfoNormalTest(e) {
-        dealAuthUserInfo(e).then((res) => {
-            this.setData({userInfo: res.userInfo});
+    async onGotUserInfoNormalTest(e) {
+        try {
+            const {userInfo} = await dealAuthUserInfo(e);
+            this.setData({userInfo});
             HiNavigator.navigateToArrhyth();
-        }).catch((res) => {
-            console.log(res);
-        });
+        } catch (e) {
+            console.error(e);
+        }
     },
-    onGotUserInfo02Test(e) {
-        dealAuthUserInfo(e).then((res) => {
-            this.setData({userInfo: res.userInfo});
+    async onGotUserInfo02Test(e) {
+        try {
+            const {userInfo} = await dealAuthUserInfo(e);
+            this.setData({userInfo});
             HiNavigator.navigateToArrhyth({type: 2});
-        }).catch((res) => {
-            console.log(res);
-        });
+        } catch (e) {
+            console.error(e);
+        }
     },
 
     toHeartHealthPage() {
