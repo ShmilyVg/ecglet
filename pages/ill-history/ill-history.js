@@ -131,8 +131,9 @@ Page({
                 await Protocol.accountUpdate(data);
                 data.age = tools.jsGetAge(data.birthday);
                 const userInfo = await UserInfo.get().userInfo;
-                delete userInfo.relevanceId;
-                UserInfo.set({...userInfo, ...data, diseaseNull: 0});
+                let allUserInfo = {...userInfo, ...data, diseaseNull: 0};
+                delete allUserInfo.relevanceId;
+                UserInfo.set(allUserInfo);
                 getApp().globalData.editMember = {};
             } else {
                 await Protocol.memberRelevanceUpdate(data);
