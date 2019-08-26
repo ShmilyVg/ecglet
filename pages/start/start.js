@@ -10,7 +10,6 @@ const app = getApp();
 Page({
     data: {
         userInfo: {},
-        isConnected: true,
         isFirstUsed: true,
     },
 
@@ -27,14 +26,8 @@ Page({
         }
     },
 
-    onShow() {
+   async onShow() {
         app.clearAllArrhythTimer();
-        Protocol.checkHaveNetwork().then(() => {
-            this.setData({isConnected: true});
-        }).catch(() => {
-            this.setData({isConnected: false});
-        });
-        this.setData({isConnected: getApp().globalData.isConnected});
         UserInfo.get().then((res) => {
             let name = tools.HandleShortName(res.userInfo.nickName);
             this.setData({
@@ -61,15 +54,8 @@ Page({
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
         })
     },
-    onNetworkStatusChanged(res) {
-        this.setData({isConnected: res.isConnected});
-    },
-    onNoNetworkConnected() {
-        console.log('onNoNetworkConnected', this.data.isConnected);
-        WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
-    },
+
     onGotUserInfoNormalTest(e) {
-        console.log('onGotUserInfoNormalTest isConnected=', this.data.isConnected);
         dealAuthUserInfo(e).then((res) => {
             this.setData({userInfo: res.userInfo});
             HiNavigator.navigateToArrhyth();
@@ -78,7 +64,6 @@ Page({
         });
     },
     onGotUserInfo02Test(e) {
-        console.log('onGotUserInfo02Test isConnected=', this.data.isConnected);
         dealAuthUserInfo(e).then((res) => {
             this.setData({userInfo: res.userInfo});
             HiNavigator.navigateToArrhyth({type: 2});
