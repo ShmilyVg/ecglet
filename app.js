@@ -46,15 +46,15 @@ App({
         console.log('App.js onShow options', options);
     },
 
-    doLogin() {
+    async doLogin() {
         console.log('doLogin');
         Toast.showLoading();
-        Login.doLogin().then((data) => {
-            return UserInfo.get();
-        }).then((res) => {
-            console.log('app getUserInfo', res);
+        try {
+            await Login.doLogin()
+            const {userInfo} = await UserInfo.get()
+            console.log('app getUserInfo', userInfo);
             wx.setStorageSync('isRegister', true);
-            const {phone, birthday, height, weight} = res.userInfo;
+            const {phone, birthday, height, weight} = userInfo;
             if (!wx.getStorageSync('phoneNumber')) {
                 wx.setStorageSync('phoneNumber', res.userInfo.phone || '');
             }
@@ -67,12 +67,16 @@ App({
             } else {
                 this.onLoginSuccess && this.onLoginSuccess();
             }
-        }).catch((res) => {
+
+        } catch (res) {
             console.log('app.js login fail', res);
             if (res && res.data && res.data.code === 2) {
                 HiNavigator.relaunchToWelcome();
             }
-        }).finally(Toast.hiddenLoading);
+        } finally {
+            Toast.hiddenLoading();
+        }
+
     },
 
     globalData: {
