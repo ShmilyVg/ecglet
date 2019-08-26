@@ -1,5 +1,5 @@
 import Toast from "../../utils/toast";
-import {getFormatDate} from "../../utils/tools";
+import {getFormatDate, userInfoEmptyTip} from "../../utils/tools";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import ChooseImage from "../../components/choose-image/chooseImage";
 
@@ -67,35 +67,10 @@ Page({
     },
 
     onSubmit() {
-        if (this.submitHandleErr()) {
+        if (userInfoEmptyTip(this.data)) {
             getApp().globalData.editMember = this.data;
             HiNavigator.navigateToIllHistory({});
         }
-    },
-
-    submitHandleErr() {
-        const {nickName, phone, birthday, height, weight} = this.data;
-        let res = false;
-        if (!nickName || nickName.length === 0) {
-            Toast.showText('请填写完整信息');
-        } else if (!phone || phone.length !== 11) {
-            if (!phone || phone.length === 0) {
-                Toast.showText('请填写手机号');
-            } else if (!phone || phone.length > 0) {
-                Toast.showText('手机号格式错误');
-            }
-        } else if (!/^\d+$/.test(phone)) {
-            Toast.showText('手机号格式错误');
-        } else if (!birthday || birthday === '请选择出生日期' || birthday === "") {
-            Toast.showText('请选择出生日期');
-        } else if (!height || !height.trim()) {
-            Toast.showText('请填写身高');
-        } else if (!weight || !weight.trim()) {
-            Toast.showText('请填写体重');
-        } else {
-            res = true
-        }
-        return res;
     },
 
     chooseImage() {
