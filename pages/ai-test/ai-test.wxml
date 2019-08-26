@@ -1,7 +1,0 @@
-<view class="flex-column fill-width">
-    <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
-
-</view>
-
-
-<button style="position: fixed;bottom: 0;left: 0;" bindtap="onTap">选择文件</button>
