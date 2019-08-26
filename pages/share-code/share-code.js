@@ -6,15 +6,14 @@ import Protocol from "../../apis/network/protocol";
 Page({
     data: {},
 
-    onLoad() {
-        Protocol.getQRCode({}).then((res) => {
-            drawQrcode({
-                width: 244,
-                height: 244,
-                canvasId: 'myQrcode',
-                text: res.result.QRCodeUrl
-            });
-        })
+    async onLoad() {
+        const {result: {QRCodeUrl}} = await Protocol.getQRCode({});
+        drawQrcode({
+            width: 244,
+            height: 244,
+            canvasId: 'myQrcode',
+            text: QRCodeUrl
+        });
     },
 
     saveCanvas() {
