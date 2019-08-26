@@ -96,7 +96,7 @@ Page({
 
     onSubmit() {
         if (userInfoEmptyTip(this.data)) {
-            getApp().globalData.editMember = this.data;
+            getApp().globalData.editMember = {...this.data, isNormalMember: true};
             HiNavigator.navigateToIllHistory({isFirstInto: true});
         }
     },

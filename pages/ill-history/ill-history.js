@@ -128,7 +128,6 @@ Page({
             if (data.isNewMember) {
                 await Protocol.accountCreate(data);
             } else if (data.isNormalMember) {
-                delete data.relevanceId;
                 await Protocol.accountUpdate(data);
                 data.age = tools.jsGetAge(data.birthday);
                 const userInfo = await UserInfo.get().userInfo;
@@ -140,10 +139,10 @@ Page({
                     getApp().globalData.currentMember = data
                 }
             }
+            this.editFinish();
         } catch (e) {
             this.editErr(e.data.code);
         } finally {
-            this.editFinish();
             Toast.hiddenLoading();
         }
     },
