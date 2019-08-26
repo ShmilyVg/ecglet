@@ -1,4 +1,8 @@
 
+.cell {
+  width: 70%;
+}
+
 .new-user-edit-remind-big{
   font-size:44rpx;
   font-family:PingFang-SC-Regular;
