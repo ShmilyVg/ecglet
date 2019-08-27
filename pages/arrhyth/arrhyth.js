@@ -121,16 +121,7 @@ Page({
                 }
 
             } else {
-                console.log("设备连接成功...")
 
-                // await wx.hideLoading()
-                that.hideLoading()
-
-                // 每次重新连接，采集数据缓存清空一次
-                that.waveData = undefined
-
-                // 计时开始
-                this.arrhythStateManager.prepare();
             }
         } catch (err) {
             console.log("onDeviceConnected error -- %o", err)
@@ -274,6 +265,16 @@ Page({
                     //         serviceId: matchServices[0].uuid
                     //     });
                     // }
+                    console.log("设备连接成功...")
+
+                    // await wx.hideLoading()
+                    that.hideLoading()
+
+                    // 每次重新连接，采集数据缓存清空一次
+                    that.waveData = undefined
+
+                    // 计时开始
+                    this.arrhythStateManager.prepare();
                 })
                     // .then(characteristics => {
                     //     console.log('电量 getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
