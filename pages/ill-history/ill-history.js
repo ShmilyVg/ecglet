@@ -44,11 +44,8 @@ Page({
 
     onLoad(option) {
         let userInfo = getApp().globalData.editMember;
-        if (option.isFirstInto != 'false') {
-            this.setData({
-                isFirstInto: option.isFirstInto
-            });
-        }
+        const isFirstInto = !!parseInt(option.isFirstInto);
+        this.setData({isFirstInto});
 
         if (userInfo.isNewMember) {
             return;
@@ -131,7 +128,6 @@ Page({
                 await Protocol.accountUpdate(data);
                 data.age = tools.jsGetAge(data.birthday);
                 const userInfo = await UserInfo.get().userInfo;
-                delete userInfo.relevanceId;
                 UserInfo.set({...userInfo, ...data, diseaseNull: 0});
                 getApp().globalData.editMember = {};
             } else {
@@ -140,10 +136,10 @@ Page({
                     getApp().globalData.currentMember = data
                 }
             }
+            this.editFinish();
         } catch (e) {
             this.editErr(e.data.code);
         } finally {
-            this.editFinish();
             Toast.hiddenLoading();
         }
     },

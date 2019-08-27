@@ -55,9 +55,9 @@ Page({
                 phone: wx.getStorageSync('phoneNumber'),
                 isPhoneNotAuth: this.isPhoneNotAuth()
             });
-
         }
     },
+
     onNameChange(e) {
         this.setData({
             nickName: e.detail.value
@@ -96,8 +96,8 @@ Page({
 
     onSubmit() {
         if (userInfoEmptyTip(this.data)) {
-            getApp().globalData.editMember = this.data;
-            HiNavigator.navigateToIllHistory({isFirstInto: true});
+            getApp().globalData.editMember = {...this.data, isNormalMember: true};
+            HiNavigator.navigateToIllHistory({isFirstInto: 1});
         }
     },
 
