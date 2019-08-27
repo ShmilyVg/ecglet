@@ -264,32 +264,32 @@ Page({
                     }
                 }).then(res => {
                     console.log('notifyBLECharacteristicValueChange result: ' + res.errMsg)
-                    matchServices = tempServices.filter(v => {
-                        return v.uuid.includes('0000180F');
-                    });
-                    if (matchServices.length > 0) {
-
-                        return getBLEDeviceCharacteristics({
-                            deviceId: selectDeviceId,
-                            serviceId: matchServices[0].uuid
-                        });
-                    }
+                    // matchServices = tempServices.filter(v => {
+                    //     return v.uuid.includes('0000180F');
+                    // });
+                    // if (matchServices.length > 0) {
+                    //
+                    //     return getBLEDeviceCharacteristics({
+                    //         deviceId: selectDeviceId,
+                    //         serviceId: matchServices[0].uuid
+                    //     });
+                    // }
                 })
-                    .then(characteristics => {
-                        console.log('电量 getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
-
-                        characteristics.characteristics.forEach(v => {
-                            console.log('电量 characteristic: ' + v.uuid + ', properties: ' + v.properties)
-                        });
-                        this.batteryServiceObj = {
-                            isUpdating: false,
-                            batteryCharacteristics: characteristics.characteristics.filter(v => {
-                                return v.uuid.includes('2A19');
-                            }),
-                            selectDeviceId,
-                            matchServices: matchServices
-                        };
-                    })
+                    // .then(characteristics => {
+                    //     console.log('电量 getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
+                    //
+                    //     characteristics.characteristics.forEach(v => {
+                    //         console.log('电量 characteristic: ' + v.uuid + ', properties: ' + v.properties)
+                    //     });
+                    //     this.batteryServiceObj = {
+                    //         isUpdating: false,
+                    //         batteryCharacteristics: characteristics.characteristics.filter(v => {
+                    //             return v.uuid.includes('2A19');
+                    //         }),
+                    //         selectDeviceId,
+                    //         matchServices: matchServices
+                    //     };
+                    // })
                     .catch(error => {
                         console.log('error: %o', error)
                     })
@@ -433,23 +433,23 @@ Page({
             }
             if (count <= maxCount) {
                 circle.drawCircle(count);
-                if (count > finalBatteryCount) {
-                    const {isUpdating} = that.batteryServiceObj;
-                    if (!isUpdating) {
-                        const {batteryCharacteristics, selectDeviceId, matchServices} = that.batteryServiceObj;
-                        that.batteryServiceObj.isUpdating = true;
-                        if (batteryCharacteristics.length > 0) {
-                            that.data.tempTimestamp = Date.now();
-                            notifyBLECharacteristicValueChange({
-                                deviceId: selectDeviceId,
-                                serviceId: matchServices[0].uuid,
-                                characteristicId: batteryCharacteristics[0].uuid,
-                                state: true
-                            })
-                        }
-                    }
-
-                }
+                // if (count > finalBatteryCount) {
+                //     const {isUpdating} = that.batteryServiceObj;
+                //     if (!isUpdating) {
+                //         const {batteryCharacteristics, selectDeviceId, matchServices} = that.batteryServiceObj;
+                //         that.batteryServiceObj.isUpdating = true;
+                //         if (batteryCharacteristics.length > 0) {
+                //             that.data.tempTimestamp = Date.now();
+                //             notifyBLECharacteristicValueChange({
+                //                 deviceId: selectDeviceId,
+                //                 serviceId: matchServices[0].uuid,
+                //                 characteristicId: batteryCharacteristics[0].uuid,
+                //                 state: true
+                //             })
+                //         }
+                //     }
+                //
+                // }
             } else if (count > maxCount) {
                 that.data.count = 0;
                 app.clearAllArrhythTimer();
