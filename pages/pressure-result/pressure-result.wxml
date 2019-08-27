@@ -14,7 +14,7 @@
     <view class="line-1" wx:if="{{index}}"></view>
     <view class="flex-column cell align-items-center">
         <view class="flex-row" style="width: 100%;justify-content: space-between">
-            <view class="flex-row align-items-center" style="height: 90rpx">
+            <view class="flex-row align-items-center" style="">
                 <view class="flex-column">
                 <view class="flex-row">
                     <view class="cell-title">{{item.title}}</view>

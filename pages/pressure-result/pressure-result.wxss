@@ -41,7 +41,7 @@ page {
     font-family:PingFang-SC-Regular;
     font-weight:400;
     color:rgba(113,142,160,1);
-    line-height:32rpx;
+    line-height:38rpx;
     margin-top: 26rpx;
 }
 
