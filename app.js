@@ -20,7 +20,7 @@ App({
         wx.onNetworkStatusChange(async (res) => {
             console.log('网络状态变更', res);
             this.globalData.isConnected = res.isConnected;
-            await notifyCurrentPage({eventName: 'onNetworkStatusChanged', eventValue: res});
+            await notifyCurrentPage({name: 'onNetworkStatusChanged', value: res});
 
         });
         if (!this.globalData.options.query.withoutLogin) {
@@ -58,11 +58,11 @@ App({
 
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
-                await notifyCurrentPage({eventName: 'onLoginSuccess'})
+                await notifyCurrentPage({name: 'onLoginSuccess'})
             } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
                 HiNavigator.relaunchToWelcome();
             } else {
-                await notifyCurrentPage({eventName: 'onLoginSuccess'})
+                await notifyCurrentPage({name: 'onLoginSuccess'})
             }
 
         } catch (res) {

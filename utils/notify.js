@@ -1,30 +1,25 @@
-export async function notifyCurrentPage({eventName, eventValue}) {
+export async function notifyCurrentPage({name, value}) {
     const currentPages = getCurrentPages(), length = currentPages.length;
     if (currentPages && length) {
         const page = currentPages[length - 1], {observers} = page;
         if (observers) {
-            const observer = observers[eventName];
+            const observer = observers[name];
             if (observer) {
-                const currentResult = await observer.call(page, eventValue);
-
+                const currentResult = await observer.call(page, value);
             }
         }
     }
 }
 
-export async function notifyAllPage({eventName, eventValue}) {
+export function notifyAllPage({name, value}) {
     const currentPages = getCurrentPages(), length = currentPages.length;
     if (currentPages && length) {
         for (let page of currentPages.reverse()) {
             const {observers} = page;
             if (observers) {
-                const observer = observers[eventName];
+                const observer = observers[name];
                 if (observer) {
-                    const currentResult = await observer.call(page, eventValue);
-                    if (currentResult && currentResult.deliver) {
-
-                    }
-                    console.error('接收到的结果', typeof currentResult);
+                    observer.call(page, value);
                 }
             }
         }
