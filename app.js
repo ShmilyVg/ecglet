@@ -58,11 +58,11 @@ App({
 
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
-                await notifyCurrentPage({eventName: 'onLoginSuccess', eventValue: {temp: '登录成功了！！！'}})
+                await notifyCurrentPage({eventName: 'onLoginSuccess'})
             } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
                 HiNavigator.relaunchToWelcome();
             } else {
-                await notifyCurrentPage({eventName: 'onLoginSuccess', eventValue: {temp: '登录成功了！！！'}})
+                await notifyCurrentPage({eventName: 'onLoginSuccess'})
             }
 
         } catch (res) {
