@@ -29,14 +29,17 @@
 <view class="decipher-line-height-20"></view>
 
 
-<view class="decipher-content-view flex-column">
-    <view class="flex-row align-items-center">
-        <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
-        <view class="decipher-content-title">改善建议</view>
+<block wx:if="{{result.hipeeSuggest}}">
+    <view class="decipher-content-view flex-column">
+        <view class="flex-row align-items-center">
+            <image class="decipher-item-icon" src="../../images/index-detail/suggest.png"></image>
+            <view class="decipher-content-title">改善建议</view>
+        </view>
+        <view class="decipher-content-text">{{result.hipeeSuggest}}</view>
     </view>
-    <view class="decipher-content-text">{{result.hipeeSuggest}}</view>
-</view>
-<view class="decipher-line-height-20"></view>
+    <view class="decipher-line-height-20"></view>
+</block>
+
 
 <view class="decipher-content-view flex-column">
     <view class="flex-row align-items-center">
