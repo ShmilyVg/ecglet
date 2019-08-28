@@ -28,9 +28,6 @@ Page({
             {
                 value: false, text: '乏力'
             },
-            {
-                value: false, text: '高血压病史'
-            }
         ],
         detailed: [
             {
@@ -47,7 +44,10 @@ Page({
             },
             {
                 value: false, text: '刚进行过剧烈活动'
-            }
+            },
+            {
+                value: false, text: '饮酒'
+            },
         ],
         count: 0,
         text: ''
