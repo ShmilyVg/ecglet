@@ -5,11 +5,11 @@ page {
 }
 
 .title {
-    font-size:38rpx;
+    font-size:40rpx;
     font-weight:500;
     color:rgba(255,255,255,1);
     line-height:53rpx;
-    margin-top: 20rpx;
+    margin-top: 60rpx;
 }
 
 .content {
@@ -65,7 +65,7 @@ page {
 }
 
 .result-top-layout{
-    height: 240rpx;
+    height: 250rpx;
     position: relative;
     overflow: hidden;
 }
@@ -73,7 +73,7 @@ page {
 .result-top-layout::after {
     content: '';
     width: 140%;
-    height: 200rpx;
+    height: 100%;
     position: absolute;
     z-index: -1;
     left: -20%;
@@ -122,7 +122,7 @@ page {
     width: 95rpx;
     height: 95rpx;
     position: relative;
-    margin-top: -100rpx;
+    margin-top: -60rpx;
     border-radius: 50%;
     border-width: 15rpx;
     border-style: solid;

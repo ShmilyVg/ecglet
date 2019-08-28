@@ -92,7 +92,7 @@
     font-weight:400;
     color:rgba(91,91,91,1);
     line-height:46rpx;
-    margin-top: 40rpx;
+    margin-top: 25rpx;
 }
 
 .decipher-suggest-item-title{

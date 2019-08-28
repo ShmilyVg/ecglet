@@ -113,10 +113,6 @@ Page({
                     }
                     that.reset()
                     this.arrhythStateManager.guider();
-                    // await wx.showLoading({
-                    //   title: "等待设备接通...",
-                    //   mask: true
-                    // })
                     that.showLoading()
                 }
 
