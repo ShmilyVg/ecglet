@@ -4,7 +4,7 @@ export async function notifyCurrentPage({name, value}) {
         const page = currentPages[length - 1], {observers} = page;
         if (observers) {
             const observer = observers[name];
-            if (observer) {
+            if (typeof observer === "function") {
                 const currentResult = await observer.call(page, value);
             }
         }
@@ -18,7 +18,7 @@ export function notifyAllPage({name, value}) {
             const {observers} = page;
             if (observers) {
                 const observer = observers[name];
-                if (observer) {
+                if (typeof observer === "function") {
                     observer.call(page, value);
                 }
             }
