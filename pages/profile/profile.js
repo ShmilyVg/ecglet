@@ -9,14 +9,12 @@ Page({
         SoftwareVersion
     },
     events: {
-        onLoginSuccess() {
-
+        async onLoginSuccess() {
+            this.setData({...(await UserInfo.get())});
         }
     },
-    onLoad() {
-        getApp().onLoginSuccess = async () => {
-            this.setData({userInfo: await UserInfo.get()});
-        };
+    async onLoad() {
+
     },
 
     async onShow() {

@@ -9,6 +9,7 @@ import {initAnalysisOnApp} from "./analysis/mta";
 import Toast from "./utils/toast";
 import CommonProtocol from "./apis/network/network/libs/protocol";
 import {SoftwareVersion} from "./utils/config";
+import {notifyCurrentPage} from "./utils/notify";
 
 App({
     onLaunch(options) {
@@ -16,16 +17,11 @@ App({
         console.log('App.js onLaunch options', options);
         // 展示本地存储能力
         initAnalysisOnApp();
-        wx.onNetworkStatusChange((res) => {
+        wx.onNetworkStatusChange(async (res) => {
             console.log('网络状态变更', res);
             this.globalData.isConnected = res.isConnected;
-            const currentPages = getCurrentPages();
-            if (currentPages && currentPages.length) {
-                const pageListener = currentPages[currentPages.length - 1].onNetworkStatusChanged;
-                console.log('页面监听函数', pageListener);
-                pageListener && pageListener(res);
-            }
-            // }
+            await notifyCurrentPage({eventName: 'onNetworkStatusChanged', eventValue: res});
+
         });
         if (!this.globalData.options.query.withoutLogin) {
             this.doLogin();
@@ -52,6 +48,7 @@ App({
         try {
             await Login.doLogin();
             const {userInfo} = await UserInfo.get();
+
             console.log('app getUserInfo', userInfo);
             wx.setStorageSync('isRegister', true);
             const {phone, birthday, height, weight, cardiopathy, diabetes, hypertension} = userInfo;
@@ -61,11 +58,11 @@ App({
 
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
-                this.onLoginSuccess && this.onLoginSuccess();
+                await notifyCurrentPage({eventName: 'onLoginSuccess', eventValue: {temp: '登录成功了！！！'}})
             } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
                 HiNavigator.relaunchToWelcome();
             } else {
-                this.onLoginSuccess && this.onLoginSuccess();
+                await notifyCurrentPage({eventName: 'onLoginSuccess', eventValue: {temp: '登录成功了！！！'}})
             }
 
         } catch (res) {

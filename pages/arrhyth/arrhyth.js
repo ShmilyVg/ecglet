@@ -47,6 +47,25 @@ Page({
         tip: '',
         tipAnimationData: {}
     },
+    isNetworkNotConnected: false,
+    events: {
+        onNetworkStatusChanged(res) {
+            if (!res.isConnected) {
+                if (!this.isNetworkNotConnected) {
+                    this.isNetworkNotConnected = true;
+                    WXDialog.showDialog({
+                        content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
+                            wx.navigateBack({delta: 1});
+                        }
+                    });
+                    this.reset();
+                    this.showLoading();
+                }
+
+            }
+        },
+
+    },
 
     waveData: undefined,
 
@@ -121,23 +140,6 @@ Page({
             }
         } catch (err) {
             console.log("onDeviceConnected error -- %o", err)
-
-        }
-    },
-
-    isNetworkNotConnected: false,
-    onNetworkStatusChanged(res) {
-        if (!res.isConnected) {
-            if (!this.isNetworkNotConnected) {
-                this.isNetworkNotConnected = true;
-                WXDialog.showDialog({
-                    content: '网络断开，请检查网络后重新测试', confirmEvent: () => {
-                        wx.navigateBack({delta: 1});
-                    }
-                });
-                this.reset();
-                this.showLoading();
-            }
 
         }
     },
