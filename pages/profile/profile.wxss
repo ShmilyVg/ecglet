@@ -30,7 +30,6 @@
   text-overflow: ellipsis;
   white-space:nowrap;
   overflow: hidden;
-  margin-top: 25rpx;
   margin-left: 40rpx;
 }
 

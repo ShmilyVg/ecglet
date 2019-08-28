@@ -1,8 +1,8 @@
 <!--<block>-->
     <view class="flex-column">
         <view class="top-image">
-            <view class="fill-width flex-row align-items-center">
-                <view class="flex-row align-items-center" style="margin-top: 48rpx;margin-left: 40rpx">
+            <view class="fill-width flex-row align-items-center" style="margin-top: 48rpx;">
+                <view class="flex-row align-items-center" style="margin-left: 40rpx">
                     <image mode="aspectFill" src="{{userInfo.portraitUrl||'../../images/user.png'}}" class="avatar"></image>
                 </view>
                 <view class="name">{{name}}</view>
