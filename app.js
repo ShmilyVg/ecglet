@@ -50,11 +50,11 @@ App({
         console.log('doLogin');
         Toast.showLoading();
         try {
-            await Login.doLogin()
-            const {userInfo} = await UserInfo.get()
+            await Login.doLogin();
+            const {userInfo} = await UserInfo.get();
             console.log('app getUserInfo', userInfo);
             wx.setStorageSync('isRegister', true);
-            const {phone, birthday, height, weight} = userInfo;
+            const {phone, birthday, height, weight, cardiopathy, diabetes, hypertension} = userInfo;
             if (!wx.getStorageSync('phoneNumber')) {
                 wx.setStorageSync('phoneNumber', phone || '');
             }
@@ -62,7 +62,7 @@ App({
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
                 this.onLoginSuccess && this.onLoginSuccess();
-            } else if (!phone || !birthday || !weight || !height) {
+            } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
                 HiNavigator.relaunchToWelcome();
             } else {
                 this.onLoginSuccess && this.onLoginSuccess();
