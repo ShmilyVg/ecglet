@@ -48,7 +48,7 @@ Page({
         tipAnimationData: {}
     },
     isNetworkNotConnected: false,
-    events: {
+    observers: {
         onNetworkStatusChanged(res) {
             if (!res.isConnected) {
                 if (!this.isNetworkNotConnected) {
@@ -135,8 +135,6 @@ Page({
                     that.showLoading()
                 }
 
-            } else {
-
             }
         } catch (err) {
             console.log("onDeviceConnected error -- %o", err)
@@ -172,7 +170,7 @@ Page({
             }
         );
         console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
-        let selectDeviceId;
+        let selectDeviceId,isConnecting = false;
         try {
             // 设置设备发现监听回调
             wx.onBluetoothDeviceFound(res => {
@@ -201,79 +199,80 @@ Page({
                 let matchServices = [], tempServices = [];
 
                 // 先判断设备是否已经被接通
-                createBLEConnection({deviceId: selectDeviceId}).then(ret => {
-                    console.log('return: ' + ret.errMsg)
-                    // that.setData({ lastDeviceId:  selectDeviceId })
-                    that.data.lastDeviceId = selectDeviceId
+                if (!isConnecting) {
+                    isConnecting = true;
+                    createBLEConnection({deviceId: selectDeviceId}).then(ret => {
+                        console.log('return: ' + ret.errMsg)
+                        // that.setData({ lastDeviceId:  selectDeviceId })
+                        that.data.lastDeviceId = selectDeviceId
 
-                    // await that.onDeviceConnect(true, selectDeviceId)
-                    return getBLEDeviceServices({deviceId: selectDeviceId});
+                        // await that.onDeviceConnect(true, selectDeviceId)
+                        return getBLEDeviceServices({deviceId: selectDeviceId});
 
-                }).then(services => {
-                    console.log('getBLEDeviceServices result: ' + services.errMsg)
-                    tempServices = services.services;
+                    }).then(services => {
+                        console.log('getBLEDeviceServices result: ' + services.errMsg)
+                        tempServices = services.services;
 
-                    tempServices.forEach(v => {
-                        console.log('service: ' + v.uuid + ' isPrimary: ' + v.isPrimary)
-                    })
-
-                    matchServices = tempServices.filter(v => {
-                        return v.uuid.includes('0000FFB1')
-                    })
-                    if (matchServices.length > 0) {
-
-                        return getBLEDeviceCharacteristics({
-                            deviceId: selectDeviceId,
-                            serviceId: matchServices[0].uuid
-                        });
-
-                    } else {
-                        return Promise.reject('do nothing matchServices.length<=0');
-                    }
-                }).then(characteristics => {
-
-                    console.log('getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
-
-                    characteristics.characteristics.forEach(v => {
-                        console.log('characteristic: ' + v.uuid + ', properties: ' + v.properties)
-                    });
-                    let matchCharacteristics = characteristics.characteristics.filter(v => {
-                        return v.uuid.includes('FFB2')
-                    });
-                    if (matchCharacteristics.length > 0) {
-                        return notifyBLECharacteristicValueChange({
-                            deviceId: selectDeviceId,
-                            serviceId: matchServices[0].uuid,
-                            characteristicId: matchCharacteristics[0].uuid,
-                            state: true
+                        tempServices.forEach(v => {
+                            console.log('service: ' + v.uuid + ' isPrimary: ' + v.isPrimary)
                         })
 
-                    } else {
-                        return Promise.reject('do nothing matchCharacteristics.length<=0');
-                    }
-                }).then(res => {
-                    console.log('notifyBLECharacteristicValueChange result: ' + res.errMsg)
-                    // matchServices = tempServices.filter(v => {
-                    //     return v.uuid.includes('0000180F');
-                    // });
-                    // if (matchServices.length > 0) {
-                    //
-                    //     return getBLEDeviceCharacteristics({
-                    //         deviceId: selectDeviceId,
-                    //         serviceId: matchServices[0].uuid
-                    //     });
-                    // }
-                    console.log("设备连接成功...")
+                        matchServices = tempServices.filter(v => {
+                            return v.uuid.includes('0000FFB1')
+                        })
+                        if (matchServices.length > 0) {
 
-                    // await wx.hideLoading()
-                    that.hideLoading()
+                            return getBLEDeviceCharacteristics({
+                                deviceId: selectDeviceId,
+                                serviceId: matchServices[0].uuid
+                            });
 
-                    // 每次重新连接，采集数据缓存清空一次
-                    that.waveData = undefined
+                        } else {
+                            return Promise.reject('do nothing matchServices.length<=0');
+                        }
+                    }).then(characteristics => {
 
-                    // 计时开始
-                    this.arrhythStateManager.prepare();
-                })
+                        console.log('getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
+
+                        characteristics.characteristics.forEach(v => {
+                            console.log('characteristic: ' + v.uuid + ', properties: ' + v.properties)
+                        });
+                        let matchCharacteristics = characteristics.characteristics.filter(v => {
+                            return v.uuid.includes('FFB2')
+                        });
+                        if (matchCharacteristics.length > 0) {
+                            return notifyBLECharacteristicValueChange({
+                                deviceId: selectDeviceId,
+                                serviceId: matchServices[0].uuid,
+                                characteristicId: matchCharacteristics[0].uuid,
+                                state: true
+                            })
+
+                        } else {
+                            return Promise.reject('do nothing matchCharacteristics.length<=0');
+                        }
+                    }).then(res => {
+                        console.log('notifyBLECharacteristicValueChange result: ' + res.errMsg)
+                        // matchServices = tempServices.filter(v => {
+                        //     return v.uuid.includes('0000180F');
+                        // });
+                        // if (matchServices.length > 0) {
+                        //
+                        //     return getBLEDeviceCharacteristics({
+                        //         deviceId: selectDeviceId,
+                        //         serviceId: matchServices[0].uuid
+                        //     });
+                        // }
+                        console.log("设备连接成功...")
+
+                        // await wx.hideLoading()
+                        that.hideLoading()
+
+                        // 每次重新连接，采集数据缓存清空一次
+                        that.waveData = undefined
+                        // 计时开始
+                        this.arrhythStateManager.prepare();
+                    })
                     // .then(characteristics => {
                     //     console.log('电量 getBLEDeviceCharacteristics results: ' + characteristics.errMsg)
                     //
@@ -289,9 +288,12 @@ Page({
                     //         matchServices: matchServices
                     //     };
                     // })
-                    .catch(error => {
-                        console.log('error: %o', error)
-                    })
+                        .catch(error => {
+                            console.log('error: %o', error)
+                        }).finally(()=>{
+                        isConnecting = false;
+                    });
+                }
 
             })
 

@@ -8,9 +8,10 @@ Page({
         userInfo: {},
         SoftwareVersion
     },
-    events: {
+    observers: {
         async onLoginSuccess() {
             this.setData({...(await UserInfo.get())});
+            // return {deliver: true};
         }
     },
     async onLoad() {
