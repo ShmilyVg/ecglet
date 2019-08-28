@@ -82,7 +82,8 @@ function showCanvasView(page, startCountFun) {
     that.data.progressCircle = that.selectComponent('#circle1')
     let circle = that.data.progressCircle
     circle.initCircleData();
-    circle.drawCircleBg(that.data.maxCount);
+    circle.drawCircleBg();
+    circle.drawCircleBg();
     // setTimeout(()=>{
     query.select('#ecg').boundingClientRect((rect) => {
         that.data.ecgPannel = that.selectComponent('#ecg')
