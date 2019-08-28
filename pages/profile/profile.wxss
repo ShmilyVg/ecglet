@@ -1,6 +1,6 @@
 
 .top-image {
-  height: 383rpx;
+  height: 303rpx;
   width: 100%;
   background-color: var(--primaryColor);
 }

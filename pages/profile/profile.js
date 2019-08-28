@@ -8,7 +8,11 @@ Page({
         userInfo: {},
         SoftwareVersion
     },
+    events: {
+        onLoginSuccess() {
 
+        }
+    },
     onLoad() {
         getApp().onLoginSuccess = async () => {
             this.setData({userInfo: await UserInfo.get()});
