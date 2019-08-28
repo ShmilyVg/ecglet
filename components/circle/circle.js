@@ -22,7 +22,7 @@ Component({
      */
     data: {
         period: 50,
-        size: 0,
+        size: 160,
         num: 100,
         rpx: 1,
         ctx: {},
@@ -37,12 +37,9 @@ Component({
         multipleSlot: true
     },
     methods: {
-        initCircleData({radius}) {
-            const data = this.data, myRadius = radius * data.rpx, roundWidth = data.roundWidth,
+        initCircleData() {
+            const data = this.data, myRadius = Math.floor(data.size / 2), roundWidth = data.roundWidth,
                 halfRoundWidth = roundWidth / 2;
-            this.setData({
-                size: 2 * myRadius
-            });
             data.radius = myRadius - halfRoundWidth;//半径
             data.wholeDegree = 2 * Math.PI;//360度
             data.circleX = data.radius + halfRoundWidth;

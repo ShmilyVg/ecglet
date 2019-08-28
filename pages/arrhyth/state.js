@@ -1,4 +1,4 @@
-const WAIT_TIME = 5000, radius = 80;
+const WAIT_TIME = 5000;
 
 export class ArrhythStateManager {
 
@@ -74,10 +74,6 @@ export class ArrhythStateManager {
 
 }
 
-export function getCircleRadius() {
-    return radius;
-}
-
 function showCanvasView(page, startCountFun) {
     let that = page;
 
@@ -85,7 +81,7 @@ function showCanvasView(page, startCountFun) {
 
     that.data.progressCircle = that.selectComponent('#circle1')
     let circle = that.data.progressCircle
-    circle.initCircleData({radius: getCircleRadius()});
+    circle.initCircleData();
     circle.drawCircleBg(that.data.maxCount);
     // setTimeout(()=>{
     query.select('#ecg').boundingClientRect((rect) => {
