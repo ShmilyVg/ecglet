@@ -270,6 +270,7 @@ Page({
 
                         // 每次重新连接，采集数据缓存清空一次
                         that.waveData = undefined
+                        app.clearAllArrhythTimer();
                         // 计时开始
                         this.arrhythStateManager.prepare();
                     })
