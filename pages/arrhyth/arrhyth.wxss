@@ -54,21 +54,17 @@ swiper{
 }
 
 .circle_pannel{
-  /*flex-grow: 1;*/
   /*height: 500rpx;*/
 }
 
 .content-layout{
-  height: 350rpx;
+  height: 180rpx;
   margin-bottom: 20rpx;
   margin-top: 20rpx;
 }
-
 .ecg_pannel {
   flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  align-self: stretch;
+  /*align-self: stretch;*/
 }
 .toast {
   margin-top: 41rpx;

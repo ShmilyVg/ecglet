@@ -23,7 +23,7 @@
       </block>
       <opacity-text wx:else type="{{testType}}" class="flex-row align-items-center justify-center"></opacity-text>
     </view>
-    <ecg id="ecg" class="ecg_pannel" bg="ecg_bg" draw='ecg_draw' bind:finish="onWaveFinish"></ecg>
+    <ecg id="ecg" class="fill-width ecg_pannel"></ecg>
   </view>
 
     <view wx:else class="flex-column align-items-center">
