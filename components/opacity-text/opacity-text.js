@@ -47,7 +47,7 @@ Component({
             this.showOptions = {
                 duration: 800,
                 timingFunction: 'linear',
-                delay: 9000,
+                delay: 8000,
                 transformOrigin: '50% 50% 0'
             };
             this.hiddenOptions = {
