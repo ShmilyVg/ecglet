@@ -141,9 +141,7 @@ Page({
 
         }
     },
-    createMyBLEConnection() {
 
-    },
     onLoad(options) {
         this.arrhythStateManager = new ArrhythStateManager(this);
         // console.log(await wx.getUserInfo())
@@ -174,43 +172,42 @@ Page({
         try {
             // 设置设备发现监听回调
             wx.onBluetoothDeviceFound(res => {
-                const {devices} = res;
-                console.log('Found device: ', devices);
+
 
                 // 先判断是否已经有设备接通，则直接跳过
                 if (that.data.connectingDeviceId.length > 0) {
                     console.log(`设备<${that.data.connectingDeviceId}>已经接通，不再接通新设备或重复连接`)
                     return
                 }
-
-                let matches = devices.filter(v => {
-                    return v.deviceId === that.data.lastDeviceId
-                })
-
-                // 优先连接原设备
-                selectDeviceId = matches.length === 0 ? devices[0].deviceId : matches[0].deviceId;
-                let matchServices = [], tempServices = [];
+                const {devices} = res;
+                console.log('Found device: ', devices);
 
                 // 先判断设备是否已经被接通
                 if (!isConnecting) {
+                    let matches = devices.filter(v => {
+                        return v.deviceId === that.data.lastDeviceId
+                    })
+
+                    // 优先连接原设备
+                    selectDeviceId = matches.length === 0 ? devices[0].deviceId : matches[0].deviceId;
+                    console.log('连接的设备', selectDeviceId, isConnecting);
+                    let matchServices = [], tempServices = [];
+
+
+                    console.log('执行createBLEConnection', selectDeviceId, isConnecting);
                     isConnecting = true;
-
                     createBLEConnection({deviceId: selectDeviceId}).then(ret => {
-                        console.log('return: ' + ret.errMsg)
-                        // that.setData({ lastDeviceId:  selectDeviceId })
-                        that.data.lastDeviceId = selectDeviceId
-
-                        function getMyBLEDeviceServices() {
-                            return getBLEDeviceServices({deviceId: selectDeviceId}).catch(error => {
-                                console.warn('error: getBLEDeviceServices', error);
+                        console.log('return: ' + ret.errMsg, selectDeviceId);
+                        function getMyBLEDeviceServices({deviceId}) {
+                            return getBLEDeviceServices({deviceId}).catch(error => {
+                                console.warn('error: getBLEDeviceServices', error, deviceId);
                                 if (error.errCode === 10004) {
-                                    return getMyBLEDeviceServices();
+                                    return getMyBLEDeviceServices({deviceId});
                                 }
                             });
                         }
 
-                        // await that.onDeviceConnect(true, selectDeviceId)
-                        return getMyBLEDeviceServices();
+                        return getMyBLEDeviceServices({deviceId: selectDeviceId});
 
                     }).then(services => {
                         console.log('getBLEDeviceServices result: ' + services.errMsg)
@@ -224,21 +221,20 @@ Page({
                             return v.uuid.includes('0000FFB1')
                         })
 
-                        function getMyBLEDeviceCharacteristics() {
+                        function getMyBLEDeviceCharacteristics({deviceId}) {
                             return getBLEDeviceCharacteristics({
-                                deviceId: selectDeviceId,
+                                deviceId,
                                 serviceId: matchServices[0].uuid
+                            }).catch(error => {
+                                console.warn('error: getBLEDeviceCharacteristics', error)
+                                if (error.errCode === 10005) {
+                                    return getMyBLEDeviceCharacteristics({deviceId});
+                                }
                             });
                         }
 
                         if (matchServices.length > 0) {
-
-                            return getMyBLEDeviceCharacteristics().catch(error => {
-                                console.warn('error: getBLEDeviceCharacteristics', error)
-                                if (error.errCode === 10005) {
-                                    return getMyBLEDeviceCharacteristics();
-                                }
-                            });
+                            return getMyBLEDeviceCharacteristics({deviceId: selectDeviceId});
 
                         } else {
                             return Promise.reject('do nothing matchServices.length<=0');
@@ -309,6 +305,7 @@ Page({
                             }
                         })
                         .finally(() => {
+                            console.log('执行finally');
                             isConnecting = false;
                         });
                 }
