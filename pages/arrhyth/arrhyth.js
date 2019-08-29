@@ -184,6 +184,7 @@ Page({
 
                 // 先判断设备是否已经被接通
                 if (!isConnecting) {
+                    isConnecting = true;
                     let matches = devices.filter(v => {
                         return v.deviceId === that.data.lastDeviceId
                     })
@@ -195,7 +196,6 @@ Page({
 
 
                     console.log('执行createBLEConnection', selectDeviceId, isConnecting);
-                    isConnecting = true;
                     createBLEConnection({deviceId: selectDeviceId}).then(ret => {
                         console.log('return: ' + ret.errMsg, selectDeviceId);
                         function getMyBLEDeviceServices({deviceId}) {
