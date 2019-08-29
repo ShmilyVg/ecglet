@@ -52,6 +52,10 @@ export class ArrhythStateManager {
         });
     }
 
+    clearPrepareTimeout() {
+        clearTimeout(this._page.prepareTimeoutIndex);
+        clearTimeout(this.connectedStateIndex);
+    }
 
     test() {
 
@@ -93,7 +97,7 @@ function showCanvasView(page, startCountFun) {
         // that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
         that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
         that.data.ecgPannel.preparePannelDark(rect.width, rect.height);
-        setTimeout(() => {
+        that.prepareTimeoutIndex = setTimeout(() => {
             startCountFun && startCountFun();
             that.startCount();
         }, WAIT_TIME);

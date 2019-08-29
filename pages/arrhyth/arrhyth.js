@@ -77,6 +77,7 @@ Page({
     reset() {
         let that = this
         app.clearAllArrhythTimer();
+
         that.data.count = 0;
         that.batteryServiceObj = {};
         // if (that.data.progressCircle) {
@@ -143,7 +144,6 @@ Page({
     },
 
     onLoad(options) {
-        app.clearAllArrhythTimer();
         this.arrhythStateManager = new ArrhythStateManager(this);
         this.arrhythStateManager.guider();
         // console.log(await wx.getUserInfo())
@@ -270,7 +270,7 @@ Page({
 
                         // 每次重新连接，采集数据缓存清空一次
                         that.waveData = undefined
-                        app.clearAllArrhythTimer();
+                        // app.clearAllArrhythTimer();
                         // 计时开始
                         this.arrhythStateManager.prepare();
                     })
@@ -391,6 +391,7 @@ Page({
             // that.hideLoading()
             that.isStartBLEDevices = false;
             that.reset();
+            that.arrhythStateManager.clearPrepareTimeout();
             closeBluetoothAdapter().then(res => {
                 console.log('关闭蓝牙适配: %o', res)
             }).catch(error => {
