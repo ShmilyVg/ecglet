@@ -23,7 +23,7 @@
 
 .cell-hpe{
   height: 25rpx;
-  padding: 50rpx 40rpx;
+  padding: 50rpx 51rpx;
   position: relative;
   display: flex;
   align-items: center;
