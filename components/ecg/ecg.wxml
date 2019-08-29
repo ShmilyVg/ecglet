@@ -6,7 +6,7 @@
 -->
 
 <view class="ecg_box" style="width:{{width}}px;height:{{height}}px">
-  <canvas class="ecg_bg" canvas-id="{{bg}}" style="width:{{width}}px;height:{{height}}px"></canvas>
-  <canvas class="ecg_draw" canvas-id="{{draw}}" style="width:{{width}}px;height:{{height}}px"></canvas>
+  <canvas class="ecg_bg" canvas-id="ecg_bg" style="width:{{width}}px;height:{{height}}px"></canvas>
+  <canvas class="ecg_draw" canvas-id="ecg_draw" style="width:{{width}}px;height:{{height}}px"></canvas>
   <slot></slot>
 </view>

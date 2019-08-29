@@ -13,10 +13,12 @@
 .flex-row{
   display: flex;
   flex-direction: row;
+  -webkit-flex-direction: row;
 }
 
 .flex-column{
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
 }
 
