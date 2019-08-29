@@ -22,7 +22,7 @@ Page({
 
         const isPhoneNotAuth = !userInfo.phone;
 
-        this.setData({birthEndDate, ...userInfo, isPhoneNotAuth})
+        this.setData({birthEndDate, ...userInfo, sex: userInfo.sex === -1 ? 1 : userInfo.sex, isPhoneNotAuth})
     },
 
     isPhoneNotAuth() {
