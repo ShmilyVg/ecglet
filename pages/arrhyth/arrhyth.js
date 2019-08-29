@@ -30,7 +30,6 @@ Page({
         bleStatus: '',
         windowHeight: 0,
         logs: [],
-        deviceList: [],
         lastDeviceId: '',
         connectingDeviceId: '',
         progressCircle: undefined,
@@ -170,19 +169,12 @@ Page({
             }
         );
         console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
-        let selectDeviceId,isConnecting = false;
+        let selectDeviceId, isConnecting = false;
         try {
             // 设置设备发现监听回调
             wx.onBluetoothDeviceFound(res => {
-                console.log('onBluetoothDeviceFound:')
-                res.devices.forEach(device => {
-                    console.log('Found device: ', device)
-                })
-
-                // that.setData({ deviceList: res.devices })
-                that.data.deviceList = res.devices.map(v => {
-                    return v.deviceId
-                })
+                const {devices} = res;
+                console.log('Found device: ', devices);
 
                 // 先判断是否已经有设备接通，则直接跳过
                 if (that.data.connectingDeviceId.length > 0) {
@@ -190,12 +182,12 @@ Page({
                     return
                 }
 
-                let matches = res.devices.filter(v => {
+                let matches = devices.filter(v => {
                     return v.deviceId === that.data.lastDeviceId
                 })
 
                 // 优先连接原设备
-                selectDeviceId = matches.length === 0 ? res.devices[0].deviceId : matches[0].deviceId;
+                selectDeviceId = matches.length === 0 ? devices[0].deviceId : matches[0].deviceId;
                 let matchServices = [], tempServices = [];
 
                 // 先判断设备是否已经被接通
@@ -291,9 +283,13 @@ Page({
                     // })
                         .catch(error => {
                             console.log('error: %o', error)
-                        }).finally(()=>{
-                        isConnecting = false;
-                    });
+                            if (error.errCode === 10004) {
+                                this.data.connectingDeviceId = '';
+                            }
+                        })
+                        .finally(() => {
+                            isConnecting = false;
+                        });
                 }
 
             })
