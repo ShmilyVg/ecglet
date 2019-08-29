@@ -144,7 +144,6 @@ Page({
 
     onLoad(options) {
         this.arrhythStateManager = new ArrhythStateManager(this);
-        this.arrhythStateManager.guider();
         // console.log(await wx.getUserInfo())
         wx.setKeepScreenOn({
             keepScreenOn: true, success: (res) => {
@@ -463,6 +462,7 @@ Page({
     },
     onShow() {
         console.log('onShow... isStartBLEDevices', this.isStartBLEDevices)
+        this.arrhythStateManager.guider();
         if (this.isStartBLEDevices) {
             return;
         }
@@ -493,7 +493,7 @@ Page({
             that.reset()
             that.data.completed = true
             this.isStartBLEDevices = false;
-            this.arrhythStateManager.guider();
+            this.arrhythStateManager.clearConnectedTimeout();
         });
 
     },

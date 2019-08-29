@@ -37,7 +37,7 @@ export class ArrhythStateManager {
     }
 
     prepare() {
-        clearTimeout(this.connectedStateIndex);
+        this.clearConnectedTimeout();
         this._page.setData({
             isGuider: false,
             isConnectedTimeout: false,
@@ -52,9 +52,12 @@ export class ArrhythStateManager {
         });
     }
 
+    clearConnectedTimeout() {
+        clearTimeout(this.connectedStateIndex);
+    }
     clearPrepareTimeout() {
         clearTimeout(this._page.prepareTimeoutIndex);
-        clearTimeout(this.connectedStateIndex);
+        this.clearConnectedTimeout();
     }
 
     test() {
@@ -66,7 +69,7 @@ export class ArrhythStateManager {
     }
 
     connectedFailed() {
-        clearTimeout(this.connectedStateIndex);
+        this.clearConnectedTimeout();
         this._page.onConnectedFailedReason();
         this._page.setData({
             isGuider: true,
