@@ -30,7 +30,9 @@ Component({
                 showDialog: true
             });
         },
-
+        dismiss() {
+            this.setData({showDialog: false});
+        },
         _confirmEvent() {
             console.log('回调_confirmEvent');
             this._cancelEvent();
