@@ -38,7 +38,7 @@ export class ArrhythStateManager {
 
     prepare() {
         this.clearConnectedTimeout();
-        this.remindDialog.dismiss();
+        this.remindDialog && this.remindDialog.dismiss();
         this._page.setData({
             isGuider: false,
             isConnectedTimeout: false,
