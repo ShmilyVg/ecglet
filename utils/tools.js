@@ -37,16 +37,14 @@ export function jsGetAge(strBirthday) {
                 let dayDiff = nowDay - birthDay;//日之差
                 if (dayDiff < 0) {
                     returnAge = ageDiff - 1;
-                }
-                else {
+                } else {
                     returnAge = ageDiff;
                 }
             } else {
                 let monthDiff = nowMonth - birthMonth;//月之差
                 if (monthDiff < 0) {
                     returnAge = ageDiff - 1;
-                }
-                else {
+                } else {
                     returnAge = ageDiff;
                 }
             }
@@ -149,25 +147,25 @@ export function reLoginWithoutLogin() {
 }
 
 export function userInfoEmptyTip({nickName, phone, birthday, height, weight}) {
-        let res = false;
-        if (!nickName || nickName.length === 0) {
-            Toast.showText('请填写完整信息');
-        } else if (!phone || phone.length !== 11) {
-            if (!phone || phone.length === 0) {
-                Toast.showText('请填写手机号');
-            } else if (!phone || phone.length > 0) {
-                Toast.showText('手机号格式错误');
-            }
-        } else if (!/^\d+$/.test(phone)) {
+    let res = false;
+    if (!nickName || nickName.length === 0) {
+        Toast.showText('请填写完整信息');
+    } else if (!phone || phone.length !== 11) {
+        if (!phone || phone.length === 0) {
+            Toast.showText('请填写手机号');
+        } else if (!phone || phone.length > 0) {
             Toast.showText('手机号格式错误');
-        } else if (!birthday || birthday === '请选择出生日期' || birthday === "") {
-            Toast.showText('请选择出生日期');
-        } else if (!height || !height.trim()) {
-            Toast.showText('请填写身高');
-        } else if (!weight || !weight.trim()) {
-            Toast.showText('请填写体重');
-        } else {
-            res = true
         }
-        return res;
+    } else if (!/^\d+$/.test(phone)) {
+        Toast.showText('手机号格式错误');
+    } else if (!birthday || birthday === '请选择出生日期' || birthday === "") {
+        Toast.showText('请选择出生日期');
+    } else if (!height || !height.trim()) {
+        Toast.showText('请填写身高');
+    } else if (!weight || !weight.trim()) {
+        Toast.showText('请填写体重');
+    } else {
+        res = true
+    }
+    return res;
 }

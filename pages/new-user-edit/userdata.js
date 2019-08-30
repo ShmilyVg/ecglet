@@ -36,12 +36,7 @@ Page({
             try {
                 let phoneNumber = await Protocol.getPhoneNum({encryptedData, iv});
                 wx.setStorageSync('phoneNumber', phoneNumber);
-                wx.setStorageSync('isNewUserPhoneAuth', true);
-
-                this.setData({
-                    phone: wx.getStorageSync('phoneNumber'),
-                    isPhoneNotAuth: this.isPhoneNotAuth()
-                });
+                this.handlePhoneNum();
             } catch (e) {
                 console.error(e);
                 Toast.showText('授权手机号失败，请重试');
@@ -50,12 +45,16 @@ Page({
             }
         } else {
             WXDialog.showDialog({content: '因您拒绝授权手机号，可能对后续专业服务造成影响。您可以再次点击进行手动填写', showCancel: false});
-            wx.setStorageSync('isNewUserPhoneAuth', true);
-            this.setData({
-                phone: wx.getStorageSync('phoneNumber'),
-                isPhoneNotAuth: this.isPhoneNotAuth()
-            });
+            this.handlePhoneNum();
         }
+    },
+
+    handlePhoneNum() {
+        wx.setStorageSync('isNewUserPhoneAuth', true);
+        this.setData({
+            phone: wx.getStorageSync('phoneNumber'),
+            isPhoneNotAuth: this.isPhoneNotAuth()
+        });
     },
 
     onNameChange(e) {

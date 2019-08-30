@@ -74,7 +74,7 @@ Page({
     },
 
     async chooseImage() {
-        const image = await ChooseImage.chose()
+        const image = await ChooseImage.chose();
         this.setData({
             portraitUrl: image
         })
