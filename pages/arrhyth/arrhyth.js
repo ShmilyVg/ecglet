@@ -184,6 +184,7 @@ Page({
 
                 // 先判断设备是否已经被接通
                 if (!isConnecting) {
+                    isConnecting = true;
                     let matches = devices.filter(v => {
                         return v.deviceId === that.data.lastDeviceId
                     })
@@ -195,19 +196,9 @@ Page({
 
 
                     console.log('执行createBLEConnection', selectDeviceId, isConnecting);
-                    isConnecting = true;
                     createBLEConnection({deviceId: selectDeviceId}).then(ret => {
                         console.log('return: ' + ret.errMsg, selectDeviceId);
-                        function getMyBLEDeviceServices({deviceId}) {
-                            return getBLEDeviceServices({deviceId}).catch(error => {
-                                console.warn('error: getBLEDeviceServices', error, deviceId);
-                                if (error.errCode === 10004) {
-                                    return getMyBLEDeviceServices({deviceId});
-                                }
-                            });
-                        }
-
-                        return getMyBLEDeviceServices({deviceId: selectDeviceId});
+                        return getBLEDeviceServices({deviceId: selectDeviceId});
 
                     }).then(services => {
                         console.log('getBLEDeviceServices result: ' + services.errMsg)
@@ -221,20 +212,11 @@ Page({
                             return v.uuid.includes('0000FFB1')
                         })
 
-                        function getMyBLEDeviceCharacteristics({deviceId}) {
-                            return getBLEDeviceCharacteristics({
-                                deviceId,
-                                serviceId: matchServices[0].uuid
-                            }).catch(error => {
-                                console.warn('error: getBLEDeviceCharacteristics', error)
-                                if (error.errCode === 10005) {
-                                    return getMyBLEDeviceCharacteristics({deviceId});
-                                }
-                            });
-                        }
-
                         if (matchServices.length > 0) {
-                            return getMyBLEDeviceCharacteristics({deviceId: selectDeviceId});
+                            return getBLEDeviceCharacteristics({
+                                deviceId: selectDeviceId,
+                                serviceId: matchServices[0].uuid
+                            });
 
                         } else {
                             return Promise.reject('do nothing matchServices.length<=0');
@@ -300,8 +282,9 @@ Page({
                     // })
                         .catch(error => {
                             console.log('error: %o', error)
-                            if (error.errCode === 10004) {
+                            if (error.errCode === 10004 || error.errCode === 10005) {
                                 this.data.connectingDeviceId = '';
+                                return closeBLEConnection({deviceId: selectDeviceId});
                             }
                         })
                         .finally(() => {
