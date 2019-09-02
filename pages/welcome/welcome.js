@@ -31,7 +31,7 @@ Page({
         try {
             const {userInfo} = await dealAuthUserInfo(e)
             this.setData({userInfo});
-            HiNavigator.relaunchToNewUserEdit();
+            HiNavigator.redirectToNewUserEdit();
         } catch (e) {
             console.error(e);
         } finally {
