@@ -42,9 +42,9 @@ export default class Protocol {
         return this.getNetworkType().then(res => {
             console.log('当前网络状态', res);
             if (res.networkType === 'none' || res.networkType === 'unknown') {
-                return Promise.reject();
+                return Promise.reject(res);
             } else {
-                return Promise.resolve();
+                return Promise.resolve(res);
             }
         })
     }

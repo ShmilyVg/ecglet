@@ -10,7 +10,8 @@
         </block>
     </swiper>
     <view class="fill-width flex-column align-items-center" style="position: absolute;left: 0;bottom: 40rpx;">
-        <button class="button-radius" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" bindtap="onClick">授权登录</button>
+        <button class="button-radius" bindtap="bindGetUserInfo">授权登录</button>
+<!--        <button class="button-radius" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" bindtap="onClick">授权登录</button>-->
         <view class="welcome-bottom-text">{{currentIndex===items.length-1?'*报告出自“上海交通大学医学院附属仁济医院远程心电诊断中心”':''}}</view>
     </view>
 </view>
