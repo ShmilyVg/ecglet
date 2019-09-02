@@ -59,9 +59,7 @@ Page({
             if (!userInfo.hypertension && !userInfo.cardiopathy && !userInfo.diabetes) {
                 illItem[3].isChose = true;
             }
-            this.setData({
-                illItem: illItem
-            });
+            this.setData({illItem});
         }
     },
 
