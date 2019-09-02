@@ -1,4 +1,5 @@
 import CommonNavigator from "./../../base/heheda-navigator/navigator";
+import {stat} from "../../analysis/mta";
 
 export default class HiNavigator extends CommonNavigator {
     static relaunchToStart() {
@@ -16,9 +17,11 @@ export default class HiNavigator extends CommonNavigator {
     static relaunchToWelcome() {
         this.reLaunch({url: '/pages/welcome/welcome'});
     }
+
     static navigateToWelcome() {
         this.navigateTo({url: '/pages/welcome/welcome'});
     }
+
     static navigateToArrhyth({type = 1} = {}) {
         this.navigateTo({url: '/pages/arrhyth/arrhyth?type=' + type});
     }
@@ -66,11 +69,14 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static navigateToResultPageByType({type, dataId}) {
+        let value = '心脏负荷报告页';
         if (type === 2) {
             this.navigateToHeartPressureResult({dataId});
         } else {
+            value = '常规心电报告页';
             this.navigateToNormalResult({dataId});
         }
+        stat({key: 'click_ecg_jiancebaogao_pdf', value});
     }
 
     static navigateToNormalResult({dataId}) {

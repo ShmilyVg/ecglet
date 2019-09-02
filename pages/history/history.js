@@ -5,6 +5,7 @@ import * as trend from "./view/view/trend";
 import {createDateAndTime} from "../../utils/tools";
 import * as Tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
+import {stat} from "../../analysis/mta";
 
 const app = getApp();
 
@@ -103,6 +104,7 @@ Page({
         if (this.data.rightChoseIsLeft) {
             this.handleRightTopList()
         } else {
+            stat({key: 'click_ecg_jiancejilu_tendency'});
             this.handleRightTopTrend();
         }
     },
