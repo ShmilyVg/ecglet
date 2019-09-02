@@ -68,13 +68,13 @@
 
 .btn{
     width:750rpx;
-    height:110rpx;
+    height:100rpx;
     background:var(--primaryColor);
-    font-size:38rpx;
+    font-size:32rpx;
     font-weight:500;
     color:rgba(255,255,255,1);
     text-align: center;
-    line-height:110rpx;
+    line-height:50rpx;
     position: fixed;
     left: 0;
     bottom: 0;
