@@ -38,7 +38,6 @@ Page({
 
     onShow() {
         this.isNeedRelogin = true;
-        getApp().globalData.refresh = true;
     },
 
     onHide() {

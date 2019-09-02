@@ -54,13 +54,16 @@ Page({
     },
     filePath: '',
     arrhythType: '',
+
     onLoad(options) {
         this.filePath = options.tempFileUrl ? decodeURIComponent(options.tempFileUrl) : '';
         this.arrhythType = options.type;
     },
-    onShow() {
 
+    onShow() {
+        getApp().globalData.refresh = true;
     },
+
     onUnload() {
         wx.setKeepScreenOn({
             keepScreenOn: false, success: (res) => {
