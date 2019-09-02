@@ -79,7 +79,7 @@ App({
     },
 
     isNeedRegister() {
-        return this.globalData.isNeedRegister = true;
+        return this.globalData.isNeedRegister;
     },
 
     globalData: {

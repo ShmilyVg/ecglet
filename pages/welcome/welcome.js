@@ -22,29 +22,15 @@ Page({
         MyUsed.initUsed();
     },
 
-    // onClick() {
-    //     console.log('onClick');
-    //     Toast.showLoading();
-    // },
-    // async bindGetUserInfo(e) {
-    //     console.log(e);
-    //     try {
-    //         const {userInfo} = await dealAuthUserInfo(e)
-    //         this.setData({userInfo});
-    //         HiNavigator.relaunchToNewUserEdit();
-    //     } catch (e) {
-    //         console.error(e);
-    //     } finally {
-    //         Toast.hiddenLoading();
-    //     }
-    //
-    // },
+    onClick() {
+        console.log('onClick');
+        Toast.showLoading();
+    },
     async bindGetUserInfo(e) {
         console.log(e);
-        Toast.showLoading();
         try {
             const {userInfo} = await dealAuthUserInfo(e)
-            // this.setData({userInfo});
+            this.setData({userInfo});
             HiNavigator.relaunchToNewUserEdit();
         } catch (e) {
             console.error(e);
@@ -52,6 +38,9 @@ Page({
             Toast.hiddenLoading();
         }
 
+    },
+    rejectLogin() {
+        HiNavigator.navigateBack({delta: 1});
     },
     onWelcomeItemChanged(e) {
         const {detail: {current}} = e;

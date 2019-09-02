@@ -27,7 +27,9 @@ Page({
             name
         });
     },
-
+    toWelcomePage() {
+        HiNavigator.navigateToWelcome();
+    },
     async toEditInfo() {
         await dealRegister();
         const {userInfo} = await UserInfo.get();
