@@ -42,6 +42,7 @@ Page({
             rightChoseIsLeft: true, trendRightChoseIsLeft: true,
             bottomViewIsHidden: !isShow
         });
+        this.data.page = 1;
         this.getMainList({page: 1, recorded: true});
     },
 
