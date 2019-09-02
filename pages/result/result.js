@@ -26,7 +26,6 @@ Page({
         } finally {
             Toast.hiddenLoading();
         }
-
     },
 
     getTime(timestamp) {
@@ -50,6 +49,7 @@ Page({
 
     onShow() {
         this.isNeedRelogin = true;
+        getApp().globalData.refresh = true;
     },
 
     onUnload() {
