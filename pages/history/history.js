@@ -38,7 +38,7 @@ Page({
         }
         const name = Tools.HandleShortName(userInfo.nickName);
         this.setData({
-            userInfo, name, logs: [], isNormalMember,
+            userInfo, name, isNormalMember,
             rightChoseIsLeft: true, trendRightChoseIsLeft: true,
             bottomViewIsHidden: !isShow
         });
