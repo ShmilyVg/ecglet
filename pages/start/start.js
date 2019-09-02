@@ -5,6 +5,7 @@ import WXDialog from "../../base/heheda-common-view/dialog";
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {RandomRemindData} from "../../utils/tips";
+import {dealRegister} from "../../utils/tools";
 
 const app = getApp();
 Page({
@@ -37,23 +38,12 @@ Page({
     },
 
     async toNormalTestPage() {
-        console.log('按钮toNormalTestPage点击了');
-        try {
-            await Protocol.checkHaveNetwork();
-            console.log('将要进入采集页面');
-            HiNavigator.navigateToArrhyth();
-        } catch (e) {
-            console.log('进入采集页面失败', e);
-            WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
-        }
+        await dealRegister();
+        HiNavigator.navigateToArrhyth();
     },
     async to02TestPage() {
-        try {
-            await Protocol.checkHaveNetwork();
-            HiNavigator.navigateToArrhyth({type: 2});
-        } catch (e) {
-            WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});
-        }
+        await dealRegister();
+        HiNavigator.navigateToArrhyth({type: 2});
     },
 
     async onGotUserInfoNormalTest(e) {
@@ -75,7 +65,8 @@ Page({
         }
     },
 
-    toHeartHealthPage() {
+    async toHeartHealthPage() {
+        await dealRegister();
         HiNavigator.navigateToHeartHealthEvaluation();
     },
 });

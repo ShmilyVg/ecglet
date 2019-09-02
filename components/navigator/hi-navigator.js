@@ -9,10 +9,16 @@ export default class HiNavigator extends CommonNavigator {
         this.reLaunch({url: '/pages/new-user-edit/userdata'});
     }
 
+    static redirectToNewUserEdit() {
+        this.redirectTo({url: '/pages/new-user-edit/userdata'});
+    }
+
     static relaunchToWelcome() {
         this.reLaunch({url: '/pages/welcome/welcome'});
     }
-
+    static navigateToWelcome() {
+        this.navigateTo({url: '/pages/welcome/welcome'});
+    }
     static navigateToArrhyth({type = 1} = {}) {
         this.navigateTo({url: '/pages/arrhyth/arrhyth?type=' + type});
     }

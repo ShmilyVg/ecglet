@@ -52,7 +52,7 @@
     justify-content: center;
     align-items: center;
     width:750rpx;
-    height:110rpx;
+    height:100rpx;
     background:var(--primaryColor);
     font-size:32rpx;
     font-family:PingFang-SC-Medium;

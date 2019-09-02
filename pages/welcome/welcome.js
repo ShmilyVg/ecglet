@@ -29,15 +29,19 @@ Page({
     async bindGetUserInfo(e) {
         console.log(e);
         try {
-            const {userInfo} = await dealAuthUserInfo(e)
+            const {userInfo} = await dealAuthUserInfo(e);
+            getApp().globalData.isNeedRegister = false;
             this.setData({userInfo});
-            HiNavigator.relaunchToNewUserEdit();
+            HiNavigator.redirectToNewUserEdit();
         } catch (e) {
             console.error(e);
         } finally {
             Toast.hiddenLoading();
         }
 
+    },
+    rejectLogin() {
+        HiNavigator.navigateBack({delta: 1});
     },
     onWelcomeItemChanged(e) {
         const {detail: {current}} = e;

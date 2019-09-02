@@ -5,7 +5,8 @@
                 <view class="flex-row align-items-center" style="margin-left: 40rpx">
                     <image mode="aspectFill" src="{{userInfo.portraitUrl||'../../images/user.png'}}" class="avatar"></image>
                 </view>
-                <view class="name">{{name}}</view>
+                <view wx:if="{{name}}" class="name">{{name}}</view>
+                <view wx:else bindtap="toWelcomePage" class="name">点击前往授权</view>
             </view>
         </view>
 

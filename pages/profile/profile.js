@@ -1,6 +1,7 @@
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import * as tools from "../../utils/tools";
+import {dealRegister} from "../../utils/tools";
 import {SoftwareVersion} from "../../utils/config";
 
 Page({
@@ -26,8 +27,11 @@ Page({
             name
         });
     },
-
+    toWelcomePage() {
+        HiNavigator.navigateToWelcome();
+    },
     async toEditInfo() {
+        await dealRegister();
         const {userInfo} = await UserInfo.get();
         getApp().globalData.editMember = userInfo;
         wx.navigateTo({
@@ -36,7 +40,8 @@ Page({
         );
     },
 
-    toMemeberListPage(e) {
+    async toMemeberListPage(e) {
+        await dealRegister();
         HiNavigator.navigateToMemberList({state: 2});
     },
 
@@ -47,7 +52,8 @@ Page({
     clickCell3() {
         wx.navigateTo({url: '../feedback/feedback'})
     },
-    toShareCodePage() {
+    async toShareCodePage() {
+        await dealRegister();
         HiNavigator.navigateToShareCode();
     },
     toKnowledgePage() {
