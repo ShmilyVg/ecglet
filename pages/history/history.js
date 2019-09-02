@@ -25,9 +25,21 @@ Page({
         bottomViewIsHidden: true
     },
 
-    async onShow() {
+    async onLoad() {
         const {result: {isShow}} = await Protocol.getRelativesGetToolTip({});
+        this.setData({bottomViewIsHidden: !isShow});
+        this.handleBaseData();
+    },
 
+    async onShow() {
+        if (getApp().globalData.refresh) {
+            this.handleBaseData();
+            getApp().globalData.refresh = false;
+        }
+    },
+
+
+    async handleBaseData() {
         let userInfo = app.globalData.currentMember;
         let isNormalMember = true;
         if (userInfo.relevanceId) {
@@ -40,7 +52,6 @@ Page({
         this.setData({
             userInfo, name, isNormalMember,
             rightChoseIsLeft: true, trendRightChoseIsLeft: true,
-            bottomViewIsHidden: !isShow
         });
         this.data.page = 1;
         this.getMainList({page: 1, recorded: true});

@@ -61,7 +61,7 @@ App({
                 await notifyCurrentPage({name: 'onLoginSuccess'})
             } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
                 // HiNavigator.relaunchToWelcome();
-                this.globalData.isNeedRegister  = true;
+                this.globalData.isNeedRegister = true;
             } else {
                 await notifyCurrentPage({name: 'onLoginSuccess'})
             }
@@ -70,7 +70,7 @@ App({
             console.log('app.js login fail', res);
             if (res && res.data && res.data.code === 2) {
                 // HiNavigator.relaunchToWelcome();
-                this.globalData.isNeedRegister  = true
+                this.globalData.isNeedRegister = true
             }
         } finally {
             Toast.hiddenLoading();
@@ -91,7 +91,8 @@ App({
         currentMember: {},
         editMember: {},
         countTimer: [],
-        connectedFailedTimer: []
+        connectedFailedTimer: [],
+        refresh: false
     },
 
     addNewArrhythTimer(timer) {
