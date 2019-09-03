@@ -24,3 +24,8 @@ export function initAnalysisOnApp() {
         "statReachBottom": true
     });
 }
+
+export function stat({key, value = {}} = {}) {
+    mta.Event.stat(key, value);
+}
+
