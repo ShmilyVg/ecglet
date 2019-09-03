@@ -133,6 +133,7 @@ Page({
                     let relevanceId = members[index].relevanceId;
                     Protocol.memberRelevanceDel({relevanceId}).then(() => {
                         if (relevanceId == getApp().globalData.currentMember.relevanceId) {
+                            getApp().globalData.refresh = true;
                             getApp().globalData.currentMember = {};
                         }
                         members.splice(index, 1);
@@ -163,6 +164,7 @@ Page({
 
     toTabbarHistory(index) {
         this.saveCurrentMember(index);
+        getApp().globalData.refresh = true;
         wx.switchTab({
             url: '../history/history'
         });

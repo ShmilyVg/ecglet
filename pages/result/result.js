@@ -26,7 +26,6 @@ Page({
         } finally {
             Toast.hiddenLoading();
         }
-
     },
 
     getTime(timestamp) {
