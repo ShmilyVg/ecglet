@@ -25,6 +25,7 @@ export class ArrhythStateManager {
     }
 
     guider() {
+        this.clearPrepareTimeout();
         this._page.setData({
             isGuider: true,//是否是引导页
             isConnectedTimeout: false,//；连接失败页面
