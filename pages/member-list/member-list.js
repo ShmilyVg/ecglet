@@ -1,7 +1,8 @@
 // pages/member-list/member-list.js
 import Protocol from "../../apis/network/protocol";
 import UserInfo from "../../apis/network/network/libs/userInfo";
-import * as Tools from "../../utils/tools";
+import {HandleShortName} from "../../utils/tools";
+import HiNavigator from "../../components/navigator/hi-navigator";
 
 Page({
     data: {
@@ -11,31 +12,20 @@ Page({
     },
 
     onLoad(options) {
-        let state = parseInt(options.state);
+        const state = parseInt(options.state);
         console.log('状态：', state);
         switch (state) {
             case 1:
                 // 检测完成后切换成员进入
-                this.setData({
-                    showTopText: true,
-                    haveMainMember: true,
-                    state: state
-                });
+                this.setData({showTopText: true, haveMainMember: true, state});
                 break;
             case 2:
                 // 我的-成员管理进入
-                this.setData({
-                    showTopText: false,
-                    haveMainMember: false,
-                    state: state
-                });
+                this.setData({state});
                 break;
             case 3:
                 // 检测记录-切换成员进入
-                this.setData({
-                    haveMainMember: true,
-                    state: state
-                });
+                this.setData({haveMainMember: true, state});
                 break;
         }
     },
@@ -48,7 +38,7 @@ Page({
             members.splice(0, 0, userInfo);
         }
         members.map(item => {
-            item.shortName = Tools.HandleShortName(item.nickName);
+            item.shortName = HandleShortName(item.nickName);
         });
         this.setData({members})
     },
@@ -59,7 +49,7 @@ Page({
         switch (this.data.state) {
             case 1:
                 this.saveCurrentMember(index);
-                wx.navigateBack({delta: 1});
+                HiNavigator.navigateBack({});
                 break;
             case 2:
                 this.showSheet(index);
@@ -110,26 +100,18 @@ Page({
             content: '删除成员的同时，该成员下的所有数据也被删除',
             showCancel: true,
             confirmText: '执意删除',
-            success(res) {
+            async success(res) {
                 if (res.confirm) {
                     let members = that.data.members;
-                    let relevanceId = members[index].relevanceId;
-                    Protocol.memberRelevanceDel({relevanceId}).then(() => {
-                        if (relevanceId == getApp().globalData.currentMember.relevanceId) {
-                            getApp().globalData.refresh = true;
-                            getApp().globalData.currentMember = {};
-                        }
-                        members.splice(index, 1);
-                        that.setData({
-                            members: members
-                        });
-                    });
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
+                    const {relevanceId} = members[index];
+                    await Protocol.memberRelevanceDel({relevanceId});
+                    if (relevanceId == getApp().globalData.currentMember.relevanceId) {
+                        getApp().globalData.refresh = true;
+                        getApp().globalData.currentMember = {};
+                    }
+                    members.splice(index, 1);
+                    that.setData({members});
                 }
-            },
-            fail() {
-                console.log('fail');
             }
         });
     },
