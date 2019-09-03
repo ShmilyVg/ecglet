@@ -2,7 +2,7 @@ import Toast from '../../utils/toast';
 import HiNavigator from "../../components/navigator/hi-navigator";
 import Protocol from "../../apis/network/protocol";
 import * as trend from "./view/view/trend";
-import {createDateAndTime} from "../../utils/tools";
+import {createDateAndTime, dealRegister} from "../../utils/tools";
 import * as Tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import {stat} from "../../analysis/mta";
@@ -228,7 +228,8 @@ Page({
         wx.stopPullDownRefresh();
     },
 
-    switchMember() {
+    async switchMember() {
+        await dealRegister();
         HiNavigator.navigateToMemberList({state: 3});
     },
 
