@@ -40,32 +40,17 @@ Page({
         }
     },
 
-    onShow() {
+    async onShow() {
         getApp().globalData.editMember = {};
-        Protocol.memberRelevanceList({}).then((e) => {
-            let members = e.result.dataList;
-            if (this.data.haveMainMember) {
-                UserInfo.get().then(res => {
-                    members.splice(0, 0, res.userInfo);
-                    members = this.handleNameShow(members);
-                    this.setData({
-                        members: members
-                    })
-                })
-            } else {
-                members = this.handleNameShow(members);
-                this.setData({
-                    members: members
-                })
-            }
-        });
-    },
-
-    handleNameShow(members) {
+        let {result: {dataList: members}} = await Protocol.memberRelevanceList({});
+        if (this.data.haveMainMember) {
+            const {userInfo} = await UserInfo.get();
+            members.splice(0, 0, userInfo);
+        }
         members.map(item => {
             item.shortName = Tools.HandleShortName(item.nickName);
         });
-        return members;
+        this.setData({members})
     },
 
     clickCell(e) {
@@ -74,9 +59,7 @@ Page({
         switch (this.data.state) {
             case 1:
                 this.saveCurrentMember(index);
-                wx.navigateBack({
-                    delta: 1
-                });
+                wx.navigateBack({delta: 1});
                 break;
             case 2:
                 this.showSheet(index);
@@ -165,9 +148,7 @@ Page({
     toTabbarHistory(index) {
         this.saveCurrentMember(index);
         getApp().globalData.refresh = true;
-        wx.switchTab({
-            url: '../history/history'
-        });
+        wx.switchTab({url: '../history/history'});
     },
 
     saveCurrentMember(index) {
@@ -175,8 +156,6 @@ Page({
     },
 
     addMember() {
-        wx.navigateTo({
-            url: '../userdata/userdata'
-        })
+        wx.navigateTo({url: '../userdata/userdata'})
     }
 })

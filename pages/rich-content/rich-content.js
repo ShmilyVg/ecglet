@@ -7,47 +7,21 @@ const app = getApp();
 Page({
     data: {
         ill: [
-            {
-                value: false, text: '头疼'
-            },
-            {
-                value: false, text: '胸口疼'
-            },
-            {
-                value: false, text: '紧张/焦虑'
-            },
-            {
-                value: false, text: '眩晕'
-            },
-            {
-                value: false, text: '倦怠'
-            },
-            {
-                value: false, text: '气促'
-            },
-            {
-                value: false, text: '乏力'
-            },
+            {value: false, text: '头疼'},
+            {value: false, text: '胸口疼'},
+            {value: false, text: '紧张/焦虑'},
+            {value: false, text: '眩晕'},
+            {value: false, text: '倦怠'},
+            {value: false, text: '气促'},
+            {value: false, text: '乏力'}
         ],
         detailed: [
-            {
-                value: false, text: '吸烟'
-            },
-            {
-                value: false, text: '经常熬夜'
-            },
-            {
-                value: false, text: '久坐不动'
-            },
-            {
-                value: false, text: '运动锻炼'
-            },
-            {
-                value: false, text: '刚进行过剧烈活动'
-            },
-            {
-                value: false, text: '饮酒'
-            },
+            {value: false, text: '吸烟'},
+            {value: false, text: '经常熬夜'},
+            {value: false, text: '久坐不动'},
+            {value: false, text: '运动锻炼'},
+            {value: false, text: '刚进行过剧烈活动'},
+            {value: false, text: '饮酒'}
         ],
         count: 0,
         text: ''
@@ -77,19 +51,15 @@ Page({
     },
 
     textContent(e) {
-        let {detail: {cursor, value}} = e;
-        this.setData({
-            count: cursor,
-            text: value
-        })
+        let {detail: {cursor: count, value: text}} = e;
+        this.setData({count, text})
     },
+
     clickIll(e) {
         const {target: {dataset: {index}}} = e;
         let ill = this.data.ill;
         ill[index].value = !ill[index].value;
-        this.setData({
-            ill: ill
-        })
+        this.setData({ill})
     },
 
     clickDetailed(e) {
@@ -100,6 +70,7 @@ Page({
             detailed: detailed
         })
     },
+
     async uploadBaseInfo() {
         if (this.data.count > 100) {
             Toast.showText('字符超出限制');
@@ -132,7 +103,6 @@ Page({
             } finally {
                 Toast.hiddenLoading();
             }
-
         } else {
             Toast.showText('心电数据上传异常\n请重新检测');
         }
