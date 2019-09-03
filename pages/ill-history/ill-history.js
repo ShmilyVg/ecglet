@@ -97,10 +97,13 @@ Page({
                 })
             }
         });
-        if (this.data.isFirstInto) {
-            this.saveUserInfo({ill: result});
-        } else if (this.data.haveHistoryIll) {
-            this.saveUserInfoDialog({ill: result})
+
+        if (this.data.haveHistoryIll) {
+            if (this.data.isFirstInto) {
+                this.saveUserInfo({ill: result});
+            } else {
+                this.saveUserInfoDialog({ill: result})
+            }
         } else {
             Toast.showText('请选择是否有病史');
         }

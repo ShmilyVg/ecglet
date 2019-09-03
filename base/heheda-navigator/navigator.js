@@ -7,7 +7,7 @@ export default class CommonNavigator {
         wx.reLaunch({url, success, fail, complete});
     }
 
-    static navigateBack({delta, success, fail, complete}) {
+    static navigateBack({delta = 1, success, fail, complete}) {
         wx.navigateBack({delta, success, fail, complete});
     }
 
