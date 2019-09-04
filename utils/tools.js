@@ -126,11 +126,12 @@ export function dealRegister() {
     return new Promise(async (resolve) => {
         try {
             await Protocol.checkHaveNetwork();
-            if (!getApp().isNeedRegister()) {
-                resolve();
-            } else {
-                HiNavigator.navigateToWelcome();
-            }
+            resolve();
+            // if (!getApp().isNeedRegister()) {
+            //     resolve();
+            // } else {
+            //     HiNavigator.navigateToWelcome();
+            // }
         } catch (e) {
             console.warn('进入页面失败', e);
             WXDialog.showDialog({content: '网络断开，请检查网络后重新测试'});

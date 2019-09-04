@@ -55,13 +55,11 @@ App({
             if (!wx.getStorageSync('phoneNumber')) {
                 wx.setStorageSync('phoneNumber', phone || '');
             }
-            this.globalData.isNeedRegister = false;
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
                 await notifyCurrentPage({name: 'onLoginSuccess'})
             } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
-                // HiNavigator.relaunchToWelcome();
-                this.globalData.isNeedRegister = true;
+                HiNavigator.relaunchToWelcome();
             } else {
                 await notifyCurrentPage({name: 'onLoginSuccess'})
             }
@@ -69,8 +67,7 @@ App({
         } catch (res) {
             console.log('app.js login fail', res);
             if (res && res.data && res.data.code === 2) {
-                // HiNavigator.relaunchToWelcome();
-                this.globalData.isNeedRegister = true
+                HiNavigator.relaunchToWelcome();
             }
         } finally {
             Toast.hiddenLoading();
@@ -78,15 +75,10 @@ App({
 
     },
 
-    isNeedRegister() {
-        return this.globalData.isNeedRegister;
-    },
-
     globalData: {
         options: {query: {withoutLogin: false}},//无需登录即可使用？
         userInfo: {},
         tempGatherResult: {},
-        isNeedRegister: false,
         isConnected: true,
         currentMember: {},
         editMember: {},

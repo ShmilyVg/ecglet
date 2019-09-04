@@ -146,7 +146,6 @@ Page({
     },
 
     editFinish() {
-        getApp().globalData.isNeedRegister = false;
         if (this.data.isFirstInto) {
             HiNavigator.relaunchToStart();
         } else {
