@@ -22,6 +22,10 @@ export default class HiNavigator extends CommonNavigator {
         this.navigateTo({url: '/pages/welcome/welcome'});
     }
 
+    static navigateToInstruction() {
+        this.navigateTo({url: '/pages/instruction/instruction'});
+    }
+
     static navigateToArrhyth({type = 1} = {}) {
         this.navigateTo({url: '/pages/arrhyth/arrhyth?type=' + type});
     }

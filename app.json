@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/start/start",
-    "pages/css-test/css-test",
+    "pages/instruction/instruction",
     "pages/arrhyth/arrhyth",
     "pages/profile/profile",
     "pages/userdata/userdata",

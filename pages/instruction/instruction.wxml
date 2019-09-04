@@ -1,0 +1,22 @@
+<view class="flex-column">
+    <view class="flex-row align-items-center" style="align-self: center;">
+        <image src="../../images/instruction/left.png" style="width: 44rpx;height: 24rpx;"></image>
+        <view class="instruction-title">HiPee心电管家</view>
+        <image src="../../images/instruction/right.png" style="width: 44rpx;height: 24rpx;"></image>
+    </view>
+    <view class="instruction-content">给忙碌者的心脏多一份守护</view>
+    <view class="flex-column box-sizing-border-box" style="padding: 0 63rpx 0 52rpx;">
+        <block wx:for="{{instructionList}}" wx:key="index">
+            <view class="flex-row" style="margin-bottom: 74rpx;">
+                <image src="../../images/instruction/icon0{{index+1}}.png" class="instruction-icon"></image>
+                <view class="flex-column">
+                    <view class="instruction-item-title">{{item.title}}</view>
+                    <text class="instruction-item-content">{{item.content}}</text>
+                </view>
+
+            </view>
+
+        </block>
+    </view>
+    <view class="button-radius" bindtap="toUse">开始使用</view>
+</view>
