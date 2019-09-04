@@ -23,4 +23,4 @@
     </textarea>
 </view>
 
-<view class="flex-row align-items-center justify-center btn" bindtap="uploadBaseInfo">确定</view>
+<cover-view class="btn" style="padding: 26rpx 0;height: auto;" bindtap="uploadBaseInfo">确定</cover-view>
