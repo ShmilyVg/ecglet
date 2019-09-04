@@ -6,7 +6,7 @@
     font-weight:bold;
     color:rgba(34,34,34,1);
     line-height:37rpx;
-    margin: 70rpx 21rpx 23rpx;
+    margin: 0 21rpx 0;
 }
 
 .instruction-content{

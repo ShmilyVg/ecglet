@@ -40,12 +40,16 @@ export class ArrhythStateManager {
     prepare() {
         this.clearConnectedTimeout();
         this.remindDialog && this.remindDialog.dismiss();
+        try{
+            this._page.firstConfirmEvent();
+        }catch (e) {
+            console.warn(e);
+        }
         this._page.setData({
             isGuider: false,
             isConnectedTimeout: false,
             isFilterArrhythData: true
         }, () => {
-
             showCanvasView(this._page, () => {
                 this._page.setData({
                     isFilterArrhythData: false,
