@@ -2,7 +2,7 @@
     <swiper indicator-dots="{{true}}" bindchange="onWelcomeItemChanged"
             autoplay="{{true}}" interval="{{5000}}" duration="{{300}}" indicator-active-color="rgba(163,143,236,1)" indicator-color="rgba(230,227,255,1)">
         <block wx:for="{{items}}" wx:key="path">
-            <swiper-item class="flex-column align-items-center" style="margin-top: 92rpx;">
+            <swiper-item class="flex-column align-items-center">
                 <view class="welcome-title">{{item.title}}</view>
                 <view class="welcome-content">{{item.content}}</view>
                 <image src="../../images/welcome/{{item.path}}.png" class="welcome-image"/>
@@ -10,10 +10,11 @@
         </block>
     </swiper>
     <view class="fill-width flex-column align-items-center" style="position: absolute;left: 0;bottom: 40rpx;">
-        <view class="flex-row align-items-center fill-width">
-            <button class="button-radius flex-sub" bindtap="rejectLogin" style="width: auto;margin: 0 20rpx;background-color: white;color: var(--primaryColor);border: 1rpx solid var(--primaryColor);">拒绝授权</button>
-            <button class="button-radius flex-sub" style="width: auto;margin: 0 20rpx;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" bindtap="onClick">授权登录</button>
+        <view class="flex-row align-items-center" style="margin-bottom: 34rpx;padding: 20rpx;" bindtap="toInstruction">
+            <view class="welcome-to-instruction">查看心电监测仪功能说明</view>
+            <image src="../../images/welcome/arrow.png" style="width: 28rpx;height: 28rpx;margin-left: 9rpx;"></image>
         </view>
+        <button class="button-radius" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" bindtap="onClick">登录注册</button>
         <view class="welcome-bottom-text">{{currentIndex===items.length-1?'*报告出自“上海交通大学医学院附属仁济医院远程心电诊断中心”':''}}</view>
     </view>
 </view>

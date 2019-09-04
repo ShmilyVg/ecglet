@@ -39,6 +39,10 @@ Page({
         }
 
     },
+
+    toInstruction() {
+        HiNavigator.navigateToInstruction();
+    },
     rejectLogin() {
         HiNavigator.navigateBack({delta: 1});
     },
