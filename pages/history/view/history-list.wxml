@@ -7,7 +7,7 @@
                 <view class="flex-column" style="margin-left: 18rpx;">
                     <view class="flex-row align-items-center">
                         <view class="item-title">{{item.type_des}}</view>
-                        <image wx:if="{{item.status}}" src="../../images/history/warn.png" style="margin-left: 14rpx;margin-top:-5rpx;width: 26rpx;height: 26rpx"></image>
+                        <image wx:if="{{item.status}}" src="../../images/history/warn.png" style="margin-left: 14rpx;width: 26rpx;height: 26rpx"></image>
                     </view>
                     <view class="item-list-date">{{item.dateStr}} {{item.timeStr}}</view>
                 </view>
