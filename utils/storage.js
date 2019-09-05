@@ -53,16 +53,34 @@ export default class Storage extends BaseStorage {
     static setCardiac({tips}) {
         return this.set({key: 'hi_checking_cardiac_tips', data: tips});
     }
+
     static getCardiacSync() {
         return this.getSync('hi_checking_cardiac_tips');
     }
+
     static setRoutine({tips}) {
         return this.set({key: 'hi_checking_routine_tips', data: tips});
     }
+
     static getRoutineSync() {
         return this.getSync('hi_checking_routine_tips');
     }
 
+    static isFistHeartNormalTest() {
+        return !this.getSync('hi_have_heart_normal_test');
+    }
+
+    static isFistHeartPressureTest() {
+        return !this.getSync('hi_have_heart_pressure_test');
+    }
+
+    static setFirstHeartNormalTest() {
+        return this.set({key: 'hi_have_heart_normal_test', data: 1});
+    }
+
+    static setFirstHeartPressureTest() {
+        return this.set({key: 'hi_have_heart_pressure_test', data: 1});
+    }
 }
 
 function testable(target) {

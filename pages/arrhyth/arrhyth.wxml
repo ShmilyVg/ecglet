@@ -78,5 +78,13 @@
 </view>
 <dialog id="myDialog"></dialog>
 
+
+<view wx:if="{{firstObj.show}}" style="position: fixed;top: 0;left: 0;background-color: rgba(0,0,0,0.5)" class="fill-width fill-height">
+  <view style="width: 600rpx;background-color: white;border-radius: 40rpx;padding: 74rpx 68rpx 52rpx;margin-top: 300rpx;margin-left: auto;margin-right: auto;" class="flex-column align-items-center box-sizing-border-box">
+    <view style="font-size: 38rpx;color: #222222;line-height: 28rpx;">{{firstObj.title}}</view>
+    <view style="font-size: 32rpx;color: #5B5B5B;line-height: 54rpx;margin-top: 48rpx;margin-bottom: 56rpx;">{{firstObj.content}}</view>
+    <view bindtap="firstConfirmEvent" style="font-size: 30rpx;color: white;font-weight: 400;line-height: 28rpx;padding: 25rpx 75rpx;box-shadow:0 10rpx 20rpx 0 rgba(114,101,227,0.2);border-radius:39rpx;background-color: var(--primaryColor)">我知道了</view>
+  </view>
+</view>
 <!-- <i-toast id="toast" /> -->
 

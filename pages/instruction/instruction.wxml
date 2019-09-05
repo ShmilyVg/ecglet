@@ -1,5 +1,5 @@
 <view class="flex-column">
-    <view class="flex-row align-items-center" style="align-self: center;">
+    <view class="flex-row align-items-center" style="align-self: center;margin: 70rpx 0 23rpx;">
         <image src="../../images/instruction/left.png" style="width: 44rpx;height: 24rpx;"></image>
         <view class="instruction-title">HiPee心电管家</view>
         <image src="../../images/instruction/right.png" style="width: 44rpx;height: 24rpx;"></image>

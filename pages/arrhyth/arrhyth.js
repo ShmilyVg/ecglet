@@ -16,6 +16,7 @@ import {
 } from "../../apis/ble/manager";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {ArrhythStateManager} from "./state";
+import Storage from "../../utils/storage";
 
 ArrayBuffer.prototype.concat = function (b2) {
     let tmp = new Uint8Array(this.byteLength + b2.byteLength);
@@ -142,6 +143,19 @@ Page({
         }
     },
 
+    getFirstObj(type) {
+        if (type === 2) {
+            if (Storage.isFistHeartPressureTest()) {
+                return {show: true, title: '即将进行心脏负荷评估', content: '测试时间持续5分钟，请找到一个相对舒适的空间和姿势，按照引导操作，开启心脏负荷评估。'};
+            }
+        } else {
+            if (Storage.isFistHeartNormalTest()) {
+                return {show: true, title: '即将进行心电检测', content: '检测过程中请勿交谈、移动，保持静息状态'};
+            }
+        }
+        return {};
+    },
+
     onLoad(options) {
         this.arrhythStateManager = new ArrhythStateManager(this);
         // console.log(await wx.getUserInfo())
@@ -161,12 +175,15 @@ Page({
         let that = this;
         that.data.testType = parseInt(options.type) || 1;
         wx.setNavigationBarTitle({title: that.data.testType === 2 ? '心脏负荷评估' : '常规心电检测'});
-        that.setData({
-                maxCount: parseInt(this.getOriginTxt()),
-                testType: that.data.testType,
-                windowHeight: wx.getSystemInfoSync().windowHeight,
-            }
-        );
+
+        if (that.data.testType)
+            that.setData({
+                    maxCount: parseInt(this.getOriginTxt()),
+                    testType: that.data.testType,
+                    windowHeight: wx.getSystemInfoSync().windowHeight,
+                    firstObj: {...this.getFirstObj(that.data.testType)}
+                }
+            );
         console.log('onLoad', that.data.testType, this.getOriginTxt(), this.data.maxCount);
         let selectDeviceId, isConnecting = false;
         try {
@@ -379,7 +396,18 @@ Page({
         }
 
     },
+    firstConfirmEvent() {
+        this.setData({
+            'firstObj.show': false
+        }, () => {
+            if (this.data.testType === 2) {
+                Storage.setFirstHeartPressureTest();
+            } else {
+                Storage.setFirstHeartNormalTest();
+            }
+        })
 
+    },
     onUnload() {
         let that = this
         console.warn('onUnload...');
