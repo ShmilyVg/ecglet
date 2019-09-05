@@ -37,9 +37,23 @@ App({
         }
     },
 
-    onShow(options) {
+    async onShow(options) {
         this.globalData.options = options;
         console.log('App.js onShow options', options);
+        const currentPages = getCurrentPages();
+        console.log('当前页面', currentPages);
+        if (currentPages.length) {
+            const current = currentPages[currentPages.length - 1];
+            if (current.route !== options.path) {
+                setTimeout(() => {
+                    HiNavigator.redirectTo({url: `/${current.route}`});
+                })
+            }
+        }
+    },
+
+    onHide() {
+
     },
 
     async doLogin() {
