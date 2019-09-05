@@ -80,7 +80,7 @@ App({
         userInfo: {},
         tempGatherResult: {},
         isConnected: true,
-        currentMember: {},
+        currentMember: {isEmpty: true},
         editMember: {},
         countTimer: [],
         connectedFailedTimer: [],

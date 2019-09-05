@@ -5,6 +5,7 @@ import WXDialog from "../../utils/dialog";
 import Toast from "../../base/heheda-common-view/toast";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import * as tools from "../../utils/tools";
+import {jsGetAge} from "../../utils/tools";
 
 Page({
     data: {
@@ -120,6 +121,7 @@ Page({
 
     async saveUserInfo({ill}) {
         let data = {...getApp().globalData.editMember, ...ill};
+        data.age = jsGetAge(data.birthday);
         Toast.showLoading();
         console.log('保存信息：', data);
         try {
@@ -131,10 +133,14 @@ Page({
                 const userInfo = await UserInfo.get().userInfo;
                 UserInfo.set({...userInfo, ...data, diseaseNull: 0});
                 getApp().globalData.editMember = {};
+                let currentMember = getApp().globalData.currentMember;
+                if (currentMember.isEmpty || getApp().globalData.currentMember.memberId === data.memberId) {
+                    getApp().globalData.currentMember = data;
+                }
             } else {
                 await Protocol.memberRelevanceUpdate(data);
                 if (getApp().globalData.currentMember.memberId === data.memberId) {
-                    getApp().globalData.currentMember = data
+                    getApp().globalData.currentMember = data;
                 }
             }
             this.editFinish();

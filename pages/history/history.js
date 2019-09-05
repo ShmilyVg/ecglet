@@ -23,7 +23,7 @@ Page({
         tagChose: 1,
         itemList: [],
         isNormalMember: true,
-        bottomViewIsHidden: true
+        bottomViewIsHidden: true,
     },
 
     async onLoad() {
@@ -33,12 +33,21 @@ Page({
     },
 
     async onShow() {
+        let userInfo = app.globalData.currentMember;
+        let isNormalMember = true;
+        if (userInfo.relevanceId) {
+            isNormalMember = false
+        } else {
+            const norMember = await UserInfo.get();
+            userInfo = norMember.userInfo;
+        }
+        const name = Tools.HandleShortName(userInfo.nickName);
+        this.setData({userInfo, name, isNormalMember});
         if (getApp().globalData.refresh) {
             this.handleBaseData();
             getApp().globalData.refresh = false;
         }
     },
-
 
     async handleBaseData() {
         let userInfo = app.globalData.currentMember;
