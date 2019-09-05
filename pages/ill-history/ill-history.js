@@ -133,10 +133,14 @@ Page({
                 const userInfo = await UserInfo.get().userInfo;
                 UserInfo.set({...userInfo, ...data, diseaseNull: 0});
                 getApp().globalData.editMember = {};
+                let currentMember = getApp().globalData.currentMember;
+                if (currentMember.isEmpty || getApp().globalData.currentMember.memberId === data.memberId) {
+                    getApp().globalData.currentMember = data;
+                }
             } else {
                 await Protocol.memberRelevanceUpdate(data);
                 if (getApp().globalData.currentMember.memberId === data.memberId) {
-                    getApp().globalData.currentMember = data
+                    getApp().globalData.currentMember = data;
                 }
             }
             this.editFinish();
