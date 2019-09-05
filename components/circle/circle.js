@@ -84,8 +84,8 @@ Component({
         _drawText({maxCount, radius, step, ctx}) {
             //绘制文字
             const currentNum = maxCount - step;
-            let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = 45;
-            if (currentNum >= 100) {
+            let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = Math.floor(radius / 1.2);
+            if (currentNum > 60) {
                 largeFontSize = 43;
                 halfLargeFontSize = Math.floor(largeFontSize / 2.3);
             }
@@ -93,10 +93,22 @@ Component({
             ctx.setTextAlign('center');
             ctx.setTextBaseline('normal');
             ctx.fillStyle = 'white';
-            ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize + 1);
-            ctx.font = '12px sans-serif';
-            ctx.fillText('S', radius + sX, radius + halfLargeFontSize - 1);
-            ctx.draw();
+            const minute = Math.floor(currentNum / 60);
+            if (minute > 0) {
+                ctx.fillText(minute.toString(), radius - sX / 5 - 24, radius + halfLargeFontSize + 1);
+                ctx.font = '12px sans-serif';
+                ctx.fillText('分', radius - sX / 5, radius + halfLargeFontSize - 1);
+                ctx.font = `${largeFontSize}px sans-serif`;
+                ctx.fillText(('00' + (currentNum % 60)).slice(-2), radius + sX / 2.5, radius + halfLargeFontSize + 1);
+                ctx.font = '12px sans-serif';
+                ctx.fillText('秒', radius + sX, radius + halfLargeFontSize - 1);
+            } else {
+                sX = 45;
+                ctx.fillText(('00' + currentNum).slice(currentNum < 100 ? -2 : -3), radius, radius + halfLargeFontSize + 1);
+                ctx.font = '12px sans-serif';
+                ctx.fillText('秒', radius + sX, radius + halfLargeFontSize - 1);
+            }
+
         },
         _drawCircle({circleX, circleY, startDegree, radius, ctx}) {
             let {degreePreFPS, roundWidth} = this.data;
