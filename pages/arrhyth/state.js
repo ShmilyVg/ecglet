@@ -97,6 +97,7 @@ function showCanvasView(page, startCountFun) {
     circle.initCircleData();
     circle.drawCircleBg();
     circle.drawCircleBg();
+    circle.drawCircleBg();
     // setTimeout(()=>{
     query.select('#ecg').boundingClientRect((rect) => {
         that.data.ecgPannel = that.selectComponent('#ecg')
