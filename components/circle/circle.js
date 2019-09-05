@@ -108,7 +108,7 @@ Component({
                 ctx.font = '12px sans-serif';
                 ctx.fillText('秒', radius + sX, radius + halfLargeFontSize - 1);
             }
-
+            ctx.draw();
         },
         _drawCircle({circleX, circleY, startDegree, radius, ctx}) {
             let {degreePreFPS, roundWidth} = this.data;
