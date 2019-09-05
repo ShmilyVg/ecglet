@@ -5,6 +5,7 @@ import WXDialog from "../../utils/dialog";
 import Toast from "../../base/heheda-common-view/toast";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import * as tools from "../../utils/tools";
+import {jsGetAge} from "../../utils/tools";
 
 Page({
     data: {
@@ -120,6 +121,7 @@ Page({
 
     async saveUserInfo({ill}) {
         let data = {...getApp().globalData.editMember, ...ill};
+        data.age = jsGetAge(data.birthday);
         Toast.showLoading();
         console.log('保存信息：', data);
         try {
