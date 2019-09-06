@@ -40,20 +40,28 @@ App({
     async onShow(options) {
         this.globalData.options = options;
         console.log('App.js onShow options', options);
-        const currentPages = getCurrentPages();
-        console.log('当前页面', currentPages);
-        if (currentPages.length) {
-            const current = currentPages[currentPages.length - 1];
-            if (current.route !== options.path) {
-                setTimeout(() => {
-                    HiNavigator.redirectTo({url: `/${current.route}`});
-                })
-            }
-        }
+        // const currentPages = getCurrentPages();
+        // console.log('当前页面', currentPages);
+        // if (currentPages.length) {
+        //     const current = currentPages[currentPages.length - 1];
+        //     if (current.route !== options.path) {
+        //         setTimeout(() => {
+        //             HiNavigator.redirectTo({url: `/${current.route}`});
+        //         })
+        //     }
+        // }
     },
 
     onHide() {
 
+    },
+
+    judgeNeedRegister({userInfo}) {
+        const {phone, birthday, height, weight, cardiopathy, diabetes, hypertension} = userInfo;
+        return {
+            isNeedRegister: !phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined,
+            toRegister: HiNavigator.relaunchToWelcome
+        };
     },
 
     async doLogin() {
@@ -65,17 +73,21 @@ App({
 
             console.log('app getUserInfo', userInfo);
             wx.setStorageSync('isRegister', true);
-            const {phone, birthday, height, weight, cardiopathy, diabetes, hypertension} = userInfo;
+            const {phone} = userInfo;
             if (!wx.getStorageSync('phoneNumber')) {
                 wx.setStorageSync('phoneNumber', phone || '');
             }
             const {query} = this.globalData.options;
             if (!!query.isGetUserInfo) {
                 await notifyCurrentPage({name: 'onLoginSuccess'})
-            } else if (!phone || !birthday || !weight || !height || cardiopathy === undefined || diabetes === undefined || hypertension === undefined) {
-                HiNavigator.relaunchToWelcome();
             } else {
-                await notifyCurrentPage({name: 'onLoginSuccess'})
+                const {isNeedRegister, toRegister} = this.judgeNeedRegister({userInfo});
+                if (isNeedRegister) {
+                    toRegister();
+                } else {
+                    await notifyCurrentPage({name: 'onLoginSuccess'})
+
+                }
             }
 
         } catch (res) {

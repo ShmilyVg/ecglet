@@ -1,11 +1,8 @@
 import UserInfo from '../../apis/network/userInfo.js';
 import * as tools from "../../utils/tools";
-import {dealAuthUserInfo, MyUsed} from "../../utils/tools";
-import WXDialog from "../../base/heheda-common-view/dialog";
-import Protocol from "../../apis/network/protocol";
+import {dealAuthUserInfo, dealRegister, MyUsed} from "../../utils/tools";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {RandomRemindData} from "../../utils/tips";
-import {dealRegister} from "../../utils/tools";
 
 const app = getApp();
 Page({
@@ -14,7 +11,12 @@ Page({
         isFirstUsed: true,
     },
 
-    onLoad(param) {
+    async onLoad(param) {
+        const {isNeedRegister, toRegister} = app.judgeNeedRegister(await UserInfo.get());
+        if (isNeedRegister) {
+            toRegister();
+            return;
+        }
         const isFirstUsed = MyUsed.isFirstUsed();
 
         if (isFirstUsed) {
