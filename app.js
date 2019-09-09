@@ -8,7 +8,7 @@ import HiNavigator from "./components/navigator/hi-navigator";
 import {initAnalysisOnApp} from "./analysis/mta";
 import Toast from "./utils/toast";
 import CommonProtocol from "./apis/network/network/libs/protocol";
-import {SoftwareVersion} from "./utils/config";
+import {firstUseToWelcomePage, SoftwareVersion} from "./utils/config";
 import {notifyCurrentPage} from "./utils/notify";
 
 App({
@@ -83,7 +83,9 @@ App({
             } else {
                 const {isNeedRegister, toRegister} = this.judgeNeedRegister({userInfo});
                 if (isNeedRegister) {
-                    // toRegister();
+                    if (firstUseToWelcomePage) {
+                        toRegister();
+                    }
                 } else {
                     await notifyCurrentPage({name: 'onLoginSuccess'})
 
