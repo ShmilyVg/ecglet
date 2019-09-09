@@ -126,7 +126,8 @@ export function dealRegister() {
     return new Promise(async (resolve) => {
         try {
             await Protocol.checkHaveNetwork();
-            const {isNeedRegister, toRegister} = getApp().judgeNeedRegister({userInfo: await UserInfo.get()});
+            const {userInfo} = await UserInfo.get();
+            const {isNeedRegister, toRegister} = getApp().judgeNeedRegister({userInfo});
             if (!isNeedRegister) {
                 resolve();
             } else {

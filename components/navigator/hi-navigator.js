@@ -15,7 +15,7 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static relaunchToWelcome() {
-        this.reLaunch({url: '/pages/welcome/welcome'});
+        CommonNavigator.reLaunch({url: '/pages/welcome/welcome'});
     }
 
     static navigateToWelcome() {
