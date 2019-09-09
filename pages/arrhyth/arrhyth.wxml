@@ -60,11 +60,11 @@
 
           <view class="fill-width flex-column align-items-center" style="margin-top: 180rpx;">
             <view class="flex-row align-items-center">
-              <image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></image>
-              <view class="remind-text-bottom">绿灯亮起：表示当前处于采集状态</view>
+<!--              <image src="./../../images/arrhyth/collect_lvdeng.png" class="remind-image-size"></image>-->
+              <view class="remind-text-bottom">蓝灯闪烁：表示当前处于采集状态</view>
             </view>
             <view class="flex-row align-items-center" style="margin-top: 19rpx;">
-              <image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></image>
+<!--              <image src="./../../images/arrhyth/collect_landeng.png" class="remind-image-size"></image>-->
               <view class="remind-text-bottom">蓝灯亮起：表示仪器开启，尝试与手机连接</view>
             </view>
           </view>
