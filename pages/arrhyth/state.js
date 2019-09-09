@@ -9,11 +9,12 @@ export class ArrhythStateManager {
         };
         this._page.onConnectedFailedReason = () => {
             this.remindDialog = this._page.selectComponent('#myDialog');
-            this.remindDialog.show({title:'连接不上?',content:
+            this.remindDialog.show({title:'连接不上?', content:
                     '1、请检查网络状态和蓝牙是否开启；\n' +
-                    '2、确认心电仪的蓝色指示灯是否亮起；\n' +
-                    '3、将手机尽可能靠近心电仪；\n' +
-                    '4、清理小程序后台进程，再进一遍看看是否能够重连；'})
+                    '2、请确认开启手机GPS和微信定位权限；\n'+
+                    '3、确认心电仪的蓝色指示灯是否亮起；\n' +
+                    '4、将手机尽可能靠近心电仪；\n' +
+                    '5、清理小程序后台进程，再进一遍看看是否能够重连；'})
 
         };
         this.connectedStateIndex = -1;
