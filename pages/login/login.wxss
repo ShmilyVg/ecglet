@@ -1,0 +1,36 @@
+/* pages/login/login.wxss */
+
+.login-logo{
+    width: 150rpx;
+    height: 150rpx;
+    margin-top: 150rpx
+}
+
+.login-title {
+    font-size:40rpx;
+    font-weight:500;
+    color:rgba(51,51,51,1);
+    line-height:48rpx;
+    margin-top: 30rpx;
+}
+
+.login-content {
+    margin-top: 30rpx;
+}
+
+.login-content-point {
+    width:10rpx;
+    height:10rpx;
+    background:rgba(165,155,255,1);
+    border-radius:50%;
+    margin-top: 20rpx;
+    margin-right: 15rpx;
+}
+
+.login-content-text {
+    width:539rpx;
+    font-size:30rpx;
+    font-weight:400;
+    color:rgba(91,91,91,1);
+    line-height:48rpx;
+}

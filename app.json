@@ -25,7 +25,8 @@
     "pages/tired-level/tired-level",
     "pages/exciting-level/exciting-level",
     "pages/heart-health-evaluate/heart-health-evaluate",
-    "pages/heart-health-evaluate-result/heart-health-evaluate-result"
+    "pages/heart-health-evaluate-result/heart-health-evaluate-result",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
