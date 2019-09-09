@@ -14,8 +14,8 @@ Page({
     async onLoad(param) {
         const {isNeedRegister, toRegister} = app.judgeNeedRegister(await UserInfo.get());
         if (isNeedRegister) {
-            toRegister();
-            return;
+            // toRegister();
+            // return;
         }
         const isFirstUsed = MyUsed.isFirstUsed();
 

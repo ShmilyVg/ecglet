@@ -83,7 +83,7 @@ App({
             } else {
                 const {isNeedRegister, toRegister} = this.judgeNeedRegister({userInfo});
                 if (isNeedRegister) {
-                    toRegister();
+                    // toRegister();
                 } else {
                     await notifyCurrentPage({name: 'onLoginSuccess'})
 
