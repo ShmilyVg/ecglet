@@ -127,11 +127,11 @@ export function dealRegister() {
         try {
             await Protocol.checkHaveNetwork();
             const {userInfo} = await UserInfo.get();
-            const {isNeedRegister, toRegister} = getApp().judgeNeedRegister({userInfo});
+            const {isNeedRegister} = getApp().judgeNeedRegister({userInfo});
             if (!isNeedRegister) {
                 resolve();
             } else {
-                toRegister();
+                HiNavigator.navigateToWelcome();
             }
         } catch (e) {
             console.warn('进入页面失败', e);

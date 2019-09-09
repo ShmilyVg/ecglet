@@ -19,7 +19,7 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static navigateToWelcome() {
-        this.navigateTo({url: '/pages/welcome/welcome'});
+        CommonNavigator.navigateTo({url: '/pages/welcome/welcome'});
     }
 
     static navigateToInstruction() {
