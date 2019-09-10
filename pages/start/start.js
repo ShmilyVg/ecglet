@@ -3,6 +3,7 @@ import * as tools from "../../utils/tools";
 import {dealAuthUserInfo, dealRegister, MyUsed} from "../../utils/tools";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import {RandomRemindData} from "../../utils/tips";
+import {firstUseToWelcomePage} from "../../utils/config";
 
 const app = getApp();
 Page({
@@ -14,8 +15,10 @@ Page({
     async onLoad(param) {
         const {isNeedRegister, toRegister} = app.judgeNeedRegister(await UserInfo.get());
         if (isNeedRegister) {
-            toRegister();
-            return;
+            if (firstUseToWelcomePage) {
+                toRegister();
+                return;
+            }
         }
         const isFirstUsed = MyUsed.isFirstUsed();
 
