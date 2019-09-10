@@ -14,14 +14,11 @@ export const ScenesHandle = {
 
 export function initAnalysisOnApp() {
     mta.App.init({
-        "appID": "500690452",
-        // "eventID": "500670812",
+        "appID":"500690452",
+        "eventID":"500695339",
         "autoReport": true,
         "statParam": true,
         "ignoreParams": [],
-        "statPullDownFresh": true,
-        "statShareApp": true,
-        "statReachBottom": true
     });
 }
 

@@ -18,7 +18,7 @@ export default class HiNavigator extends CommonNavigator {
         const pages = getCurrentPages(), len = pages.length;
         if (len > 0) {
             const currentPage = pages[len - 1];
-            if (currentPage&&currentPage.route!=='pages/welcome/welcome') {
+            if (currentPage && currentPage.route !== 'pages/welcome/welcome') {
                 CommonNavigator.reLaunch({url: '/pages/welcome/welcome'});
             }
         }
@@ -79,11 +79,11 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static navigateToResultPageByType({type, dataId}) {
-        let value = '心脏负荷报告页';
+        let value = {'xinzangfuhe': 'true'};
         if (type === 2) {
             this.navigateToHeartPressureResult({dataId});
         } else {
-            value = '常规心电报告页';
+            value = {'changguixindian': 'true'};
             this.navigateToNormalResult({dataId});
         }
         stat({key: 'click_ecg_jiancebaogao_pdf', value});
