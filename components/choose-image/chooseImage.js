@@ -11,21 +11,30 @@ export default class ChoseImage {
                 sourceType: ['album', 'camera'],
                 success: (res) => {
                     Toast.showLoading();
-                    let path = res.tempFilePaths[0];
-                    wx.uploadFile({
-                        url: config.UploadUrl,
-                        filePath: path,
-                        name: path,
-                        success(res) {
-                            console.log(res);
-                            Toast.hiddenLoading();
-                            let data = res.data;
-                            let image = JSON.parse(data).result.img_url;
-                            console.log('上传图片：', image);
-                            resolve(image);
-                        }
-                    })
-                }
+                    wx.compressImage({
+                        src: res.tempFilePaths[0], // 图片路径
+                        quality: 40, // 压缩质量
+                        success: res => {
+                            const path = res.tempFilePath;
+                            wx.uploadFile({
+                                url: config.UploadUrl,
+                                filePath: path,
+                                name: path,
+                                success(res) {
+                                    console.log(res);
+                                    Toast.hiddenLoading();
+                                    let data = res.data;
+                                    let image = JSON.parse(data).result.img_url;
+                                    console.log('上传图片：', image);
+                                    resolve(image);
+                                }, fail: reject
+                            })
+                        },
+                        fail: reject
+                    });
+
+                },
+                fail: reject
             })
         })
     }
