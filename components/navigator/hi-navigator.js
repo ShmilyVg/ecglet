@@ -15,7 +15,13 @@ export default class HiNavigator extends CommonNavigator {
     }
 
     static relaunchToWelcome() {
-        CommonNavigator.reLaunch({url: '/pages/welcome/welcome'});
+        const pages = getCurrentPages(), len = pages.length;
+        if (len > 0) {
+            const currentPage = pages[len - 1];
+            if (currentPage&&currentPage.route!=='pages/welcome/welcome') {
+                CommonNavigator.reLaunch({url: '/pages/welcome/welcome'});
+            }
+        }
     }
 
     static navigateToWelcome() {
