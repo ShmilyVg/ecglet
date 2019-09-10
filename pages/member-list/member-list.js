@@ -129,11 +129,11 @@ Page({
 
     toTabbarHistory(index) {
         this.saveCurrentMember(index);
-        getApp().globalData.refresh = true;
         wx.switchTab({url: '../history/history'});
     },
 
     saveCurrentMember(index) {
+        getApp().globalData.refresh = true;
         getApp().globalData.currentMember = this.data.members[index];
     },
 
