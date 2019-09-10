@@ -13,7 +13,7 @@
         </view>
 
     </view>
-    <image src="../../images/result/logo.png" class="logo"></image>
+<!--    <image src="../../images/result/logo.png" class="logo"></image>-->
 
     <template is="result-top" data="{{items}}"></template>
     <template is="result-bottom" data="{{suggest:result.hipeeSuggest.contents,isAbNormal:true,btnColor:'#3A93EF'}}"></template>
