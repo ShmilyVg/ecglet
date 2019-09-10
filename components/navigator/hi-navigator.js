@@ -111,22 +111,28 @@ export default class HiNavigator extends CommonNavigator {
 
     static navigateToHeartPressureDetail({dataId}) {
         this.navigateTo({url: `/pages/press-detail/press-detail?dataId=${dataId}`});
+        stat({key: 'click_xinzangfuhe_sub_page',value:{'yali':'true'}});
     }
 
     static navigateToAvgHrDetail({dataId}) {
         this.navigateTo({url: `/pages/avg-hr/avg-hr?dataId=${dataId}`});
+        stat({key: 'click_xinzangfuhe_sub_page',value:{'pingjunxinlv':'true'}});
+
     }
 
     static navigateToHrvIntervalDetail({dataId}) {
         this.navigateTo({url: `/pages/hrv-interval/hrv-interval?dataId=${dataId}`});
+        stat({key: 'click_xinzangfuhe_sub_page',value:{'xinlvbianyi':'true'}});
     }
 
     static navigateToTiredLevelDetail({dataId}) {
         this.navigateTo({url: `/pages/tired-level/tired-level?dataId=${dataId}`});
+        stat({key: 'click_xinzangfuhe_sub_page',value:{'pilao':'true'}});
     }
 
     static navigateToExcitingLevelDetail({dataId}) {
         this.navigateTo({url: `/pages/exciting-level/exciting-level?dataId=${dataId}`});
+        stat({key: 'click_xinzangfuhe_sub_page',value:{'xingfen':'true'}});
     }
 
     static navigateToHeartHealthEvaluation() {
