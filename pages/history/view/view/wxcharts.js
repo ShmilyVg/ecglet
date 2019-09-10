@@ -1981,7 +1981,7 @@ var Charts = function Charts(opts) {
     let distanceArr = getXAxisPoints(opts.categories, opts, config$$1).xAxisPoints;
     let distance = 0;
     if (distanceArr.length > 8) {
-        distance = -(distanceArr[distanceArr.length - 1] - distanceArr[7]) + 9;
+        distance = -(distanceArr[distanceArr.length - 1] - distanceArr[7]) + (distanceArr.length * 2) - 10;
     }
     opts._scrollDistance_ = distance;
     this.scrollOption = {
