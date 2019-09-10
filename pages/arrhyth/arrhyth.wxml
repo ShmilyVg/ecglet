@@ -50,7 +50,7 @@
           </view>
 
           <view wx:else class="flex-column align-items-center temp-height">
-            <view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请选择任一图示操作'}}</view>
+            <view class="remind-text-big">{{bleStatus==='not_init'?'请开启手机蓝牙':'请按照任一图示操作'}}</view>
             <view class="remind-text-big">{{bleStatus==='not_init'?'':'尝试设备连接'}}</view>
             <view class="fill-width flex-row align-items-center justify-center" style="margin-top: 49rpx;">
               <image wx:if="{{bleStatus!=='not_init'}}" src="./../../images/arrhyth/ti.png" style="width: 26rpx;height: 26rpx;"></image>
