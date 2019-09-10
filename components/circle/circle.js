@@ -85,7 +85,7 @@ Component({
             //绘制文字
             const currentNum = maxCount - step;
             let largeFontSize = 60, halfLargeFontSize = largeFontSize / 2.5, sX = Math.floor(radius / 1.2);
-            if (currentNum > 60) {
+            if (currentNum >= 60) {
                 largeFontSize = 43;
                 halfLargeFontSize = Math.floor(largeFontSize / 2.3);
             }
