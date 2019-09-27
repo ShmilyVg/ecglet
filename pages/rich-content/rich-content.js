@@ -99,7 +99,7 @@ Page({
                 HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: result});
             } catch (e) {
                 console.error(e);
-                Toast.showText(e.errMsg);
+                Toast.showErrMsg(e);
             } finally {
                 Toast.hiddenLoading();
             }

@@ -1,6 +1,21 @@
 <template name="history-list" class="flex-column">
     <view style="height: 30rpx"></view>
     <view wx:if="{{logs.length}}" class="flex-column">
+        <view wx:if="{{showOperator}}" class="fill-width flex-row align-items-center space-between box-sizing-border-box history-choose-operator-layout">
+            <view catchtap="deleteAllItemsEvent" class="flex-row align-items-center history-choose-all-btn-layout">
+                <view class="history-item-check-padding-layout">
+                    <view wx:if="{{isAllDeleteChecked}}" class="flex-row align-items-center justify-center history-item-check-layout">
+                        <image src="../../images/history/right.png" class="history-item-right-icon"></image>
+                    </view>
+                    <view wx:else class="history-item-uncheck-layout"></view>
+                </view>
+                <view class="history-choose-all-text">全选</view>
+            </view>
+            <view class="flex-row align-items-center history-delete-btn-layout">
+                <view catchtap="deleteCancelEvent" class="history-delete-cancel-btn">取消</view>
+                <view catchtap="deleteConfirmEvent" class="history-delete-btn">删除</view>
+            </view>
+        </view>
         <view class="flex-row align-items-center box-sizing-border-box history-item-layout" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindlongpress="onLongPressHistoryItemEvent" bindtap="onClickHistoryItemEvent" data-item="{{item}}">
             <view wx:if="{{item.showEditorDialog}}" class="absolute flex-column history-edit-dialog-layout">
                 <view catchtap="deleteCurrentItemEvent" data-item="{{item}}" class="flex-row align-items-center box-sizing-border-box history-edit-dialog-item-layout">
@@ -13,13 +28,15 @@
                     <view class="history-edit-text">批量删除</view>
                 </view>
             </view>
-
-            <view wx:if="{{showOperator}}" class="history-item-check-padding-layout">
-                <view wx:if="{{item.checked}}" class="flex-row align-items-center justify-center history-item-check-layout">
-                    <image src="../../images/history/right.png" class="history-item-right-icon"></image>
+            <block wx:if="{{showOperator}}">
+                <view class="history-item-check-padding-layout">
+                    <view wx:if="{{item.checked}}" class="flex-row align-items-center justify-center history-item-check-layout">
+                        <image src="../../images/history/right.png" class="history-item-right-icon"></image>
+                    </view>
+                    <view wx:else class="history-item-uncheck-layout"></view>
                 </view>
-                <view wx:else class="history-item-uncheck-layout"></view>
-            </view>
+            </block>
+
             <view class="flex-row align-items-center space-between box-sizing-border-box history-item flex-sub">
                 <view class="flex-row align-items-center">
                     <image src="../../images/history/{{item.type==1?'cg':'fh'}}.png" class="green-circle"></image>

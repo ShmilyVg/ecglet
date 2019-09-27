@@ -196,3 +196,44 @@
     border-radius: 20rpx;
     border: 8rpx solid rgba(0,0,0,0.1);
 }
+.history-choose-operator-layout{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 3;
+    background-color: white;
+    padding: 24rpx 30rpx 24rpx 0;
+}
+.history-choose-all-btn-layout {
+    padding-left: 30rpx;
+}
+
+.history-choose-all-text{
+    font-size:26rpx;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(91,91,91,1);
+    line-height:28rpx;
+}
+
+.history-delete-btn-layout{
+    font-size:28rpx;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:28rpx;
+}
+
+.history-delete-cancel-btn{
+    color:rgba(156,156,156,1);
+    border:1rpx solid rgba(178,178,178,1);
+    border-radius:30rpx;
+    padding: 18rpx 48rpx;
+}
+
+.history-delete-btn{
+    color:rgba(114,101,227,1);
+    border:1rpx solid rgba(128,116,237,1);
+    border-radius:30rpx;
+    padding: 18rpx 48rpx;
+    margin-left: 20rpx;
+}

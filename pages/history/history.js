@@ -6,6 +6,7 @@ import {createDateAndTime, dealRegister} from "../../utils/tools";
 import * as Tools from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import {stat} from "../../analysis/mta";
+import WXDialog from "../../utils/dialog";
 
 const app = getApp();
 
@@ -25,6 +26,7 @@ Page({
         isNormalMember: true,
         bottomViewIsHidden: true,
         showOperator: false,
+        isAllDeleteChecked: false,
         showEditorDialogItemIndex: -1
     },
 
@@ -77,10 +79,12 @@ Page({
         }
         let {result: {dataList: list}} = await Protocol.getHistoryList({data});
         if (list.length) {
+            const checked = this.data.isAllDeleteChecked;
             list.forEach((item) => {
                 const {date, time} = createDateAndTime(parseInt(item.created_timestamp));
                 item.dateStr = date;
                 item.timeStr = time;
+                item.checked = checked;
             });
         }
         if (!recorded) {
@@ -100,7 +104,7 @@ Page({
             obj[`logs[${this.data.showEditorDialogItemIndex}].showEditorDialog`] = false;
             this.setData(obj, () => {
                 this.data.showEditorDialogItemIndex = -1;
-            })
+            });
         }
     },
     onLongPressHistoryItemEvent(e) {
@@ -128,8 +132,28 @@ Page({
         }
     },
     deleteCurrentItemEvent(e) {
-        const {currentTarget: {dataset: {item}}} = e;
-        //TODO 编写删除逻辑
+        const {currentTarget: {dataset: {item: {id: dataId}}}} = e, obj = {}, {logs} = this.data;
+        for (let i = 0, len = logs.length; i < len; i++) {
+            if (logs[i].id === dataId) {
+                obj[`logs[${i}].showEditorDialog`] = false;
+                this.setData(obj, () => {
+                    this.data.showEditorDialogItemIndex = -1;
+                    WXDialog.showDialog({
+                        content: '确定删除这条记录吗？', showCancel: true,
+                        confirmEvent: async () => {
+                            try {
+                                await Protocol.deleteGather({ids: [dataId]});
+                                await this.getMainList({recorded: true});
+                            } catch (e) {
+                                Toast.showErrMsg(e);
+                            }
+                        }
+                    });
+                });
+                break;
+            }
+        }
+
     },
     editAllEvent() {
         const obj = {};
@@ -142,6 +166,8 @@ Page({
 
     onClickHistoryItemEvent(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
+        this.hideEditDialog();//showEditorDialogItemIndex 在经过这一步后，肯定是等于-1了
+
         if (this.data.showOperator) {
             console.warn('正在批量处理，暂不进入详情页');
             let index = -1, logs = this.data.logs, itemChecked = false;
@@ -157,11 +183,50 @@ Page({
                 const obj = {};
                 obj[`logs[${index}].checked`] = !itemChecked;
 
-                this.setData(obj);
+                this.setData(obj, () => {
+                    this.setData({
+                        isAllDeleteChecked: logs.every(item => item.checked)
+                    });
+                });
             }
             return;
         }
-        HiNavigator.navigateToResultPageByType({type, dataId})
+        if (this.data.showEditorDialogItemIndex === -1) {
+            HiNavigator.navigateToResultPageByType({type, dataId});
+        }
+    },
+    deleteAllItemsEvent() {
+        const {logs} = this.data, obj = {}, isAllChecked = logs.every(item => item.checked);
+        obj['isAllDeleteChecked'] = !isAllChecked;
+        logs.forEach((item, index) => {
+            obj[`logs[${index}].checked`] = !isAllChecked;
+        });
+
+        this.setData(obj);
+    },
+    deleteConfirmEvent() {
+        const {logs, isAllDeleteChecked} = this.data;
+        WXDialog.showDialog({
+            title: '温馨提示', content: '确定删除选中的数据吗?', showCancel: true, confirmText: '删除', confirmEvent: async () => {
+                if (isAllDeleteChecked) {
+                    //TODO 处理删除所有数据
+                    await Protocol.deleteAllGather();
+                } else {
+                    const ids = logs.filter(item => item.checked).map(item => item.id);
+                    await Protocol.deleteGather({ids});
+                }
+                await this.getMainList({recorded: true});
+            }
+        })
+    },
+    deleteCancelEvent() {
+        const {logs} = this.data, obj = {};
+        obj['isAllDeleteChecked'] = false;
+        obj['showOperator'] = false;
+        logs.forEach((item, index) => {
+            obj[`logs[${index}].checked`] = false;
+        });
+        this.setData(obj);
     },
     onPullDownRefresh() {
         console.log('onPullDownRefresh');

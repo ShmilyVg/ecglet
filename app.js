@@ -13,6 +13,12 @@ import {notifyCurrentPage} from "./utils/notify";
 
 App({
     onLaunch(options) {
+        // WXDialog.showDialog({
+        //     title: '版本更新',
+        //     content: '1.支持删除检测记录;\n2.服务器稳定性提升;',
+        //     confirmText: '立即重启',
+        //     confirmEvent: () => {}
+        // });
         this.globalData.options = options;
         console.log('App.js onLaunch options', options);
         // 展示本地存储能力

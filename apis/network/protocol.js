@@ -341,6 +341,14 @@ export default class Protocol {
         return Network.request({url: 'cardiac/health/getEvaluate', data: args});
     }
 
+    static deleteGather({ids}) {
+        return Network.request({url: 'gather/delete', data: arguments[0]});
+    }
+
+    static deleteAllGather() {
+        return Network.request({url: 'gather/delete'});
+    }
+
     static wxReLogin(resolve, reject) {
         wx.login({
             success: resolve, fail: res => {

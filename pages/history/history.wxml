@@ -1,6 +1,6 @@
 <import src="view/history-list"></import>
 <import src="view/history-trend"></import>
-<view class="fill-width flex-column" bindtap="hideEditDialog">
+<view class="fill-width flex-column" catchtap="hideEditDialog">
     <view class="top-view flex-row">
         <view class="flex-row" style="align-items: center;" bindtap="switchMember">
             <image class="avatar" mode="aspectFill" src="{{userInfo.portraitUrl||'../../images/avatar.png'}}"></image>
@@ -25,7 +25,7 @@
         </view>
     </view>
 
-    <template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs,showOperator}}"></template>
+    <template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs,showOperator,isAllDeleteChecked}}"></template>
 
     <template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList,trend}}"></template>
 

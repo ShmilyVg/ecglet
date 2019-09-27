@@ -1,4 +1,3 @@
-
 export default class Toast {
 
     static success(title, duration) {
@@ -37,7 +36,7 @@ export default class Toast {
         wx.hideToast();
     }
 
-    static showText(title,duration) {
+    static showText(title, duration) {
         setTimeout(() => {
             wx.showToast({
                 title: title,
@@ -45,5 +44,9 @@ export default class Toast {
                 duration: duration ? duration : 2000
             })
         });
+    }
+
+    static showErrMsg(error) {
+        this.showText(error.errMsg)
     }
 }
