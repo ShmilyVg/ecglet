@@ -140,13 +140,27 @@ Page({
         })
     },
 
-    toResultPage(e) {
+    onClickHistoryItemEvent(e) {
+        const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
         if (this.data.showOperator) {
-            console.warn('正在批量处理，暂不处理长按事件');
+            console.warn('正在批量处理，暂不进入详情页');
+            let index = -1, logs = this.data.logs, itemChecked = false;
+            for (let i = 0, len = logs.length; i < len; i++) {
+                let item = logs[i];
+                if (item.id === dataId) {
+                    index = i;
+                    itemChecked = item.checked;
+                    break;
+                }
+            }
+            if (index !== -1) {
+                const obj = {};
+                obj[`logs[${index}].checked`] = !itemChecked;
+
+                this.setData(obj);
+            }
             return;
         }
-        const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
-        // if()
         HiNavigator.navigateToResultPageByType({type, dataId})
     },
     onPullDownRefresh() {

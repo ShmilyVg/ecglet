@@ -1,7 +1,7 @@
 <template name="history-list" class="flex-column">
     <view style="height: 30rpx"></view>
     <view wx:if="{{logs.length}}" class="flex-column">
-        <view class="flex-row align-items-center box-sizing-border-box history-item-layout" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindlongpress="onLongPressHistoryItemEvent" bindtap="toResultPage" data-item="{{item}}">
+        <view class="flex-row align-items-center box-sizing-border-box history-item-layout" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindlongpress="onLongPressHistoryItemEvent" bindtap="onClickHistoryItemEvent" data-item="{{item}}">
             <view wx:if="{{item.showEditorDialog}}" class="absolute flex-column history-edit-dialog-layout">
                 <view catchtap="deleteCurrentItemEvent" data-item="{{item}}" class="flex-row align-items-center box-sizing-border-box history-edit-dialog-item-layout">
                     <image src="../../images/history/delete.png" class="history-edit-icon"></image>
@@ -16,7 +16,7 @@
 
             <view wx:if="{{showOperator}}" class="history-item-check-padding-layout">
                 <view wx:if="{{item.checked}}" class="flex-row align-items-center justify-center history-item-check-layout">
-                    <image src="../../../images/history/right.png" class="history-item-right-icon"></image>
+                    <image src="../../images/history/right.png" class="history-item-right-icon"></image>
                 </view>
                 <view wx:else class="history-item-uncheck-layout"></view>
             </view>
