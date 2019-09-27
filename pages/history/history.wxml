@@ -15,14 +15,17 @@
     </view>
 </view>
 
+<view class="bottom-view flex-row space-between" wx:if="{{!bottomViewIsHidden && isNormalMember}}">
+    <view class="bottom-view-text">
+        <text>亲友扫码可随时查看您的检测记录\n 如结果异常，亲友可接到提醒</text>
+    </view>
+    <view class="flex-row align-items-center">
+        <view class="bottom-view-btn" bindtap="toFamily">同步给亲友</view>
+        <image src="../../images/history/x.png" class="bottom-view-close" bindtap="hiddenBottomView"></image>
+    </view>
+</view>
+
 <template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
 
 <template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList,trend}}"></template>
 
-<view class="bottom-view flex-row" wx:if="{{!bottomViewIsHidden && isNormalMember}}">
-    <view class="bottom-view-text">
-        <text>亲友扫码可随时查看您的检测记录\n 如结果异常，亲友可接到提醒</text>
-    </view>
-    <view class="bottom-view-btn" bindtap="toFamily">同步给亲友</view>
-    <image src="../../images/history/x.png" class="bottom-view-close" bindtap="hiddenBottomView"></image>
-</view>
