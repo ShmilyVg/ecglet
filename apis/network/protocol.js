@@ -346,7 +346,7 @@ export default class Protocol {
     }
 
     static deleteAllGather() {
-        return Network.request({url: 'gather/delete'});
+        return Network.request({url: 'gather/delete/all'});
     }
 
     static wxReLogin(resolve, reject) {
