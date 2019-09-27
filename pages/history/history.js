@@ -24,7 +24,8 @@ Page({
         itemList: [],
         isNormalMember: true,
         bottomViewIsHidden: true,
-        showOperator: false
+        showOperator: false,
+        showEditorDialogItemIndex: -1
     },
 
     async onLoad() {
@@ -93,15 +94,60 @@ Page({
         Toast.hiddenLoading();
         wx.stopPullDownRefresh();
     },
+    hideEditDialog() {
+        if (this.data.showEditorDialogItemIndex !== -1) {
+            const obj = {};
+            obj[`logs[${this.data.showEditorDialogItemIndex}].showEditorDialog`] = false;
+            this.setData(obj, () => {
+                this.data.showEditorDialogItemIndex = -1;
+            })
+        }
+    },
+    onLongPressHistoryItemEvent(e) {
+        if (this.data.showOperator) {
+            console.warn('正在批量处理，暂不处理长按事件');
+            return;
+        }
+        const {currentTarget: {dataset: {item: {id: dataId}}}} = e, logs = this.data.logs;
+        let index = -1;
+        for (let i = 0, len = logs.length; i < len; i++) {
+            if (logs[i].id === dataId) {
+                index = i;
+                break;
+            }
+        }
+        if (index !== -1) {
+            const obj = {};
+            obj[`logs[${index}].showEditorDialog`] = true;
+            if (this.data.showEditorDialogItemIndex !== -1) {
+                obj[`logs[${this.data.showEditorDialogItemIndex}].showEditorDialog`] = false;
+            }
+            this.setData(obj, () => {
+                this.data.showEditorDialogItemIndex = index;
+            });
+        }
+    },
+    deleteCurrentItemEvent(e) {
+        const {currentTarget: {dataset: {item}}} = e;
+        //TODO 编写删除逻辑
+    },
+    editAllEvent() {
+        const obj = {};
+        obj['showOperator'] = true;
+        obj[`logs[${this.data.showEditorDialogItemIndex}].showEditorDialog`] = false;
+        this.setData(obj, () => {
+            this.data.showEditorDialogItemIndex = -1;
+        })
+    },
 
     toResultPage(e) {
+        if (this.data.showOperator) {
+            console.warn('正在批量处理，暂不处理长按事件');
+            return;
+        }
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
         // if()
         HiNavigator.navigateToResultPageByType({type, dataId})
-    },
-
-    onLongPressHistoryItemEvent(e) {
-        console.log(e);
     },
     onPullDownRefresh() {
         console.log('onPullDownRefresh');
