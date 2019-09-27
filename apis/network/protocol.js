@@ -1,7 +1,8 @@
 import Network from "./network";
 import WXDialog from "../../base/heheda-common-view/dialog";
 import BaseNetworkImp from "./network/libs/base/base-network-imp";
-import {PostUrl, UploadUrl} from "../../utils/config";
+import {PostUrl} from "../../utils/config";
+import Toast from "../../utils/toast";
 
 function createFontSize(item) {
     if (!Number.isNaN(parseInt(item.rightContent))) {
@@ -78,11 +79,11 @@ export default class Protocol {
                     },
                     fail: function (e) {
                         console.log('上传失败', e);
-                        reject();
+                        Toast.showText('心电数据上传异常\n请重新检测');
                     }
                 });
             } else {
-                reject();
+                Toast.showText('心电数据上传异常\n请重新检测');
             }
         });
     };
@@ -115,11 +116,11 @@ export default class Protocol {
                     },
                     fail: function (e) {
                         console.log('上传失败', e);
-                        reject();
+                        Toast.showText('心电数据上传异常\n请重新检测');
                     }
                 });
             } else {
-                reject();
+                Toast.showText('心电数据上传异常\n请重新检测');
             }
         });
     };
@@ -169,10 +170,10 @@ export default class Protocol {
         return Network.request({url: 'relatives/delToolTip'})
     }
 
-    static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl,hypertension,cardiopathy,diabetes}) {
+    static accountCreate({nickName, sex, phone, birthday, height, weight, portraitUrl, hypertension, cardiopathy, diabetes}) {
         return Network.request({
             url: 'member/relevance/create',
-            data: {nickName, sex, phone, birthday, height, weight, portraitUrl,hypertension,cardiopathy,diabetes}
+            data: {nickName, sex, phone, birthday, height, weight, portraitUrl, hypertension, cardiopathy, diabetes}
         })
     }
 
@@ -194,10 +195,22 @@ export default class Protocol {
         return Network.request({url: 'relatives/delRelatives ', data: {memberId}})
     }
 
-    static memberRelevanceUpdate({relevanceId, phone, nickName, portraitUrl, birthday, height, weight, sex,hypertension,cardiopathy,diabetes}) {
+    static memberRelevanceUpdate({relevanceId, phone, nickName, portraitUrl, birthday, height, weight, sex, hypertension, cardiopathy, diabetes}) {
         return Network.request({
             url: 'member/relevance/update',
-            data: {relevanceId, phone, nickName, portraitUrl, birthday, height, weight, sex,hypertension,cardiopathy,diabetes}
+            data: {
+                relevanceId,
+                phone,
+                nickName,
+                portraitUrl,
+                birthday,
+                height,
+                weight,
+                sex,
+                hypertension,
+                cardiopathy,
+                diabetes
+            }
         })
     }
 
@@ -254,7 +267,7 @@ export default class Protocol {
      * @returns {*|Promise|Promise<any>|never}
      */
     static getCardiac({id}) {
-       return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true});
+        return Network.request({url: 'gather/getCardiac', data: arguments[0], requestWithoutLogin: true});
     }
 
     static getPdfUrl({id}) {

@@ -99,7 +99,7 @@ Page({
                 HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: result});
             } catch (e) {
                 console.error(e);
-                Toast.showText('服务器异常，请稍后重试');
+                Toast.showText(e.errMsg);
             } finally {
                 Toast.hiddenLoading();
             }
