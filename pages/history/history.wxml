@@ -25,7 +25,7 @@
     </view>
 </view>
 
-<template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs}}"></template>
+<template is="history-list" wx:if="{{rightChoseIsLeft}}" data="{{logs,showOperator:true}}"></template>
 
 <template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList,trend}}"></template>
 

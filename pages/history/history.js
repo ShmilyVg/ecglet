@@ -24,6 +24,7 @@ Page({
         itemList: [],
         isNormalMember: true,
         bottomViewIsHidden: true,
+        showOperator: false
     },
 
     async onLoad() {
@@ -95,9 +96,13 @@ Page({
 
     toResultPage(e) {
         const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
+        // if()
         HiNavigator.navigateToResultPageByType({type, dataId})
     },
 
+    onLongPressHistoryItemEvent(e) {
+        console.log(e);
+    },
     onPullDownRefresh() {
         console.log('onPullDownRefresh');
         if (this.data.rightChoseIsLeft) {

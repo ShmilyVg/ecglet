@@ -14,13 +14,15 @@
     width:42rpx;
     height:42rpx;
 }
-
+.history-item-layout{
+    padding: 0 30rpx;
+    margin-bottom: 20rpx;
+    position: relative;
+}
 .history-item{
-    width:95%;
     background:rgba(255,255,255,1);
     border-radius:30rpx;
     align-self: center;
-    margin-bottom: 20rpx;
     padding: 38rpx 50rpx 38rpx 30rpx;
 }
 
@@ -140,4 +142,57 @@
     font-size:30rpx;
     font-weight:500;
     color:rgba(153,153,153,1);
+}
+.history-item-check-padding-layout{
+    padding: 10rpx 26rpx 10rpx 0;
+}
+.history-item-right-icon{
+    width: 16rpx;
+    height: 12rpx;
+}
+
+.history-item-check-layout{
+    width: 32rpx;
+    height: 32rpx;
+    background-color: #7265E3;
+    border: 1rpx solid #7265E3;
+    border-radius: 50%;
+}
+
+.history-item-uncheck-layout{
+    width: 32rpx;
+    height: 32rpx;
+    border: 1rpx solid #B2B2B2;
+    border-radius: 50%;
+}
+.history-edit-icon{
+    width: 26rpx;
+    height: 26rpx;
+    margin-right: 12rpx;
+}
+
+.history-edit-text{
+    font-size:28rpx;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(51,68,78,1);
+    line-height:28rpx;
+}
+
+.history-edit-dialog-line{
+    width: 100%;
+    border-bottom: 1rpx solid rgba(230,230,230,1);
+}
+
+.history-edit-dialog-item-layout{
+    padding: 32rpx 34rpx 32rpx 32rpx;
+}
+
+.history-edit-dialog-layout{
+    top: 30rpx;
+    right: 30rpx;
+    z-index: 3;
+    background-color: white;
+    border-radius: 20rpx;
+    border: 8rpx solid rgba(0,0,0,0.1);
 }
