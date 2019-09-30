@@ -5,6 +5,7 @@ import * as Tools from "../../utils/tools";
 import {reLoginWithoutLogin} from "../../utils/tools";
 import Toast from "../../utils/toast";
 
+const app = getApp();
 Page({
     data: {
         time: '',
@@ -34,13 +35,18 @@ Page({
     },
 
     async onLoad(options) {
-        getApp().globalData.options.query = options;
+        app.globalData.options.query = options;
         this.resultTop = new ResultTop(this);
         this.dataId = options.dataId;
         const {dataList, userInfo} = await Protocol.getRoutine({id: options.dataId});
         dataList.time = this.getTime(parseInt(dataList.time));
         this.setData({result: dataList, userInfo});
         this.resultTop.showItems({items: dataList.report});
+        const {tempDataIdObj} = app.globalData;
+
+        if (tempDataIdObj && !tempDataIdObj.isCheck) {
+            tempDataIdObj.isCheck = 1;
+        }
     },
 
     onHide() {

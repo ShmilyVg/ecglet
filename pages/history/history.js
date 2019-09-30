@@ -51,6 +51,19 @@ Page({
             this.handleBaseData();
             getApp().globalData.refresh = false;
         }
+        const {tempDataIdObj} = app.globalData;
+        if (tempDataIdObj && tempDataIdObj.isCheck) {
+            const {dataId} = tempDataIdObj, {logs} = this.data;
+            for (let i = 0, len = logs.length; i < len; i++) {
+                if (logs[i].id === dataId) {
+                    const obj = {};
+                    obj[`logs[${i}].isCheck`] = 1;
+                    this.setData(obj);
+                    break;
+                }
+            }
+            app.globalData.tempDataIdObj = null;
+        }
     },
 
     async handleBaseData() {
@@ -165,7 +178,7 @@ Page({
     },
 
     onClickHistoryItemEvent(e) {
-        const {currentTarget: {dataset: {item: {type, id: dataId}}}} = e;
+        const {currentTarget: {dataset: {item: {type, id: dataId, isCheck, isSetUp}}}} = e;
         this.hideEditDialog();//showEditorDialogItemIndex 在经过这一步后，肯定是等于-1了
 
         if (this.data.showOperator) {
@@ -192,7 +205,14 @@ Page({
             return;
         }
         if (this.data.showEditorDialogItemIndex === -1) {
-            HiNavigator.navigateToResultPageByType({type, dataId});
+            if (isSetUp) {
+                if (!isCheck) {
+                    app.globalData.tempDataIdObj = {dataId, isCheck};
+                }
+                HiNavigator.navigateToResultPageByType({type, dataId});
+            } else {
+                Toast.showText('该报告正在生成中，此处文案需要修改');
+            }
         }
     },
     deleteAllItemsEvent() {

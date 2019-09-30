@@ -49,8 +49,13 @@
                     </view>
                 </view>
                 <view class="flex-column" style="align-items: flex-end">
-                    <view class="item-num" style="color: #5B5B5B;">{{item.times}}</view>
-                    <view class="item-unit">{{item.unit}}</view>
+                    <view wx:if="{{!item.isSetUp}}" class="history-list-item-is-setup">报告生成中…</view>
+                    <!--isCheck是否已读-->
+                    <view wx:elif="{{!item.isCheck}}" class="history-list-item-is-check">查看报告</view>
+                    <block wx:else>
+                        <view class="item-num" style="color: #5B5B5B;">{{item.times}}</view>
+                        <view class="item-unit">{{item.unit}}</view>
+                    </block>
                 </view>
             </view>
         </view>
