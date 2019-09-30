@@ -6,6 +6,10 @@ export default class HiNavigator extends CommonNavigator {
         this.reLaunch({url: '/pages/start/start?onLoginSuccess=true'});
     }
 
+    static switchToHistory() {
+        this.switchTab({url: '/pages/history/history'});
+    }
+
     static relaunchToNewUserEdit() {
         this.reLaunch({url: '/pages/new-user-edit/userdata'});
     }

@@ -2,6 +2,7 @@
 import Protocol from "../../apis/network/protocol";
 import HiNavigator from "../../components/navigator/hi-navigator";
 import Toast from "../../utils/toast";
+import WXDialog from "../../utils/dialog";
 
 const app = getApp();
 Page({
@@ -99,7 +100,13 @@ Page({
                 HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: result});
             } catch (e) {
                 console.error(e);
-                Toast.showErrMsg(e);
+
+                WXDialog.showDialog({
+                    content: '', confirmEvent: () => {
+                        HiNavigator.switchToHistory();
+                    }
+                });
+                // Toast.showErrMsg(e);
             } finally {
                 Toast.hiddenLoading();
             }

@@ -59,8 +59,8 @@ page {
     width: 28rpx;
     height: 28rpx;
     position: absolute;
-    top: 95rpx;
-    left: 90rpx;
+    bottom: -10rpx;
+    right: -10rpx;
     border-radius: 50%;
     border:7rpx solid white;
 }
@@ -103,4 +103,26 @@ page {
     background:rgba(234,230,255,1);
     box-shadow:0px -1px 0px 0px rgba(234,230,255,0.76);
     border-radius:50%;
+}
+
+.bottom-refresh-btn{
+    width: 110rpx;
+    height: 110rpx;
+    background:rgba(140,140,143,0.7);
+    border-radius: 50%;
+    position: fixed;
+    bottom: 54rpx;
+    right: 50rpx;
+}
+.bottom-refresh-btn-icon{
+    width: 36rpx;
+    height: 36rpx;
+    margin-bottom: 5rpx;
+}
+.bottom-refresh-btn-text{
+    font-size:22rpx;
+    font-family:PingFang SC;
+    font-weight:500;
+    color:rgba(255,254,254,1);
+    line-height:28rpx;
 }

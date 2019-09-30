@@ -27,5 +27,8 @@ export default class CommonProtocol {
         return Network.request({url: 'account/systeminfo', data: {systemInfo: {...systemInfo, hiSoftwareVersion}}});
     }
 
+    static getSoftwareUpdateText() {
+        return Network.request({url: 'software/update/text', requestWithoutLogin: true});
+    }
 
 }

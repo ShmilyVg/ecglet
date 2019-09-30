@@ -248,6 +248,11 @@ Page({
         });
         this.setData(obj);
     },
+
+    refreshAllData() {
+        wx.startPullDownRefresh();
+    },
+
     onPullDownRefresh() {
         console.log('onPullDownRefresh');
         if (this.data.rightChoseIsLeft) {
