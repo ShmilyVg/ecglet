@@ -2,8 +2,8 @@ import Toast from '../../utils/toast';
 import HiNavigator from "../../components/navigator/hi-navigator";
 import Protocol from "../../apis/network/protocol";
 import * as trend from "./view/view/trend";
-import {createDateAndTime, dealRegister} from "../../utils/tools";
 import * as Tools from "../../utils/tools";
+import {createDateAndTime, dealRegister} from "../../utils/tools";
 import UserInfo from "../../apis/network/network/libs/userInfo";
 import {stat} from "../../analysis/mta";
 import WXDialog from "../../utils/dialog";
@@ -23,6 +23,7 @@ Page({
         trendTag: [],
         tagChose: 1,
         itemList: [],
+        logsTotal: 0,
         isNormalMember: true,
         bottomViewIsHidden: true,
         showOperator: false,
@@ -90,7 +91,7 @@ Page({
         if (!this.data.isNormalMember) {
             data = {data: {page, relevanceId: this.data.userInfo.relevanceId}}
         }
-        let {result: {dataList: list}} = await Protocol.getHistoryList({data});
+        let {result: {dataList: list, page: {total: logsTotal}}} = await Protocol.getHistoryList({data});
         if (list.length) {
             const checked = this.data.isAllDeleteChecked;
             list.forEach((item) => {
@@ -106,7 +107,8 @@ Page({
             this.data.page = 1;
         }
         this.setData({
-            logs: list
+            logs: list,
+            logsTotal
         });
         Toast.hiddenLoading();
         wx.stopPullDownRefresh();
@@ -183,7 +185,7 @@ Page({
 
         if (this.data.showOperator) {
             console.warn('正在批量处理，暂不进入详情页');
-            let index = -1, logs = this.data.logs, itemChecked = false;
+            let index = -1, {logs, logsTotal} = this.data, itemChecked = false;
             for (let i = 0, len = logs.length; i < len; i++) {
                 let item = logs[i];
                 if (item.id === dataId) {
@@ -198,7 +200,7 @@ Page({
 
                 this.setData(obj, () => {
                     this.setData({
-                        isAllDeleteChecked: logs.every(item => item.checked)
+                        isAllDeleteChecked: logsTotal === logs.length && logs.every(item => item.checked)
                     });
                 });
             }
@@ -225,19 +227,26 @@ Page({
         this.setData(obj);
     },
     deleteConfirmEvent() {
-        const {logs, isAllDeleteChecked} = this.data;
-        WXDialog.showDialog({
-            title: '温馨提示', content: '确定删除选中的数据吗?', showCancel: true, confirmText: '删除', confirmEvent: async () => {
-                if (isAllDeleteChecked) {
-                    const {userInfo: {relevanceId}} = this.data;
-                    await Protocol.deleteAllGather({relevanceId});
-                } else {
-                    const ids = logs.filter(item => item.checked).map(item => item.id);
-                    await Protocol.deleteGather({ids});
+        const {logs, isAllDeleteChecked} = this.data, ids = [];
+        if (!isAllDeleteChecked) {
+            ids.push(...logs.filter(item => item.checked).map(item => item.id));
+        }
+        if (isAllDeleteChecked || !!ids.length) {
+            WXDialog.showDialog({
+                title: '温馨提示', content: '确定删除选中的数据吗?', showCancel: true, confirmText: '删除', confirmEvent: async () => {
+                    if (isAllDeleteChecked) {
+                        const {userInfo: {relevanceId}} = this.data;
+                        await Protocol.deleteAllGather({relevanceId});
+                    } else {
+                        await Protocol.deleteGather({ids});
+                    }
+                    await this.getMainList({recorded: true});
+                    this.deleteCancelEvent();
                 }
-                await this.getMainList({recorded: true});
-            }
-        })
+            });
+        } else {
+            Toast.showText('请至少选中一项');
+        }
     },
     deleteCancelEvent() {
         const {logs} = this.data, obj = {};
