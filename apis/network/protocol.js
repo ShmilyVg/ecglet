@@ -75,7 +75,16 @@ export default class Protocol {
                     success: function (res) {
                         console.log('上传成功的文件', res);
                         let data = JSON.parse(res.data);
-                        resolve(data);
+                        if (data.code === 1) {
+                            if (!!data.result) {
+                                resolve(data);
+                            }else{
+                                const data = {code: 0, msg: '接收到的dataId是空！请稍后重试'};
+                                reject(data);
+                            }
+                        } else {
+                            reject(data);
+                        }
                     },
                     fail: function (e) {
                         console.log('上传失败', e);
@@ -112,7 +121,16 @@ export default class Protocol {
                     success: function (res) {
                         console.log('上传成功的文件', res);
                         let data = JSON.parse(res.data);
-                        resolve(data);
+                        if (data.code === 1) {
+                            if (!!data.result) {
+                                resolve(data);
+                            }else{
+                                const data = {code: 0, msg: '接收到的dataId是空！请稍后重试'};
+                                reject(data);
+                            }
+                        } else {
+                            reject(data);
+                        }
                     },
                     fail: function (e) {
                         console.log('上传失败', e);

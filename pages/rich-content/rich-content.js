@@ -94,19 +94,18 @@ Page({
                     relevanceId: userInfo.isMainMember ? '' : userInfo.memberId,
                 });
 
-                if (!result) {
-                    throw new Error('接收到的dataId是空！');
-                }
                 HiNavigator.redirectToResultPageByType({type: parseInt(this.arrhythType), dataId: result});
             } catch (e) {
                 console.error(e);
-
-                WXDialog.showDialog({
-                    content: '', confirmEvent: () => {
-                        HiNavigator.switchToHistory();
-                    }
-                });
-                // Toast.showErrMsg(e);
+                if (e.code === 4000) {
+                    WXDialog.showDialog({
+                        content: e.msg, confirmEvent: () => {
+                            HiNavigator.switchToHistory();
+                        }
+                    });
+                } else {
+                    Toast.showErrMsg(e);
+                }
             } finally {
                 Toast.hiddenLoading();
             }

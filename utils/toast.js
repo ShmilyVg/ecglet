@@ -47,6 +47,6 @@ export default class Toast {
     }
 
     static showErrMsg(error) {
-        this.showText(error.errMsg)
+        this.showText(error.msg)
     }
 }
