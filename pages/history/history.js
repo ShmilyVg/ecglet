@@ -229,8 +229,8 @@ Page({
         WXDialog.showDialog({
             title: '温馨提示', content: '确定删除选中的数据吗?', showCancel: true, confirmText: '删除', confirmEvent: async () => {
                 if (isAllDeleteChecked) {
-                    //TODO 处理删除所有数据
-                    await Protocol.deleteAllGather();
+                    const {userInfo: {relevanceId}} = this.data;
+                    await Protocol.deleteAllGather({relevanceId});
                 } else {
                     const ids = logs.filter(item => item.checked).map(item => item.id);
                     await Protocol.deleteGather({ids});

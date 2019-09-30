@@ -78,7 +78,7 @@ export default class Protocol {
                         if (data.code === 1) {
                             if (!!data.result) {
                                 resolve(data);
-                            }else{
+                            } else {
                                 const data = {code: 0, msg: '接收到的dataId是空！请稍后重试'};
                                 reject(data);
                             }
@@ -124,7 +124,7 @@ export default class Protocol {
                         if (data.code === 1) {
                             if (!!data.result) {
                                 resolve(data);
-                            }else{
+                            } else {
                                 const data = {code: 0, msg: '接收到的dataId是空！请稍后重试'};
                                 reject(data);
                             }
@@ -363,8 +363,12 @@ export default class Protocol {
         return Network.request({url: 'gather/delete', data: arguments[0]});
     }
 
-    static deleteAllGather() {
-        return Network.request({url: 'gather/delete/all'});
+    static deleteAllGather({relevanceId}) {
+        const args = arguments[0];
+        if (!relevanceId) {
+            Reflect.deleteProperty(args, 'relevanceId');
+        }
+        return Network.request({url: 'gather/delete/all', data: args});
     }
 
     static wxReLogin(resolve, reject) {
