@@ -59,6 +59,7 @@
                 </view>
             </view>
         </view>
+        <view style="margin-bottom: 200rpx;"></view>
     </view>
 
     <view wx:else class="none-history flex-column">

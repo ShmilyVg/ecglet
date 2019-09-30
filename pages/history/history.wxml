@@ -31,7 +31,7 @@
 
     <template is="history-trend" wx:else data="{{trendRightChoseIsLeft,list,logs,trendTag,tagChose,itemList,trend}}"></template>
 
-    <view catchtap="refreshAllData" wx:if="{{rightChoseIsLeft}}" class="flex-column justify-center align-items-center bottom-refresh-btn">
+    <view catchtap="refreshAllData" wx:if="{{rightChoseIsLeft&&!showOperator}}" class="flex-column justify-center align-items-center bottom-refresh-btn">
         <image src="../../images/history/refresh.png" class="bottom-refresh-btn-icon"></image>
         <view class="bottom-refresh-btn-text">刷新</view>
     </view>

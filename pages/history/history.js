@@ -218,11 +218,23 @@ Page({
         }
     },
     deleteAllItemsEvent() {
-        const {logs} = this.data, obj = {}, isAllChecked = logs.every(item => item.checked);
-        obj['isAllDeleteChecked'] = !isAllChecked;
+        let {logs, logsTotal, isAllDeleteChecked} = this.data, obj = {},
+            isCurrentItemsAllChecked = logs.every(item => item.checked);
+        if (logsTotal > logs.length) {//当前数据不全
+            if (isAllDeleteChecked) {//如果已经全选了
+                isCurrentItemsAllChecked = false;
+            } else {
+                isCurrentItemsAllChecked = true;
+            }
+        } else {
+            isCurrentItemsAllChecked = !isCurrentItemsAllChecked;
+        }
         logs.forEach((item, index) => {
-            obj[`logs[${index}].checked`] = !isAllChecked;
+            obj[`logs[${index}].checked`] = isCurrentItemsAllChecked;
         });
+
+        obj['isAllDeleteChecked'] = isCurrentItemsAllChecked;
+
 
         this.setData(obj);
     },
