@@ -9,7 +9,7 @@ updateManager.onCheckForUpdate(function (res) {
 });
 
 updateManager.onUpdateReady(async function () {
-    const result = await CommonProtocol.getSoftwareUpdateText();
+    const {result} = await CommonProtocol.getSoftwareUpdateText();
     WXDialog.showDialog({
         title: '版本更新',
         content: result,
