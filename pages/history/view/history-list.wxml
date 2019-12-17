@@ -16,7 +16,7 @@
                 <view catchtap="deleteConfirmEvent" class="history-delete-btn">删除</view>
             </view>
         </view>
-        <view class="flex-row align-items-center box-sizing-border-box history-item-layout" wx:for="{{logs}}" wx:key="{{item.pdfUrl}}" bindlongpress="onLongPressHistoryItemEvent" bindtap="onClickHistoryItemEvent" data-item="{{item}}">
+        <view class="flex-row align-items-center box-sizing-border-box history-item-layout" wx:for="{{logs}}" wx:key="id" bindlongpress="onLongPressHistoryItemEvent" bindtap="onClickHistoryItemEvent" data-item="{{item}}">
             <view wx:if="{{item.showEditorDialog}}" class="absolute flex-column history-edit-dialog-layout">
                 <view catchtap="deleteCurrentItemEvent" data-item="{{item}}" class="flex-row align-items-center box-sizing-border-box history-edit-dialog-item-layout">
                     <image src="../../images/history/delete.png" class="history-edit-icon"></image>
